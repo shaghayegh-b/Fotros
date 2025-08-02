@@ -11,7 +11,7 @@ body {
 body {
   font-size: 100%;
   font-family: "Poppins", "Inter", sans-serif;
-  background-color: #fffff;
+  background-color: white;
   color: #000000;
 }
 input:focus {
