@@ -20,14 +20,14 @@ import offImage1 from "../../assets/img/offImage1.png";
 import offImage2 from "../../assets/img/offImage2.png";
 import offImage3 from "../../assets/img/offImage3.png";
 import offImage4 from "../../assets/img/offImage4.png";
-import offImage6 from "../../assets/img/offImage6.png";
-import ersal from "../../assets/img/ersal.jpg";
-import back from "../../assets/img/back.png";
-import sopurt from "../../assets/img/sopurt.png";
-import off from "../../assets/img/off2.png";
-
 import varzeshset from "../../assets/img/set.png";
 import tabeston from "../../assets/img/tabeston.png";
+import offImage6 from "../../assets/img/offImage6.png";
+import ersal from "../../assets/img/send.jpg";
+import back from "../../assets/img/back.png";
+import sopurt from "../../assets/img/support.png";
+import off from "../../assets/img/off2.png";
+
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
