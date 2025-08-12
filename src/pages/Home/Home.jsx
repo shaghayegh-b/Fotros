@@ -56,7 +56,7 @@ function Home() {
       <div className="h-16  "></div>
       <div className="main1">
         {/* بنر ها */}
-        <div className="p-[5px] pt-0">
+        <div className="pb-[5px] pt-0 px-[10px] ">
           <Swiper
             slidesPerView={1}
             spaceBetween={5}
@@ -93,7 +93,7 @@ function Home() {
           </Swiper>
         </div>
         {/* header */}
-        <div className="flex mt-[10px] flex-col px-[33px] md:flex-row-reverse">
+        <div className="flex mt-[10px] flex-col px-[16px] md:flex-row-reverse">
           {/* بخش 1 */}
           <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2 mt-[10px]  font-bold text-[125%]">
             <div className="right flex-1 flex flex-col justify-between gap-[20px]">
@@ -347,7 +347,7 @@ function Home() {
                 <p className="text-[140%] font-[600]">
                   ف&#x0640;روش وی&#x0640;&#x0640;ژه
                 </p>
-                <br />
+                <div className="h-[28px]"></div>
                 <p className="md:text-[135%]">
                   ت&#x0640;خف&#x0640;یف وی&#x0640;ژه روزانه
                   <br />
@@ -539,7 +539,6 @@ function Home() {
 
                   <p>برای ساختن بدنی سالم و سرحال</p>
                   <p>برای ساختن بدنی سالم و سرحال</p>
-                  <p>برای ساختن بدنی سالم و سرحال</p>
                 </div>
 
                 <button className="w-full flex justify-end-safe items-center md:px-[10px]">
@@ -561,7 +560,6 @@ function Home() {
                     ست های تابستونه
                   </p>
 
-                  <p>برای روزهای گرم سال</p>
                   <p>برای روزهای گرم سال</p>
                   <p>برای روزهای گرم سال</p>
                 </div>
