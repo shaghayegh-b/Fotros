@@ -1,16 +1,8 @@
-import "./App.css";
-import img from "./assets/Fotros.png"
+import { useRoutes } from 'react-router-dom';
+import {router} from './routes'
 function App() {
-  return (
-    <>
-      <h1>Fotros</h1>
-      <h2>فطروس</h2>
-      <div className="w-10 h-10 rounded-full">
-      <img src={img} alt="Ftros" className="" />
-      </div>
-      <img src={img} alt="Ftros" className="" />
-    </>
-  );
+  let routes=useRoutes(router)
+  return routes
 }
 
 export default App;

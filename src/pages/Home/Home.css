@@ -1,0 +1,56 @@
+.Category {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  width: 84px;
+  height: 84px;
+  background-color: #d4e5fa;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+.categorys svg {
+  width: 100%;
+  height: 40%;
+}
+.categorys .swiper ,.NewProducts .swiper {
+  padding: 16px 28px !important;
+  margin: 4px;
+  width: 100%;
+  height: 100%;
+}
+.NewProducts .swiper {
+      padding: 15px 10px !important;
+        margin:0;
+}
+@media (width >=200px) {
+    .categorys .swiper ,.NewProducts .swiper {
+  padding: 16px 8px !important;
+  margin: 4px;
+  width: 100%;
+  height: 100%;
+}
+}
+@media (width >= 48rem /* 768px */) {
+.Category{
+      width: 120px;
+  height: 110px;
+  background-color: #d8dce4;
+}
+    }
+
+    @media (width >= 64rem /* 1024px */) {
+.Category{
+      width: 140px;
+  height: 120px;
+    }
+    }
+  @media (width >= 96rem) {
+.main1{
+padding: 0 50px;
+    }
+    }
