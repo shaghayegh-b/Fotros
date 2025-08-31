@@ -1,0 +1,27 @@
+.Meno{
+    background-color: #ffff ;
+
+}
+.Meno2{
+    padding: .5rem;
+    background-color: #ffff;
+}
+.Meno2 ul{
+    padding-top: .2rem;
+}
+.Meno2 li{
+    padding: .2rem;
+}
+.Meno2 .grouping{
+    background-color: #0000;
+}
+.Meno2 li:hover{
+    background-color: #0000;
+}
+.dark .Meno2 .grouping{
+    background-color:#48536869;
+}
+.Meno2 li  i{
+    width: 2rem;
+    text-align: center;
+}
