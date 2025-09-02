@@ -6,4 +6,5 @@ export let router = [
   { path: "/Fotros/", element: <Home /> },
   { path: "/Fotros/Products", element: <Products /> },
   { path: "/Fotros/Products/:idsortby", element: <ProductId /> },
+
 ];
