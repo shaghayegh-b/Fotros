@@ -47,10 +47,14 @@ function ProductId() {
   const [commentsCount, setCommentsCount] = useState(0);
   const [commentText, setCommentText] = useState([]);
   const [recommend, setRecommend] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
-
+  const [selectedSize,setSelectedSize]=useState(null)
   const { addToFav, removeFromFav, favoriteItems } = useFav();
-  const { addToCart, increase, decrease, cartItems } = useCart();
+  const {
+    addToCart,
+    increase,
+    decrease,
+    cartItems
+  } = useCart();
 
   const { idsortby } = useParams();
 
@@ -123,13 +127,16 @@ function ProductId() {
   };
 
   const selectedColor = product.colors?.[selectedColorIndex];
-  const itemInCart = cartItems.find(
-    (item) =>
-      item.idsortby === product.idsortby &&
-      item.selectedColor?.code === selectedColor?.code
-  );
+// پیدا کردن آیتم در سبد خرید با در نظر گرفتن رنگ و سایز
+const itemInCart = cartItems.find(
+  (item) =>
+    item.idsortby === product.idsortby &&
+    item.selectedColor?.code === selectedColor?.code &&
+    item.selectedSize === selectedSize // این خط اضافه شد
+);
 
-  const quantity = itemInCart ? itemInCart.quantity : 0;
+const quantity = itemInCart ? itemInCart.quantity : 0;
+
   const isOutOfStock = product.remaining === "اتمام موجودی";
 
   // تنظیمات اسلایدر
@@ -215,7 +222,7 @@ function ProductId() {
     );
   }
   // fav
-  const isFav = favoriteItems.some((item) => item.id === product.id);
+  const isFav = favoriteItems.some((item) => item.idsortby === product.idsortby );
   return (
     <>
       <Navbar></Navbar>
@@ -381,7 +388,8 @@ function ProductId() {
                           onClick={() =>
                             increase(
                               product.idsortby,
-                              colors[selectedColorIndex]?.code
+                              colors[selectedColorIndex]?.code,
+                              selectedSize
                             )
                           }
                         >
@@ -402,13 +410,15 @@ function ProductId() {
                               ) {
                                 decrease(
                                   product.idsortby,
-                                  colors[selectedColorIndex]?.code
+                                  colors[selectedColorIndex]?.code,
+                                  selectedSize
                                 );
                               }
                             } else {
                               decrease(
                                 product.idsortby,
-                                colors[selectedColorIndex]?.code
+                                colors[selectedColorIndex]?.code,
+                                selectedSize
                               );
                             }
                           }}
@@ -423,14 +433,34 @@ function ProductId() {
                       ? " bg-[#00000026]  cursor-not-allowed"
                       : " bg-[#1e88e5] text-white"
                   }`}
-                        onClick={() =>
+                        onClick={() => {
+                          // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
+                          if (
+                            colors.length > 1 &&
+                            !colorToSend
+                          ) {
+                            alert("لطفا رنگ محصول را انتخاب کنید.");
+                            return;
+                          }
+
+                          // اگر محصول چند سایز داشت ولی سایزی انتخاب نشده
+                          if (
+                            product.size &&
+                            product.size.length > 0 &&
+                            !selectedSize
+                          ) {
+                            alert("لطفا سایز محصول را انتخاب کنید.");
+                            return;
+                          }
+                          console.log(colorToSend,selectedSize)
+                          if(colorToSend,selectedSize)
                           addToCart({
                             ...product,
                             quantity: 1,
                             selectedColor: colorToSend,
                             selectedSize: selectedSize,
-                          })
-                        }
+                          });
+                        }}
                         disabled={isOutOfStock}
                       >
                         افزودن به سبد خرید
@@ -439,14 +469,35 @@ function ProductId() {
                   ) : (
                     <button
                       className="h-[38px] md:w-[250px] w-full rounded-sm bg-[#1e88e5] text-white "
-                      onClick={() =>
-                        addToCart({
-                          ...product,
-                          quantity: 1,
-                          selectedColor: colors[selectedColorIndex],
-                        })
-                      }
-                      disabled={isOutOfStock}
+                      onClick={() => {
+                          // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
+                          if (
+                            colors.length > 1 &&
+                            !colorToSend
+                          ) {
+                            alert("لطفا رنگ محصول را انتخاب کنید.");
+                            return;
+                          }
+
+                          // اگر محصول چند سایز داشت ولی سایزی انتخاب نشده
+                          if (
+                            product.size &&
+                            product.size.length > 0 &&
+                            !selectedSize
+                          ) {
+                            alert("لطفا سایز محصول را انتخاب کنید.");
+                            return;
+                          }
+                          console.log(colorToSend,selectedSize)
+                          if(colorToSend,selectedSize)
+                          addToCart({
+                            ...product,
+                            quantity: 1,
+                            selectedColor: colorToSend,
+                            selectedSize: selectedSize,
+                          });
+                        }}
+                        disabled={isOutOfStock}
                     >
                       افزودن به سبد خرید
                     </button>

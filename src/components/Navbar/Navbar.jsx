@@ -7,11 +7,17 @@ import {FaSearch} from "react-icons/fa"
 import {IoMdArrowRoundBack} from "react-icons/io"
 import {RiShoppingCartLine} from "react-icons/ri"
 import "./Navbar.css"
+import { useCart } from "../../context/CartContext/CartContext";
 export const mymeno=createContext()
 
 function Navbar() {
   const [fSearch, setFSearch] = useState(false);
   const [meno, setMeno] = useState(false);
+  const { cartItems } = useCart();
+    const totalQuantity = cartItems?.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    );
   return (
     <>
     {/* Navbar */}
@@ -35,10 +41,10 @@ function Navbar() {
                     <FaSearch />
                   </button>
                   {/* shopping */}
-                  <NavLink to="/bazrafkan-store/ShoppingBag" className="relative">
+                  <NavLink to="/Fotros/ShoppingCart" className="relative">
                   <RiShoppingCartLine />
                       <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-blue-400 text-white shadow-sm">
-                        0
+                        {totalQuantity}
                       </span>
                   </NavLink>
                 </div>
