@@ -18,19 +18,19 @@ function Footer() {
           </h2>
           <ul>
             <li>
-              <Link>درباره ما</Link>
+              <Link to="/Fotros/aboutme">درباره ما</Link>
             </li>
             <li>
-              <Link>تماس با ما</Link>
+              <Link to="/Fotros/contactus">تماس با ما</Link>
             </li>
             <li>
-              <Link>سوالات متداول</Link>
+              <Link to="/Fotros/questions">سوالات متداول</Link>
             </li>
             <li>
-              <Link>قوانین و مقررات</Link>
+              <Link to="/Fotros/rules">قوانین و مقررات</Link>
             </li>
             <li>
-              <Link>شرایط بازگشت کالا</Link>
+              <Link to="/Fotros/repol">شرایط بازگشت کالا</Link>
             </li>
           </ul>
           <div className="flex gap-[13px] ">
