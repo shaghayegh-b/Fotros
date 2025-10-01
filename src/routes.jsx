@@ -7,6 +7,7 @@ import ContactUs from "./pages/ContactUs/ContactUs";
 import Questions from "./pages/Questions/Questions";
 import RulesPage from "./pages/RulesPage/RulesPage";
 import RepolPage from "./pages/RepolPage/RepolPage";
+import UserDashboard from "./pages/UserDashboard/UserDashboard";
 
 export let router = [
   { path: "/Fotros/", element: <Home /> },
@@ -14,9 +15,9 @@ export let router = [
   { path: "/Fotros/Products/:idsortby", element: <ProductId /> },
   { path: "/Fotros/ShoppingCart", element: <ShoppingCart /> },
   { path: "/Fotros/aboutme", element: <AboutPage /> },
-    { path: "/Fotros/contactus", element: <ContactUs /> },
-    { path: "/Fotros/questions", element: <Questions /> },
-    { path: "/Fotros/rules", element: <RulesPage /> },
-    { path: "/Fotros/repol", element: <RepolPage /> },
-
+  { path: "/Fotros/contactus", element: <ContactUs /> },
+  { path: "/Fotros/questions", element: <Questions /> },
+  { path: "/Fotros/rules", element: <RulesPage /> },
+  { path: "/Fotros/repol", element: <RepolPage /> },
+  { path: "/Fotros/userdashboard/:subMenu", element: <UserDashboard /> },
 ];

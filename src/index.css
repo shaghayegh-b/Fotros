@@ -17,9 +17,7 @@ body {
 input:focus {
   outline: unset;
 }
-input::placeholder {
-  color: rgb(26, 26, 26);
-}
+
 a,
 button {
   cursor: pointer;
