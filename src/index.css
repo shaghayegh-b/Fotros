@@ -25,3 +25,25 @@ button {
 .box-shadow{
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3215686275);
 }
+
+/* اسکرولبار سفارشی برای * */
+*::-webkit-scrollbar {
+  width: 3Px; /* عرض اسکرولبار */
+}
+body::-webkit-scrollbar {
+  width:8Px; /* عرض اسکرولبار */
+}
+*::-webkit-scrollbar-track {
+  background: #02384f62;
+  /*رنگپس‌زمینهمسیراسکرول*/
+  border-radius:4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color:#2591ef ; /* رنگ دکمه اسکرول */
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color:  #1e88e5;  /* نگام هاور */
+}
