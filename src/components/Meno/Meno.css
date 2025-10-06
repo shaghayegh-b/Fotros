@@ -1,6 +1,5 @@
 .Meno{
     background-color: #ffff ;
-
 }
 .Meno2{
     padding: .5rem;
@@ -9,19 +8,13 @@
 .Meno2 ul{
     padding-top: .2rem;
 }
-.Meno2 li{
-    padding: .2rem;
-}
 .Meno2 .grouping{
-    background-color: #0000;
-}
-.Meno2 li:hover{
-    background-color: #0000;
+    background-color: #bedbff;
 }
 .dark .Meno2 .grouping{
-    background-color:#48536869;
+    background-color:#a2ccff1c;
 }
-.Meno2 li  i{
-    width: 2rem;
-    text-align: center;
+
+.pEmail::-webkit-scrollbar {
+  height: 2Px; /* عرض اسکرولبار */
 }

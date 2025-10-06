@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AxiosProvider } from "./context/AxiosContaext/AxiosContaext";
 import { FavProvider } from "./context/FavProvider/FavProvider";
 import { CartProvider } from "./context/CartContext/CartContext";
-
+import { SearchProvider } from "./context/SearchContext/SearchContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -14,7 +14,9 @@ root.render(
       <AxiosProvider>
         <FavProvider>
           <CartProvider>
-            <App></App>
+            <SearchProvider>
+              <App></App>
+            </SearchProvider>
           </CartProvider>
         </FavProvider>
       </AxiosProvider>

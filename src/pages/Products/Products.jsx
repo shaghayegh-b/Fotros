@@ -12,41 +12,42 @@ import Loading from "../../components/Loading/Loading";
 import { useFav } from "../../context/FavProvider/FavProvider";
 import Categorys from "../../components/Categorys/Categorys";
 import { Link } from "react-router-dom";
+import { useSearch } from "../../context/SearchContext/SearchContext";
 
 function Products() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-
   const [pagedProducts, setPagedProducts] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const limit = 15; // تعداد محصول در هر صفحه
   const { addToFav, removeFromFav, favoriteItems } = useFav();
-  const {
-    filteredProducts,
-    loading,
-    selectedCategory,
-    funcAxios
-  } = useAxios();
+  const { filteredProducts, loading, selectedCategory, funcAxios } = useAxios();
+  const { searchedProducts ,searchQuery } = useSearch();
+  const productsToShow =
+    searchedProducts.length > 0 ? searchedProducts : filteredProducts;
 
   useEffect(() => {
-  const localProducts = JSON.parse(localStorage.getItem("products")) || [];
-  if (localProducts.length === 0) {
-    funcAxios(
-      "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
-    );
-  }
-}, []);
-  useEffect(() => {
-    if (Array.isArray(filteredProducts)) {
-      const offset = currentPage * limit;
-      const pagedData = filteredProducts.slice(offset, offset + limit);
-      setPagedProducts(pagedData);
-      setPageCount(Math.ceil(filteredProducts.length / limit));
+    const localProducts = JSON.parse(localStorage.getItem("products")) || [];
+    if (localProducts.length === 0) {
+      funcAxios(
+        "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
+      );
     }
-  }, [filteredProducts, currentPage]);
+  }, []);
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [productsToShow]);
+
+  useEffect(() => {
+    const data = Array.isArray(productsToShow) ? productsToShow : [];
+    const offset = currentPage * limit;
+    const pagedData = data.slice(offset, offset + limit);
+    setPagedProducts(pagedData);
+    setPageCount(Math.ceil(data.length / limit));
+  }, [productsToShow, currentPage]);
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
@@ -58,7 +59,9 @@ function Products() {
       <div className="h-16  "></div>
       <div className="pb-[90px]">
         <h2 className="text-[175%] font-[600] md:px-[60px] p-[10px] md:py-[20px]">
-          {selectedCategory}
+          {searchedProducts.length > 0
+            ? `جستجو : ${searchQuery}`
+            : selectedCategory}{" "}
         </h2>
         <div
           className={`${
@@ -76,28 +79,28 @@ function Products() {
           {/* Skeleton Loader */}
           {loading ? (
             <Loading />
-          )  : filteredProducts.length === 0 ? (
-  <p className="text-center text-gray-500 mt-10">
-    هیچ محصولی در این دسته‌بندی فعلاً موجود نیست 😔
-    <br/>
-     <span className="flex gap-[5px] items-center justify-center">
-        لطفاً کمی صبر کنید تا محصولات تازه اضافه شوند
-      <FaHeart
-    color="#1e88e5"
-    className="m-[5px] mt-[10px] cursor-pointer"
-    size={20}
-  />
-     </span>
-  </p>
-) : (
-            <div className="pruducts grid gap-4  lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+          ) : productsToShow.length === 0 ? (
+            <p className="text-center text-gray-500 mt-10">
+              هیچ محصولی در این دسته‌بندی فعلاً موجود نیست 😔
+              <br />
+              <span className="flex gap-[5px] items-center justify-center">
+                لطفاً کمی صبر کنید تا محصولات تازه اضافه شوند
+                <FaHeart
+                  color="#1e88e5"
+                  className="m-[5px] mt-[10px] cursor-pointer"
+                  size={20}
+                />
+              </span>
+            </p>
+          ) : (
+            <div className="products grid gap-4  lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
               {pagedProducts.map((product) => {
                 const isFav = favoriteItems.some(
                   (item) => item.id === product.id
                 );
 
                 return (
-                  <div key={product.id} className="pruduct relative">
+                  <div key={product.id} className="product relative">
                     <div className="md:px-[10px] px-[2px] flex justify-between absolute z-1 top-0 w-full opacity-80 ">
                       {isFav ? (
                         <FaHeart
