@@ -1,10 +1,29 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { AxiosProvider } from "./context/AxiosContaext/AxiosContaext";
+import { FavProvider } from "./context/FavProvider/FavProvider";
+import { CartProvider } from "./context/CartContext/CartContext";
+import { SearchProvider } from "./context/SearchContext/SearchContext";
+import { AuthProvider } from "./context/AuthContext/AuthContext";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <AxiosProvider>
+        <FavProvider>
+          <CartProvider>
+            <SearchProvider>
+              <AuthProvider>
+                <App></App>
+              </AuthProvider>
+            </SearchProvider>
+          </CartProvider>
+        </FavProvider>
+      </AxiosProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);

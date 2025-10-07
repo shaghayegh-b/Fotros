@@ -1,0 +1,20 @@
+.Meno{
+    background-color: #ffff ;
+}
+.Meno2{
+    padding: .5rem;
+    background-color: #ffff;
+}
+.Meno2 ul{
+    padding-top: .2rem;
+}
+.Meno2 .grouping{
+    background-color: #bedbff;
+}
+.dark .Meno2 .grouping{
+    background-color:#a2ccff1c;
+}
+
+.pEmail::-webkit-scrollbar {
+  height: 2Px; /* عرض اسکرولبار */
+}

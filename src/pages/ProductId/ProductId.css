@@ -1,0 +1,33 @@
+/* محدود کردن دکمه‌ها داخل کادر اسلایدر */
+.ProductId .slick-slider {
+    position: relative; /* اگر نبود اضافه کن */
+    overflow: visible; /* اجازه بده دکمه‌ها بیرون از محدوده هم باشن */
+
+  }
+ .ProductId  .slick-track{
+    display: flex;
+    gap: 4px;
+ }
+/* دکمه‌ها رو بیشتر به داخل اسلایدر ببر */
+/* .ProductId .slick-prev {
+  left: 96% !important;
+  z-index: 10;
+} */
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  border-radius: 100%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  color: #000000; /* رنگ فلش‌ها */
+  font-size: 20px;
+}

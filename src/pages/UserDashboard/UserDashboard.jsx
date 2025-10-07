@@ -1,0 +1,101 @@
+import { useEffect, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+
+import { CgProfile } from "react-icons/cg";
+import {
+  FaHeart,
+  FaMapMarkerAlt,
+  FaShoppingCart,
+} from "react-icons/fa";
+import { BiSupport } from "react-icons/bi";
+
+import porofDefault from "../../assets/img/porof1.png";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import UserInfo from "../../components/ComUserDashboard/UserInfo/UserInfo";
+import Orders from "../../components/ComUserDashboard/Orders/Orders";
+import Support from "../../components/ComUserDashboard/Support/Support";
+import Favorites from "../../components/ComUserDashboard/Favorites/Favorites";
+import Addresses from "../../components/ComUserDashboard/Addresses/Addresses";
+
+import "./UserDashboard.css";
+
+
+function UserDashboard() {
+  const { subMenu } = useParams();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [subMenu]);
+
+  // اطلاعات کاربری
+  const [profilePic, setProfilePic] = useState(null);
+
+  useEffect(() => {
+    const savedPic = localStorage.getItem("profilePic");
+    if (savedPic) {
+      setProfilePic(savedPic);
+    }
+  }, []);
+
+  // سفارش ها
+  //
+
+  //علاقه مندی ها
+  //
+
+  // ادرس من
+  //
+  //    درخواست ها
+  //
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* navbar */}
+      <Navbar />
+      <div className="h-12 lg:h-16  "></div>
+      {/* main */}
+      <div className="UserDashboard flex py-[10px] px-[14px] lg:px-[30px] ">
+        {/*Dashboard */}
+        <div className="hidden lg:inline-block w-[20%] p-[20px]">
+          <div className="flex flex-col justify-center items-center">
+            <img
+              src={profilePic || porofDefault} // عکس پیش‌فرض هم بذار
+              alt="Profile"
+              className="w-[130px] h-[130px] rounded-full border-[1px] border-[#56a3ff61] object-cover"
+            />
+            <h2 className="font-[600] py-[10px]">شقایق بزرافکن</h2>
+          </div>
+          <div className="flex flex-col gap-[10px]">
+            {[
+              { id: "UserInfo", text: "اطلاعات کاربری", icon: <CgProfile /> },
+              { id: "Orders", text: "سفارش های من", icon: <FaShoppingCart /> },
+              { id: "Favorites", text: "علاقه مندی ها", icon: <FaHeart /> },
+              { id: "Addresses", text: "ادرس من", icon: <FaMapMarkerAlt /> },
+              { id: "Support", text: "پشتیبانی", icon: <BiSupport /> },
+            ].map(({ text, id, icon }, idx) => (
+              <NavLink
+                key={idx}
+                to={`/Fotros/userdashboard/${id}`}
+                className=" border-[2px] w-full border-[#dfdfdf] flex items-center justify-start gap-[9px]  pr-[15px] pl-[13px] py-[8px] rounded-xl "
+              >
+                <span className="icondashboard text-[115%]">{icon}</span>
+                <span className="textdashboard">{text}</span>
+              </NavLink>
+            ))}
+          </div>
+        </div>
+        <div className="w-[100%] lg:w-[80%]">
+          {subMenu === "UserInfo" && (
+            <UserInfo profilePic={profilePic} setProfilePic={setProfilePic} />
+          )}
+          {subMenu === "Orders" && <Orders></Orders>}
+          {subMenu === "Favorites" && <Favorites/>}
+          {subMenu === "Addresses" && <Addresses/>}
+          {subMenu === "Support" && <Support />}
+        </div>
+      </div>
+      {/* footer */}
+      <div className="h-[1.3rem] lg:h-[3rem]"></div> <Footer />
+    </div>
+  );
+}
+export default UserDashboard;
