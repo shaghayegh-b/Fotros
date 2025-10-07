@@ -7,7 +7,7 @@ import { AxiosProvider } from "./context/AxiosContaext/AxiosContaext";
 import { FavProvider } from "./context/FavProvider/FavProvider";
 import { CartProvider } from "./context/CartContext/CartContext";
 import { SearchProvider } from "./context/SearchContext/SearchContext";
-import { AuthContext } from "./context/AuthContext/AuthContext";
+import { AuthProvider } from "./context/AuthContext/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,9 +17,9 @@ root.render(
         <FavProvider>
           <CartProvider>
             <SearchProvider>
-              <AuthContext>
+              <AuthProvider>
                 <App></App>
-              </AuthContext>
+              </AuthProvider>
             </SearchProvider>
           </CartProvider>
         </FavProvider>
