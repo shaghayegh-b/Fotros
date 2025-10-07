@@ -9,6 +9,9 @@ import RulesPage from "./pages/RulesPage/RulesPage";
 import RepolPage from "./pages/RepolPage/RepolPage";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import NotFound from "./pages/NotFound/NotFound";
+import LoginPage from "./pages/Login/LoginPage";
+import InfoLogin from "./pages/Login/InfoLogin";
+import ProfileLogin from "./pages/Login/ProfileLogin";
 
 export let router = [
   { path: "/Fotros/", element: <Home /> },
@@ -22,4 +25,7 @@ export let router = [
   { path: "/Fotros/repol", element: <RepolPage /> },
   { path: "/Fotros/userdashboard/:subMenu", element: <UserDashboard /> },
   { path: "*", element: <NotFound /> },
+  { path: "/Fotros/login", element: <LoginPage /> },
+  { path: "/Fotros/info-login", element: <InfoLogin /> },
+  { path: "/Fotros/profile-login", element: <ProfileLogin /> },
 ];

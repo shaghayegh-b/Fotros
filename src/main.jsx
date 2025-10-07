@@ -7,6 +7,8 @@ import { AxiosProvider } from "./context/AxiosContaext/AxiosContaext";
 import { FavProvider } from "./context/FavProvider/FavProvider";
 import { CartProvider } from "./context/CartContext/CartContext";
 import { SearchProvider } from "./context/SearchContext/SearchContext";
+import { AuthContext } from "./context/AuthContext/AuthContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -15,7 +17,9 @@ root.render(
         <FavProvider>
           <CartProvider>
             <SearchProvider>
-              <App></App>
+              <AuthContext>
+                <App></App>
+              </AuthContext>
             </SearchProvider>
           </CartProvider>
         </FavProvider>
