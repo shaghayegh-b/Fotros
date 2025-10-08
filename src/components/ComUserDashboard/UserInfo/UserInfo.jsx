@@ -6,17 +6,22 @@ import porof3 from "../../../assets/img/porof3.png";
 import porof4 from "../../../assets/img/porof4.png";
 import porof5 from "../../../assets/img/porof5.png";
 import porof6 from "../../../assets/img/porof6.png";
-function UserInfo({ profilePic, setProfilePic }) {
+import porofDefault from "../../../assets/img/porof1.png";
+
+import { useAuth } from "../../../context/AuthContext/AuthContext";
+function UserInfo() {
+  const { user, updateUser } = useAuth();
+  const [selectedPic, setSelectedPic] = useState(
+    user?.profilePic || porofDefault
+  );
+
   const defaultPics = [porof1, porof2, porof3, porof4, porof5, porof6];
   const fileInputRef = useRef(null);
-  useEffect(() => {
-    const savedPic = localStorage.getItem("profilePic");
-    if (savedPic) {
-      setProfilePic(savedPic);
-    } else {
-      setProfilePic(porof1);
-    }
-  }, [setProfilePic]);
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState({});
 
   // تغییر تصویر با انتخاب فایل از گالری
   const handleFileChange = (e) => {
@@ -24,26 +29,26 @@ function UserInfo({ profilePic, setProfilePic }) {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setProfilePic(reader.result);
+        setSelectedPic(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
   // ذخیره تصویر (مثلاً در localStorage یا API سرور)
   const handleSavePhoto = () => {
-    if (profilePic) {
-      localStorage.setItem("profilePic", profilePic);
-      alert("تصویر پروفایل ذخیره شد!");
-    } else {
-      alert("لطفاً یک تصویر انتخاب کنید.");
-    }
+    updateUser({ profilePic: selectedPic });
+    alert("تصویر پروفایل ذخیره شد!");
   };
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
 
-  const [errors, setErrors] = useState({});
+  useEffect(() => {
+    if (user) {
+      setFname(user.fname || "");
+      setLname(user.lname || "");
+      setPhone(user.username || "");
+      setEmail(user.email || "");
+    }
+  }, [user]);
+
   const handleSaveForm = (e) => {
     e.preventDefault(); // جلوگیری از رفرش صفحه
 
@@ -53,29 +58,33 @@ function UserInfo({ profilePic, setProfilePic }) {
     if (!phone) newErrors.phone = "شماره تماس الزامی است";
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      setErrors({});
-      // ریست کردن فرم
-      setFname("");
-      setLname("");
-      setPhone("");
+      return;
     }
-  };
+    updateUser({
+      fname,
+      lname,
+      username: phone,
+      email,
+      profilePic: selectedPic,
+    });
 
+    alert("اطلاعات با موفقیت ذخیره شد ✅");
+    setErrors({});
+  };
   return (
     <div className="flex flex-col ">
-      <h2 className="py-[10px] font-bold text-[130%]">اطلاعات کاربری</h2>
+      <h2 className="py-[10px] font-semibold text-[130%]">اطلاعات کاربری</h2>
       <div className="flex  lg:flex-row flex-col gap-[10px] lg:gap-[19px] w-full">
         {/* profile */}
         {/* lg> */}
         <div className="bg-[#f5f5f5] p-[10px] rounded-sm inline-block md:hidden lg:inline-block    lg:w-[30%]">
-          <h3 className="py-[8px] font-[600] text-[102%]">تصویر پروفایل</h3>
+          <h3 className="py-[8px] font-bold text-[102%]">تصویر پروفایل</h3>
           <div className="flex justify-center">
             <span className="flex justify-center items-center m-[10px] w-[110px] h-[110px] shadow-lg rounded-full overflow-hidden">
               <img
-                src={profilePic}
+                src={selectedPic}
                 alt="Profile"
-                className="w-full h-full object-cover object-center"
+                className="border-[1px] border-[#56a2ff32] w-full h-full object-cover object-center"
               />
             </span>
           </div>
@@ -85,10 +94,9 @@ function UserInfo({ profilePic, setProfilePic }) {
                 key={idx}
                 src={pic}
                 alt={`porof${idx + 1}`}
-                className="rounded-full w-full border-[1px] border-[#56a3ff61] cursor-pointer"
-                onClick={() => {
-                  setProfilePic(pic);
-                }}
+  className={`rounded-full w-full cursor-pointer border-[1.2px] ${
+      selectedPic === pic ? "border-[#0b9ae7dd]" : "border-[#56a3ff61]"
+    }`}                onClick={() => setSelectedPic(pic)}
               />
             ))}
           </div>
@@ -129,7 +137,7 @@ function UserInfo({ profilePic, setProfilePic }) {
               <div className="flex justify-center">
                 <span className="flex justify-center items-center m-[10px] w-[130px] h-[130px] shadow-lg rounded-full overflow-hidden">
                   <img
-                    src={profilePic}
+                    src={selectedPic}
                     alt="Profile"
                     className="w-full h-full object-cover object-center"
                   />
@@ -156,7 +164,7 @@ function UserInfo({ profilePic, setProfilePic }) {
                 {/* دکمه ذخیره تصویر */}
                 <button
                   onClick={handleSavePhoto}
-                  className="bg-[#1e88e5] text-white text-center p-[10px] rounded-lg box-shadow w-full"
+                  className="border-[1px] border-[#56a2ff32] bg-[#1e88e5] text-white text-center p-[10px] rounded-lg box-shadow w-full"
                 >
                   ذخیره تصویر
                 </button>
@@ -168,10 +176,9 @@ function UserInfo({ profilePic, setProfilePic }) {
                   key={idx}
                   src={pic}
                   alt={`porof${idx + 1}`}
-                  className="rounded-full w-full border-[1px] border-[#56a3ff61] cursor-pointer"
-                  onClick={() => {
-                    setProfilePic(pic);
-                  }}
+  className={`rounded-full w-full cursor-pointer border-[1.2px] ${
+      selectedPic === pic ? "border-[#0b9ae7dd]" : "border-[#56a3ff61]"
+    }`}                  onClick={() => setSelectedPic(pic)}
                 />
               ))}
             </div>

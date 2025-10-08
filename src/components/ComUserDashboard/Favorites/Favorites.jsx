@@ -8,7 +8,7 @@ import { useAxios } from "../../../context/AxiosContaext/AxiosContaext";
 import Loading from "../../Loading/Loading";
 
 function Favorites() {
-  const {addToFav, favoriteItems, removeFromFav } = useFav();
+  const { addToFav, favoriteItems, removeFromFav } = useFav();
   const { allProducts, loading: productsLoading } = useAxios();
   const [pagedFavorites, setPagedFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -41,27 +41,28 @@ function Favorites() {
   }, [favoriteItems, allProducts, currentPage]);
 
   const handlePageClick = (event) => setCurrentPage(event.selected);
-useEffect(() => {
-  setCurrentPage(0);
-}, [favoriteItems, allProducts]);
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [favoriteItems, allProducts]);
 
   return (
     <div className="flex flex-col">
       <h2 className="py-[10px] font-bold text-[130%]">علاقه‌مندی‌ها</h2>
       {/* loading */}
-      {productsLoading&& <Loading/>}
+      {productsLoading && <Loading />}
       {/* اگر محصولی وجود نداشت */}
-      { !productsLoading||pagedFavorites.length === 0 && (
-        <p className="text-center text-gray-500 mt-10">
-          هیچ محصولی در علاقه‌مندی‌ها موجود نیست 😔
-        </p>
-      )}
+      {
+        pagedFavorites.length === 0 && !productsLoading && (
+          <p className="text-center text-gray-500 mt-10">
+            هیچ محصولی در علاقه‌مندی‌ها موجود نیست 😔
+          </p>
+        )}
       <div className="pruducts grid gap-x-[10px] gap-y-[7px] lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
         {pagedFavorites.map((product) => {
           const isFav = favoriteItems.some((item) => item.id === product.id);
           return (
             <div
-              key={`${product.idsortby}-${product.favId}`}
+              key={`${product.idsortby}-${product.id}`}
               className="product relative"
             >
               <div className="md:px-[10px] px-[2px] flex justify-between absolute z-1 top-0 w-full opacity-80 ">
@@ -96,12 +97,14 @@ useEffect(() => {
                 to={`/Fotros/Products/${product.idsortby}`}
                 className=" md:h-[345px] h-[228px] rounded px-[6px] py-[10px] pt-0 box-shadow flex flex-col justify-center items-center md:gap-[15px] gap-[9px] "
               >
-                <div className=" h-[140px] md:h-[220px] lg:h-[180px] "><img
-                  src={product.img}
-                  alt={product.title}
-                  className=" h-full"
-                  loading="lazy"
-                /></div>
+                <div className=" h-[140px] md:h-[220px] lg:h-[180px] ">
+                  <img
+                    src={product.img}
+                    alt={product.title}
+                    className=" h-full"
+                    loading="lazy"
+                  />
+                </div>
 
                 <p className="font-semibold self-start text-[110%] ">
                   {product.title}

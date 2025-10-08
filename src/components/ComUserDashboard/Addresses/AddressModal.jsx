@@ -1,11 +1,19 @@
 import React, { memo, useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
+import { useAuth } from "../../../context/AuthContext/AuthContext";
+function AddressModal({ open, onClose, onSave }) {
+  const { user } = useAuth();
 
-function AddressModal({ open, onClose }) {
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [isOtherRecipient, setIsOtherRecipient] = useState(false);
+  const [fname, setFName] = useState("");
+  const [lname, setLName] = useState("");
+
+  const [phone, setPhone] = useState("");
+
   const [errors, setErrors] = useState({});
 
   // 🟢 دیتای کامل استان‌ها و شهرهای ایران
@@ -137,19 +145,44 @@ function AddressModal({ open, onClose }) {
     if (!province) newErrors.province = "انتخاب استان الزامی است";
     if (!city) newErrors.city = "انتخاب شهر الزامی است";
     if (!address) newErrors.address = "آدرس الزامی است";
+    if (isOtherRecipient) {
+      if (!phone) newErrors.phone = "شماره تماس الزامی است";
+      if (!fname) newErrors.fname = "نام فرد گیرنده الزامی است";
+      if (!lname) newErrors.lname = "نام خانوادگی فرد گیرنده الزامی است";
+    }
     if (!/^\d{10}$/.test(postalCode))
       newErrors.postalCode = "کدپستی باید ۱۰ رقم باشد";
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      setErrors({});
-      // ریست کردن فرم
-      setProvince("");
-      setCity("");
-      setAddress("");
-      setPostalCode("");
-      onClose();
+      return;
     }
+
+    // آدرس جدید
+    const newAddress = {
+      id: Date.now(),
+      province,
+      city,
+      fullAddress: `${province}، ${city}، ${address}`,
+      postalCode,
+      phone: isOtherRecipient ? phone : user.username,
+      fname: isOtherRecipient ? fname : user.fname,
+      lname: isOtherRecipient ? lname : user.lname,
+    };
+
+    // ارسال به Context از طریق props
+    if (onSave) onSave(newAddress);
+
+    // ریست فرم و بستن مودال
+    setProvince("");
+    setCity("");
+    setAddress("");
+    setPostalCode("");
+    setIsOtherRecipient(false);
+    setFName("");
+    setLName("");
+    setPhone("");
+    setErrors({});
+    onClose();
   };
 
   if (!open) return null;
@@ -167,7 +200,69 @@ function AddressModal({ open, onClose }) {
           <h2 className="text-lg font-bold">افزودن آدرس</h2>
           <MdClose onClick={onClose} className="cursor-pointer text-[22px]" />
         </div>
+        <div className="flex items-center gap-2 pb-[4px]">
+          <input
+            type="checkbox"
+            id="otherRecipient"
+            checked={isOtherRecipient}
+            onChange={(e) => setIsOtherRecipient(e.target.checked)}
+          />
+          <label htmlFor="otherRecipient" className="font-semibold">
+            گیرنده فرد دیگری است
+          </label>
+        </div>
+
         <form action="#" onSubmit={handleSave}>
+          {isOtherRecipient && (
+            <>
+            {/* اسم گیرنده */}
+              <label htmlFor="fname" className="block mb-1 font-semibold mt-3">
+                نام گیرنده<span className="text-[#c20101]">*</span>
+              </label>
+              <input
+                id="fname"
+                type="text"
+                value={fname}
+                onChange={(e) => setFName(e.target.value)}
+                className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
+                placeholder="مثلاً : علی"
+              />
+              {errors.fname && (
+                <p className="text-red-500 text-sm mb-2">{errors.fname}</p>
+              )}
+              {/* فامیل گیرنده */}
+              <label htmlFor="lname" className="block mb-1 font-semibold mt-3">
+                نام خانوادگی گیرنده<span className="text-[#c20101]">*</span>
+              </label>
+              <input
+                id="lname"
+                type="text"
+                value={lname}
+                onChange={(e) => setLName(e.target.value)}
+                className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
+                placeholder="مثلاً : رضایی"
+              />
+              {errors.lname && (
+                <p className="text-red-500 text-sm mb-2">{errors.lname}</p>
+              )}
+              {/* شماره تماس گیرنده */}
+              <label htmlFor="phone" className="block mb-1 font-semibold mt-3">
+                شماره تماس<span className="text-[#c20101]">*</span>
+              </label>
+              <input
+                id="phone"
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
+                placeholder="مثلاً : 09123456789"
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mb-2">{errors.phone}</p>
+              )}
+            </>
+          )}
+
           {/* استان */}
           <label htmlFor="province" className="block mb-1 font-semibold">
             استان<span className="text-[#c20101]">*</span>
@@ -259,7 +354,6 @@ function AddressModal({ open, onClose }) {
             }`}
             placeholder="مثال :6064554499"
           />
-
           {errors.postalCode && (
             <p className="text-red-500 text-sm mb-2">{errors.postalCode}</p>
           )}

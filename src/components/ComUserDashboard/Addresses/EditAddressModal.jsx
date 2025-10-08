@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 
-function EditAddressModal({ open, onClose }) {
+function EditAddressModal({ open, onClose , address, onSave }) {
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
-  const [address, setAddress] = useState("");
+const [fullAddress, setFullAddress] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [errors, setErrors] = useState({});
 
@@ -118,6 +118,15 @@ function EditAddressModal({ open, onClose }) {
     همدان: ["همدان", "ملایر", "نهاوند", "اسدآباد", "تویسرکان"],
     یزد: ["یزد", "میبد", "اردکان", "بافق", "مهریز"],
   };
+  // بارگذاری اطلاعات آدرس وقتی مودال باز شد یا آدرس تغییر کرد
+  useEffect(() => {
+    if (address) {
+      setProvince(address.province || "");
+      setCity(address.city || "");
+      setFullAddress(address.fullAddress?.split("،").slice(2).join("،") || "");
+      setPostalCode(address.postalCode || "");
+    }
+  }, [address]);
   //   وقتی مودال باز است، می‌توان body را lock کرد
   useEffect(() => {
     if (open) {
@@ -136,20 +145,28 @@ function EditAddressModal({ open, onClose }) {
     let newErrors = {};
     if (!province) newErrors.province = "انتخاب استان الزامی است";
     if (!city) newErrors.city = "انتخاب شهر الزامی است";
-    if (!address) newErrors.address = "آدرس الزامی است";
+    if (!fullAddress) newErrors.fullAddress = "آدرس الزامی است";
     if (!/^\d{10}$/.test(postalCode))
       newErrors.postalCode = "کدپستی باید ۱۰ رقم باشد";
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      setErrors({});
-      // ریست کردن فرم
-      setProvince("");
-      setCity("");
-      setAddress("");
-      setPostalCode("");
-      onClose();
+      return;
     }
+
+    const updatedAddress = {
+      ...address,
+      province,
+      city,
+      fullAddress: `${province}، ${city}، ${fullAddress}`,
+      postalCode,
+    };
+
+    if (onSave) onSave(updatedAddress);
+
+    // ریست فرم و بستن مودال
+    setErrors({});
+    onClose();
   };
 
   if (!open) return null;
@@ -222,19 +239,19 @@ function EditAddressModal({ open, onClose }) {
           )}
 
           {/* آدرس */}
-          <label htmlFor="address" className="block mb-1 font-semibold mt-3">
+          <label htmlFor="fullAddress" className="block mb-1 font-semibold mt-3">
             آدرس<span className="text-[#c20101]">*</span>
           </label>
           <input
-            id="address"
+            id="fullAddress"
             type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={fullAddress}
+            onChange={(e) => setFullAddress(e.target.value)}
             className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
             placeholder="مثلاً: شهر. محله. خیابان. پلاک...."
           />
-          {errors.address && (
-            <p className="text-red-500 text-sm mb-2">{errors.address}</p>
+          {errors.fullAddress && (
+            <p className="text-red-500 text-sm mb-2">{errors.fullAddress}</p>
           )}
 
           {/* کدپستی */}

@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from "react";
 import { MdClose } from "react-icons/md";
 
-function DeleteAddressModal({ open, onClose }) {
+function DeleteAddressModal({ open, onClose, onConfirm, address }) {
   //   وقتی مودال باز است، می‌توان body را lock کرد
   useEffect(() => {
     if (open) {
@@ -13,7 +13,7 @@ function DeleteAddressModal({ open, onClose }) {
       document.body.style.overflow = "auto"; // cleanup
     };
   }, [open]);
-
+console.log(address)
   if (!open) return null;
 
   return (
@@ -33,8 +33,7 @@ function DeleteAddressModal({ open, onClose }) {
           میخواهید این ادرس را حذف کنید؟
         </h2>
         <p className="text-gray-600">
-
-          اهواز. گلستان .خیابان تربت غربی . پلاک 42
+          {address?.fullAddress || "آدرس موجود نیست"}{" "}
         </p>
         {/* دکمه‌ها */}
         <div className="flex flex-col-reverse md:flex-row items-center justify-between mt-4 gap-[8px] ">
@@ -46,6 +45,7 @@ function DeleteAddressModal({ open, onClose }) {
             انصراف
           </button>
           <button
+            onClick={onConfirm}
             type="submit"
             className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%] bg-[#1e88e5] text-white rounded-lg"
           >

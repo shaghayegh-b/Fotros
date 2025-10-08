@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }) => {
             lname: "",
             email: "",
             profilePic: "",
+            favorites: [],
             token: "JWT_TOKEN_EXAMPLE",
           };
 
