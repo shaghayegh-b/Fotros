@@ -202,29 +202,33 @@ function Navbar() {
             </NavLink>
             {/* userdashboard */}
             {isLoggedIn ? (
-              <NavLink to="/Fotros/userdashboard/UserInfo">
-                <div className=" w-[fit-content] bg-blue-100 px-[9px] py-[2px] hidden md:grid items-center grid-cols-3 grid-rows-1 gap-[4px] rounded-xl">
-                  <img
-                    src={user.profilePic}
-                    alt={user.fname}
-                    className="w-full rounded-full "
-                  />
-                  <p>{user.lname}</p>
-                  <MdKeyboardArrowDown className="hidden lg:inline-block" />
-                </div>
+              <NavLink
+                to="/Fotros/userdashboard/UserInfo"
+                className="h-full w-[80px] lg:w-[115px] hidden md:flex items-center justify-around gap-2 px-[6px] py-[2px] rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200"
+              >
+                <img
+                  src={user.profilePic}
+                  alt={user.fname}
+                  className="h-[1.2rem] md:h-[2rem] rounded-full object-cover border border-white shadow-sm"
+                />
+                <p className=" flex-1 text-center text-ellipsis whitespace-nowrap ">{user.fname}</p>
+                <MdKeyboardArrowDown className="hidden lg:inline-block shrink-0" />
               </NavLink>
             ) : (
-              <NavLink to="/Fotros/login">
+              <NavLink
+                to="/Fotros/login"
+                className="text-xl hover:text-blue-500 transition-colors duration-200"
+              >
                 <FaRegUser />
               </NavLink>
             )}
           </div>
         </div>
-{/* search box */}
+        {/* search box */}
         {isDropdownAllowed && (
           <div
             ref={dropdownRefSearch}
-            className={`fixed top-[60px] left-[160px] -translate-x-1/2 w-[300px] bg-white border border-gray-300 shadow-lg rounded-lg z-50 transform transition-all duration-300 ease-in-out ${
+            className={`fixed top-[60px] left-[160px] -translate-x-1/2 w-[300px] bg-white border border-gray-300 shadow-lg rounded-lg z-5 transform transition-all duration-300 ease-in-out ${
               isSearchDropdownOpen
                 ? "scale-y-100 opacity-100"
                 : "scale-y-0 opacity-0"

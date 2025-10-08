@@ -11,6 +11,10 @@ import {
   AiOutlineProduct,
 } from "react-icons/ai";
 import { HiArrowCircleLeft } from "react-icons/hi";
+
+import { CgProfile } from "react-icons/cg";
+import { FaHeart, FaMapMarkerAlt, FaShoppingCart } from "react-icons/fa";
+import { BiSupport } from "react-icons/bi";
 import {
   MdCategory,
   MdDarkMode,
@@ -102,6 +106,7 @@ function Meno() {
                   <span className="font-[600]">صفحه اصلی</span>
                 </NavLink>
               </li>
+              {/* دسته بندی */}
               <li
                 className={`flex flex-col gap-[10px] relative
                  `}
@@ -151,62 +156,37 @@ function Meno() {
                   ))}
                 </div>
               </li>
-              <li
-                onClick={() => {
-                  setMeno(false);
-                }}
-              >
-                <Link
-                  to="/Fotros/userdashboard/Favorites"
-                  className="flex gap-[8px] items-center  px-[7px] "
+              {[
+                { id: "userdashboard/UserInfo", text: "اطلاعات کاربری", icon: CgProfile },
+                { id: "userdashboard/Orders", text: "سفارش های من", icon: FaShoppingCart },
+                { id: "userdashboard/Favorites", text: "علاقه مندی ها", icon: FaHeart },
+                { id: "userdashboard/Addresses", text: "ادرس های من", icon: FaMapMarkerAlt },
+                { id: "userdashboard/Support", text: "پشتیبانی", icon: BiSupport },
+                { id: "questions", text: "سوالات متداول", icon: AiOutlineMessage },
+                { id: "contactus", text: "ارتباط با ما", icon: AiOutlineLink },
+                { id: "questions", text: "", icon: AiOutlineMessage },
+              ].map(({ text, id, icon: Icon }, idx) => (
+                <li
+                  key={idx}
+                  onClick={() => {
+                    setMeno(false);
+                  }}
                 >
-                  <BiHeart  className={` ${
-                      location.pathname === "/Fotros/userdashboard/Favorites" ? "text-[#4f93e8]" : ""
-                    }`} />
-                  <span className="font-[600]">محصولات مورد علاقه</span>
-                </Link>
-              </li>
-              <li
-                onClick={() => {
-                  setMeno(false);
-                }}
-              >
-                <NavLink
-                  to="/Fotros/questions"
-                  className="flex gap-[8px] items-center  px-[7px] "
-                >
-                  <AiOutlineMessage  className={` ${
-                      location.pathname === "/Fotros/questions" ? "text-[#4f93e8]" : ""
-                    }`} />
-                  <span className="font-[600]">سوالات متداول</span>
-                </NavLink>
-              </li>
-              {/* <li
-                                onClick={() => {
-                          setMeno(false);
-                        }}
+                  <Link
+                    to={`/Fotros/${id}`}
                     className="flex gap-[8px] items-center  px-[7px] "
->
-                  <a href="">
-                    <i className="fa fa-bell text-[#1974ba]"></i>
-                    <span className="font-[600]">اعلانات</span>
-                  </a>
-                </li> */}
-              <li
-                onClick={() => {
-                  setMeno(false);
-                }}
-              >
-                <NavLink
-                  to="/Fotros/contactus"
-                  className="flex gap-[8px] items-center  px-[7px] "
-                >
-                  <AiOutlineLink  className={` ${
-                      location.pathname === "/Fotros/contactus" ? "text-[#4f93e8]" : ""
-                    }`} />
-                  <span className="font-[600]">ارتباط با ما</span>
-                </NavLink>
-              </li>
+                  >
+                    <Icon
+                      className={`${
+                        location.pathname === `/Fotros/userdashboard/${id}`
+                          ? "text-[#4f93e8]"
+                          : ""
+                      }`}
+                    />
+                    <span className="font-[600]">{text}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
 
             <hr className=" border-gray-500" />
