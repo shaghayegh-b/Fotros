@@ -171,7 +171,7 @@ function Navbar() {
             <img src={logoimg} alt="Logoimg" className=" h-[22px]" />
           </div>
           {/* search & shopping & userdashboard */}
-          <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-between items-center ">
+          <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-end items-center ">
             {/* search desktop */}
             <SearchBar
               mode="desktop"
@@ -217,7 +217,6 @@ function Navbar() {
             ) : (
               <NavLink
                 to="/Fotros/login"
-                className="text-xl hover:text-blue-500 transition-colors duration-200"
               >
                 <FaRegUser />
               </NavLink>
@@ -314,7 +313,7 @@ function Navbar() {
             onClick={() => setMeno(false)}
           >
             <MdClose
-              className={`rounded-full shadow flex justify-center items-center bg-[#d9dadb]
+              className={`rounded-full shadow flex justify-center items-center bg-[#d9dadb] m-[8px]
                         ${meno ? "" : "hidden"}`}
             />
           </div>

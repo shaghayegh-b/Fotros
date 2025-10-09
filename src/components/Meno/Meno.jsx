@@ -65,7 +65,7 @@ function Meno() {
               to="/Fotros/userdashboard/UserInfo"
               className="Meno1 bg-blue-300 w-[100%] flex flex-row p-3 py-8 gap-3 items-center"
             >
-              <div className="w-[2rem] h-[2rem] rounded-full flex justify-center items-center">
+              <div className="w-[3.5rem] h-[3.5rem] rounded-full flex justify-center items-center">
                 <img
                   src={user.profilePic}
                   alt={user.fname}
@@ -84,7 +84,7 @@ function Meno() {
             </Link>
           )}
           <div className="Meno2 flex flex-col gap-2">
-            <ul className="flex flex-col gap-[15px]">
+            <ul className="flex flex-col gap-[20px] pb-[5px]">
               <li
                 onClick={() => {
                   funcAxios(PRODUCT_CATEGORIES[0].url);
@@ -100,7 +100,7 @@ function Meno() {
                 >
                   <HiHome
                     className={` ${
-                      location.pathname === "/Fotros/" ? "text-[#4f93e8]" : ""
+                      location.pathname === "/Fotros/" ? "text-[#4f93e8]" : "text-[#042a50]"
                     }`}
                   />
                   <span className="font-[600]">صفحه اصلی</span>
@@ -115,10 +115,10 @@ function Meno() {
                 <div className="font-[600] flex-2 flex justify-between items-center px-[7px] py-[5px]">
                   <span className="flex-2 flex gap-[8px]">
                     <MdCategory
-                      className={`${
+                      className={` ${
                         location.pathname === "/Fotros/Products" || grouping
                           ? "text-[#4f93e8]"
-                          : ""
+                          : "text-[#042a50]"
                       }`}
                     />
                     دسته بندی
@@ -149,7 +149,7 @@ function Meno() {
                         applyFilter("", false, cat.filterName);
                         setMeno(false);
                       }}
-                      className="tracking-tighter w-full px-[7px] py-[5px] hover:bg-[#afd2fd] border-y border-y-[#afd2fd] "
+                      className="tracking-tighter w-full px-[7px] py-[8px] hover:bg-[#afd2fd] border-y border-y-[#afd2fd] "
                     >
                       {cat.name}
                     </NavLink>
@@ -157,14 +157,12 @@ function Meno() {
                 </div>
               </li>
               {[
-                { id: "userdashboard/UserInfo", text: "اطلاعات کاربری", icon: CgProfile },
                 { id: "userdashboard/Orders", text: "سفارش های من", icon: FaShoppingCart },
                 { id: "userdashboard/Favorites", text: "علاقه مندی ها", icon: FaHeart },
                 { id: "userdashboard/Addresses", text: "ادرس های من", icon: FaMapMarkerAlt },
                 { id: "userdashboard/Support", text: "پشتیبانی", icon: BiSupport },
                 { id: "questions", text: "سوالات متداول", icon: AiOutlineMessage },
                 { id: "contactus", text: "ارتباط با ما", icon: AiOutlineLink },
-                { id: "questions", text: "", icon: AiOutlineMessage },
               ].map(({ text, id, icon: Icon }, idx) => (
                 <li
                   key={idx}
@@ -177,10 +175,10 @@ function Meno() {
                     className="flex gap-[8px] items-center  px-[7px] "
                   >
                     <Icon
-                      className={`${
-                        location.pathname === `/Fotros/userdashboard/${id}`
+                      className={` ${
+                        location.pathname === `/Fotros/${id}`
                           ? "text-[#4f93e8]"
-                          : ""
+                          : "text-[#042a50] "
                       }`}
                     />
                     <span className="font-[600]">{text}</span>
@@ -190,13 +188,13 @@ function Meno() {
             </ul>
 
             <hr className=" border-gray-500" />
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-[15px] pb-[20px]">
               <li
                 title="Change Theme Mode"
                 onClick={() => setIsDark(!isDark)}
                 className="flex gap-[8px] items-center  px-[7px] "
               >
-                {isDark ? <MdLightMode /> : <MdDarkMode />}
+                {isDark ? <MdLightMode className="text-[#897705]" /> : <MdDarkMode className="text-[#042a50]" />}
                 <span className="font-[600]">
                   {isDark ? "حالت روز" : "حالت شب "}
                 </span>
@@ -212,7 +210,7 @@ function Meno() {
                     to="/Fotros/"
                     className="flex gap-[8px] items-center  px-[7px]"
                   >
-                    <FiLogOut />
+                    <FiLogOut className="text-[#042a50]" />
                     <span className="font-[600]">خروج از حساب کاربری</span>
                   </NavLink>
                 </li>
@@ -226,7 +224,7 @@ function Meno() {
                     to="/Fotros/login"
                     className="flex gap-[8px] items-center  px-[7px] "
                   >
-                    <FaUserPlus />
+                    <FaUserPlus className="text-[#042a50]" />
                     <span className="font-[600]">ساخت حساب کاربری</span>
                   </NavLink>
                 </li>
