@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 
 import wingfotros from "../../assets/img/wingfotros.png";
 import imgdaman from "../../assets/img/daman.png";
@@ -8,6 +8,33 @@ import { useAuth } from "../../context/AuthContext/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const inputRef = useRef(null);
+  const [hasFocused, setHasFocused] = useState(false); // برای بررسی اینکه کاربر فوکوس کرده یا نه
+
+  useEffect(() => {
+    // تابعی که وقتی کاربر فوکوس کرد، وضعیت رو تغییر میده
+    const handleFocus = () => setHasFocused(true);
+
+    const inputElement = inputRef.current;
+    if (inputElement) {
+      inputElement.addEventListener("focus", handleFocus);
+    }
+
+    // بعد از ۵ ثانیه بررسی کن
+    const timer = setTimeout(() => {
+      if (!hasFocused && inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 5000);
+
+    // پاکسازی
+    return () => {
+      clearTimeout(timer);
+      if (inputElement) {
+        inputElement.removeEventListener("focus", handleFocus);
+      }
+    };
+  }, [hasFocused]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -47,40 +74,40 @@ function LoginPage() {
       <div className="flex justify-center items-center w-full h-[100vh] bg-[#d5d5d5]">
         {/* تزئینی‌ها */}
         <div className="">
-            <img
-          src={imgdaman}
-          alt=""
-          className="h-[5.4rem] absolute right-[15px] md:right-[35rem] z-2 bottom-[1rem]"
-        />
-        <img
-          src={shirtimg}
-          alt=""
-          className="h-[6rem] absolute left-[2px] md:left-[15rem] z-2 top-[6rem]"
-        />
-        <img
-          src={topimg}
-          alt=""
-          className="h-[9rem] absolute left-[0px] md:left-[25rem] z-2  bottom-[170px] md:bottom-[unset] md:top-[2rem]"
-        />
-        <img
-          src={topimg}
-          alt=""
-          className="h-[7rem] absolute right-[19px] md:right-[3rem] z-2 top-[2rem]"
-        />
-        <img
-          src={topimg}
-          alt=""
-          className="h-[4rem] hidden md:inline-block absolute right-[50px] md:right-[26rem] z-2 top-[8rem]"
-        />
-        <img
-          src={topimg}
-          alt=""
-          className="h-[8rem] hidden md:inline-block absolute right-[4px] md:right-[3rem] z-2 bottom-[4rem]"
-        />
+          <img
+            src={imgdaman}
+            alt=""
+            className="h-[5.4rem] absolute right-[15px] md:right-[35rem] z-2 bottom-[1rem]"
+          />
+          <img
+            src={shirtimg}
+            alt=""
+            className="h-[6rem] absolute left-[2px] md:left-[15rem] z-2 top-[6rem]"
+          />
+          <img
+            src={topimg}
+            alt=""
+            className="h-[9rem] absolute left-[0px] md:left-[25rem] z-2  bottom-[170px] md:bottom-[unset] md:top-[2rem]"
+          />
+          <img
+            src={topimg}
+            alt=""
+            className="h-[7rem] absolute right-[19px] md:right-[3rem] z-2 top-[2rem]"
+          />
+          <img
+            src={topimg}
+            alt=""
+            className="h-[4rem] hidden md:inline-block absolute right-[50px] md:right-[26rem] z-2 top-[8rem]"
+          />
+          <img
+            src={topimg}
+            alt=""
+            className="h-[8rem] hidden md:inline-block absolute right-[4px] md:right-[3rem] z-2 bottom-[4rem]"
+          />
         </div>
 
         {/* فرم ورود */}
-        <div className="w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[white] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
+        <div className="mt-[-40%] md:mt-[unset] w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[white] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
           <div className=" w-full mb-[43px] flex items-center justify-center gap-[7px]">
             <div className="relative w-[55px] h-[55px]">
               <img src={wingfotros} alt="Logoimg" className=" h-full " />
@@ -101,6 +128,7 @@ function LoginPage() {
               شماره موبایل
             </label>
             <input
+              ref={inputRef}
               type="text"
               id="phonenumber"
               value={phone}

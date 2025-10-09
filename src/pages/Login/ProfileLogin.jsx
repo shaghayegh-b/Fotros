@@ -77,13 +77,13 @@ function ProfileLogin() {
           className="h-[8rem] hidden md:inline-block absolute right-[4px] md:right-[3rem] z-2 bottom-[4rem]"
         />
       </div>
-      <div className="max-h-[95vh] overflow-y-scroll w-[85%] md:w-[65%] z-3 bg-[white] rounded-md  my-[15px] flex items-center justify-center ">
+      <div className="mt-[-40%] md:mt-[unset] max-h-[95vh] overflow-y-scroll w-[85%] md:w-[65%] z-3 bg-[white] rounded-md  my-[15px] flex items-center justify-center ">
         <div className=" flex flex-col items-center justify-center gap-[10px] p-[30px]">
           <h2 className="text-center w-full font-semibold text-[130%] ">
             انتخاب عکس پروفایل
           </h2>
           {/* profile */}
-          <div className=" rounded-sm flex flex-col w-[80%]">
+          <div className=" rounded-sm flex flex-col w-[95%]">
             <div className="flex justify-center">
               <span className="flex justify-center items-center m-[10px] w-[123px] h-[123px] shadow-lg rounded-full overflow-hidden">
                 <img
@@ -99,9 +99,9 @@ function ProfileLogin() {
                   key={idx}
                   src={pic}
                   alt={`porof${idx + 1}`}
-                  className={`rounded-full w-full cursor-pointer border-[2px] ${
+                  className={`rounded-full w-full cursor-pointer border-[1.2px] ${
                     !isCustomPic && selectedPic === pic
-                      ? "border-[#0b9ae7dd] border-[3px]"
+                      ? "border-[#0b9ae7dd]"
                       : "border-[#56a3ff61]"
                   }`}
                   onClick={() => {
@@ -121,22 +121,23 @@ function ProfileLogin() {
                 ref={fileInputRef}
                 className="hidden"
               />
+              <div className="flex flex-col md:flex-row gap-[10px]">
+                {/* دکمه انتخاب عکس */}
+                <button
+                  className="text-[#1e88e5] border-[#1e88e5] border-[1px] text-center p-[10px] rounded-lg box-shadow w-full"
+                  onClick={() => fileInputRef.current.click()}
+                >
+                  انتخاب عکس از گالری
+                </button>
 
-              {/* دکمه انتخاب عکس */}
-              <button
-                className="text-[#1e88e5] border-[#1e88e5] border-[1px] text-center p-[10px] rounded-lg box-shadow w-full"
-                onClick={() => fileInputRef.current.click()}
-              >
-                انتخاب عکس از گالری
-              </button>
-
-              {/* دکمه ذخیره تصویر */}
-              <button
-                onClick={handleSavePhoto}
-                className="bg-[#1e88e5] text-white text-center p-[10px] rounded-lg box-shadow w-full"
-              >
-                ذخیره تصویر
-              </button>
+                {/* دکمه ذخیره تصویر */}
+                <button
+                  onClick={handleSavePhoto}
+                  className="bg-[#1e88e5] text-white text-center p-[10px] rounded-lg box-shadow w-full"
+                >
+                  ذخیره تصویر
+                </button>
+              </div>
             </div>
           </div>
         </div>
