@@ -100,7 +100,9 @@ function Meno() {
                 >
                   <HiHome
                     className={` ${
-                      location.pathname === "/Fotros/" ? "text-[#4f93e8]" : "text-[#042a50]"
+                      location.pathname === "/Fotros/"
+                        ? "text-[#4f93e8]"
+                        : "text-[#042a50]"
                     }`}
                   />
                   <span className="font-[600]">صفحه اصلی</span>
@@ -156,12 +158,13 @@ function Meno() {
                   ))}
                 </div>
               </li>
+
               {[
-                { id: "userdashboard/Orders", text: "سفارش های من", icon: FaShoppingCart },
-                { id: "userdashboard/Favorites", text: "علاقه مندی ها", icon: FaHeart },
-                { id: "userdashboard/Addresses", text: "ادرس های من", icon: FaMapMarkerAlt },
-                { id: "userdashboard/Support", text: "پشتیبانی", icon: BiSupport },
-                { id: "questions", text: "سوالات متداول", icon: AiOutlineMessage },
+                {
+                  id: "questions",
+                  text: "سوالات متداول",
+                  icon: AiOutlineMessage,
+                },
                 { id: "contactus", text: "ارتباط با ما", icon: AiOutlineLink },
               ].map(({ text, id, icon: Icon }, idx) => (
                 <li
@@ -185,20 +188,64 @@ function Meno() {
                   </Link>
                 </li>
               ))}
-            </ul>
-
-            <hr className=" border-gray-500" />
-            <ul className="flex flex-col gap-[15px] pb-[20px]">
               <li
                 title="Change Theme Mode"
                 onClick={() => setIsDark(!isDark)}
                 className="flex gap-[8px] items-center  px-[7px] "
               >
-                {isDark ? <MdLightMode className="text-[#897705]" /> : <MdDarkMode className="text-[#042a50]" />}
+                {isDark ? (
+                  <MdLightMode className="text-[#897705]" />
+                ) : (
+                  <MdDarkMode className="text-[#042a50]" />
+                )}
                 <span className="font-[600]">
                   {isDark ? "حالت روز" : "حالت شب "}
                 </span>
               </li>
+            </ul>
+
+            <hr className=" border-gray-500" />
+            <ul className="flex flex-col gap-[15px] pb-[20px]">
+              {isLoggedIn &&
+                [
+                  {
+                    id: "userdashboard/Orders",
+                    text: "سفارش های من",
+                    icon: FaShoppingCart,
+                  },
+                  {
+                    id: "userdashboard/Favorites",
+                    text: "علاقه مندی ها",
+                    icon: FaHeart,
+                  },
+                  {
+                    id: "userdashboard/Addresses",
+                    text: "آدرس های من",
+                    icon: FaMapMarkerAlt,
+                  },
+                  {
+                    id: "userdashboard/Support",
+                    text: "پشتیبانی",
+                    icon: BiSupport,
+                  },
+                ].map(({ text, id, icon: Icon }, idx) => (
+                  <li key={idx} onClick={() => setMeno(false)}>
+                    <Link
+                      to={`/Fotros/${id}`}
+                      className="flex gap-[8px] items-center px-[7px]"
+                    >
+                      <Icon
+                        className={`${
+                          location.pathname === `/Fotros/${id}`
+                            ? "text-[#4f93e8]"
+                            : "text-[#042a50]"
+                        }`}
+                      />
+                      <span className="font-[600]">{text}</span>
+                    </Link>
+                  </li>
+                ))}
+
               {isLoggedIn ? (
                 <li
                   onClick={() => {
