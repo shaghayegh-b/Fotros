@@ -13,6 +13,7 @@ import { useFav } from "../../context/FavProvider/FavProvider";
 import Categorys from "../../components/Categorys/Categorys";
 import { Link } from "react-router-dom";
 import { useSearch } from "../../context/SearchContext/SearchContext";
+import { useAuth } from "../../context/AuthContext/AuthContext";
 
 function Products() {
   useEffect(() => {
@@ -25,7 +26,8 @@ function Products() {
   const limit = 15; // تعداد محصول در هر صفحه
   const { addToFav, removeFromFav, favoriteItems } = useFav();
   const { filteredProducts, loading, selectedCategory, funcAxios } = useAxios();
-  const { searchedProducts ,searchQuery } = useSearch();
+  const { searchedProducts, searchQuery } = useSearch();
+  const { isLoggedIn } = useAuth();
   const productsToShow =
     searchedProducts.length > 0 ? searchedProducts : filteredProducts;
 
@@ -56,26 +58,19 @@ function Products() {
   return (
     <>
       <Navbar />
-      <div className="h-16  "></div>
-      <div className="pb-[90px]">
-        <h2 className="text-[175%] font-[600] md:px-[60px] p-[10px] md:py-[20px]">
+      <div className="h-10 lg:h-16"></div>
+      <div className="pb-[80px]">
+        <h2 className="text-[175%] font-[600] p-[10px] md:px-[30px] md:py-[20px]">
           {searchedProducts.length > 0
             ? `جستجو : ${searchQuery}`
             : selectedCategory}{" "}
         </h2>
-        <div
-          className={`${
-            selectedCategory == "همه محصولات" || selectedCategory == "مانتو"
-              ? "hidden md:block"
-              : ""
-          }`}
-        >
-          <Categorys resetPage={() => setCurrentPage(0)} />
-        </div>
+
+        <Categorys resetPage={() => setCurrentPage(0)} />
         <div>
           <Filter resetPage={() => setCurrentPage(0)} />
         </div>
-        <div className="md:pt-[15px] pt-[10px]">
+        <div className="md:pt-[15px] pt-[10px] px-[5px]">
           {/* Skeleton Loader */}
           {loading ? (
             <Loading />
@@ -93,7 +88,7 @@ function Products() {
               </span>
             </p>
           ) : (
-            <div className="products grid gap-4  lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+            <div className="products grid gap-[5px] md:gap-[9px]  lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
               {pagedProducts.map((product) => {
                 const isFav = favoriteItems.some(
                   (item) => item.id === product.id
@@ -111,7 +106,15 @@ function Products() {
                         />
                       ) : (
                         <FaRegHeart
-                          onClick={() => addToFav(product)}
+                          onClick={() => {
+                            if (!isLoggedIn) {
+                              alert(
+                                "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید."
+                              );
+                              return;
+                            }
+                            addToFav(product);
+                          }}
                           className="m-[5px] mt-[10px] cursor-pointer"
                           size={20}
                         />

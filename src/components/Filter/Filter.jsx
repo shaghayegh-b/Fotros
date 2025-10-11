@@ -49,53 +49,6 @@ function Filter({ resetPage }) {
         >
           محصولات موجود
         </button>
-
-        {/* <select
-          value={sortFilter}
-          onChange={handleSortChange}
-          className="px-3 py-1 border rounded"
-        >
-          <option
-            value=""
-            className={`${
-              open ? "border-[1px] border-[#97a7b461]" : ""
-            } flex justify-between items-center text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
-          >
-            مرتب‌سازی
-          </option>
-          <option
-            value="cheapest"
-            className={`${
-              open ? "border-[1px] border-[#97a7b461]" : ""
-            } flex justify-between items-center text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
-          >
-            ارزان‌ترین
-          </option>
-          <option
-            value="mostExpensive"
-            className={`${
-              open ? "border-[1px] border-[#97a7b461]" : ""
-            } flex justify-between items-center text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
-          >
-            گران‌ترین
-          </option>
-          <option
-            value="mostDiscount"
-            className={`${
-              open ? "border-[1px] border-[#97a7b461]" : ""
-            } flex justify-between items-center text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
-          >
-            بیشترین تخفیف
-          </option>
-          <option
-            value="newest"
-            className={`${
-              open ? "border-[1px] border-[#97a7b461]" : ""
-            } flex justify-between items-center text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
-          >
-            جدیدترین
-          </option>
-        </select> */}
         <Listbox value={sortFilter} onChange={handleSortChange}>
           {({ open }) => (
             <div className="relative">
@@ -104,7 +57,7 @@ function Filter({ resetPage }) {
                   open ? "border-[1px] border-[#97a7b461]" : ""
                                 }  flex justify-between items-center gap-[4px] text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
               >
-                <span className={`w-[90%]  tracking-tighter`}>
+                <span className={`w-[90%] whitespace-nowrap tracking-tighter`}>
                   {selected.label}
                 </span>
 
@@ -121,7 +74,7 @@ function Filter({ resetPage }) {
                     key={filter.id}
                     value={filter}
                     className={({ active }) =>
-                      `px-3 py-1 cursor-pointer ${
+                      `px-3 py-1 cursor-pointer whitespace-nowrap ${
                         active
                           ? "bg-[#81bcf0] border-[3px] border-[#97a7b461]"
                           : ""
@@ -136,7 +89,7 @@ function Filter({ resetPage }) {
           )}
         </Listbox>
       </div>
-      <Link to="/Fotros/" className="flex gap-[4px] items-center">صفحه اصلی <FaHome/></Link>
+      <Link to="/Fotros/" className="hidden md:flex gap-[2px] items-center whitespace-nowrap text-[85%]">صفحه اصلی<FaHome/></Link>
     </div>
   );
 }
