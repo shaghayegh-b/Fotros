@@ -32,6 +32,7 @@ import {
 
 import "./ProductId.css";
 import SlideProduct from "../../components/SlideProduct/SlideProduct";
+import { useAuth } from "../../context/AuthContext/AuthContext";
 const CACHE_DURATION = 5 * 60 * 1000; // مدت زمان کش: 5 دقیقه
 
 function ProductId() {
@@ -47,14 +48,10 @@ function ProductId() {
   const [commentsCount, setCommentsCount] = useState(0);
   const [commentText, setCommentText] = useState([]);
   const [recommend, setRecommend] = useState(null);
-  const [selectedSize,setSelectedSize]=useState(null)
+  const [selectedSize, setSelectedSize] = useState(null);
   const { addToFav, removeFromFav, favoriteItems } = useFav();
-  const {
-    addToCart,
-    increase,
-    decrease,
-    cartItems
-  } = useCart();
+  const { addToCart, increase, decrease, cartItems } = useCart();
+  const { isLoggedIn } = useAuth();
 
   const { idsortby } = useParams();
 
@@ -127,20 +124,19 @@ function ProductId() {
   };
 
   const selectedColor = product.colors?.[selectedColorIndex];
-// پیدا کردن آیتم در سبد خرید با در نظر گرفتن رنگ و سایز
-const itemInCart = cartItems.find(
-  (item) =>
-    item.idsortby === product.idsortby &&
-    item.selectedColor?.code === selectedColor?.code &&
-    item.selectedSize === selectedSize // این خط اضافه شد
-);
+  // پیدا کردن آیتم در سبد خرید با در نظر گرفتن رنگ و سایز
+  const itemInCart = cartItems.find(
+    (item) =>
+      item.idsortby === product.idsortby &&
+      item.selectedColor?.code === selectedColor?.code &&
+      item.selectedSize === selectedSize // این خط اضافه شد
+  );
 
-const quantity = itemInCart ? itemInCart.quantity : 0;
+  const quantity = itemInCart ? itemInCart.quantity : 0;
 
   const isOutOfStock = product.remaining === "اتمام موجودی";
 
   // تنظیمات اسلایدر
-
   const settings = {
     infinite: true,
     slidesToShow: Math.min(colors.length, 3),
@@ -173,6 +169,10 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
+    if (!isLoggedIn) {
+      alert("برای ثبت نظر باید وارد حساب کاربری خود شوید.");
+      return;
+    }
 
     if (recommend === null) {
       alert("لطفا انتخاب کنید که این محصول را پیشنهاد می‌کنید یا نه!");
@@ -222,11 +222,13 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
     );
   }
   // fav
-  const isFav = favoriteItems.some((item) => item.idsortby === product.idsortby );
+  const isFav = favoriteItems.some(
+    (item) => item.idsortby === product.idsortby
+  );
   return (
     <>
       <Navbar></Navbar>
-      <div className="h-16  "></div>
+      <div className="h-10 lg:h-16"></div>
       <div className="">
         {loading ? (
           <Loading />
@@ -342,7 +344,7 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                 </div>
                 {/* size */}
                 <div className="flex gap-[10px] items-center order-2 md:order-3">
-                  <p className="md:w-[12%] w-[20%]">سایز : </p>
+                  <p className=" w-[fit-content] md:w-[12%]">سایز : </p>
                   {product.size && product.size.length > 0 ? (
                     <form className="flex gap-2 flex-wrap">
                       {product.size.map((s, idx) => (
@@ -431,14 +433,11 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                   ${
                     isOutOfStock
                       ? " bg-[#00000026]  cursor-not-allowed"
-                      : " bg-[#1e88e5] text-white"
+                      : " bg-[#309cfb] md:bg-[#2192f4] text-white"
                   }`}
                         onClick={() => {
                           // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
-                          if (
-                            colors.length > 1 &&
-                            !colorToSend
-                          ) {
+                          if (colors.length > 1 && !colorToSend) {
                             alert("لطفا رنگ محصول را انتخاب کنید.");
                             return;
                           }
@@ -452,14 +451,14 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                             alert("لطفا سایز محصول را انتخاب کنید.");
                             return;
                           }
-                          console.log(colorToSend,selectedSize)
-                          if(colorToSend,selectedSize)
-                          addToCart({
-                            ...product,
-                            quantity: 1,
-                            selectedColor: colorToSend,
-                            selectedSize: selectedSize,
-                          });
+                          console.log(colorToSend, selectedSize);
+                          if ((colorToSend, selectedSize))
+                            addToCart({
+                              ...product,
+                              quantity: 1,
+                              selectedColor: colorToSend,
+                              selectedSize: selectedSize,
+                            });
                         }}
                         disabled={isOutOfStock}
                       >
@@ -468,36 +467,33 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                     </div>
                   ) : (
                     <button
-                      className="h-[38px] md:w-[250px] w-full rounded-sm bg-[#1e88e5] text-white "
+                      className="h-[38px] md:w-[250px] w-full rounded-sm bg-[#309cfb] md:bg-[#2192f4] text-white "
                       onClick={() => {
-                          // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
-                          if (
-                            colors.length > 1 &&
-                            !colorToSend
-                          ) {
-                            alert("لطفا رنگ محصول را انتخاب کنید.");
-                            return;
-                          }
+                        // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
+                        if (colors.length > 1 && !colorToSend) {
+                          alert("لطفا رنگ محصول را انتخاب کنید.");
+                          return;
+                        }
 
-                          // اگر محصول چند سایز داشت ولی سایزی انتخاب نشده
-                          if (
-                            product.size &&
-                            product.size.length > 0 &&
-                            !selectedSize
-                          ) {
-                            alert("لطفا سایز محصول را انتخاب کنید.");
-                            return;
-                          }
-                          console.log(colorToSend,selectedSize)
-                          if(colorToSend,selectedSize)
+                        // اگر محصول چند سایز داشت ولی سایزی انتخاب نشده
+                        if (
+                          product.size &&
+                          product.size.length > 0 &&
+                          !selectedSize
+                        ) {
+                          alert("لطفا سایز محصول را انتخاب کنید.");
+                          return;
+                        }
+                        console.log(colorToSend, selectedSize);
+                        if ((colorToSend, selectedSize))
                           addToCart({
                             ...product,
                             quantity: 1,
                             selectedColor: colorToSend,
                             selectedSize: selectedSize,
                           });
-                        }}
-                        disabled={isOutOfStock}
+                      }}
+                      disabled={isOutOfStock}
                     >
                       افزودن به سبد خرید
                     </button>
@@ -507,30 +503,50 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                     className={`self-center flex items-center px-[5px] gap-[5px] md:absolute bottom-[-32px] text-[95%] font-[500]
                   ${quantity > 0 ? "right-[120px] " : "right-[0] "}`}
                   >
-                    {isFav ? (
-                      <FaHeart
-                        onClick={() => removeFromFav(product.id)}
-                        color="#bc0000"
-                        className=" p-[2px] cursor-pointer"
-                        size={20}
-                      />
-                    ) : (
-                      <FaRegHeart
-                        onClick={() => addToFav(product)}
-                        className=" p-[2px] cursor-pointer"
-                        size={20}
-                      />
-                    )}
-                    <p className="text-center">
-                      {isFav
-                        ? " حذف از علاقه‌مندی‌ها"
-                        : " افزودن به علاقه‌مندی‌ها"}
-                    </p>
-                    {/* {fav ? (
-                    <p>حذف از علاقه‌مندی‌ها</p>
-                  ) : (
-
-                  )} */}
+                    <div
+                      className={`self-center flex items-center px-[5px]  md:absolute bottom-[-17px] ${
+                        quantity > 0 ? "right-[120px] " : "right-[0] "
+                      }`}
+                    >
+                      {isFav ? (
+                        <div
+                          className="flex items-center gap-[5px] text-[95%] font-[500]"
+                          onClick={() => {
+                            removeFromFav(product.id);
+                          }}
+                        >
+                          <FaHeart
+                            color="#bc0000"
+                            className="p-[2px] cursor-pointer"
+                            size={20}
+                          />
+                          <p className="text-center whitespace-nowrap">
+                            حذف از علاقه‌مندی‌ها
+                          </p>
+                        </div>
+                      ) : (
+                        <div
+                          className="flex items-center gap-[5px] text-[95%] font-[500]"
+                          onClick={() => {
+                            if (!isLoggedIn) {
+                              alert(
+                                "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید."
+                              );
+                              return;
+                            }
+                            addToFav(product);
+                          }}
+                        >
+                          <FaRegHeart
+                            className="p-[2px] cursor-pointer"
+                            size={20}
+                          />
+                          <p className="text-center whitespace-nowrap">
+                            افزودن به علاقه‌مندی‌ها
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -564,7 +580,7 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                     setComment(true);
                   }}
                 >
-                  نظرات کاربران{" "}
+                  نظرات کاربران
                   <span className="text-[75%]">({commentsCount})</span>
                 </button>
               </div>
@@ -619,7 +635,7 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                         )}
                         {product.dressLength && (
                           <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
-                            قد کار{" "}
+                            قد کار
                           </li>
                         )}
                       </ul>
@@ -765,21 +781,30 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
                         className="bg-[#f5f5f5] py-[10px] md:px-[20px] px-[9px] rounded-sm "
                         placeholder="لطفا نظر خود را اینجا بنویسد."
                       />
-
-                      <Link
-                        to="/Fotros/"
-                        className="w-full flex md:flex-row flex-col items-center md:justify-[unset] justify-center gap-[3px] text-[95%] md:text-[100%] md:w-[max-content] my-[5px]"
-                      >
-                        <span>
-                          قبل از ثبت نظر بايد وارد حساب کاربری خود شويد.
-                        </span>
-                        <span className="text-[95%] text-[#1e88e5]">
-                          ورود به حساب کاربری
-                        </span>
-                      </Link>
+                      {!isLoggedIn && (
+                        <Link
+                          to="/Fotros/login"
+                          className="w-full flex md:flex-row flex-col items-center md:justify-[unset] justify-center gap-[3px] text-[95%] md:text-[100%] md:w-[max-content] my-[5px]"
+                        >
+                          <span>
+                            قبل از ثبت نظر بايد وارد حساب کاربری خود شويد.
+                          </span>
+                          <span className="text-[95%] text-[#2192f4]">
+                            ورود به حساب کاربری
+                          </span>
+                        </Link>
+                      )}
                       <button
                         type="subnit"
-                        className="md:bg-[#1e88e5] text-[102%] md:text-[100%] md:border-unset border-[3px] border-[#1e88e5] w-[70%]  md:w-[unset] self-center md:self-end text-[#1e88e5] md:text-white px-[30px] py-[10px] md:py-[5px] my-[6px] box-shadow rounded-xl "
+                        onClick={() => {
+                          if (!isLoggedIn) {
+                            alert(
+                              "برای ثبت نظر باید وارد حساب کاربری خود شوید."
+                            );
+                            return;
+                          }
+                        }}
+                        className="md:bg-[#2192f4] text-[102%] md:text-[100%] md:border-unset border-[3px] border-[#75beff] md:border-[unset] w-[70%]  md:w-[unset] self-center md:self-end text-[#1e88e5] md:text-white px-[30px] py-[10px] md:py-[5px] my-[6px] box-shadow rounded-xl "
                       >
                         ثبت نظر
                       </button>
@@ -798,6 +823,7 @@ const quantity = itemInCart ? itemInCart.quantity : 0;
             {/* محصولات مشابه  */}
             <SlideProduct
               title="م&#x0640;حص&#x0640;ولات مشابه"
+              title2="محصولات مشابه"
               allurl={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=${product.category}`}
               url={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=${product.category}`}
             ></SlideProduct>
