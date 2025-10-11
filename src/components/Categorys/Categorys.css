@@ -1,0 +1,21 @@
+.categorys svg {
+  width: 100%;
+  height: 40%;
+}
+.categorys .swiper,
+.NewProducts .swiper {
+  padding: 16px 28px !important;
+  margin: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width >=200px) {
+  .categorys .swiper,
+  .NewProducts .swiper {
+    padding: 16px 8px !important;
+    margin: 4px;
+    width: 100%;
+    height: 100%;
+  }
+}
