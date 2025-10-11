@@ -16,7 +16,7 @@ import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 
-function SlideProduct({ title, url, allurl }) {
+function SlideProduct({ title,title2, url, allurl }) {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const { funcAxios, setSortFilter, setOnlyAvailable, applyFilter } =
@@ -68,14 +68,15 @@ function SlideProduct({ title, url, allurl }) {
             }}
             className="hidden md:inline-block m-[20px] mb-[10px] bg-[#1e88e5] text-white text-center text-[120%] p-[10px] w-[60%] md:w-[250px] rounded-xl box-shadow "
           >
-            مشاهده همه محصولات
+            مشاهده {title2}
           </Link>
         </div>
 
         {loading ? (
           <div className="flex flex-col justify-center items-center">
-            <p className="text-[70%]">درحال دریافت {title}</p>
             <Loading />
+                        <p className="text-[70%]">درحال دریافت {title2}</p>
+
           </div>
         ) : (
           <div className="p-[5px] pt-0 NewProducts relative">
@@ -160,7 +161,7 @@ function SlideProduct({ title, url, allurl }) {
             }}
             className=" m-[20px] text-center bg-[#1e88e5] text-white text-[120%] p-[10px] w-[60%] rounded-xl box-shadow "
           >
-            مشاهده همه محصولات
+            مشاهده {title2}
           </Link>
         </div>
       </div>
