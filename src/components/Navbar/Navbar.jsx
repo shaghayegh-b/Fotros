@@ -2,12 +2,11 @@ import { useState, createContext, memo, useEffect, useRef } from "react";
 import { useLocation, useNavigate, Link, NavLink } from "react-router-dom";
 
 import { HiBars3BottomRight } from "react-icons/hi2";
-import { FaRegUser } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdClose, MdKeyboardArrowDown } from "react-icons/md";
-
+import { LuCircleUser } from "react-icons/lu";
 import logoimg from "../../assets/img/Fotros.png";
 import wingfotros from "../../assets/img/wingfotros.png";
 
@@ -83,7 +82,7 @@ function Navbar() {
     <>
       {/* Navbar */}
       <div
-        className={`Navbar   border-b-[3px] border-b-solid border-b-[#f5f5f5]  bg-[#ffff] w-full fixed top-0 z-2 `}
+        className={`Navbar   border-b-[3px] border-b-solid border-b-[#f5f5f5]  bg-[#ffff] w-full fixed top-0 z-20 `}
       >
         <div
           className={`Navbarchild px-[8px] lg:px-[20px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
@@ -196,9 +195,9 @@ function Navbar() {
             {/* shopping */}
             <NavLink to="/Fotros/ShoppingCart" className="relative">
               <RiShoppingCartLine />
-              <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-blue-400 text-white shadow-sm">
+                 {!totalQuantity == 0 &&( <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-blue-400 text-white shadow-sm">
                 {totalQuantity}
-              </span>
+              </span>)}
             </NavLink>
             {/* userdashboard */}
             {isLoggedIn ? (
@@ -218,7 +217,7 @@ function Navbar() {
               <NavLink
                 to="/Fotros/login"
               >
-                <FaRegUser />
+                                <LuCircleUser  className="hidden md:inline-block shrink-0" />
               </NavLink>
             )}
           </div>
@@ -299,7 +298,7 @@ function Navbar() {
 
         {/* منو باز بشه اگر روی ایکون منو کلیک بشه */}
         <div
-          className={`fixed z-20 top-0 h-[100vh] bg-[#000000a6]  ${
+          className={`fixed z-25 top-0 h-[100vh] bg-[#000000a6]  ${
             meno ? "w-[100vw]" : "w-[0]"
           }`}
         >
@@ -307,7 +306,7 @@ function Navbar() {
             <Meno></Meno>
           </mymeno.Provider>
           <div
-            className={`menoClose h-[100vh] fixed top-0 left-0 z-20 w-[15vw] flex items-start justify-end
+            className={`menoClose h-[100vh] fixed top-0 left-0 z-25 w-[15vw] flex items-start justify-end
             ${meno ? "" : "hidden"}
             `}
             onClick={() => setMeno(false)}

@@ -208,6 +208,11 @@ function Meno() {
             <ul className="flex flex-col gap-[15px] pb-[20px]">
               {isLoggedIn &&
                 [
+                    {
+                    id: "userdashboard/UserInfo",
+                    text: "ویرایش اطلاعات کاربری",
+                    icon: CgProfile,
+                  },
                   {
                     id: "userdashboard/Orders",
                     text: "سفارش های من",
