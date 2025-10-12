@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, useRef } from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,17 +9,19 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 // import required modules
-import { Scrollbar } from "swiper/modules";
-
+import { Navigation, Scrollbar } from "swiper/modules";
 import { PRODUCT_CATEGORIES } from "../../constants/categories";
 import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
+import "./Categorys.css";
+
+import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 function Categorys() {
   const { funcAxios, applyFilter, setSortFilter, setOnlyAvailable } =
     useAxios();
   const location = useLocation();
   const [hideIcons, setHideIcons] = useState(false);
-
+  const swiperRef = useRef(null);
   useEffect(() => {
     const checkHideIcons = () => {
       const isMobile = window.innerWidth < 768;
@@ -40,13 +42,31 @@ function Categorys() {
 
   return (
     <>
-      <div className="categorys ">
+      <div className="categorys m-[7px] relative">
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          className="swiper-button-next-custom shadow-md hover:shadow-lg hidden md:flex items-center justify-center
+        absolute top-[40%] left-4 z-2
+        hover:bg-gray-300 hover:text-gray-600 border-[1px] border-gray-600
+           text-[#f5f5f5] bg-gray-600
+            p-[5px] rounded-full text-[130%]"
+        >
+          <MdArrowBack />
+        </button>
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="swiper-button-next-custom shadow-md hover:shadow-lg hidden md:flex items-center justify-center
+          absolute top-[40%] right-4 z-2
+    hover:bg-gray-300 hover:text-gray-600 border-[1px] border-gray-600
+           text-[#f5f5f5] bg-gray-600
+            p-[5px] rounded-full text-[130%]"
+        >
+          <MdArrowForward />
+        </button>
         <Swiper
+          dir="rtl"
           slidesPerView={4}
           spaceBetween={15}
-          scrollbar={{
-            hide: true,
-          }}
           breakpoints={{
             768: { slidesPerView: 5 },
             1000: { slidesPerView: 7 },
@@ -56,6 +76,16 @@ function Categorys() {
             2500: { slidesPerView: 20 },
           }}
           modules={[Scrollbar]}
+          scrollbar={{
+            hide: true,
+          }}
+          loop={true}
+          navigation={{
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+          }}
+          modules={[Scrollbar, Navigation]}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
           {PRODUCT_CATEGORIES.map(
             ({ id, name, icon: Icon, url, filterName }) => (
