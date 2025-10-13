@@ -65,7 +65,6 @@ function ShoppingCart() {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-
   const [deletedMessage, setDeletedMessage] = useState(false);
   //   وقتی وارد صفحه محصول می‌شی، اگر صفحه پایین باشه، اسلایدر دیده نمی‌شه
   useEffect(() => {
@@ -74,9 +73,8 @@ function ShoppingCart() {
   return (
     <>
       <Navbar />
-      <div className="h-16  "></div>
-
-      <div className="ShoppingCart flex-1 relative  min-h-screen flex flex-col pb-[90px]">
+      <div className="h-5 lg:h-16"></div>
+      <div className="ShoppingCart pt-[10px] px-[14px] pb-[30px] lg:px-[30px]  flex-1 relative  min-h-[55vh] flex flex-col">
         {/* پیغام حذف یا اضافه و... */}
         <div
           className={`fixed bg-[white] top-14 left-1/2 -translate-x-1/2 z-10 w-[85%] p-3    border-t-2 border-solid border-[#0ba5ffed] text-sm rounded-sm shadow-md transition-all duration-300 ${
@@ -86,7 +84,6 @@ function ShoppingCart() {
           <i className="fa fa-check text-[#0ba5ffed] p-2"></i>
           {deletedMessage}
         </div>
-
         {cartItems.length === 0 ? (
           // موجود نبودن محصول
           <div
@@ -99,29 +96,29 @@ function ShoppingCart() {
           </div>
         ) : (
           // نمایش سبد خرید
-          <div className="p-[10px] md:px-[40px] md:py-[15px]">
-            <h2 className="p-[10px] text-[140%] font-[600] ">سبد خرید</h2>
-
-            <div className="flex flex-col-reverse md:flex-row gap-[20px]">
+          <div className="px-[unset] md:px-[40px] md:py-[15px]">
+            <h2 className="py-[10px] text-[140%] font-bold">سبد خرید</h2>
+            <div className="flex flex-col-reverse md:flex-row gap-[5px]">
               {/* محصولات */}
-              <div className=" w-full md:w-[75%] ">
+              <div className=" w-full md:w-[75%] flex flex-col gap-[10px] ">
                 {/* هر محصول */}
                 {cartItems.map((item) => (
                   <div
                     key={item.idsortby}
-                    className={` oneprodukt md:h-[300px] flex flex-col md:flex-row gap-[15px] md:gap-[45px] relative bg-[#f5f5f5] p-[10px] md:p-[20px] rounded-md m-[10px] md:m-1 `}
+                    className={` oneprodukt flex flex-col md:flex-row gap-[15px] md:gap-[30px] relative bg-[#f5f5f5] p-[10px] md:p-[20px] rounded-md `}
                   >
                     {/* تصویر */}
-                    <div className="flex justify-center items-center h-[fit-content] md:w-[20%] rounded-md md:px-[5px] px-[28px]">
+                    <div className="self-center flex justify-center items-center h-[200px] md:h-[fit-content] md:w-[25%] rounded-md md:px-[5px] px-[28px]">
                       <img
                         src={item.img}
                         alt={item.title}
-                        className=" md:h-full w-full md:w-[unset] rounded-md "
+                        className="h-full md:h-full md:w-[unset] rounded-md "
                         loading="lazy"
                       />
                     </div>
                     {/* اطلاعات محصول */}
-                    <div className="flex flex-col justify-between gap-[20px] md:gap-[10px] md:w-[64%]">
+                    <div className="flex flex-col gap-[15px] w-full">
+                        {/* نام محصول و حذف  */}
                       <div className="flex items-center justify-between">
                         <p className="font-[600]">{item.title}</p>
                         <IoTrashOutline
@@ -146,25 +143,23 @@ function ShoppingCart() {
                           className="fa fa-times hover:text-red-700 cursor-pointer"
                         />
                       </div>
-
                       {/*  قیمت */}
-                        <div className="flex items-baseline md:gap-[10px] gap-[6px]">
-                          {item.off > 0 && (
-                            <span className=" text-[#1e2939e0] md:text-[95%] text-[85%] line-through">
-                              {item.price.toLocaleString()}
-                            </span>
-                          )}
+                      <div className="flex items-baseline md:gap-[10px] gap-[6px]">
+                        {item.off > 0 && (
+                          <span className=" text-[#1e2939e0] md:text-[95%] text-[85%] line-through">
+                            {item.price.toLocaleString()}
+                          </span>
+                        )}
 
-                          <p className="flex gap-[3px] text-red-800 font-bold text-[110%]">
-                            {(
-                              item.price -
-                              (item.price * item.off) / 100
-                            ).toLocaleString()}
-                            <span>تومان</span>
-                          </p>
-                        </div>
-
-
+                        <p className="flex gap-[3px] text-red-800 font-bold text-[110%]">
+                          {(
+                            item.price -
+                            (item.price * item.off) / 100
+                          ).toLocaleString()}
+                          <span>تومان</span>
+                        </p>
+                      </div>
+                      {/* رنگ انتخابی */}
                       <div className="flex gap-[10px]">
                         {/* رنگ انتخابی */}{" "}
                         <p className="flex bg-white py-[3px] px-[10px] rounded-xl w-[fit-content] ">
@@ -220,7 +215,7 @@ function ShoppingCart() {
                         برای دیدن مشخصات محصول کلیک کن!
                       </Link>
                       {/* تعداد و جمع جزء */}
-                      <div className=" flex justify-between py-3  ">
+                      <div className="flex items-center gap-[100px] pt-[15px] pb-[7px]">
                         {/* جمع جزء */}
                         <p>
                           <span className="font-[600]">جمع جزء :</span>&nbsp;
@@ -280,25 +275,23 @@ function ShoppingCart() {
               </div>
               {/* فاکتور خرید */}
               <div
-                className={`flex flex-col gap-[13px] md:gap-[8px] bg-[#f5f5f5] p-[10px] pb-[25px] md:p-[20px] rounded-md m-1 h-[fit-content] `}
+                className={`flex flex-col gap-[9px] md:gap-[8px] bg-[#f5f5f5] px-[10px] pb-[25px] pt-[6px] md:p-[20px] rounded-md m-1 h-[fit-content] `}
               >
-                <h4 className="text-[108%] md:text-[133%] font-[600] p-[10px]">
+                <h4 className="text-[110%] md:text-[133%] font-bold py-[10px] px-[4px]">
                   فاکتور خرید شما
                 </h4>
 
-                <p className="md:font-[600] flex gap-[10px] self-center">
+                <p className="md:font-[600] flex gap-[10px] self-center whitespace-nowrap">
                   <span> جمع کل سبد خرید ({totalQuantity})</span>:{" "}
-                  <span>{total.toLocaleString()}تومان</span>
+                  <span>{total.toLocaleString()} تومان</span>
                 </p>
 
-                <button
-                  className="self-center bg-[#1e88e5] text-white text-center py-[6px] px-[12px] rounded-xl box-shadow my-[4px]"
-                >
+                <button className="self-center bg-[#1e88e5] text-white text-center py-[6px] px-[12px] rounded-xl box-shadow my-[4px]">
                   ادامه جهت تسویه حساب
                 </button>
 
                 <button
-                onClick={() => {
+                  onClick={() => {
                     let confirmp = confirm("میخوای سبد خرید رو حذف کنی؟");
                     if (confirmp) {
                       clearCart();
@@ -309,23 +302,26 @@ function ShoppingCart() {
                     }
                   }}
                   type="button"
-                  className="self-center bg-[#f5f5f5] border-[#1e88e5] border-[1px] text-center py-[1px] px-[10px] rounded-xl box-shadow text-[85%]"
+                  className="self-center bg-[#f5f5f5] border-[#1e88e5] border-[1px] text-center pb-[2px] pt-[4px] px-[10px] rounded-xl box-shadow text-[85%]"
                 >
                   پاک کردن سبد خرید
                 </button>
               </div>
             </div>
-            {/* پیشنهاد محصول */}
-            <div className="my-[20px] mt-[80px] p-[10px] bg-[#f5f5f5]">
-            <SlideProduct
-              title="خریداران این محصولات.محصولات زیر را هم خریده اند"
-              allurl={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products`}
-              url={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products`}
-            ></SlideProduct>
-            </div>
-                      </div>
+          </div>
         )}
       </div>
+      {/* پیشنهاد محصول */}
+      {cartItems.length > 0 && (
+        <div className="w-full my-[20px] mt-[45px] py-[10px] bg-[#f5f5f5] px-[-5px]">
+          <SlideProduct
+            title="خریداران این محصولات.محصولات زیر را هم خریده اند"
+            title2="محصولات"
+            allurl={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products`}
+            url={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products`}
+          ></SlideProduct>
+        </div>
+      )}
 
       <Footer />
     </>
