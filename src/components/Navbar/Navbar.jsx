@@ -45,7 +45,6 @@ function Navbar() {
   const searchRef = useRef(null);
   useEffect(() => {
     function handleClickOutsideSearch(event) {
-      // اگر کلیک روی دراپ‌داون یا فرم سرچ نبود
       if (
         dropdownRefSearch.current &&
         !dropdownRefSearch.current.contains(event.target) &&
@@ -55,11 +54,18 @@ function Navbar() {
         setIsSearchDropdownOpen(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutsideSearch);
+
+    if (isSearchDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutsideSearch);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutsideSearch);
+    }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutsideSearch);
     };
-  }, []);
+  }, [isSearchDropdownOpen]);
+
   const totalQuantity = cartItems?.reduce(
     (sum, item) => sum + item.quantity,
     0
@@ -195,9 +201,11 @@ function Navbar() {
             {/* shopping */}
             <NavLink to="/Fotros/ShoppingCart" className="relative">
               <RiShoppingCartLine />
-                 {!totalQuantity == 0 &&( <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-blue-400 text-white shadow-sm">
-                {totalQuantity}
-              </span>)}
+              {!totalQuantity == 0 && (
+                <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-blue-400 text-white shadow-sm">
+                  {totalQuantity}
+                </span>
+              )}
             </NavLink>
             {/* userdashboard */}
             {isLoggedIn ? (
@@ -210,14 +218,14 @@ function Navbar() {
                   alt={user.fname}
                   className="h-[1.2rem] md:h-[2rem] rounded-full object-cover border border-white shadow-sm"
                 />
-                <p className=" flex-1 text-center text-ellipsis whitespace-nowrap ">{user.fname}</p>
+                <p className=" flex-1 text-center text-ellipsis whitespace-nowrap ">
+                  {user.fname}
+                </p>
                 <MdKeyboardArrowDown className="hidden lg:inline-block shrink-0" />
               </NavLink>
             ) : (
-              <NavLink
-                to="/Fotros/login"
-              >
-                                <LuCircleUser  className="hidden md:inline-block shrink-0" />
+              <NavLink to="/Fotros/login">
+                <LuCircleUser className="hidden md:inline-block shrink-0" />
               </NavLink>
             )}
           </div>
@@ -226,17 +234,18 @@ function Navbar() {
         {isDropdownAllowed && (
           <div
             ref={dropdownRefSearch}
-            className={`fixed top-[60px] left-[160px] -translate-x-1/2 w-[300px] bg-white border border-gray-300 shadow-lg rounded-lg z-5 transform transition-all duration-300 ease-in-out ${
+            className={`fixed top-[38px] md:top-[60px] left-[50%] md:left-[160px] -translate-x-1/2 w-full md:w-[300px] bg-white border border-gray-300 shadow-lg rounded-lg z-5 transform transition-all duration-300 ease-in-out ${
               isSearchDropdownOpen
                 ? "scale-y-100 opacity-100"
                 : "scale-y-0 opacity-0"
-            } origin-top max-h-[90vh] flex flex-col`}
+            } origin-top max-h-[72vh] md:max-h-[90vh] flex flex-col`}
           >
             <div className=" text-[105%] flex justify-between items-center  p-2 border-b border-gray-300">
               <h5>{searchQuery}</h5>
               <button
                 onClick={() => {
                   setIsSearchDropdownOpen(false);
+                  setFSearch(false);
                   setinputValue("");
                   searchProducts("");
                 }}
@@ -332,7 +341,12 @@ function Navbar() {
               onFocus={() =>
                 setIsSearchDropdownOpen(searchedProducts.length > 0)
               }
-              onClose={() => setFSearch(false)}
+              onClose={() => {
+                setFSearch(false);
+                setIsSearchDropdownOpen(false);
+                setinputValue("");
+                searchProducts("");
+              }}
             />
           </div>
         )}
