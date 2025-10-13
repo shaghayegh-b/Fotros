@@ -56,6 +56,11 @@ function UserInfo() {
     if (!fname) newErrors.fname = "نام الزامی است";
     if (!lname) newErrors.lname = "نام خانوادگی الزامی است";
     if (!phone) newErrors.phone = "شماره تماس الزامی است";
+
+    if (!/^09\d{9}$/.test(phone))
+      newErrors.phone = "شماره موبایل معتبر وارد کنید(ماره موبایل باید با 09.. شروع شود)";
+    if (!phone || phone.length < 11)
+      newErrors.phone = "شماره موبایل وارد شده صحیح نیست";
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -231,10 +236,20 @@ function UserInfo() {
               id="phone"
               name="phone"
               type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+           value={phone}
+                pattern="\d*"
+                maxLength={11}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, "");
+                  setPhone(val.slice(0, 11));
+                }}
               placeholder="مثال: 09399619640"
-              className=" bg-white  placeholder:text-gray-500 py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa] "
+              className={` bg-white  placeholder:text-gray-500 py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa]
+                ${
+                   phone.length > 0 && phone.length !== 11
+                     ? "text-red-500 border-red-400"
+                     : "text-black "
+                 }`}
             />
             {errors.phone && (
               <p className="text-red-500 text-sm mb-2">{errors.phone}</p>

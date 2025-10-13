@@ -150,6 +150,11 @@ function AddressModal({ open, onClose, onSave }) {
       if (!fname) newErrors.fname = "نام فرد گیرنده الزامی است";
       if (!lname) newErrors.lname = "نام خانوادگی فرد گیرنده الزامی است";
     }
+
+    if (!/^09\d{9}$/.test(phone))
+      newErrors.phone = "شماره موبایل معتبر وارد کنید(ماره موبایل باید با 09.. شروع شود)";
+    if (!phone || phone.length < 11)
+      newErrors.phone = "شماره موبایل وارد شده صحیح نیست";
     if (!/^\d{10}$/.test(postalCode))
       newErrors.postalCode = "کدپستی باید ۱۰ رقم باشد";
     if (Object.keys(newErrors).length > 0) {
@@ -194,7 +199,7 @@ function AddressModal({ open, onClose, onSave }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#d9d9d9] w-[95%] md:w-[90%] max-w-md max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
+        className="bg-[#d9d9d9] w-[95%] md:w-[90%] max-w-md max-h-[64vh] md:max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
       >
         <div className="flex justify-between items-center pb-[18px]">
           <h2 className="text-lg font-bold">افزودن آدرس</h2>
@@ -215,7 +220,7 @@ function AddressModal({ open, onClose, onSave }) {
         <form action="#" onSubmit={handleSave}>
           {isOtherRecipient && (
             <>
-            {/* اسم گیرنده */}
+              {/* اسم گیرنده */}
               <label htmlFor="fname" className="block mb-1 font-semibold mt-3">
                 نام گیرنده<span className="text-[#c20101]">*</span>
               </label>
@@ -253,9 +258,19 @@ function AddressModal({ open, onClose, onSave }) {
                 id="phone"
                 type="text"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
-                placeholder="مثلاً : 09123456789"
+                pattern="\d*"
+                maxLength={11}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, "");
+                  setPhone(val.slice(0, 11));
+                }}
+                className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa]
+                 ${
+                   phone.length > 0 && phone.length !== 11
+                     ? "text-red-500 border-red-400"
+                     : "text-black "
+                 }`}
+                placeholder="مثال : 09123456789"
               />
               {errors.phone && (
                 <p className="text-red-500 text-sm mb-2">{errors.phone}</p>
