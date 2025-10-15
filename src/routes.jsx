@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import LoginPage from "./pages/Login/LoginPage";
 import InfoLogin from "./pages/Login/InfoLogin";
 import ProfileLogin from "./pages/Login/ProfileLogin";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 export let router = [
   { path: "/Fotros/", element: <Home /> },
@@ -23,7 +24,7 @@ export let router = [
   { path: "/Fotros/questions", element: <Questions /> },
   { path: "/Fotros/rules", element: <RulesPage /> },
   { path: "/Fotros/repol", element: <RepolPage /> },
-  { path: "/Fotros/userdashboard/:subMenu", element: <UserDashboard /> },
+  { path: "/Fotros/userdashboard/:subMenu", element: (<ProtectedRoute><UserDashboard /></ProtectedRoute>)},
   { path: "*", element: <NotFound /> },
   { path: "/Fotros/login", element: <LoginPage /> },
   { path: "/Fotros/info-login", element: <InfoLogin /> },
