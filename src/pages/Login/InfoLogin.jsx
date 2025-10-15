@@ -1,43 +1,45 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../context/AuthContext/AuthContext";
 import imgdaman from "../../assets/img/daman.png";
 import shirtimg from "../../assets/img/shirt.png";
 import topimg from "../../assets/img/top.png";
 
 import { useNavigate } from "react-router-dom";
+import ModalAlert from "../../components/ModalAlert/ModalAlert";
 function InfoLogin() {
-    const inputRef = useRef(null);
-      const [hasFocused, setHasFocused] = useState(false); // برای بررسی اینکه کاربر فوکوس کرده یا نه
+  const inputRef = useRef(null);
+  const [hasFocused, setHasFocused] = useState(false); // برای بررسی اینکه کاربر فوکوس کرده یا نه
+  useEffect(() => {
+    // تابعی که وقتی کاربر فوکوس کرد، وضعیت رو تغییر میده
+    const handleFocus = () => setHasFocused(true);
 
-      useEffect(() => {
-        // تابعی که وقتی کاربر فوکوس کرد، وضعیت رو تغییر میده
-        const handleFocus = () => setHasFocused(true);
+    const inputElement = inputRef.current;
+    if (inputElement) {
+      inputElement.addEventListener("focus", handleFocus);
+    }
 
-        const inputElement = inputRef.current;
-        if (inputElement) {
-          inputElement.addEventListener("focus", handleFocus);
-        }
+    // بعد از ۵ ثانیه بررسی کن
+    const timer = setTimeout(() => {
+      if (!hasFocused && inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 5000);
 
-        // بعد از ۵ ثانیه بررسی کن
-        const timer = setTimeout(() => {
-          if (!hasFocused && inputRef.current) {
-            inputRef.current.focus();
-          }
-        }, 5000);
-
-        // پاکسازی
-        return () => {
-          clearTimeout(timer);
-          if (inputElement) {
-            inputElement.removeEventListener("focus", handleFocus);
-          }
-        };
-      }, [hasFocused]);
+    // پاکسازی
+    return () => {
+      clearTimeout(timer);
+      if (inputElement) {
+        inputElement.removeEventListener("focus", handleFocus);
+      }
+    };
+  }, [hasFocused]);
   const { user, updateUser } = useAuth();
   const [fname, setFname] = useState(user?.fname || "");
   const [lname, setLname] = useState(user?.lname || "");
   const [email, setEmail] = useState(user?.email || "");
   const [errors, setErrors] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -57,13 +59,15 @@ function InfoLogin() {
       setErrors(newErrors);
     } else {
       updateUser({ fname, lname, email });
-      alert("اطلاعات ذخیره شد ✅");
-      navigate("/Fotros/profile-login");
+      setModalMessage("اطلاعات با موفقیت ذخیره شد.");
+      setIsModalOpen(true);
+
       setErrors({});
       // ریست کردن فرم
       setLname("");
       setFname("");
       setEmail("");
+
     }
   };
 
@@ -103,7 +107,7 @@ function InfoLogin() {
         />
       </div>
 
-        <div className="mt-[-40%] md:mt-[unset] w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[white] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
+      <div className="mt-[-40%] md:mt-[unset] w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[white] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
         <h2 className="text-center w-full mb-[20px] font-semibold text-[130%] ">
           اطلاعات کاربری
         </h2>
@@ -112,7 +116,7 @@ function InfoLogin() {
             نام
           </label>
           <input
-              ref={inputRef}
+            ref={inputRef}
             id="fname"
             type="text"
             value={fname}
@@ -156,6 +160,15 @@ function InfoLogin() {
           </button>
         </form>
       </div>
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          navigate("/Fotros/profile-login");
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+      />
     </div>
   );
 }

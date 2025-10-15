@@ -9,6 +9,7 @@ import porof6 from "../../../assets/img/porof6.png";
 import porofDefault from "../../../assets/img/porof1.png";
 
 import { useAuth } from "../../../context/AuthContext/AuthContext";
+import ModalAlert from "../../ModalAlert/ModalAlert";
 function UserInfo() {
   const { user, updateUser } = useAuth();
   const [selectedPic, setSelectedPic] = useState(
@@ -22,6 +23,8 @@ function UserInfo() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // تغییر تصویر با انتخاب فایل از گالری
   const handleFileChange = (e) => {
@@ -37,7 +40,8 @@ function UserInfo() {
   // ذخیره تصویر (مثلاً در localStorage یا API سرور)
   const handleSavePhoto = () => {
     updateUser({ profilePic: selectedPic });
-    alert("تصویر پروفایل ذخیره شد!");
+    setModalMessage("تصویر پروفایل ذخیره شد.");
+    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -58,7 +62,8 @@ function UserInfo() {
     if (!phone) newErrors.phone = "شماره تماس الزامی است";
 
     if (!/^09\d{9}$/.test(phone))
-      newErrors.phone = "شماره موبایل معتبر وارد کنید(ماره موبایل باید با 09.. شروع شود)";
+      newErrors.phone =
+        "شماره موبایل معتبر وارد کنید(ماره موبایل باید با 09.. شروع شود)";
     if (!phone || phone.length < 11)
       newErrors.phone = "شماره موبایل وارد شده صحیح نیست";
     if (Object.keys(newErrors).length > 0) {
@@ -72,8 +77,8 @@ function UserInfo() {
       email,
       profilePic: selectedPic,
     });
-
-    alert("اطلاعات با موفقیت ذخیره شد ✅");
+    setModalMessage("اطلاعات با موفقیت ذخیره شد.");
+    setIsModalOpen(true);
     setErrors({});
   };
   return (
@@ -99,9 +104,12 @@ function UserInfo() {
                 key={idx}
                 src={pic}
                 alt={`porof${idx + 1}`}
-  className={`rounded-full w-full cursor-pointer border-[1.2px] ${
-      selectedPic === pic ? "border-[#0b9ae7dd]" : "border-[#56a3ff61]"
-    }`}                onClick={() => setSelectedPic(pic)}
+                className={`rounded-full w-full cursor-pointer border-[1.2px] ${
+                  selectedPic === pic
+                    ? "border-[#0b9ae7dd]"
+                    : "border-[#56a3ff61]"
+                }`}
+                onClick={() => setSelectedPic(pic)}
               />
             ))}
           </div>
@@ -181,9 +189,12 @@ function UserInfo() {
                   key={idx}
                   src={pic}
                   alt={`porof${idx + 1}`}
-  className={`rounded-full w-full cursor-pointer border-[1.2px] ${
-      selectedPic === pic ? "border-[#0b9ae7dd]" : "border-[#56a3ff61]"
-    }`}                  onClick={() => setSelectedPic(pic)}
+                  className={`rounded-full w-full cursor-pointer border-[1.2px] ${
+                    selectedPic === pic
+                      ? "border-[#0b9ae7dd]"
+                      : "border-[#56a3ff61]"
+                  }`}
+                  onClick={() => setSelectedPic(pic)}
                 />
               ))}
             </div>
@@ -236,20 +247,20 @@ function UserInfo() {
               id="phone"
               name="phone"
               type="text"
-           value={phone}
-                pattern="\d*"
-                maxLength={11}
-                onChange={(e) => {
-                  const val = e.target.value.replace(/\D/g, "");
-                  setPhone(val.slice(0, 11));
-                }}
+              value={phone}
+              pattern="\d*"
+              maxLength={11}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, "");
+                setPhone(val.slice(0, 11));
+              }}
               placeholder="مثال: 09399619640"
               className={` bg-white  placeholder:text-gray-500 py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa]
                 ${
-                   phone.length > 0 && phone.length !== 11
-                     ? "text-red-500 border-red-400"
-                     : "text-black "
-                 }`}
+                  phone.length > 0 && phone.length !== 11
+                    ? "text-red-500 border-red-400"
+                    : "text-black "
+                }`}
             />
             {errors.phone && (
               <p className="text-red-500 text-sm mb-2">{errors.phone}</p>
@@ -276,6 +287,14 @@ function UserInfo() {
           </form>
         </div>
       </div>
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+      />
     </div>
   );
 }

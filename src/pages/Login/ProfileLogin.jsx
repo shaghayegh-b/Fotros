@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../context/AuthContext/AuthContext";
+import ModalAlert from "../../components/ModalAlert/ModalAlert";
+
 import imgdaman from "../../assets/img/daman.png";
 import shirtimg from "../../assets/img/shirt.png";
 import topimg from "../../assets/img/top.png";
@@ -16,6 +18,9 @@ function ProfileLogin() {
   const [profilePic, setProfilePic] = useState(user?.profilePic || "");
   const [selectedPic, setSelectedPic] = useState(profilePic || porof1);
   const [isCustomPic, setIsCustomPic] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
   const defaultPics = [porof1, porof2, porof3, porof4, porof5, porof6];
 
   const fileInputRef = useRef(null);
@@ -39,8 +44,8 @@ function ProfileLogin() {
 
   const handleSavePhoto = () => {
     updateUser({ profilePic });
-    alert("عکس پروفایل ذخیره شد ✅");
-    navigate("/Fotros");
+    setModalMessage("تصویر پروفایل با موفقیت ذخیره شد.");
+    setIsModalOpen(true);
   };
   return (
     <div className="flex justify-center items-center w-full h-[100vh] bg-[#d5d5d5]">
@@ -142,6 +147,15 @@ function ProfileLogin() {
           </div>
         </div>
       </div>
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          navigate("/Fotros/");
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+      />
     </div>
   );
 }

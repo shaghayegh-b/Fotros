@@ -2,12 +2,21 @@ import { memo, useEffect, useState } from "react";
 
 import Footer from "../../components/Footer/Footer";
 import { useCart } from "../../context/CartContext/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { IoTrashOutline } from "react-icons/io5";
 import SlideProduct from "../../components/SlideProduct/SlideProduct";
+import ModalAlert from "../../components/ModalAlert/ModalAlert";
+import { useAuth } from "../../context/AuthContext/AuthContext";
 
 function ShoppingCart() {
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalButtons, setModalButtons] = useState([]);
+
   const {
     cartItems,
     removeFromCart,
@@ -118,27 +127,42 @@ function ShoppingCart() {
                     </div>
                     {/* اطلاعات محصول */}
                     <div className="flex flex-col gap-[15px] w-full">
-                        {/* نام محصول و حذف  */}
+                      {/* نام محصول و حذف  */}
                       <div className="flex items-center justify-between">
                         <p className="font-[600]">{item.title}</p>
                         <IoTrashOutline
                           onClick={() => {
-                            let confirmm = confirm(
+                            setModalMessage(
                               "میخوای کالا رو از سبد خریدت حذف کنی؟"
                             );
-                            if (confirmm) {
-                              removeFromCart(
-                                item.idsortby,
-                                item.selectedColor?.code,
-                                item.selectedSize
-                              );
-                              setDeletedMessage(
-                                `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`
-                              );
-                              setTimeout(() => {
-                                setDeletedMessage(false);
-                              }, 3000);
-                            }
+                            setModalButtons([
+                              {
+                                label: "بله",
+                                type: "yes",
+                                onClick: () => {
+                                  removeFromCart(
+                                    item.idsortby,
+                                    item.selectedColor?.code,
+                                    item.selectedSize
+                                  );
+                                  setDeletedMessage(
+                                    `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`
+                                  );
+                                  setTimeout(() => {
+                                    setDeletedMessage(false);
+                                  }, 3000);
+                                  setIsModalOpen(false);
+                                },
+                              },
+                              {
+                                label: "خیر",
+                                type: "no",
+                                onClick: () => {
+                                  setIsModalOpen(false);
+                                },
+                              },
+                            ]);
+                            setIsModalOpen(true);
                           }}
                           className="fa fa-times hover:text-red-700 cursor-pointer"
                         />
@@ -239,22 +263,37 @@ function ShoppingCart() {
                           <button
                             onClick={() => {
                               if (item.quantity === 1) {
-                                let confirmq = confirm(
+                                setModalMessage(
                                   "میخوای کالا رو از سبد خریدت حذف کنی؟"
                                 );
-                                if (confirmq) {
-                                  removeFromCart(
-                                    item.idsortby,
-                                    item.selectedColor?.code,
-                                    item.selectedSize
-                                  );
-                                  setDeletedMessage(
-                                    `"${item.title}" از سبد خرید حذف شد`
-                                  );
-                                  setTimeout(() => {
-                                    setDeletedMessage(false);
-                                  }, 3000);
-                                }
+                                setModalButtons([
+                                  {
+                                    label: "بله",
+                                    type: "yes",
+                                    onClick: () => {
+                                      removeFromCart(
+                                        item.idsortby,
+                                        item.selectedColor?.code,
+                                        item.selectedSize
+                                      );
+                                      setDeletedMessage(
+                                        `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`
+                                      );
+                                      setTimeout(() => {
+                                        setDeletedMessage(false);
+                                      }, 3000);
+                                      setIsModalOpen(false);
+                                    },
+                                  },
+                                  {
+                                    label: "خیر",
+                                    type: "no",
+                                    onClick: () => {
+                                      setIsModalOpen(false);
+                                    },
+                                  },
+                                ]);
+                                setIsModalOpen(true);
                               } else {
                                 decrease(
                                   item.idsortby,
@@ -286,20 +325,62 @@ function ShoppingCart() {
                   <span>{total.toLocaleString()} تومان</span>
                 </p>
 
-                <button className="self-center bg-[#1e88e5] text-white text-center py-[6px] px-[12px] rounded-xl box-shadow my-[4px]">
+                <button
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      setModalMessage(
+                        "برای تسویه حساب باید وارد حساب کاربری خود شوید!"
+                      );
+                      setModalButtons([
+                        {
+                          label: "ورود به حساب کاربری",
+                          type: "yes",
+                          onClick: () => {
+                            setIsModalOpen(false);
+                            navigate("/Fotros/login");
+                          },
+                        },
+                        {
+                          label: "بیخیال",
+                          type: "no",
+                          onClick: () => {
+                            setIsModalOpen(false);
+                          },
+                        },
+                      ]);
+                      setIsModalOpen(true);
+                    }
+                  }}
+                  className="self-center bg-[#1e88e5] text-white text-center py-[6px] px-[12px] rounded-xl box-shadow my-[4px]"
+                >
                   ادامه جهت تسویه حساب
                 </button>
 
                 <button
                   onClick={() => {
-                    let confirmp = confirm("میخوای سبد خرید رو حذف کنی؟");
-                    if (confirmp) {
-                      clearCart();
-                      setDeletedMessage(`سبد خرید خالی شد`);
-                      setTimeout(() => {
-                        setDeletedMessage(false);
-                      }, 3000);
-                    }
+                    setModalMessage("میخوای سبد خرید رو حذف کنی؟");
+                    setModalButtons([
+                      {
+                        label: "بله",
+                        type: "yes",
+                        onClick: () => {
+                          clearCart();
+                          setDeletedMessage(`سبد خرید خالی شد`);
+                          setTimeout(() => {
+                            setDeletedMessage(false);
+                          }, 3000);
+                          setIsModalOpen(false);
+                        },
+                      },
+                      {
+                        label: "خیر",
+                        type: "no",
+                        onClick: () => {
+                          setIsModalOpen(false);
+                        },
+                      },
+                    ]);
+                    setIsModalOpen(true);
                   }}
                   type="button"
                   className="self-center bg-[#f5f5f5] border-[#1e88e5] border-[1px] text-center pb-[2px] pt-[4px] px-[10px] rounded-xl box-shadow text-[85%]"
@@ -324,6 +405,15 @@ function ShoppingCart() {
       )}
 
       <Footer />
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+        buttons={modalButtons}
+      />
     </>
   );
 }

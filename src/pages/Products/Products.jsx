@@ -11,15 +11,19 @@ import Footer from "../../components/Footer/Footer";
 import Loading from "../../components/Loading/Loading";
 import { useFav } from "../../context/FavProvider/FavProvider";
 import Categorys from "../../components/Categorys/Categorys";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSearch } from "../../context/SearchContext/SearchContext";
 import { useAuth } from "../../context/AuthContext/AuthContext";
+import ModalAlert from "../../components/ModalAlert/ModalAlert";
 
 function Products() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
+  const navigate = useNavigate();
   const [pagedProducts, setPagedProducts] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -108,10 +112,10 @@ function Products() {
                         <FaRegHeart
                           onClick={() => {
                             if (!isLoggedIn) {
-                              alert(
-                                "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید."
+                              setModalMessage(
+                                "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید!"
                               );
-                              return;
+                              setIsModalOpen(true);
                             }
                             addToFav(product);
                           }}
@@ -195,6 +199,31 @@ function Products() {
         </div>
       </div>
       <Footer />
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+        buttons={[
+          {
+            label: "ورود به حساب کاربری",
+            type: "yes",
+            onClick: () => {
+              setIsModalOpen(false);
+              navigate("/Fotros/login");
+            },
+          },
+          {
+            label: "بیخیال",
+            type: "no",
+            onClick: () => {
+              setIsModalOpen(false);
+            },
+          },
+        ]}
+      />
     </>
   );
 }

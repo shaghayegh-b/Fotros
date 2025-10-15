@@ -1,9 +1,10 @@
 import { memo, useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Loading from "../../components/Loading/Loading";
+import ModalAlert from "../../components/ModalAlert/ModalAlert";
 
 import { useCart } from "../../context/CartContext/CartContext";
 import { useFav } from "../../context/FavProvider/FavProvider";
@@ -54,6 +55,12 @@ function ProductId() {
   const { isLoggedIn } = useAuth();
 
   const { idsortby } = useParams();
+  // alert
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalButtons, setModalButtons] = useState([]);
+
+  const navigate = useNavigate();
 
   // وقتی کامپوننت لود شد، داده‌ها رو از API بگیر
   useEffect(() => {
@@ -170,18 +177,55 @@ function ProductId() {
   const handleSubmitComment = async (e) => {
     e.preventDefault();
     if (!isLoggedIn) {
-      alert("برای ثبت نظر باید وارد حساب کاربری خود شوید.");
-      return;
+      setModalMessage("برای ثبت نظر باید وارد حساب کاربری خود شوید!");
+      setModalButtons([
+        {
+          label: "ورود به حساب کاربری",
+          type: "yes",
+          onClick: () => {
+            setIsModalOpen(false);
+            navigate("/Fotros/login");
+          },
+        },
+        {
+          label: "بیخیال",
+          type: "no",
+          onClick: () => {
+            setIsModalOpen(false);
+          },
+        },
+      ]);
+      setIsModalOpen(true);
     }
 
     if (recommend === null) {
-      alert("لطفا انتخاب کنید که این محصول را پیشنهاد می‌کنید یا نه!");
-      return;
+      setModalMessage(
+        "لطفا انتخاب کنید که این محصول را پیشنهاد می‌کنید یا نه!"
+      );
+      setModalButtons([
+        {
+          label: "باشه",
+          type: "confirm",
+          onClick: () => {
+            setIsModalOpen(false);
+          },
+        },
+      ]);
+      setIsModalOpen(true);
     }
 
     if (!commentText.trim()) {
-      alert("لطفا متن نظر خود را وارد کنید.");
-      return;
+      setModalMessage("لطفا متن نظر خود را وارد کنید.");
+      setModalButtons([
+        {
+          label: "باشه",
+          type: "confirm",
+          onClick: () => {
+            setIsModalOpen(false);
+          },
+        },
+      ]);
+      setIsModalOpen(true);
     }
 
     try {
@@ -438,8 +482,17 @@ function ProductId() {
                         onClick={() => {
                           // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
                           if (colors.length > 1 && !colorToSend) {
-                            alert("لطفا رنگ محصول را انتخاب کنید.");
-                            return;
+                            setModalMessage("لطفا رنگ محصول را انتخاب کنید.");
+                            setModalButtons([
+                              {
+                                label: "باشه",
+                                type: "confirm",
+                                onClick: () => {
+                                  setIsModalOpen(false);
+                                },
+                              },
+                            ]);
+                            setIsModalOpen(true);
                           }
 
                           // اگر محصول چند سایز داشت ولی سایزی انتخاب نشده
@@ -448,8 +501,17 @@ function ProductId() {
                             product.size.length > 0 &&
                             !selectedSize
                           ) {
-                            alert("لطفا سایز محصول را انتخاب کنید.");
-                            return;
+                            setModalMessage("لطفا سایز محصول را انتخاب کنید.");
+                            setModalButtons([
+                              {
+                                label: "باشه",
+                                type: "confirm",
+                                onClick: () => {
+                                  setIsModalOpen(false);
+                                },
+                              },
+                            ]);
+                            setIsModalOpen(true);
                           }
                           console.log(colorToSend, selectedSize);
                           if ((colorToSend, selectedSize))
@@ -471,8 +533,17 @@ function ProductId() {
                       onClick={() => {
                         // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
                         if (colors.length > 1 && !colorToSend) {
-                          alert("لطفا رنگ محصول را انتخاب کنید.");
-                          return;
+                          setModalMessage("لطفا رنگ محصول را انتخاب کنید.");
+                          setModalButtons([
+                            {
+                              label: "باشه",
+                              type: "confirm",
+                              onClick: () => {
+                                setIsModalOpen(false);
+                              },
+                            },
+                          ]);
+                          setIsModalOpen(true);
                         }
 
                         // اگر محصول چند سایز داشت ولی سایزی انتخاب نشده
@@ -481,8 +552,17 @@ function ProductId() {
                           product.size.length > 0 &&
                           !selectedSize
                         ) {
-                          alert("لطفا سایز محصول را انتخاب کنید.");
-                          return;
+                          setModalMessage("لطفا سایز محصول را انتخاب کنید.");
+                          setModalButtons([
+                            {
+                              label: "باشه",
+                              type: "confirm",
+                              onClick: () => {
+                                setIsModalOpen(false);
+                              },
+                            },
+                          ]);
+                          setIsModalOpen(true);
                         }
                         console.log(colorToSend, selectedSize);
                         if ((colorToSend, selectedSize))
@@ -529,10 +609,27 @@ function ProductId() {
                           className="flex items-center gap-[5px] text-[95%] font-[500]"
                           onClick={() => {
                             if (!isLoggedIn) {
-                              alert(
-                                "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید."
+                              setModalMessage(
+                                "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید!"
                               );
-                              return;
+                              setModalButtons([
+                                {
+                                  label: "ورود به حساب کاربری",
+                                  type: "yes",
+                                  onClick: () => {
+                                    setIsModalOpen(false);
+                                    navigate("/Fotros/login");
+                                  },
+                                },
+                                {
+                                  label: "بیخیال",
+                                  type: "no",
+                                  onClick: () => {
+                                    setIsModalOpen(false);
+                                  },
+                                },
+                              ]);
+                              setIsModalOpen(true);
                             }
                             addToFav(product);
                           }}
@@ -798,10 +895,27 @@ function ProductId() {
                         type="subnit"
                         onClick={() => {
                           if (!isLoggedIn) {
-                            alert(
-                              "برای ثبت نظر باید وارد حساب کاربری خود شوید."
+                            setModalMessage(
+                              "برای ثبت نظر باید وارد حساب کاربری خود شوید!"
                             );
-                            return;
+                            setModalButtons([
+                              {
+                                label: "ورود به حساب کاربری",
+                                type: "yes",
+                                onClick: () => {
+                                  setIsModalOpen(false);
+                                  navigate("/Fotros/login");
+                                },
+                              },
+                              {
+                                label: "بیخیال",
+                                type: "no",
+                                onClick: () => {
+                                  setIsModalOpen(false);
+                                },
+                              },
+                            ]);
+                            setIsModalOpen(true);
                           }
                         }}
                         className="md:bg-[#2192f4] text-[102%] md:text-[100%] md:border-unset border-[3px] border-[#75beff] md:border-[unset] w-[70%]  md:w-[unset] self-center md:self-end text-[#1e88e5] md:text-white px-[30px] py-[10px] md:py-[5px] my-[6px] box-shadow rounded-xl "
@@ -831,6 +945,15 @@ function ProductId() {
         )}
       </div>
       <Footer />
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+        buttons={modalButtons}
+      />
     </>
   );
 }

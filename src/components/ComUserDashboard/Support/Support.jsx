@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from "react";
 import SupportTableMobile from "./SupportTableMobile";
 import SupportTableMd from "./SupportTableMd";
 import NewSupportModal from "./NewSupportModal";
+import ModalAlert from "../../ModalAlert/ModalAlert";
 
 function Support() {
   const [supports, setSupports] = useState([
@@ -107,6 +108,8 @@ function Support() {
       img: "https://raw.githubusercontent.com/shaghayegh-b/bazrafkan-store/refs/heads/main/src/assets/img/daman.webp",
     },
   ]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -172,10 +175,19 @@ function Support() {
               ...prev,
               { ...newRequest, id: prev.length + 1 },
             ]);
-            alert("درخواست شما ثبت شد!");
+             setModalMessage("درخواست شما ثبت شد!");
+    setIsModalOpen(true);
           }}
         />
       </div>
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+      />
     </div>
   );
 }
