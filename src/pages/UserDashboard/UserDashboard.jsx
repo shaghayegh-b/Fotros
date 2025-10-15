@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 import { CgProfile } from "react-icons/cg";
 import { FaHeart, FaMapMarkerAlt, FaShoppingCart } from "react-icons/fa";
@@ -16,24 +16,21 @@ import Addresses from "../../components/ComUserDashboard/Addresses/Addresses";
 
 import "./UserDashboard.css";
 import { useAuth } from "../../context/AuthContext/AuthContext";
+import { FiLogOut } from "react-icons/fi";
+import ModalAlert from "../../components/ModalAlert/ModalAlert";
 
 function UserDashboard() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { subMenu } = useParams();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [subMenu]);
+  
+  const navigate = useNavigate();
 
-  // سفارش ها
-  //
-
-  //علاقه مندی ها
-  //
-
-  // ادرس من
-  //
-  //    درخواست ها
-  //
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalButtons, setModalButtons] = useState([]);
   return (
     <div className="flex flex-col min-h-screen">
       {/* navbar */}
@@ -70,6 +67,36 @@ function UserDashboard() {
                 <span className="textdashboard">{text}</span>
               </NavLink>
             ))}
+            <button
+              onClick={() => {
+                setModalMessage("میخوای از حساب کاربری خارج بشی؟");
+                setModalButtons([
+                  {
+                    label: "بله",
+                    type: "yes",
+                    onClick: () => {
+                      logout();
+                      navigate("/Fotros/");
+                      setIsModalOpen(false);
+                    },
+                  },
+                  {
+                    label: "خیر",
+                    type: "no",
+                    onClick: () => {
+                      setIsModalOpen(false);
+                    },
+                  },
+                ]);
+                setIsModalOpen(true);
+              }}
+              className=" border-[2px] w-full border-[#dfdfdf] flex items-center justify-start gap-[9px]  pr-[15px] pl-[13px] py-[8px] rounded-xl "
+            >
+              <span className="icondashboard text-[115%]">
+                <FiLogOut />
+              </span>
+              <span className="textdashboard">خروج از حساب کاربری</span>
+            </button>
           </div>
         </div>
         <div className="w-[100%] lg:w-[80%]">
@@ -82,6 +109,15 @@ function UserDashboard() {
       </div>
       {/* footer */}
       <div className="h-[1.3rem] lg:h-[3rem]"></div> <Footer />
+      <ModalAlert
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        message={modalMessage}
+        timer={4000} // مدت زمان نوار progress
+        buttons={modalButtons}
+      />
     </div>
   );
 }
