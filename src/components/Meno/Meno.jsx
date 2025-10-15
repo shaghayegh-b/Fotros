@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import "./Meno.css";
 import { mymeno } from "../Navbar/Navbar";
 import { useContext } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { PRODUCT_CATEGORIES } from "../../constants/categories";
 import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
 import {
@@ -26,6 +26,7 @@ import { useAuth } from "../../context/AuthContext/AuthContext";
 import { FiLogOut } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
 import { HiHome } from "react-icons/hi2";
+import ModalAlert from "../ModalAlert/ModalAlert";
 function Meno() {
   const { isLoggedIn, user, logout } = useAuth();
 
@@ -51,6 +52,10 @@ function Meno() {
     }
   }, [isDark]);
   const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalButtons, setModalButtons] = useState([]);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -208,7 +213,7 @@ function Meno() {
             <ul className="flex flex-col gap-[15px] pb-[20px]">
               {isLoggedIn &&
                 [
-                    {
+                  {
                     id: "userdashboard/UserInfo",
                     text: "ویرایش اطلاعات کاربری",
                     icon: CgProfile,
@@ -254,14 +259,30 @@ function Meno() {
               {isLoggedIn ? (
                 <li
                   onClick={() => {
-                    logout();
                     setMeno(false);
+                    setModalMessage("میخوای از حساب کاربری خارج بشی؟");
+                    setModalButtons([
+                      {
+                        label: "بله",
+                        type: "yes",
+                        onClick: () => {
+                          logout();
+                          navigate("/Fotros/");
+                          setIsModalOpen(false);
+                        },
+                      },
+                      {
+                        label: "خیر",
+                        type: "no",
+                        onClick: () => {
+                          setIsModalOpen(false);
+                        },
+                      },
+                    ]);
+                    setIsModalOpen(true);
                   }}
                 >
-                  <NavLink
-                    to="/Fotros/"
-                    className="flex gap-[8px] items-center  px-[7px]"
-                  >
+                  <NavLink className="flex gap-[8px] items-center  px-[7px]">
                     <FiLogOut className="text-[#042a50]" />
                     <span className="font-[600]">خروج از حساب کاربری</span>
                   </NavLink>
@@ -284,6 +305,15 @@ function Meno() {
             </ul>
           </div>
         </div>
+        <ModalAlert
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+          message={modalMessage}
+          timer={4000} // مدت زمان نوار progress
+          buttons={modalButtons}
+        />
       </div>
     </>
   );
