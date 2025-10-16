@@ -34,15 +34,15 @@ function Footer() {
             </li>
           </ul>
           <div className="flex gap-[13px] ">
-            <button className="p-[5px] border-solid border-red border-[2px] rounded-full">
+            <Link href="https://instagram.com/shaghayeghbazrafkan-" title="اینستاگرام" className="p-[5px] border-solid border-red border-[2px] rounded-full">
               <FaInstagram />
-            </button>
-            <button className="p-[5px] border-solid border-red border-[2px] rounded-full">
+            </Link>
+            <Link href="https://t.me/bazrafkannjad"  title="کانال تلگرام" className="p-[5px] border-solid border-red border-[2px] rounded-full">
               <FaTelegramPlane />
-            </button>
-            <button className="p-[5px] border-solid border-red border-[2px] rounded-full">
+            </Link>
+            <Link href="tel:+989399619640" title="شماره تماس" className="p-[5px] border-solid border-red border-[2px] rounded-full">
               <MdOutlinePhone />
-            </button>
+            </Link>
           </div>
           <img src={logo1} alt="" className="h-[2.5rem] self-start md:hidden" />
           <div className="h-[2rem]"></div>{" "}
