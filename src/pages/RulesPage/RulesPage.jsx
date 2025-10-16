@@ -13,10 +13,10 @@ function RulesPage() {
     <>
       {/* navbar */}
       <Navbar />
-      <div className="h-16  "></div>
+      <div className="h-5 lg:h-16  "></div>
       {/* main */}
       <div className="RulesPage py-[10px] px-[14px] md:px-[50px]  ">
-        <h6 className="text-gray-500 text-[85%]  hidden md:flex gap-[4px]">
+        <h6 className="text-gray-500 text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>قوانین و مقررات</span>
         </h6>

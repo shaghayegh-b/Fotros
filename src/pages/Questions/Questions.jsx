@@ -16,15 +16,15 @@ function Questions() {
     <div className="flex flex-col min-h-screen">
       {/* navbar */}
       <Navbar />
-      <div className="h-16  "></div>
+      <div className="h-5 lg:h-16  "></div>
       {/* main */}
       <div className="Questions flex-grow py-[10px] px-[14px] md:px-[50px] ">
-        <h6 className="text-gray-500 text-[85%]  hidden md:flex gap-[4px]">
+        <h6 className="text-gray-500 text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
-          <span>تماس با ما</span>
+          <span>سوالات متداول</span>
         </h6>
         <h1 className="text-[175%] font-bold  pt-[0px] pb-[16px] md:py-[25px]">
-          تماس با ما
+          سوالات متداول
         </h1>
         <div className="flex flex-col gap-[10px] ">
           {/* 1اقساط */}
