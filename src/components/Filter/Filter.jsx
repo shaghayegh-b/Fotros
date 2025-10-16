@@ -3,6 +3,7 @@ import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
 import { Link } from "react-router-dom";
 import { memo } from "react";
 import { FaHome } from "react-icons/fa";
+import { FiChevronDown } from "react-icons/fi";
 
 function Filter({ resetPage }) {
   const {
@@ -28,7 +29,7 @@ function Filter({ resetPage }) {
     resetPage(); // صفحه رو صفر می‌کنیم
   };
   const filters = [
-    { id: "", label: "مرتب سازی بر اساس" },
+    { id: "", label: "مرتب سازی" },
     { id: "cheapest", label: "ارزان‌ترین" },
     { id: "mostExpensive", label: "گران‌ترین" },
     { id: "mostDiscount", label: "بیشترین تخفیف" },
@@ -42,30 +43,29 @@ function Filter({ resetPage }) {
         <button
           onClick={handleAvailableClick}
           className={`
-            px-3 py-1 rounded-xl shadow-sm transition min-w-32 focus:ring-1 focus:ring-white
-          ${
-            onlyAvailable ? "bg-[#81bcf0] border-[3px] border-[#97a7b461]" : ""
-          }`}
+    px-3 py-1 rounded-xl transition-all duration-300
+    border border-gray-300 shadow-sm hover:shadow-md
+    ${onlyAvailable ? "bg-[#d4ebff] border-[#81bcf0]" : "bg-white"}
+  `}
         >
           محصولات موجود
         </button>
         <Listbox value={sortFilter} onChange={handleSortChange}>
           {({ open }) => (
-            <div className="relative">
+            <div className="relative w-[100px] md:w-[120px]">
               <Listbox.Button
                 className={`${
                   open ? "border-[1px] border-[#97a7b461]" : ""
-                                }  flex justify-between items-center gap-[4px] text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
+                }  flex justify-between items-center gap-[4px] text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
               >
                 <span className={`w-[90%] whitespace-nowrap tracking-tighter`}>
                   {selected.label}
                 </span>
-
-                <i
-                  className={`fa fa-chevron-up md:inline-block hidden  ${
+                <FiChevronDown
+                  className={`md:inline-block hidden  ${
                     open ? "rotate-[180deg]" : ""
                   } transition-all duration-300 text-[85%]`}
-                ></i>
+                />
               </Listbox.Button>
 
               <Listbox.Options className="absolute bg-white mt-1 w-full text-[90%] rounded-sm border-[2px] border-[#97a7b461] z-3 focus:outline-none">
@@ -76,7 +76,9 @@ function Filter({ resetPage }) {
                     className={({ active }) =>
                       `px-3 py-1 cursor-pointer whitespace-nowrap ${
                         active
-                          ? "bg-[#81bcf0] border-[3px] border-[#97a7b461]"
+                          ? "bg-[#eaf5ff]"
+                          : selected.id === filter.id
+                          ? "bg-[#cbe4fa]"
                           : ""
                       }`
                     }
@@ -89,7 +91,13 @@ function Filter({ resetPage }) {
           )}
         </Listbox>
       </div>
-      <Link to="/Fotros/" className="hidden md:flex gap-[2px] items-center whitespace-nowrap text-[85%]">صفحه اصلی<FaHome/></Link>
+      <Link
+        to="/Fotros/"
+        className="hidden md:flex gap-[2px] items-center whitespace-nowrap text-[85%]"
+      >
+        صفحه اصلی
+        <FaHome />
+      </Link>
     </div>
   );
 }
