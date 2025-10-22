@@ -64,10 +64,18 @@ function Products() {
       <Navbar />
       <div className="h-10 lg:h-16"></div>
       <div className="pb-[80px]">
-        <h2 className="text-[175%] font-[600] p-[10px] md:px-[30px] md:py-[20px]">
+        <h6 className="text-gray-500 px-[13px] text-[85%] flex gap-[4px] md:hidden">
+          <Link to="/Fotros/">صفحه اصلی &gt; </Link>
+          <span>
+            {searchedProducts.length > 0
+              ? `جستجو : ${searchQuery}`
+              : selectedCategory}
+          </span>
+        </h6>
+        <h2 className="text-[175%] font-[600] py-[10px] px-[14px] md:px-[30px] md:py-[20px]">
           {searchedProducts.length > 0
             ? `جستجو : ${searchQuery}`
-            : selectedCategory}{" "}
+            : selectedCategory}
         </h2>
 
         <Categorys resetPage={() => setCurrentPage(0)} />

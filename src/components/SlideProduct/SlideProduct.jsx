@@ -82,7 +82,7 @@ function SlideProduct({ title,title2, url, allurl }) {
           <div className="p-[5px] pt-0 NewProducts relative">
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="swiper-button-next-custom hidden md:flex items-center justify-center absolute top-1/2 left-4 z-1
+              className="swiper-button-next-custom hidden md:flex items-center justify-center absolute top-1/2 left-4 z-2
                    bg-white text-[#1e88e5] shadow-md hover:shadow-lg hover:bg-[#1e88e5] hover:text-white
                    p-3 rounded-full text-2xl"
             >
@@ -90,7 +90,7 @@ function SlideProduct({ title,title2, url, allurl }) {
             </button>
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="swiper-button-prev-custom hidden md:flex items-center justify-center absolute top-1/2 right-4 z-1
+              className="swiper-button-prev-custom hidden md:flex items-center justify-center absolute top-1/2 right-4 z-2
                    bg-white text-[#1e88e5] shadow-md hover:shadow-lg hover:bg-[#1e88e5] hover:text-white
                    p-3 rounded-full text-2xl"
             >

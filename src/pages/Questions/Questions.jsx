@@ -16,10 +16,10 @@ function Questions() {
     <div className="flex flex-col min-h-screen">
       {/* navbar */}
       <Navbar />
-      <div className="h-5 lg:h-16  "></div>
+      <div className="h-6 lg:h-16  "></div>
       {/* main */}
       <div className="Questions flex-grow py-[10px] px-[14px] md:px-[50px] ">
-        <h6 className="text-gray-500 text-[85%] flex gap-[4px]">
+        <h6 className="text-gray-500 py-[10px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>سوالات متداول</span>
         </h6>

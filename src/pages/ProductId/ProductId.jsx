@@ -62,6 +62,36 @@ function ProductId() {
 
   const navigate = useNavigate();
 
+  //   deletedMessage
+  const [deletedMessage, setDeletedMessage] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [progressWidth, setProgressWidth] = useState("100%");
+  const timerRef = useRef(null);
+
+  // وقتی deletedMessage مقدار بگیره، پیام به سبک ModalAlert نمایش داده میشه
+  useEffect(() => {
+    if (!deletedMessage) return;
+
+    setVisible(true);
+    setProgressWidth("100%");
+
+    // شروع انیمیشن progress bar
+    const progressTimeout = setTimeout(() => setProgressWidth("0%"), 50);
+
+    timerRef.current = setTimeout(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setDeletedMessage("");
+        setProgressWidth("100%");
+      }, 300);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timerRef.current);
+      clearTimeout(progressTimeout);
+    };
+  }, [deletedMessage]);
+
   // وقتی کامپوننت لود شد، داده‌ها رو از API بگیر
   useEffect(() => {
     const cachedData = localStorage.getItem(`product_${idsortby}`);
@@ -274,6 +304,49 @@ function ProductId() {
       <Navbar></Navbar>
       <div className="h-10 lg:h-16"></div>
       <div className="">
+        <h6 className="text-gray-500  px-[5px] pb-[7px] text-[85%] flex gap-[4px]">
+          <Link to="/Fotros/">صفحه اصلی &gt; </Link>
+          <span>{product.title}</span>
+        </h6>
+        {/* پیغام حذف یا اضافه و... */}
+
+        {deletedMessage && (
+          <div
+            id="deletedMessageBackdrop"
+            className={`fixed inset-0 bg-[#00000053] bg-opacity-30 flex justify-center items-start pt-10 z-50 transition-opacity duration-300 ${
+              visible ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={(e) => {
+              if (e.target.id === "deletedMessageBackdrop") {
+                setVisible(false);
+                setTimeout(() => setDeletedMessage(""), 300);
+              }
+            }}
+          >
+            <div
+              className={`relative bg-white rounded-xl shadow-lg w-full max-w-[90%] md:max-w-[47%]  p-[25px] overflow-hidden transform transition-all duration-300 ${
+                visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+              }`}
+            >
+              {" "}
+              {/* نوار Progress */}
+              <div className="absolute w-[100%]  left-0 bottom-[0px]  shadow-[0_0_8px_rgba(30,136,229,0.6)] rounded-b-xl">
+                <div className="h-[4px] bg-gray-300">
+                  <div
+                    className=" h-[4px] bg-[#0b9ae7dd] "
+                    style={{
+                      width: progressWidth,
+                      transition: `width 4000ms linear`,
+                    }}
+                  ></div>
+                </div>
+              </div>
+              <p className=" text-center text-[102%] font-[500] relative z-10">
+                {deletedMessage}
+              </p>
+            </div>
+          </div>
+        )}
         {loading ? (
           <Loading />
         ) : !product || !product.idsortby ? (
@@ -285,7 +358,6 @@ function ProductId() {
               <h1 className="font-bold text-[140%] md:hidden block ">
                 {product.title}
               </h1>
-
               {/* right images */}
               <div className="flex flex-col gap-[20px] justify-between self-center mb-[20px] items-center md:w-1/4 w-full">
                 <img
@@ -321,7 +393,6 @@ function ProductId() {
                   </Slider>
                 )}
               </div>
-
               {/* left desc */}
               <div className="md:w-2/3 w-full flex flex-col gap-[27px]">
                 <h1 className="font-bold text-[140%] md:block hidden">
@@ -449,17 +520,34 @@ function ProductId() {
                           disabled={isOutOfStock || quantity === 0}
                           onClick={() => {
                             if (quantity === 1) {
-                              if (
-                                window.confirm(
-                                  "میخوای کالارو از سبد خریدت حذف کنی؟"
-                                )
-                              ) {
-                                decrease(
-                                  product.idsortby,
-                                  colors[selectedColorIndex]?.code,
-                                  selectedSize
-                                );
-                              }
+                              setModalMessage(
+                                "میخوای کالا رو از سبد خریدت حذف کنی؟"
+                              );
+                              setModalButtons([
+                                {
+                                  label: "بله",
+                                  type: "yes",
+                                  onClick: () => {
+                                    decrease(
+                                      product.idsortby,
+                                      colors[selectedColorIndex]?.code,
+                                      selectedSize
+                                    );
+                                    setDeletedMessage(
+                                      `"${product.title}" با رنگ "${selectedColor?.name}" از سبد خرید حذف شد`
+                                    );
+                                    setIsModalOpen(false);
+                                  },
+                                },
+                                {
+                                  label: "خیر",
+                                  type: "no",
+                                  onClick: () => {
+                                    setIsModalOpen(false);
+                                  },
+                                },
+                              ]);
+                              setIsModalOpen(true);
                             } else {
                               decrease(
                                 product.idsortby,
@@ -809,8 +897,8 @@ function ProductId() {
                 <div className={` desc py-[16px] px-[8px]`}>
                   <div className="mt-[10px] mb-[30px]">
                     {comments.length === 0 ? (
-                      <p className="px-[30px] py-[10px] bg-[#f5f5f5] w-full text-center">
-                        هنوز نظری ثبت نشده است
+                      <p className="px-[30px] py-[10px]  w-full text-center">
+                        " هنوز نظری ثبت نشده است "
                       </p>
                     ) : (
                       <ul>
@@ -828,9 +916,9 @@ function ProductId() {
                               )}
                               <p className="font-bold">{comment.username}</p>
                             </div>
-                            <div className="flex md:flex-row flex-col  items-center md:px-[8px]">
+                            <div className="flex md:flex-row flex-col items-center md:justify-between md:px-[8px]">
                               <p className="self-start">{comment.text}</p>
-                              <p className="text-[60%] text-gray-500 self-end">
+                              <p className="pt-[15px] text-[60%] text-gray-500 self-end">
                                 {new Date(comment.createdAt).toLocaleString()}
                               </p>
                             </div>
@@ -845,28 +933,34 @@ function ProductId() {
                   >
                     <div className="flex md:flex-row flex-col md:gap-[26px] gap-[10px]">
                       <p
-                        className="flex gap-[5px] items-center "
-                        onClick={() => setRecommend(true)}
+                        className="flex gap-[5px] items-center cursor-pointer"
+                        onClick={() =>
+                          setRecommend(recommend === true ? null : true)
+                        }
                       >
-                        {recommend ? (
-                          <AiFillLike color="green"></AiFillLike>
+                        {recommend === true ? (
+                          <AiFillLike className="text-green-600" />
                         ) : (
-                          <AiOutlineLike color="green"></AiOutlineLike>
+                          <AiOutlineLike color="green" />
                         )}
                         این محصول را پیشنهاد میکنم
                       </p>
+
                       <p
-                        className="flex gap-[5px] items-center "
-                        onClick={() => setRecommend(false)}
+                        className="flex gap-[5px] items-center cursor-pointer"
+                        onClick={() =>
+                          setRecommend(recommend === false ? null : false)
+                        }
                       >
-                        {recommend ? (
-                          <AiOutlineDislike color="red"></AiOutlineDislike>
+                        {recommend === false ? (
+                          <AiFillDislike className="text-red-600" />
                         ) : (
-                          <AiFillDislike color="red"></AiFillDislike>
+                          <AiOutlineDislike color="red" />
                         )}
                         این محصول را پیشنهاد نمیکنم
                       </p>
                     </div>
+
                     <form
                       onSubmit={handleSubmitComment}
                       className="flex flex-col gap-[10px]"
@@ -875,7 +969,7 @@ function ProductId() {
                         type="text"
                         value={commentText}
                         onChange={(e) => setCommentText(e.target.value)}
-                        className="bg-[#f5f5f5] py-[10px] md:px-[20px] px-[9px] rounded-sm "
+                        className=" py-[10px] md:px-[20px] px-[9px] rounded-sm w-full p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#288fea] text-black  "
                         placeholder="لطفا نظر خود را اینجا بنویسد."
                       />
                       {!isLoggedIn && (
@@ -918,7 +1012,7 @@ function ProductId() {
                             setIsModalOpen(true);
                           }
                         }}
-                        className="md:bg-[#2192f4] text-[102%] md:text-[100%] md:border-unset border-[3px] border-[#75beff] md:border-[unset] w-[70%]  md:w-[unset] self-center md:self-end text-[#1e88e5] md:text-white px-[30px] py-[10px] md:py-[5px] my-[6px] box-shadow rounded-xl "
+                        className="md:bg-[#2192f4] text-[102%] md:text-[100%] md:border-unset border-[3px] border-[#75beff] md:border-[0] w-[70%]  md:w-[unset] self-center md:self-end text-[#1e88e5] md:text-white px-[30px] py-[10px] md:py-[5px] my-[6px] box-shadow rounded-xl "
                       >
                         ثبت نظر
                       </button>
@@ -935,12 +1029,14 @@ function ProductId() {
               </p>
             </div>
             {/* محصولات مشابه  */}
-            <SlideProduct
-              title="م&#x0640;حص&#x0640;ولات مشابه"
-              title2="محصولات مشابه"
-              allurl={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=${product.category}`}
-              url={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=${product.category}`}
-            ></SlideProduct>
+        <div className="md:w-full md:my-[45px]  md:py-[10px] md:bg-[#f5f5f5] md:px-[-5px]">
+              <SlideProduct
+                title="م&#x0640;حص&#x0640;ولات مشابه"
+                title2="محصولات مشابه"
+                allurl={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=${product.category}`}
+                url={`https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=${product.category}`}
+              ></SlideProduct>
+            </div>
           </div>
         )}
       </div>

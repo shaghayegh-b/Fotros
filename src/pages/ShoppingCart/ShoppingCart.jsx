@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 import Footer from "../../components/Footer/Footer";
 import { useCart } from "../../context/CartContext/CartContext";
@@ -74,7 +74,36 @@ function ShoppingCart() {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const [deletedMessage, setDeletedMessage] = useState(false);
+  //   deletedMessage
+  const [deletedMessage, setDeletedMessage] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [progressWidth, setProgressWidth] = useState("100%");
+  const timerRef = useRef(null);
+
+  // وقتی deletedMessage مقدار بگیره، پیام به سبک ModalAlert نمایش داده میشه
+  useEffect(() => {
+    if (!deletedMessage) return;
+
+    setVisible(true);
+    setProgressWidth("100%");
+
+    // شروع انیمیشن progress bar
+    const progressTimeout = setTimeout(() => setProgressWidth("0%"), 50);
+
+    timerRef.current = setTimeout(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setDeletedMessage("");
+        setProgressWidth("100%");
+      }, 300);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timerRef.current);
+      clearTimeout(progressTimeout);
+    };
+  }, [deletedMessage]);
+
   //   وقتی وارد صفحه محصول می‌شی، اگر صفحه پایین باشه، اسلایدر دیده نمی‌شه
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -82,17 +111,52 @@ function ShoppingCart() {
   return (
     <>
       <Navbar />
-      <div className="h-5 lg:h-16"></div>
-      <div className="ShoppingCart pt-[10px] px-[14px] pb-[30px] lg:px-[30px]  flex-1 relative  min-h-[55vh] flex flex-col">
+      <div className="h-6 lg:h-16"></div>
+
+      <div className="ShoppingCart pt-[3px] px-[14px] pb-[30px] lg:px-[30px]  flex-1 relative  min-h-[55vh] flex flex-col">
+        <h6 className="text-gray-500 pt-[18px] pb-[5px] text-[85%] flex gap-[4px]">
+          <Link to="/Fotros/">صفحه اصلی &gt; </Link>
+          <span>سبد خرید</span>
+        </h6>
         {/* پیغام حذف یا اضافه و... */}
-        <div
-          className={`fixed bg-[white] top-14 left-1/2 -translate-x-1/2 z-10 w-[85%] p-3    border-t-2 border-solid border-[#0ba5ffed] text-sm rounded-sm shadow-md transition-all duration-300 ${
-            deletedMessage ? "" : "hidden"
-          }`}
-        >
-          <i className="fa fa-check text-[#0ba5ffed] p-2"></i>
-          {deletedMessage}
-        </div>
+        {deletedMessage && (
+          <div
+            id="deletedMessageBackdrop"
+            className={`fixed inset-0 bg-[#00000053] bg-opacity-30 flex justify-center items-start pt-10 z-50 transition-opacity duration-300 ${
+              visible ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={(e) => {
+              if (e.target.id === "deletedMessageBackdrop") {
+                setVisible(false);
+                setTimeout(() => setDeletedMessage(""), 300);
+              }
+            }}
+          >
+            <div
+              className={`relative bg-white rounded-xl shadow-lg w-full max-w-[90%] md:max-w-[47%]  p-[25px] overflow-hidden transform transition-all duration-300 ${
+                visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+              }`}
+            >
+              {" "}
+              {/* نوار Progress */}
+              <div className="absolute w-[100%]  left-0 bottom-[0px]  shadow-[0_0_8px_rgba(30,136,229,0.6)] rounded-b-xl">
+                <div className="h-[4px] bg-gray-300">
+                  <div
+                    className=" h-[4px] bg-[#0b9ae7dd] "
+                    style={{
+                      width: progressWidth,
+                      transition: `width 4000ms linear`,
+                    }}
+                  ></div>
+                </div>
+              </div>
+              <p className=" text-center text-[102%] font-[500] relative z-10">
+                {deletedMessage}
+              </p>
+            </div>
+          </div>
+        )}
+
         {cartItems.length === 0 ? (
           // موجود نبودن محصول
           <div
@@ -148,9 +212,7 @@ function ShoppingCart() {
                                   setDeletedMessage(
                                     `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`
                                   );
-                                  setTimeout(() => {
-                                    setDeletedMessage(false);
-                                  }, 3000);
+
                                   setIsModalOpen(false);
                                 },
                               },
@@ -233,7 +295,7 @@ function ShoppingCart() {
                       </div>
                       {/* دیدن محصول */}
                       <Link
-                        to={`/bazrafkan-store/Oneitem/${item.idsortby}`}
+                        to={`/Fotros/Products/${item.idsortby}`}
                         className="text-[80%]"
                       >
                         برای دیدن مشخصات محصول کلیک کن!
@@ -279,9 +341,7 @@ function ShoppingCart() {
                                       setDeletedMessage(
                                         `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`
                                       );
-                                      setTimeout(() => {
-                                        setDeletedMessage(false);
-                                      }, 3000);
+
                                       setIsModalOpen(false);
                                     },
                                   },
@@ -366,9 +426,7 @@ function ShoppingCart() {
                         onClick: () => {
                           clearCart();
                           setDeletedMessage(`سبد خرید خالی شد`);
-                          setTimeout(() => {
-                            setDeletedMessage(false);
-                          }, 3000);
+
                           setIsModalOpen(false);
                         },
                       },

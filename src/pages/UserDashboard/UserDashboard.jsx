@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 
 import { CgProfile } from "react-icons/cg";
 import { FaHeart, FaMapMarkerAlt, FaShoppingCart } from "react-icons/fa";
@@ -25,7 +25,7 @@ function UserDashboard() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [subMenu]);
-  
+
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,9 +35,13 @@ function UserDashboard() {
     <div className="flex flex-col min-h-screen">
       {/* navbar */}
       <Navbar />
-      <div className="h-5 lg:h-16  "></div>
+      <div className="h-6 lg:h-16  "></div>
       {/* main */}
-      <div className="UserDashboard flex py-[10px] px-[14px] lg:px-[30px] ">
+        <h6 className="text-gray-500 pt-[18px] px-[13px] text-[85%] flex gap-[4px]">
+        <Link to="/Fotros/">صفحه اصلی &gt; </Link>
+        <span>حساب کاربری</span>
+      </h6>
+      <div className="UserDashboard flex pt-[5px] pb-[10px] px-[14px] lg:px-[30px] ">
         {/*Dashboard */}
         <div className="hidden lg:inline-block w-[20%] p-[20px]">
           <div className="flex flex-col justify-center items-center">

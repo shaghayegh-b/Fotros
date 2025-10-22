@@ -108,14 +108,20 @@ function Home() {
               </div>
 
               {/* محصول1 */}
-              <Link to="/Fotros/Products/12" className="SatisfiedCustomer bg-[#f5f5f5] h-[80%] rounded-2xl p-[15px] ">
+              <Link
+                to="/Fotros/Products/12"
+                className="SatisfiedCustomer bg-[#f5f5f5] h-[80%] rounded-2xl p-[15px] "
+              >
                 <img src={imgkot} alt="محصول1" className="" />
               </Link>
             </div>
 
             <div className="left flex-1 flex flex-col gap-2">
               {/* محصول 2 */}
-              <Link to="/Fotros/Products/27" className=" bg-[#f5f5f5] rounded-2xl p-[9px] h-[80%] flex items-center">
+              <Link
+                to="/Fotros/Products/27"
+                className=" bg-[#f5f5f5] rounded-2xl p-[9px] h-[80%] flex items-center"
+              >
                 <img src={imgtap} alt="محصول2" className="" />
               </Link>
               {/* تنوع محصول */}
@@ -204,18 +210,20 @@ function Home() {
         <div className="h-[1.3rem] md:h-[3rem]"></div>
         {/* تخفیفات */}
         <Link
-              to="/Fotros/Products"
-              onClick={() => {
-                funcAxios(
-                  "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=off&order=desc"
-                );
-                setSortFilter("");
-                setOnlyAvailable(false);
-                applyFilter("", false, "فروش ویژه");
-              }} className="m-[15px] p-[10px] mx-[20px] md:mx-[50px] bg-blue-200 h-[180px] md:h-[200px] rounded-2xl flex md:items-center">
+          to="/Fotros/Products"
+          onClick={() => {
+            funcAxios(
+              "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=off&order=desc"
+            );
+            setSortFilter("");
+            setOnlyAvailable(false);
+            applyFilter("", false, "فروش ویژه");
+          }}
+          className="m-[15px] p-[10px] mx-[20px] md:mx-[50px] bg-blue-200 h-[180px] md:h-[200px] rounded-2xl flex md:items-center"
+        >
           <img className="h-[100%] md:h-[155%]" src={offset} alt="" />
           <div className="w-full flex flex-col justify-center">
-            <div className="flex justify-center md:justify-start relative  my-[7px] w-[100%]">
+            <div className="flex justify-between md:justify-start relative  my-[7px] w-[100%]">
               <div>
                 <p className="text-[140%] font-[600]">
                   ف&#x0640;روش وی&#x0640;&#x0640;ژه
@@ -223,13 +231,19 @@ function Home() {
                 <div className="h-[21px] md:h-[28px]"></div>
                 <p className="md:text-[135%]">
                   ت&#x0640;خف&#x0640;یف وی&#x0640;ژه روزانه
-                  <br className="md:hidden "/>
-                   بر روی تمامی محصولات&nbsp;
+                  <br className="md:hidden " />
+                  بر روی تمامی محصولات&nbsp;
                 </p>
               </div>
               <p className=" absolute left-[14px] md:left-[unset] md:right-[120px] top-[25px] md:top-[-22px] w-20% self-center bg-[#f5f5f5] rotate-[343deg] p-[4px] px-[6px] rounded-sm text-red-700 h-[fit-content] flex ">
-                <span className="text-[120%] md:text-[250%] font-semibold">70</span>
-                <img className="w-[30px] h-[30px] md:w-[50px] md:h-[50px]" src={priceimg} alt="" />
+                <span className="text-[120%] md:text-[250%] font-semibold">
+                  70
+                </span>
+                <img
+                  className="w-[30px] h-[30px] md:w-[50px] md:h-[50px]"
+                  src={priceimg}
+                  alt=""
+                />
               </p>
             </div>
             <Link
