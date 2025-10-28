@@ -160,7 +160,7 @@ function ShoppingCart() {
         {cartItems.length === 0 ? (
           // موجود نبودن محصول
           <div
-            className={` py-1 px-2 m-auto bg-[#a8d2ff17] md:w-[50%] border-t-4 border-solid border-[#0ba5ffed]  text-center flex flex-col justify-center items-center mt-1 mb-3 `}
+            className={`font-vazir py-1 px-2 m-auto bg-[#a8d2ff17] md:w-[50%] border-t-4 border-solid border-[#0ba5ffed]  text-center flex flex-col justify-center items-center mt-1 mb-3 `}
           >
             <p className="p-[10px]">
               <i className=" fa fa-times text-[#00c7eced] font-[600] p-2"></i>
