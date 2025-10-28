@@ -114,7 +114,7 @@ function ShoppingCart() {
       <div className="h-6 lg:h-16"></div>
 
       <div className="ShoppingCart pt-[3px] px-[14px] pb-[30px] lg:px-[30px]  flex-1 relative  min-h-[55vh] flex flex-col">
-        <h6 className="text-gray-500 pt-[18px] pb-[5px] text-[85%] flex gap-[4px]">
+        <h6 className="text-gray-500 px-[8px] md:px-[20px] pt-[28px] lg:pt-[10px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>سبد خرید</span>
         </h6>

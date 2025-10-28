@@ -88,10 +88,10 @@ function Navbar() {
     <>
       {/* Navbar */}
       <div
-        className={`Navbar   border-b-[3px] border-b-solid border-b-[#f5f5f5]  bg-[#ffff] w-full fixed top-0 z-20 `}
+        className={`Navbar bg-[#fffffff7] py-[5px] px-[3px] md:p-[unset] border-b-[3px] border-b-solid border-b-[#f5f5f5]  w-full fixed top-0 z-20 `}
       >
         <div
-          className={`Navbarchild px-[8px] lg:px-[20px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
+          className={`Navbarchild px-[8px] lg:px-[15px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
             ${fSearch ? "hidden" : "flex"} `}
         >
           {/* menumobile */}
@@ -104,7 +104,7 @@ function Navbar() {
           {/* menumd */}
           <div className="hidden flex-3 lg:flex items-center gap-[21px] ">
             <div className="flex items-center gap-[7px] px-[5px]">
-              <div className="relative w-[45px] h-[55px]">
+              <div className="relative w-[45px] h-[55px] mb-[2px]">
                 <img
                   src={wingfotros}
                   alt="Logoimg"
@@ -173,7 +173,7 @@ function Navbar() {
           </div>
           {/* logo */}
           <div className="flex-3 h-[29px] self-center mx-[8px] flex justify-center lg:hidden">
-            <img src={logoimg} alt="Logoimg" className=" h-[22px]" />
+            <img src={logoimg} alt="Logoimg" className=" h-[24px]" />
           </div>
           {/* search & shopping & userdashboard */}
           <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-end items-center ">
@@ -194,7 +194,8 @@ function Navbar() {
 
             <button
               onFocus={() => setFSearch(true)}
-              className="lg:hidden mx-[7px] lg:mx-[8px] py-[2px] lg:py-[6px] rounded-xl  "
+              className={`lg:hidden   py-[2px] lg:py-[6px] rounded-xl
+              ${totalQuantity == 0 ? "mx-[4px] lg:mx-[8px]" : "mx-[10px] lg:mx-[12px]"}`}
             >
               <IoSearchSharp />
             </button>

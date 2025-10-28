@@ -64,7 +64,7 @@ function Products() {
       <Navbar />
       <div className="h-10 lg:h-16"></div>
       <div className="pb-[80px]">
-        <h6 className="text-gray-500 px-[13px] text-[85%] flex gap-[4px] md:hidden">
+        <h6 className="text-gray-500 px-[15px] md:px-[40px] pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>
             {searchedProducts.length > 0

@@ -37,7 +37,7 @@ function UserDashboard() {
       <Navbar />
       <div className="h-6 lg:h-16  "></div>
       {/* main */}
-        <h6 className="text-gray-500 pt-[18px] px-[13px] text-[85%] flex gap-[4px]">
+        <h6 className="text-gray-500 px-[14px] md:px-[20px] pt-[28px] lg:pt-[10px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
         <Link to="/Fotros/">صفحه اصلی &gt; </Link>
         <span>حساب کاربری</span>
       </h6>

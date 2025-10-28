@@ -304,7 +304,7 @@ function ProductId() {
       <Navbar></Navbar>
       <div className="h-10 lg:h-16"></div>
       <div className="">
-        <h6 className="text-gray-500  px-[5px] pb-[7px] text-[85%] flex gap-[4px]">
+        <h6 className="text-gray-500 px-[20px] md:px-[40px] pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>{product.title}</span>
         </h6>

@@ -47,7 +47,7 @@ function Home() {
       <div className="h-10 lg:h-16"></div>
       <div className="main1">
         {/* بنر ها */}
-        <div className="pb-[5px] pt-0 px-[10px] ">
+        <div className="pb-[5px] pt-[13px] px-[10px] ">
           <Swiper
             slidesPerView={1}
             spaceBetween={5}
@@ -84,12 +84,12 @@ function Home() {
           </Swiper>
         </div>
         {/* header */}
-        <div className="flex mt-[10px] flex-col px-[16px] md:flex-row-reverse">
+        <div className="flex mt-[10px] flex-col  px-[16px] lg:px-[75px] md:flex-row-reverse">
           {/* بخش 1 */}
-          <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2 mt-[10px]  font-bold text-[125%]">
+          <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2 my-[18px]  font-bold text-[125%]">
             <div className="right flex-1 flex flex-col justify-between gap-[20px]">
+              <div className="hidden lg:inline-block lg:h-[20%]"></div>
               {/* رضایت */}
-
               <div className="flex flex-col rounded-2xl h-[fit-content] bg-blue-200">
                 <span className=" my-[2px] mx-[15px] pt-[7px] ">+900</span>
                 <div className=" flex justify-between">
@@ -101,7 +101,7 @@ function Home() {
                     <img
                       src={imgCaucasian}
                       alt=""
-                      className="absolute bottom-[-14px] left-[-4px] md:bottom-[-21px] "
+                      className="absolute bottom-[-14px] left-[-4px] md:bottom-[-21px] w-[89%] "
                     />
                   </div>
                 </div>
@@ -110,9 +110,9 @@ function Home() {
               {/* محصول1 */}
               <Link
                 to="/Fotros/Products/12"
-                className="SatisfiedCustomer bg-[#f5f5f5] h-[80%] rounded-2xl p-[15px] "
+                className="SatisfiedCustomer bg-[#f5f5f5] h-[80%] lg:h-[50%] rounded-2xl p-[15px] flex justify-center items-center"
               >
-                <img src={imgkot} alt="محصول1" className="" />
+                <img src={imgkot} alt="محصول1" className="h-full" />
               </Link>
             </div>
 
@@ -120,7 +120,7 @@ function Home() {
               {/* محصول 2 */}
               <Link
                 to="/Fotros/Products/27"
-                className=" bg-[#f5f5f5] rounded-2xl p-[9px] h-[80%] flex items-center"
+                className=" bg-[#f5f5f5] rounded-2xl p-[9px] h-[80%] lg:h-[50%] flex items-center"
               >
                 <img src={imgtap} alt="محصول2" className="" />
               </Link>
@@ -197,6 +197,7 @@ function Home() {
             className="h-[5.4rem] absolute right-[3.6rem] z-1 bottom-0"
           />
         </div>
+        <div className="h-[3rem] md:h-[3rem]"></div>
         {/* دسته بندی  */}
         <div className="categorys ">
           <h3 className="font-bold text-[140%] px-[15px]  ">
@@ -207,7 +208,7 @@ function Home() {
             <Categorys />
           </Link>
         </div>
-        <div className="h-[1.3rem] md:h-[3rem]"></div>
+        <div className="h-[2rem] md:h-[3rem]"></div>
         {/* تخفیفات */}
         <Link
           to="/Fotros/Products"
@@ -265,7 +266,7 @@ function Home() {
             </Link>
           </div>
         </Link>
-        <div className="h-[1.5rem] md:h-[3rem]"></div>
+        <div className="h-[3rem]"></div>
 
         {/* محصولات جدید */}
         <SlideProduct
@@ -387,9 +388,45 @@ function Home() {
                 </button>
               </div>
             </Link>
+            <Link
+              to="/Fotros/Products"
+              onClick={() => {
+                localStorage.removeItem("products");
+                localStorage.removeItem("productsFetchTime");
+                funcAxios(
+                  "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=ست"
+                );
+                setSortFilter("");
+                setOnlyAvailable(false);
+                applyFilter("", false, "ست های ورزشی");
+              }}
+              className="mx-[8px] p-[10px] md:m-[unset] bg-blue-200 h-[150px] lg:h-[200px] rounded-2xl flex"
+            >
+              <div className="h-[100%]  w-[50%] flex justify-center items-center">
+                <img className="h-[100%]" src={varzeshset} alt="" />
+              </div>
+              <div className="w-full flex flex-col justify-between">
+                <div>
+                  <p className="text-[137%] font-[600] mb-[10px]">
+                    ست های ورزشی
+                  </p>
+
+                  <p>برای ساختن بدنی سالم و سرحال</p>
+                </div>
+
+                <button className="w-full flex justify-end-safe items-center md:px-[10px]">
+                  مشاهده محصولات
+                  <span className="w-[15px] ">
+                    <IoMdArrowRoundBack />
+                  </span>
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
-        <div className="h-[1.3rem] md:h-[3rem]"></div>
+        {/* فاصله */}
+        <div className="h-[4.5rem]  "></div>
+
         {/* footer */}
         <Footer />
       </div>
