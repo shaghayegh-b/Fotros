@@ -49,7 +49,9 @@ function Categorys() {
         absolute top-[40%] left-4 z-2
         hover:bg-gray-300 hover:text-gray-600 border-[1px] border-gray-600
            text-[#f5f5f5] bg-gray-600
-            p-[5px] rounded-full text-[130%]"
+            p-[5px] rounded-full text-[130%]
+            transition-all duration-300 ease-out
+      hover:scale-105 "
         >
           <MdArrowBack />
         </button>
@@ -59,7 +61,9 @@ function Categorys() {
           absolute top-[40%] right-4 z-2
     hover:bg-gray-300 hover:text-gray-600 border-[1px] border-gray-600
            text-[#f5f5f5] bg-gray-600
-            p-[5px] rounded-full text-[130%]"
+            p-[5px] rounded-full text-[130%]
+            transition-all duration-300 ease-out
+       hover:scale-105 "
         >
           <MdArrowForward />
         </button>
@@ -93,11 +97,19 @@ function Categorys() {
                 <button
                   type="button"
                   onClick={() => handleCategoryClick(url, filterName)}
-                  className={`Category flex flex-col items-center justify-center py-[3px] px-[6px] w-[85px] h-[84px] md:w-[128px] md:h-[128px] lg:w-[140px] lg:h-[120px] bg-[#d8dce4] rounded-[1rem]
+                  className={`Category flex flex-col items-center justify-center py-[3px] px-[6px]
+                    w-[85px] h-[84px] md:w-[128px] md:h-[128px] lg:w-[140px] lg:h-[120px] bg-[#d8dce4] rounded-[1rem]
+                     transition-all duration-300 ease-out
+      hover:bg-gray-200 hover:scale-105 hover:shadow-lg
+      overflow-hidden text-ellipsis text-center
                         ${hideIcons ? "w-[90px] h-[fit-content]" : ""}`}
                 >
-                  {!hideIcons && Icon && <Icon />}
-                  <p className="whitespace-nowrap">{name}</p>
+                  {!hideIcons && Icon &&  (
+                      <Icon className="flex justify-center items-center text-gray-800 group-hover:text-gray-600 transition-all duration-300"/>
+                  )}
+                    <p className=" font-semibold text-gray-800 break-words leading-tight text-center">
+                    {name}
+                  </p>
                 </button>
               </SwiperSlide>
             )
