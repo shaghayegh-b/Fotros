@@ -36,9 +36,13 @@ You can view the live version on GitHub Pages:
 
 *(Replace these placeholders with your real screenshots if you want)*
 
-![Home](https://via.placeholder.com/900x450?text=Home+Page)
-![Products](https://via.placeholder.com/900x450?text=Products+Page)
-![Cart](https://via.placeholder.com/900x450?text=Shopping+Cart)
+![Home](https://raw.githubusercontent.com/shaghayegh-b/bazrafkan-store/refs/heads/main/src/assets/imgFortos/home.webp)
+
+
+![Products](https://raw.githubusercontent.com/shaghayegh-b/bazrafkan-store/refs/heads/main/src/assets/imgFortos/products.webp)
+
+
+![Cart](https://raw.githubusercontent.com/shaghayegh-b/bazrafkan-store/refs/heads/main/src/assets/imgFortos/cart.webp)
 
 ---
 
