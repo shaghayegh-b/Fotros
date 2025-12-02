@@ -59,7 +59,7 @@ function NewSupportModal({ open, onClose, onSave }) {
       onClick={onClose}
     >
       <div
-        className="bg-[#d9d9d9] w-[95%] md:w-[58%] max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
+        className="bg-[var(--sup-sm)] w-[95%] md:w-[58%] max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center">
@@ -73,7 +73,7 @@ function NewSupportModal({ open, onClose, onSave }) {
           className="flex flex-col gap-[5px] py-[8px]"
         >
           <label htmlFor="title" className="block  font-semibold">
-            عنوان<span className="text-[#c20101]">*</span>
+            عنوان<span className="text-[var(--import)] ">*</span>
           </label>
           <input
             id="title"
@@ -84,15 +84,15 @@ function NewSupportModal({ open, onClose, onSave }) {
               setTitle(e.target.value);
               if (errors.title) setErrors((prev) => ({ ...prev, title: "" }));
             }}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#bababa] ${
-              errors.title ? "border-red-500" : ""
+            className={`w-full rounded p-2 mb-[2px] bg-[var(--sup)] border border-transparent focus:outline-none focus:border-[#bababa] ${
+              errors.title ? "border-[var(--import)] " : ""
             }`}
           />
           {errors.title && (
-            <p className="text-red-500 text-sm">{errors.title}</p>
+            <p className="text-[var(--import)] text-sm mb-[13px]">{errors.title}</p>
           )}
           <label htmlFor="desc" className="block  font-semibold  ">
-            محتوای پیام<span className="text-[#c20101]">*</span>
+            محتوای پیام<span className="text-[var(--import)] ">*</span>
           </label>
           <textarea
             id="desc"
@@ -102,17 +102,17 @@ function NewSupportModal({ open, onClose, onSave }) {
               setDesc(e.target.value);
               if (errors.desc) setErrors((prev) => ({ ...prev, desc: "" }));
             }}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#bababa] ${
-              errors.desc ? "border-red-500" : ""
+            className={`w-full rounded p-2 mb-[2px] bg-[var(--sup)] border border-transparent focus:outline-none focus:border-[#bababa] ${
+              errors.desc ? "border-[var(--import)] " : ""
             }`}
           />
-          {errors.desc && <p className="text-red-500 text-sm">{errors.desc}</p>}
+          {errors.desc && <p className="text-[var(--import)] text-sm mb-[13px]">{errors.desc}</p>}
           <label
             htmlFor="file-upload"
-            className="cursor-pointer p-[8px] mt-[8px] mb-[10px] transition flex gap-[15px] w-full rounded  bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#bababa]"
+            className="cursor-pointer p-[8px] mt-[8px] mb-[10px] transition flex gap-[15px] w-full rounded  bg-[var(--sup)] border border-transparent focus:outline-none focus:border-[#bababa]"
           >
-            <span className="border w-[45px] h-[45px] border-[#1e88e5] rounded-full flex justify-center items-center ">
-              <FaPlus className="text-[#0f6fc3] " />
+            <span className="border w-[45px] h-[45px] border-[var(--btn)] rounded-full flex justify-center items-center ">
+              <FaPlus className="text-[var(--btn)]" />
             </span>
             <p className="flex flex-col gap-[3px]">
               <span className=" font-bold  text-[120%]">اضافه کردن عکس</span>
@@ -136,8 +136,7 @@ function NewSupportModal({ open, onClose, onSave }) {
 
           <button
             type="submit"
-            disabled={!title || !desc}
-            className="bg-[#1e88e5] text-white font-[600] rounded-xl text-[120%] py-2 px-4 w-[fit-content] self-end"
+            className="bg-[var(--btn)] text-white font-[600] rounded-xl text-[120%] py-2 px-4 w-[fit-content] self-end"
           >
             ثبت درخواست
           </button>

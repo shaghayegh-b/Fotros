@@ -4,16 +4,16 @@ import { memo } from "react";
 function OrderTableMd({ orders, page, setPage, totalPages }) {
   return (
     <div>
-      <table className="w-full text-left rounded-2xl p-6 table-fixed bg-white">
+      <table className="w-full text-left rounded-2xl p-6 table-fixed bg-[var(--sup-sm)]">
         <thead>
-          <tr className="border-b border-gray-300">
+          <tr className="border-b border-[var(--sup-b)]">
             <th className="p-3 text-[115%] font-[500] text-center">شماره سفارش</th>
             <th className="p-3 text-[115%] font-[500] text-center">تاریخ ثبت سفارش</th>
             <th className="p-3 text-[115%] font-[500] text-center">مبلغ کل</th>
             <th className="p-3 text-[115%] font-[500] text-center">وضعیت سفارش</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200">
+        <tbody className="divide-y divide-[var(--sup-b)]">
           {orders.map((order) => (
             <tr
               key={order.id}
@@ -52,7 +52,7 @@ function OrderTableMd({ orders, page, setPage, totalPages }) {
             onClick={() => setPage(i + 1)}
             className={`px-3 py-1 rounded-lg shadow transition ${
               page === i + 1
-                ? "bg-[#1e88e5] text-white"
+                ? "bg-[var(--btn)] text-white"
                 : "bg-white text-black hover:bg-[#9393936b]"
             }`}
           >

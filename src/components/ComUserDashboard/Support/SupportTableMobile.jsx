@@ -14,16 +14,16 @@ function SupportTableMobile({
 
   return (
     <div>
-      <table className="w-full text-left rounded-2xl p-6 table-fixed bg-white">
+      <table className="w-full text-left rounded-2xl p-6 table-fixed bg-[var(--sup-sm)]">
         <thead>
-          <tr className="border-b border-gray-300">
+          <tr className="border-b border-[var(--sup-b)]">
             <th className="p-3 text-[115%] font-[500] text-center">عنوان</th>
             <th className="p-3 text-[115%] font-[500] text-center">
               مشاهده جزئیات
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200">
+        <tbody className="divide-y divide-[var(--sup-b)]">
           {supports.map((suppor) => (
             <tr
               key={suppor.id}
@@ -32,7 +32,7 @@ function SupportTableMobile({
               <td className="p-3 text-center">{suppor.title}</td>
               <td className="p-3 flex justify-center">
                 <HiArrowCircleLeft
-                  className="text-[160%] cursor-pointer text-[#1e88e5]"
+                  className="text-[160%] cursor-pointer text-[var(--btn)]"
                   onClick={() => setSelectedSuppor(suppor)}
                 />
               </td>
@@ -49,7 +49,7 @@ function SupportTableMobile({
             onClick={() => setPage(i + 1)}
             className={`px-3 py-1 rounded-lg shadow transition ${
               page === i + 1
-                ? "bg-[#1e88e5] text-white"
+                ? "bg-[var(--btn)] text-white"
                 : "bg-white text-black hover:bg-[#9393936b]"
             }`}
           >
@@ -67,7 +67,7 @@ function SupportTableMobile({
               onClick={() => setSelectedSuppor(null)} // کلیک روی بک‌دراپ
             >
               <div
-                className="bg-white p-[20px] rounded-xl shadow-lg flex flex-col gap-[8px] w-[95%] md:w-[90%] max-w-md max-h-[98vh]  overflow-y-auto scrollbar-hide"
+                className="bg-[var(--sup)] p-[20px] rounded-xl shadow-lg flex flex-col gap-[8px] w-[95%] md:w-[90%] max-w-md max-h-[98vh]  overflow-y-auto scrollbar-hide"
                 onClick={(e) => e.stopPropagation()} // جلوگیری از بسته شدن وقتی روی باکس کلیک شد
               >
                 <div className="flex justify-between items-center p-[5px] ">
@@ -78,7 +78,7 @@ function SupportTableMobile({
                   />
                 </div>
 
-                <div className="bg-[#f5f5f5] p-[10px] ">
+                <div className="bg-[var(--sup-sm)] p-[10px] ">
                   <div className="w-full h-[230px] flex justify-center items-center">
                     <img
                       src={suppor.img}
@@ -89,34 +89,34 @@ function SupportTableMobile({
                   <table className="w-full text-left rounded-2xl table-fixed border-separate border-spacing-y-[3px] border-spacing-x-[6px]">
                     <tbody className="divide-y divide-[white]">
                       <tr className="hover:bg-[#c5c5c594] transition">
-                        <th className="p-3 font-[500] text-center bg-gray-100">
+                        <th className="p-3 font-[500] text-center bg-[var(--sup)]">
                           عنوان
                         </th>
-                        <td className="p-3 text-center bg-[#f5f5f5]">
+                        <td className="p-3 text-center bg-[var(--sup)]">
                           {selectedSuppor.title}
                         </td>
                       </tr>
                       <tr className="hover:bg-[#c5c5c594] transition">
-                        <th className="p-3 font-[500] text-center bg-gray-100">
+                        <th className="p-3 font-[500] text-center bg-[var(--sup)]">
                           تاریخ
                         </th>
-                        <td className="p-3 text-center bg-[#f5f5f5]">
+                        <td className="p-3 text-center bg-[var(--sup)]">
                           {selectedSuppor.date}
                         </td>
                       </tr>
                       <tr className="hover:bg-[#c5c5c594] transition">
-                        <th className="p-3 font-[500] text-center bg-gray-100">
+                        <th className="p-3 font-[500] text-center bg-[var(--sup)]">
                           محتوای پیام
                         </th>
-                        <td className="p-3 text-center bg-[#f5f5f5]">
+                        <td className="p-3 text-center bg-[var(--sup)]">
                           {selectedSuppor.desc}
                         </td>
                       </tr>
                       <tr className="hover:bg-[#c5c5c594] transition">
-                        <th className="p-3 font-[500] text-center bg-gray-100">
+                        <th className="p-3 font-[500] text-center bg-[var(--sup)]">
                           وضعیت
                         </th>
-                        <td className="p-3 text-center bg-[#f5f5f5]">
+                        <td className="p-3 text-center bg-[var(--sup)]">
                           {selectedSuppor.status === "pending" && (
                             <span className="bg-[#ff9f513a] text-[#e45400] text-[95%] px-[4px] w-[100px] inline-block py-1 rounded">
                               در حال بررسی
@@ -143,7 +143,7 @@ function SupportTableMobile({
                 </p>
                 <button
                   onClick={() => onOpenNewSupport && onOpenNewSupport()}
-                  className="bg-[#1e88e5] text-white font-[600] text-[110%] text-center py-[6px] px-[30px] rounded-lg w-[fit-content] self-end"
+                  className="bg-[var(--btn)] text-white font-[600] text-[110%] text-center py-[6px] px-[30px] rounded-lg w-[fit-content] self-end"
                 >
                   درخواست جدید
                 </button>

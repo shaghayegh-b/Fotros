@@ -133,7 +133,7 @@ function ShoppingCart() {
             }}
           >
             <div
-              className={`relative bg-white rounded-xl shadow-lg w-full max-w-[90%] md:max-w-[47%]  p-[25px] overflow-hidden transform transition-all duration-300 ${
+              className={`relative bg-[var(--menu2)] rounded-xl shadow-lg w-full max-w-[90%] md:max-w-[47%]  p-[25px] overflow-hidden transform transition-all duration-300 ${
                 visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
               }`}
             >
@@ -178,7 +178,7 @@ function ShoppingCart() {
                 {cartItems.map((item) => (
                   <div
                     key={item.idsortby}
-                    className={` oneprodukt flex flex-col md:flex-row gap-[15px] md:gap-[30px] relative bg-[#f5f5f5] p-[10px] md:p-[20px] rounded-md `}
+                    className={` oneprodukt flex flex-col md:flex-row gap-[15px] md:gap-[30px] relative bg-[var(--cart)] p-[10px] md:p-[20px] rounded-md `}
                   >
                     {/* تصویر */}
                     <div className="self-center flex justify-center items-center h-[200px] md:h-[fit-content] md:w-[25%] rounded-md md:px-[5px] px-[28px]">
@@ -232,7 +232,7 @@ function ShoppingCart() {
                       {/*  قیمت */}
                       <div className="flex items-baseline md:gap-[10px] gap-[6px]">
                         {item.off > 0 && (
-                          <span className=" text-[#1e2939e0] md:text-[95%] text-[85%] line-through">
+                          <span className=" text-[var(--text-gary)] md:text-[95%] text-[85%] line-through">
                             {item.price.toLocaleString()}
                           </span>
                         )}
@@ -248,7 +248,7 @@ function ShoppingCart() {
                       {/* رنگ انتخابی */}
                       <div className="flex gap-[10px]">
                         {/* رنگ انتخابی */}{" "}
-                        <p className="flex bg-white py-[3px] px-[10px] rounded-xl w-[fit-content] ">
+                        <p className="flex bg-[var(--menu2)] py-[3px] px-[10px] rounded-xl w-[fit-content] ">
                           <span className="font-[600]">رنگ انتخابی : </span>
                           &nbsp;
                           {item.selectedColor?.name ? (
@@ -287,7 +287,7 @@ function ShoppingCart() {
                           )}
                         </p>
                         {/* سایز انتخابی  */}
-                        <p className="flex bg-white py-[3px] px-[10px] rounded-xl w-[fit-content] ">
+                        <p className="flex bg-[var(--menu2)] py-[3px] px-[10px] rounded-xl w-[fit-content] ">
                           <span className="font-[600]">سایز انتخابی : </span>
                           &nbsp;
                           {item.selectedSize || "Free Size"}
@@ -374,7 +374,7 @@ function ShoppingCart() {
               </div>
               {/* فاکتور خرید */}
               <div
-                className={`flex flex-col gap-[9px] md:gap-[8px] bg-[#f5f5f5] px-[10px] pb-[25px] pt-[6px] md:p-[20px] rounded-md m-1 h-[fit-content] `}
+                className={`flex flex-col gap-[9px] md:gap-[8px] bg-[var(--cart)] px-[10px] pb-[25px] pt-[6px] md:p-[20px] rounded-md m-1 h-[fit-content] `}
               >
                 <h4 className="text-[110%] md:text-[133%] font-bold py-[10px] px-[4px]">
                   فاکتور خرید شما
@@ -411,7 +411,7 @@ function ShoppingCart() {
                       setIsModalOpen(true);
                     }
                   }}
-                  className="self-center bg-[#1e88e5] text-white text-center py-[6px] px-[12px] rounded-xl box-shadow my-[4px]"
+                  className="self-center bg-[var(--btn)] text-white text-center py-[6px] px-[12px] rounded-xl box-shadow my-[4px]"
                 >
                   ادامه جهت تسویه حساب
                 </button>
@@ -441,7 +441,7 @@ function ShoppingCart() {
                     setIsModalOpen(true);
                   }}
                   type="button"
-                  className="self-center bg-[#f5f5f5] border-[#1e88e5] border-[1px] text-center pb-[2px] pt-[4px] px-[10px] rounded-xl box-shadow text-[85%]"
+                  className="self-center bg-[var(--cart)] border-[var(--btn)] border-[1px] text-center pb-[2px] pt-[4px] px-[10px] rounded-xl box-shadow text-[85%]"
                 >
                   پاک کردن سبد خرید
                 </button>
@@ -452,7 +452,7 @@ function ShoppingCart() {
       </div>
       {/* پیشنهاد محصول */}
       {cartItems.length > 0 && (
-        <div className="w-full my-[20px] mt-[45px] py-[10px] bg-[#f5f5f5] px-[-5px]">
+        <div className="w-full my-[20px] mt-[45px] py-[10px] bg-[var(--cart)] px-[-5px]">
           <SlideProduct
             title="خریداران این محصولات.محصولات زیر را هم خریده اند"
             title2="محصولات"

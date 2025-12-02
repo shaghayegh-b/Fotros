@@ -28,7 +28,7 @@ function Questions() {
         </h1>
         <div className="flex flex-col gap-[10px] ">
           {/* 1اقساط */}
-          <div className="bg-[#f5f5f5] rounded-[5px] px-[18px] py-[4px]">
+          <div className="bg-[var(--adress-sm)] rounded-[5px] px-[18px] py-[4px]">
             <button
               onClick={() => setPart1(!part1)}
               className="flex justify-between items-center w-full"
@@ -51,7 +51,7 @@ function Questions() {
             </div>
           </div>
           {/* 2اقساط */}
-          <div className="bg-[#f5f5f5] rounded-[5px] px-[18px] py-[4px]">
+          <div className="bg-[var(--adress-sm)] rounded-[5px] px-[18px] py-[4px]">
             <button
               onClick={() => setPart2(!part2)}
               className="flex justify-between items-center w-full"
@@ -74,7 +74,7 @@ function Questions() {
             </div>
           </div>
           {/*3اقساط */}
-          <div className="bg-[#f5f5f5] rounded-[5px] px-[18px] py-[4px]">
+          <div className="bg-[var(--adress-sm)] rounded-[5px] px-[18px] py-[4px]">
             <button
               onClick={() => setPart3(!part3)}
               className="flex justify-between items-center w-full "

@@ -75,7 +75,7 @@ function SlideProduct({ title, title2, url, allurl }) {
             setOnlyAvailable(false);
             applyFilter("", false, title);
           }}
-          className="hidden md:inline-block m-[20px] mb-[10px] bg-[#1e88e5] text-white text-center text-[120%] p-[10px] w-[60%] md:w-[250px] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
+          className="hidden md:inline-block m-[20px] mb-[10px] bg-[var(--btn)] text-white text-center text-[120%] p-[10px] w-[60%] md:w-[250px] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
         >
           مشاهده {title2}
         </Link>
@@ -93,7 +93,7 @@ function SlideProduct({ title, title2, url, allurl }) {
           <button
             onClick={() => swiperRef.current?.slideNext()}
             className="swiper-button-next-custom hidden md:flex items-center justify-center absolute top-1/2 left-4 z-2
-                   bg-white text-[#1e88e5] shadow-md hover:shadow-lg hover:bg-[#1e88e5] hover:text-white
+                   bg-white text-[var(--btn)] shadow-md hover:shadow-lg hover:bg-[var(--btn)] hover:text-white
                    p-3 rounded-full text-2xl transition-all"
           >
             <MdArrowBack />
@@ -101,7 +101,7 @@ function SlideProduct({ title, title2, url, allurl }) {
           <button
             onClick={() => swiperRef.current?.slidePrev()}
             className="swiper-button-prev-custom hidden md:flex items-center justify-center absolute top-1/2 right-4 z-2
-                   bg-white text-[#1e88e5] shadow-md hover:shadow-lg hover:bg-[#1e88e5] hover:text-white
+                   bg-white text-[var(--btn)] shadow-md hover:shadow-lg hover:bg-[var(--btn)] hover:text-white
                    p-3 rounded-full text-2xl transition-all"
           >
             <MdArrowForward />
@@ -132,9 +132,9 @@ function SlideProduct({ title, title2, url, allurl }) {
                 <SwiperSlide key={product.id} className="flex justify-center">
                   <Link
                     to={`/Fotros/Products/${product.idsortby}`}
-                    className="flex flex-col gap-[15px] items-start bg-white
-               p-4 rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]
-               hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]
+                    className="flex flex-col gap-[15px] items-start bg-[var(--product)]
+               p-4 rounded-2xl shadow-[var(--card-shadow)]
+             hover:shadow-[var(--card-hover-shadow)]
                hover:scale-[1.04] transition-all duration-300
                border border-gray-100 w-full max-w-[250px] mx-auto
                aspect-[3/4] sm:aspect-[4/5] md:aspect-[5/6] lg:aspect-[6/7]"
@@ -149,12 +149,12 @@ function SlideProduct({ title, title2, url, allurl }) {
                     </div>
 
                     {/* عنوان */}
-                    <p className="pt-2 w-full text-center font-medium text-gray-900 truncate text-[95%]">
+                    <p className="pt-2 w-full text-center font-medium text-[var(--text)] truncate text-[95%]">
                       {product.title}
                     </p>
 
                     {/* قیمت */}
-                    <p className="pt-1 w-full text-center text-gray-800 text-[90%]">
+                    <p className="pt-1 w-full text-center text-[var(--text)] text-[90%]">
                       {product.price} تـومـان
                     </p>
                   </Link>
@@ -177,7 +177,7 @@ function SlideProduct({ title, title2, url, allurl }) {
             setOnlyAvailable(false);
             applyFilter("", false, title);
           }}
-          className="m-[20px] text-center bg-[#1e88e5] text-white text-[120%] p-[10px] w-[60%] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
+          className="m-[20px] text-center  bg-[var(--btn)] text-white text-[120%] p-[10px] w-[60%] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
         >
           مشاهده {title2}
         </Link>

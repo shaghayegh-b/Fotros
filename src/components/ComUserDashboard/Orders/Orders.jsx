@@ -153,23 +153,23 @@ function Orders() {
   return (
     <div className="flex flex-col ">
       <h2 className="py-[10px] font-bold text-[130%]">سفارش های من</h2>
-      <div className="bg-[unset] md:bg-[#f5f5f5] p-[10px] rounded-sm ">
+      <div className="bg-[unset] md:bg-[var(--sup)] p-[10px] rounded-sm ">
         <div className="flex flex-nowrap gap-3 mb-4 w-full overflow-x-auto scrollbar-hide">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveOrderTab(tab.id)}
-              className={`rounded-2xl whitespace-nowrap px-[11px] py-[4px] bg-[#f5f5f5] md:bg-white  ${
+              className={`rounded-2xl whitespace-nowrap px-[11px] py-[4px] bg-[var(--cart)] md:bg-[var(--sup-sm)]  ${
                 activeOrderTab === tab.id
-                  ? "border border-black text-black"
-                  : "text-gray-600"
+                  ? "border border-[var(--text-input)] text-[var(--text-input)]"
+                  : "text-[var(--text-gray)]"
               }`}
             >
               {tab.label}
             </button>
           ))}
         </div>
-        <div className="p-4 rounded-md bg-[#f5f5f5] ">
+        <div className="p-4 rounded-md bg-[var(--adress-sm)] ">
           <div className="md:hidden">
             <OrderTableMobile
               orders={paginatedOrders}

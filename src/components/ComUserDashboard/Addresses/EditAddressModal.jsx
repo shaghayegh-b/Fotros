@@ -178,7 +178,7 @@ const [fullAddress, setFullAddress] = useState("");
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#d9d9d9] w-[95%] md:w-[90%] max-w-md max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
+        className="bg-[var(--sup)] w-[95%] md:w-[90%] max-w-md max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
       >
         <div className="flex justify-between items-center pb-[18px]">
           <h2 className="text-lg font-bold">ویرایش آدرس</h2>
@@ -187,7 +187,7 @@ const [fullAddress, setFullAddress] = useState("");
         <form action="#" onSubmit={handleSave}>
           {/* استان */}
           <label htmlFor="province" className="block mb-1 font-semibold">
-            استان<span className="text-[#c20101]">*</span>
+            استان<span className="text-[var(--import)]">*</span>
           </label>
           <select
             id="province"
@@ -196,31 +196,31 @@ const [fullAddress, setFullAddress] = useState("");
               setProvince(e.target.value);
               setCity("");
             }}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#bababa]  ${
-              province === "" ? "text-gray-600 " : "text-black "
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup-sm)] border border-transparent focus:outline-none focus:border-[#bababa]  ${
+              province === "" ? "text-gray-600 " : "[var(--text-input)] "
             }`}
           >
             <option value="">انتخاب کنید</option>
             {Object.keys(provinces).map((prov) => (
-              <option key={prov} value={prov} className="text-[black]">
+              <option key={prov} value={prov} className="text-[var(--text-input)]">
                 {prov}
               </option>
             ))}
           </select>
           {errors.province && (
-            <p className="text-red-500 text-sm mb-2">{errors.province}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.province}</p>
           )}
 
           {/* شهر */}
           <label htmlFor="city" className="block mb-1 font-semibold mt-3">
-            شهر<span className="text-[#c20101]">*</span>
+            شهر<span className="text-[var(--import)]">*</span>
           </label>
           <select
             id="city"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#bababa]  ${
-              city === "" ? "text-gray-600 " : "text-black "
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup-sm)] border border-transparent focus:outline-none focus:border-[#bababa]  ${
+              city === "" ? "text-gray-600 " : "[var(--text-input)] "
             }`}
             disabled={!province}
           >
@@ -229,34 +229,34 @@ const [fullAddress, setFullAddress] = useState("");
             </option>
             {province &&
               provinces[province].map((c) => (
-                <option key={c} value={c} className="text-[black]">
+                <option key={c} value={c} className="text-[var(--text-input)]">
                   {c}
                 </option>
               ))}
           </select>
           {errors.city && (
-            <p className="text-red-500 text-sm mb-2">{errors.city}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.city}</p>
           )}
 
           {/* آدرس */}
           <label htmlFor="fullAddress" className="block mb-1 font-semibold mt-3">
-            آدرس<span className="text-[#c20101]">*</span>
+            آدرس<span className="text-[var(--import)]">*</span>
           </label>
           <input
             id="fullAddress"
             type="text"
             value={fullAddress}
             onChange={(e) => setFullAddress(e.target.value)}
-            className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
+            className="w-full rounded p-2 mb-2 bg-[var(--sup-sm)] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
             placeholder="مثلاً: شهر. محله. خیابان. پلاک...."
           />
           {errors.fullAddress && (
-            <p className="text-red-500 text-sm mb-2">{errors.fullAddress}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.fullAddress}</p>
           )}
 
           {/* کدپستی */}
           <label htmlFor="postalCode" className="block mb-1 font-semibold mt-3">
-            کدپستی<span className="text-[#c20101]">*</span>
+            کدپستی<span className="text-[var(--import)]">*</span>
           </label>
           <input
             id="postalCode"
@@ -269,16 +269,16 @@ const [fullAddress, setFullAddress] = useState("");
               const val = e.target.value.replace(/\D/g, "");
               setPostalCode(val.slice(0, 10));
             }}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa]  ${
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup-sm)] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa]  ${
               postalCode.length > 0 && postalCode.length !== 10
-                ? "text-red-500 border-red-400"
-                : "text-black "
+                ? "text-[var(--import)] border-red-400"
+                : "[var(--text-input)] "
             }`}
             placeholder="مثال :6064554499"
           />
 
           {errors.postalCode && (
-            <p className="text-red-500 text-sm mb-2">{errors.postalCode}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.postalCode}</p>
           )}
 
           {/* دکمه‌ها */}
@@ -286,13 +286,13 @@ const [fullAddress, setFullAddress] = useState("");
             <button
               onClick={onClose}
               type="button"
-              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%]  text-[#0e73cc] border border-[#1e88e5] rounded-lg bg-[#f5f5f5]"
+              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%]  text-[var(--btn)] border border-[var(--btn)] rounded-lg bg-[var(--sup-sm)]"
             >
               انصراف
             </button>
             <button
               type="submit"
-              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%] bg-[#1e88e5] text-white rounded-lg"
+              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%] bg-[var(--btn)] text-white rounded-lg"
             >
               ذخیره آدرس
             </button>

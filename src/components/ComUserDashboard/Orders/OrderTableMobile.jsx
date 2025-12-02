@@ -6,24 +6,24 @@ function OrderTableMobile({ orders, page, setPage, totalPages }) {
 
   return (
     <div>
-      <table className="w-full text-left rounded-md p-6 table-fixed bg-white">
+      <table className="w-full text-left rounded-md p-6 table-fixed bg-[var(--sup-sm)]">
         <thead>
-          <tr className="border-b border-gray-300">
+          <tr className="border-b border-[var(--sup-b)]">
             <th className="p-3   font-[500] text-center">
               شماره سفارش
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200">
+        <tbody className="divide-y divide-[var(--sup-b)]">
           {orders.map((order) => (
             <tr
               key={order.id}
               className="w-full hover:bg-[#c5c5c594] transition"
             >
-              <td className="p-3 text-center bg-[white] flex justify-between items-center">
+              <td className="p-3 text-center bg-[var(--sup-sm)] flex justify-between items-center">
                 <span>{order.orderNumber}</span>
                 <HiArrowCircleLeft
-                  className="text-[160%] cursor-pointer text-[#1e88e5]"
+                  className="text-[160%] cursor-pointer text-[var(--btn)]"
                   onClick={() => setSelectedOrder(order)}
                 />
               </td>
@@ -40,7 +40,7 @@ function OrderTableMobile({ orders, page, setPage, totalPages }) {
             onClick={() => setPage(i + 1)}
             className={`px-3 py-1 rounded-lg shadow transition ${
               page === i + 1
-                ? "bg-[#1e88e5] text-white"
+                ? "bg-[var(--btn)] text-white"
                 : "bg-white text-black hover:bg-[#9393936b]"
             }`}
           >
@@ -56,7 +56,7 @@ function OrderTableMobile({ orders, page, setPage, totalPages }) {
   onClick={() => setSelectedOrder(null)} // کلیک روی بک‌دراپ
 >
   <div
-    className="bg-white px-[4px] py-[10px] rounded-xl shadow-lg w-[85%] max-w-sm"
+    className="bg-[var(--sup-sm)] px-[4px] py-[10px] rounded-xl shadow-lg w-[85%] max-w-sm"
     onClick={(e) => e.stopPropagation()} // جلوگیری از بسته شدن وقتی روی باکس کلیک شد
   >
     <div className="flex justify-between items-center p-[5px] ">
@@ -69,20 +69,20 @@ function OrderTableMobile({ orders, page, setPage, totalPages }) {
     <table className="w-full text-left rounded-2xl table-fixed border-separate border-spacing-y-[3px] border-spacing-x-[6px]">
       <tbody className="divide-y divide-[white]">
         <tr className="hover:bg-[#c5c5c594] transition">
-          <th className="p-3 font-[500] text-center bg-gray-100">شماره سفارش</th>
-          <td className="p-3 text-center bg-[#f5f5f5]">{selectedOrder.orderNumber}</td>
+          <th className="p-3 font-[500] text-center bg-[var(--sup)]">شماره سفارش</th>
+          <td className="p-3 text-center bg-[var(--sup)]">{selectedOrder.orderNumber}</td>
         </tr>
         <tr className="hover:bg-[#c5c5c594] transition">
-          <th className="p-3 font-[500] text-center bg-gray-100">تاریخ ثبت سفارش</th>
-          <td className="p-3 text-center bg-[#f5f5f5]">{selectedOrder.date}</td>
+          <th className="p-3 font-[500] text-center bg-[var(--sup)]">تاریخ ثبت سفارش</th>
+          <td className="p-3 text-center bg-[var(--sup)]">{selectedOrder.date}</td>
         </tr>
         <tr className="hover:bg-[#c5c5c594] transition">
-          <th className="p-3 font-[500] text-center bg-gray-100">مبلغ کل</th>
-          <td className="p-3 text-center bg-[#f5f5f5]">{selectedOrder.price}</td>
+          <th className="p-3 font-[500] text-center bg-[var(--sup)]">مبلغ کل</th>
+          <td className="p-3 text-center bg-[var(--sup)]">{selectedOrder.price}</td>
         </tr>
         <tr className="hover:bg-[#c5c5c594] transition">
-          <th className="p-3 font-[500] text-center bg-gray-100">وضعیت سفارش</th>
-          <td className="p-3 text-center bg-[#f5f5f5]">
+          <th className="p-3 font-[500] text-center bg-[var(--sup)]">وضعیت سفارش</th>
+          <td className="p-3 text-center bg-[var(--sup)]">
             {selectedOrder.status === "pending" && (
               <span className="bg-[#ff9f513a] text-[#e45400] text-[95%] px-[4px] w-[100px] inline-block py-1 rounded">
                 در حال ارسال

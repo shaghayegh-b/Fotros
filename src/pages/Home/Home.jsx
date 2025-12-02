@@ -90,7 +90,7 @@ function Home() {
             <div className="right flex-1 flex flex-col justify-between gap-[20px]">
               <div className="hidden lg:inline-block lg:h-[20%]"></div>
               {/* رضایت */}
-              <div className="flex flex-col rounded-2xl h-[fit-content] bg-blue-200">
+              <div className="flex flex-col rounded-2xl h-[fit-content] bg-[var(--cartsm)]">
                 <span className=" my-[2px] mx-[15px] pt-[7px] ">+900</span>
                 <div className=" flex justify-between">
                   <span className="mr-[6px] w-[40%] text-[70%] pr-[14px]">
@@ -110,7 +110,7 @@ function Home() {
               {/* محصول1 */}
               <Link
                 to="/Fotros/Products/12"
-                className="SatisfiedCustomer bg-[#f5f5f5] h-[80%] lg:h-[50%] rounded-2xl p-[15px] flex justify-center items-center"
+                className="SatisfiedCustomer bg-[var(--cart)]  h-[80%] lg:h-[50%] rounded-2xl p-[15px] flex justify-center items-center"
               >
                 <img src={imgkot} alt="محصول1" className="h-full" />
               </Link>
@@ -120,14 +120,14 @@ function Home() {
               {/* محصول 2 */}
               <Link
                 to="/Fotros/Products/27"
-                className=" bg-[#f5f5f5] rounded-2xl p-[9px] h-[80%] lg:h-[50%] flex items-center"
+                className="  bg-[var(--cart)] rounded-2xl p-[9px] h-[80%] lg:h-[50%] flex items-center"
               >
                 <img src={imgtap} alt="محصول2" className="" />
               </Link>
               {/* تنوع محصول */}
-              <div className="rounded-sm rounded-tr-[8rem] h-[130px]  p-[14px] bg-blue-200 flex flex-col justify-center">
-                <span className="px-[13px] self-end">+500</span>
-                <span className="self-center">محصول متنوع</span>
+              <div className="rounded-sm rounded-tr-[8rem] h-[130px]  p-[14px]  bg-[var(--cartsm)] text-[var(--text)] flex flex-col justify-center">
+                <span className="px-[13px] self-end ">+500</span>
+                <span className="self-center ">محصول متنوع</span>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ function Home() {
           <div className="section2 md:flex-2 relative mx-[9px] flex flex-col justify-center items-center">
             <h1 className="font-bold text-[180%]">
               ب&#x0640;&#x0640;ا&zwnj;&zwnj; &zwnj;&zwnj;&zwnj;&zwnj;
-              <span className="text-blue-500">
+              <span className="text-[var(--textsm)]">
                 ف&#x0640;&#x0640;ط&#x0640;&#x0640;روس <br />
               </span>
               م&#x0640;&#x0640;ت&#x0640;&#x0640;ف&#x0640;&#x0640;اوت
@@ -161,7 +161,7 @@ function Home() {
                 setOnlyAvailable(false);
                 applyFilter("", false, "محصولات جدید");
               }}
-              className="m-[20px] mb-[17px] w-[90%] md:w-[60%] bg-[#1e88e5] text-white text-[120%] text-center p-[10px] rounded-xl box-shadow "
+              className="m-[20px] mb-[17px] w-[90%] md:w-[60%] bg-[var(--btn)] text-white text-[120%] text-center p-[10px] rounded-xl box-shadow "
             >
               محصولات جدید
             </Link>
@@ -176,7 +176,7 @@ function Home() {
                 setOnlyAvailable(false);
                 applyFilter("", false, "همه محصولات");
               }}
-              className="m-[10px] mt-[0px] w-[90%] md:w-[60%] border-[#1e88e5] border-[1px] text-[120%] text-center p-[10px] rounded-xl box-shadow "
+              className="m-[10px] mt-[0px] w-[90%] md:w-[60%] border-[var(--btn)] border-[1px] text-[120%] text-center p-[10px] rounded-xl box-shadow "
             >
               همه محصولات
             </Link>
@@ -220,7 +220,7 @@ function Home() {
             setOnlyAvailable(false);
             applyFilter("", false, "فروش ویژه");
           }}
-          className="m-[15px] p-[10px] mx-[20px] md:mx-[50px] bg-blue-200 h-[180px] md:h-[200px] rounded-2xl flex md:items-center"
+          className="m-[15px] p-[10px] mx-[20px] md:mx-[50px] bg-[var(--cartsm)] h-[180px] md:h-[200px] rounded-2xl flex md:items-center"
         >
           <img className="h-[100%] md:h-[155%]" src={offset} alt="" />
           <div className="w-full flex flex-col justify-center">
@@ -236,7 +236,7 @@ function Home() {
                   بر روی تمامی محصولات&nbsp;
                 </p>
               </div>
-              <p className=" absolute left-[14px] md:left-[unset] md:right-[120px] top-[25px] md:top-[-22px] w-20% self-center bg-[#f5f5f5] rotate-[343deg] p-[4px] px-[6px] rounded-sm text-red-700 h-[fit-content] flex ">
+              <p className=" absolute left-[14px] md:left-[unset] md:right-[120px] top-[25px] md:top-[-22px] w-20% self-center bg-[var(--f5)] rotate-[343deg] p-[4px] px-[6px] rounded-sm text-red-700 h-[fit-content] flex ">
                 <span className="text-[120%] md:text-[250%] font-semibold">
                   70
                 </span>
@@ -296,7 +296,7 @@ function Home() {
                 setOnlyAvailable(false);
                 applyFilter("", false, "ست های ورزشی");
               }}
-              className="mx-[8px] p-[10px] md:m-[unset] bg-blue-200 h-[150px] lg:h-[200px] rounded-2xl flex"
+              className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
             >
               <div className="h-[100%]  w-[50%] flex justify-center items-center">
                 <img className="h-[100%]" src={varzeshset} alt="" />
@@ -331,7 +331,7 @@ function Home() {
                 setOnlyAvailable(false);
                 applyFilter("", false, "ست های ورزشی");
               }}
-              className="mx-[8px] p-[10px] md:m-[unset] bg-blue-200 h-[150px] lg:h-[200px] rounded-2xl flex"
+              className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
             >
               <div className="h-[100%]  w-[50%] flex justify-center items-center">
                 <img className="h-[100%]" src={tabeston} alt="" />
@@ -366,7 +366,7 @@ function Home() {
                 setOnlyAvailable(false);
                 applyFilter("", false, "ست های کامل");
               }}
-              className="mx-[8px] p-[10px] md:m-[unset] bg-blue-200 h-[150px] lg:h-[200px] rounded-2xl flex"
+              className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
             >
               <div className="h-[100%]  w-[50%] flex justify-center items-center">
                 <img className="h-[100%]" src={offset} alt="" />
@@ -400,7 +400,7 @@ function Home() {
                 setOnlyAvailable(false);
                 applyFilter("", false, "ست های ورزشی");
               }}
-              className="mx-[8px] p-[10px] md:m-[unset] bg-blue-200 h-[150px] lg:h-[200px] rounded-2xl flex"
+              className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
             >
               <div className="h-[100%]  w-[50%] flex justify-center items-center">
                 <img className="h-[100%]" src={varzeshset} alt="" />

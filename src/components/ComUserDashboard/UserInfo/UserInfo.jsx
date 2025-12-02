@@ -87,7 +87,7 @@ function UserInfo() {
       <div className="flex  lg:flex-row flex-col gap-[10px] lg:gap-[19px] w-full">
         {/* profile */}
         {/* lg> */}
-        <div className="bg-[#f5f5f5] p-[10px] rounded-sm inline-block md:hidden lg:inline-block    lg:w-[30%]">
+        <div className="bg-[var(--sup)] p-[10px] rounded-sm inline-block md:hidden lg:inline-block    lg:w-[30%]">
           <h3 className="py-[8px] font-bold text-[102%]">تصویر پروفایل</h3>
           <div className="flex justify-center">
             <span className="flex justify-center items-center m-[10px] w-[110px] h-[110px] shadow-lg rounded-full overflow-hidden">
@@ -126,7 +126,7 @@ function UserInfo() {
 
             {/* دکمه انتخاب عکس */}
             <button
-              className="text-[#1e88e5] border-[#1e88e5] border-[1px] text-center p-[10px] rounded-lg box-shadow w-full"
+              className="text-[var(--btn)] border-[var(--btn)] border-[1px] text-center p-[10px] rounded-lg box-shadow w-full"
               onClick={() => fileInputRef.current.click()}
             >
               انتخاب عکس از گالری
@@ -135,7 +135,7 @@ function UserInfo() {
             {/* دکمه ذخیره تصویر */}
             <button
               onClick={handleSavePhoto}
-              className="bg-[#1e88e5] text-white text-center p-[10px] rounded-lg box-shadow w-full"
+              className="bg-[var(--btn)] text-white text-center p-[10px] rounded-lg box-shadow w-full"
             >
               ذخیره تصویر
             </button>
@@ -143,7 +143,7 @@ function UserInfo() {
         </div>
 
         {/* lg< */}
-        <div className="bg-[#f5f5f5] p-[10px] hidden  md:inline-block  lg:hidden rounded-sm w-full">
+        <div className="bg-[var(--sup)] p-[10px] hidden  md:inline-block  lg:hidden rounded-sm w-full">
           <h3 className="py-[8px] font-[600] text-[102%]">تصویر پروفایل</h3>
           <div className="flex gap-[10px] items-center">
             <div className=" w-[40%] ">
@@ -168,7 +168,7 @@ function UserInfo() {
 
                 {/* دکمه انتخاب عکس */}
                 <button
-                  className="text-[#1e88e5] border-[#1e88e5] border-[1px] text-center p-[10px] rounded-lg box-shadow w-full"
+                  className="text-[var(--btn)] border-[var(--btn)] border-[1px] text-center p-[10px] rounded-lg box-shadow w-full"
                   onClick={() => fileInputRef.current.click()}
                 >
                   انتخاب عکس از گالری
@@ -177,7 +177,7 @@ function UserInfo() {
                 {/* دکمه ذخیره تصویر */}
                 <button
                   onClick={handleSavePhoto}
-                  className="border-[1px] border-[#56a2ff32] bg-[#1e88e5] text-white text-center p-[10px] rounded-lg box-shadow w-full"
+                  className="border-[1px] border-[#56a2ff32] bg-[var(--btn)] text-white text-center p-[10px] rounded-lg box-shadow w-full"
                 >
                   ذخیره تصویر
                 </button>
@@ -201,7 +201,7 @@ function UserInfo() {
           </div>
         </div>
 
-        <div className="bg-[#f5f5f5] p-[10px] rounded-sm w-full lg:w-[70%]">
+        <div className="bg-[var(--sup)] p-[10px] rounded-sm w-full lg:w-[70%]">
           <h3 className="pb-[4px] lg:pb-[8px] pt-[8px] font-[600] text-[102%]">
             ویرایش اطلاعات
           </h3>
@@ -211,7 +211,7 @@ function UserInfo() {
             className="flex flex-col gap-[11px] py-[3px] lg:py-[10px] px-[13px] lg:px-[20px]"
           >
             <label className="font-[600]  mt-[10px]" htmlFor="name">
-              نام<span className="text-[#c20101]">*</span>
+              نام<span className="text-[var(--import)]">*</span>
             </label>
             <input
               id="name"
@@ -220,13 +220,13 @@ function UserInfo() {
               type="text"
               onChange={(e) => setFname(e.target.value)}
               placeholder="مثال: شقایق"
-              className=" bg-white  placeholder:text-gray-500 py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa] "
+              className=" bg-[var(--sup-sm)] py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa] "
             />
             {errors.fname && (
               <p className="text-red-500 text-sm mb-2">{errors.fname}</p>
             )}
             <label className="font-[600]  mt-[10px]" htmlFor="lname">
-              نام خانوادگی<span className="text-[#c20101]">*</span>
+              نام خانوادگی<span className="text-[var(--import)]">*</span>
             </label>
             <input
               id="lname"
@@ -235,13 +235,13 @@ function UserInfo() {
               type="text"
               onChange={(e) => setLname(e.target.value)}
               placeholder="مثال: محمدی"
-              className=" bg-white  placeholder:text-gray-500 py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa] "
+              className=" bg-[var(--sup-sm)]  py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa] "
             />
             {errors.lname && (
               <p className="text-red-500 text-sm mb-2">{errors.lname}</p>
             )}
             <label className="font-[600]  mt-[10px]" htmlFor="phone">
-              شماره تماس<span className="text-[#c20101]">*</span>
+              شماره تماس<span className="text-[var(--import)]">*</span>
             </label>
             <input
               id="phone"
@@ -255,11 +255,11 @@ function UserInfo() {
                 setPhone(val.slice(0, 11));
               }}
               placeholder="مثال: 09399619640"
-              className={` bg-white  placeholder:text-gray-500 py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa]
+              className={` bg-[var(--sup-sm)]  py-[7px] px-[14px]  border border-transparent focus:outline-none focus:border-[#bababa]
                 ${
                   phone.length > 0 && phone.length !== 11
                     ? "text-red-500 border-red-400"
-                    : "text-black "
+                    : "text-[var(--text)] "
                 }`}
             />
             {errors.phone && (
@@ -278,10 +278,10 @@ function UserInfo() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="مثال: mmdi9882@gmail.com"
-              className="bg-white placeholder:text-gray-500 py-[7px] px-[14px] border border-transparent focus:outline-none focus:border-[#bababa]"
+              className="bg-[var(--sup-sm)] py-[7px] px-[14px] border border-transparent focus:outline-none focus:border-[#bababa]"
             />
 
-            <button className=" bg-[#1e88e5] text-white text-center p-[10px] px-[30px] self-end my-[15px] rounded-lg w-full md:w-[fit-content] lg:w-[fit-content] ">
+            <button className=" bg-[var(--btn)] text-white text-center p-[10px] px-[30px] self-end my-[15px] rounded-lg w-full md:w-[fit-content] lg:w-[fit-content] ">
               ذخیره اطلاعات
             </button>
           </form>

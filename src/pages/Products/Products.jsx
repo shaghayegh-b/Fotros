@@ -158,7 +158,7 @@ function Products() {
                       </p>
                       <div className=" self-end flex items-baseline md:gap-[10px] gap-[6px]">
                         {product.off > 0 && (
-                          <span className=" text-gray-800 md:text-[95%] text-[85%] line-through">
+                          <span className=" text-[var(--text-gray)] md:text-[95%] text-[85%] line-through">
                             {product.price.toLocaleString()}
                           </span>
                         )}

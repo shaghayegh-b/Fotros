@@ -402,7 +402,7 @@ function ProductId() {
                 <div className="flex md:flex-row flex-row-reverse md:justify-[unset] justify-between items-end gap-[40px] order-3 md:order-1 my-[17px] w-full md:w-[fit-content]">
                   <div className=" self-end flex md:flex-row flex-col  items-baseline md:gap-[10px] gap-[6px]">
                     {product.off > 0 && (
-                      <span className=" text-[#1e2939e0] md:text-[95%] text-[85%] line-through">
+                      <span className=" text-[var(--text-gray)] md:text-[95%] text-[85%] line-through">
                         {product.price.toLocaleString()}
                       </span>
                     )}
@@ -438,7 +438,7 @@ function ProductId() {
                           <span
                             className={`rounded-full w-[25px] h-[25px] inline-block border-[3px]  transition-all duration-300  ${
                               selectedColorIndex === idx
-                                ? "border-black shadow-md scale-110"
+                                ? "border-[var(--text-input)] shadow-md scale-110"
                                 : "border-transparent"
                             }`}
                             style={{ backgroundColor: color.code }}
@@ -475,8 +475,8 @@ function ProductId() {
                           <span
                             className={`px-3 py-1 border rounded-md text-sm transition-all duration-300 ${
                               selectedSize === s
-                                ? "bg-black text-white border-black"
-                                : "bg-white border-gray-400 hover:border-black"
+                                ? "bg-[var(--text-input)] text-[var(--sup-sm)] border-[var(--text-input)]"
+                                : "bg-[var(--sup-sm)] border-gray-400 hover:border-[var(--text-input)]"
                             }`}
                           >
                             {s}
@@ -500,7 +500,7 @@ function ProductId() {
                     <div className="w-[100%] flex gap-[25px] items-center ">
                       <div className="flex justify-center items-center gap-[5px] h-[38px]">
                         <button
-                          className="text-center  bg-[#92999d2b]  px-[7px] py-[2px] border border-black rounded-sm h-full"
+                          className="text-center  bg-[#92999d2b]  px-[7px] py-[2px] border border-[var(--text-input)] rounded-sm h-full"
                           disabled={isOutOfStock}
                           onClick={() =>
                             increase(
@@ -512,11 +512,11 @@ function ProductId() {
                         >
                           <FiPlus size="15" />
                         </button>
-                        <p className="text-center px-[7px] py-[5px] border border-black rounded-sm  h-full">
+                        <p className="text-center px-[7px] py-[5px] border border-[var(--text-input)] rounded-sm  h-full">
                           {isOutOfStock ? 0 : quantity}
                         </p>
                         <button
-                          className="text-center  bg-[#92999d2b]  px-[7px] py-[2px] border border-black rounded-sm h-full"
+                          className="text-center  bg-[#92999d2b]  px-[7px] py-[2px] border border-[var(--text-input)] rounded-sm h-full"
                           disabled={isOutOfStock || quantity === 0}
                           onClick={() => {
                             if (quantity === 1) {
@@ -565,7 +565,7 @@ function ProductId() {
                   ${
                     isOutOfStock
                       ? " bg-[#00000026]  cursor-not-allowed"
-                      : " bg-[#309cfb] md:bg-[#2192f4] text-white"
+                      : " bg-[var(--btn)] md:bg-[var(--btn)] text-white"
                   }`}
                         onClick={() => {
                           // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
@@ -617,7 +617,7 @@ function ProductId() {
                     </div>
                   ) : (
                     <button
-                      className="h-[38px] md:w-[250px] w-full rounded-sm bg-[#309cfb] md:bg-[#2192f4] text-white "
+                      className="h-[38px] md:w-[250px] w-full rounded-sm bg-[var(--btn)] md:bg-[var(--btn)] text-white "
                       onClick={() => {
                         // اگر محصول چند رنگ بود ولی رنگ انتخاب نشده
                         if (colors.length > 1 && !colorToSend) {
@@ -744,7 +744,7 @@ function ProductId() {
                   className={` px-[10px] ${
                     desc
                       ? " border-b-[2px] border-red-700 z-1 text-[102%]"
-                      : "text-gray-700"
+                      : "text-[var(--text-inactive)]"
                   }`}
                   onClick={() => {
                     setDesc(true);
@@ -758,7 +758,7 @@ function ProductId() {
                     ${
                       comment
                         ? "border-b-[2px] border-red-700 z-1 text-[102%]"
-                        : "text-gray-700"
+                        : "text-[var(--text-inactive)]"
                     }`}
                   onClick={() => {
                     setDesc(false);
@@ -774,14 +774,14 @@ function ProductId() {
                 <div className={` desc flex gap-[10px] py-[16px] `}>
                   <div className="md:w-3/10 w-2/5  flex flex-col gap-[14px]">
                     <ul className="flex flex-col gap-[14px]">
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px]">نام</li>
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px]">کد</li>
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">نام</li>
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">کد</li>
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                         جنس پارچه
                       </li>
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px]">سایز</li>
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">سایز</li>
                       {product.dokme && (
-                        <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                           نحوه بسته شدن
                         </li>
                       )}
@@ -794,32 +794,32 @@ function ProductId() {
                       product.dressLength) && (
                       <ul className="flex flex-col gap-[14px]">
                         {product.shoulder && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             عرض شانه
                           </li>
                         )}
                         {product.chest && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             دور سینه
                           </li>
                         )}
                         {product.arm && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             دور بازو
                           </li>
                         )}
                         {product.wrist && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             دور مچ
                           </li>
                         )}
                         {product.stans && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             قد آستین
                           </li>
                         )}
                         {product.dressLength && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             قد کار
                           </li>
                         )}
@@ -828,16 +828,16 @@ function ProductId() {
                   </div>
                   <div className="md:w-7/10 w-2/3 flex flex-col gap-[14px]">
                     <ul className="flex flex-col gap-[14px]">
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                         {product.title}
                       </li>
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                         {product.code}
                       </li>
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                         {product.jens}
                       </li>
-                      <li className="bg-[#f5f5f5] px-[12px] py-[4px] flex">
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px] flex">
                         {product.size.map((s) => (
                           <span className="">
                             {s}
@@ -846,7 +846,7 @@ function ProductId() {
                         ))}
                       </li>
                       {product.dokme && (
-                        <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                           {product.dokme}
                         </li>
                       )}
@@ -859,32 +859,32 @@ function ProductId() {
                       product.dressLength) && (
                       <ul className="flex flex-col gap-[14px]">
                         {product.shoulder && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             {product.shoulder}
                           </li>
                         )}
                         {product.chest && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             {product.chest}
                           </li>
                         )}
                         {product.arm && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             {product.arm}
                           </li>
                         )}
                         {product.wrist && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             {product.wrist}
                           </li>
                         )}
                         {product.stans && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             {product.stans}
                           </li>
                         )}
                         {product.dressLength && (
-                          <li className="bg-[#f5f5f5] px-[12px] py-[4px]">
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                             {product.dressLength}
                           </li>
                         )}
@@ -905,7 +905,7 @@ function ProductId() {
                         {comments.map((comment) => (
                           <li
                             key={comment.id}
-                            className="pb-[20px] pt-[16px] bg-[#f5f5f5] px-[15px] rounded-sm mb-[10px]"
+                            className="pb-[20px] pt-[16px] bg-[var(--adress-sm)] px-[15px] rounded-sm mb-[10px]"
                           >
                             <div className="flex items-center pb-[7px] gap-[10px]">
                               {comment.recommend === true && (
@@ -969,7 +969,7 @@ function ProductId() {
                         type="text"
                         value={commentText}
                         onChange={(e) => setCommentText(e.target.value)}
-                        className=" py-[10px] md:px-[20px] px-[9px] rounded-sm w-full p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#288fea] text-black  "
+                        className=" py-[10px] md:px-[20px] px-[9px] rounded-sm w-full p-2 mb-2 bg-[var(--adress-sm)] border border-transparent focus:outline-none focus:border-[#288fea] text-[var(--text-input)]  "
                         placeholder="لطفا نظر خود را اینجا بنویسد."
                       />
                       {!isLoggedIn && (
@@ -980,7 +980,7 @@ function ProductId() {
                           <span>
                             قبل از ثبت نظر بايد وارد حساب کاربری خود شويد.
                           </span>
-                          <span className="text-[95%] text-[#2192f4]">
+                          <span className="text-[95%] text-[var(--btn)]">
                             ورود به حساب کاربری
                           </span>
                         </Link>
@@ -1012,7 +1012,7 @@ function ProductId() {
                             setIsModalOpen(true);
                           }
                         }}
-                        className="md:bg-[#2192f4] text-[102%] md:text-[100%] md:border-unset border-[3px] border-[#75beff] md:border-[0] w-[70%]  md:w-[unset] self-center md:self-end text-[#1e88e5] md:text-white px-[30px] py-[10px] md:py-[5px] my-[6px] box-shadow rounded-xl "
+                        className="md:bg-[var(--btn)] text-[102%] md:text-[100%] md:border-unset border-[3px] border-[var(--btn)] md:border-[0] w-[70%]  md:w-[unset] self-center md:self-end text-[var(--btn)] md:text-white px-[30px] py-[10px] md:py-[5px] my-[6px] box-shadow rounded-xl "
                       >
                         ثبت نظر
                       </button>
@@ -1029,7 +1029,7 @@ function ProductId() {
               </p>
             </div>
             {/* محصولات مشابه  */}
-        <div className="md:w-full md:my-[45px]  md:py-[10px] md:bg-[#f5f5f5] md:px-[-5px]">
+        <div className="md:w-full md:my-[45px]  md:py-[10px] md:bg-[var(--adress-sm)] md:px-[-5px]">
               <SlideProduct
                 title="م&#x0640;حص&#x0640;ولات مشابه"
                 title2="محصولات مشابه"

@@ -142,10 +142,10 @@ function Support() {
   return (
     <div className="flex flex-col ">
       <h2 className="py-[10px] font-bold text-[130%]">درخواست های من</h2>
-      <div className="flex flex-col gap-[10px]  bg-[#f5f5f5]  md:bg-[#f5f5f5] p-[20px] rounded-sm ">
+      <div className="flex flex-col gap-[10px] bg-[var(--sup)] p-[20px] rounded-sm ">
         <button
           onClick={() => setOpenNewSupportModal(true)}
-          className="bg-[#1e88e5] text-white font-[600] text-[110%] text-center py-[6px] px-[30px] rounded-lg w-full md:w-[fit-content] self-end"
+          className="bg-[var(--btn)] text-white font-[600] text-[110%] text-center py-[6px] px-[30px] rounded-lg w-full md:w-[fit-content] self-end"
         >
           درخواست جدید
         </button>

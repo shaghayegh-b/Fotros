@@ -14,9 +14,9 @@ function SupportTableMd({
 
   return (
     <div>
-      <table className="w-full text-left rounded-2xl p-6 table-fixed bg-white">
+      <table className="w-full text-left rounded-2xl p-6 table-fixed bg-[var(--sup-sm)]">
         <thead>
-          <tr className="border-b border-gray-300">
+          <tr className="border-b border-[var(--sup-b)]">
             <th className="p-3 text-[115%] font-[500] text-center">عنوان</th>
             <th className="p-3 text-[115%] font-[500] text-center">تاریخ</th>
             <th className="p-3 text-[115%] font-[500] text-center">
@@ -28,7 +28,7 @@ function SupportTableMd({
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200">
+        <tbody className="divide-y divide-[var(--sup-b)]">
           {supports.map((suppor) => (
             <tr
               key={suppor.id}
@@ -56,7 +56,7 @@ function SupportTableMd({
               </td>
               <td className="p-3 flex justify-center">
                 <HiArrowCircleLeft
-                  className="text-[160%] cursor-pointer text-[#1e88e5]"
+                  className="text-[160%] cursor-pointer text-[var(--btn)]"
                   onClick={() => setSelectedSuppor(suppor)}
                 />
               </td>
@@ -73,7 +73,7 @@ function SupportTableMd({
             onClick={() => setPage(i + 1)}
             className={`px-3 py-1 rounded-lg shadow transition ${
               page === i + 1
-                ? "bg-[#1e88e5] text-white"
+                ? "bg-[var(--btn)] text-white"
                 : "bg-white text-black hover:bg-[#9393936b]"
             }`}
           >
@@ -91,7 +91,7 @@ function SupportTableMd({
               onClick={() => setSelectedSuppor(null)} // کلیک روی بک‌دراپ
             >
               <div
-                className="bg-white p-[20px] rounded-xl shadow-lg  flex flex-col gap-[8px] w-[58%] max-h-[98vh]  overflow-y-auto scrollbar-hide"
+                className="bg-[var(--sup)] p-[20px] rounded-xl shadow-lg  flex flex-col gap-[8px] w-[58%] max-h-[98vh]  overflow-y-auto scrollbar-hide"
                 onClick={(e) => e.stopPropagation()} // جلوگیری از بسته شدن وقتی روی باکس کلیک شد
               >
                 <div className="flex justify-between items-center p-[5px] ">
@@ -102,7 +102,7 @@ function SupportTableMd({
                   />
                 </div>
 
-                <div className="bg-[#f5f5f5] flex  gap-[20px] p-[10px] ">
+                <div className="bg-[var(--sup-sm)] flex  gap-[20px] p-[10px] ">
                   <div className=" h-[250px] flex justify-center items-center">
                     <img
                       src={suppor.img}
@@ -123,7 +123,7 @@ function SupportTableMd({
                 </p>
                 <button
                   onClick={() => onOpenNewSupport && onOpenNewSupport()}
-                  className="bg-[#1e88e5] text-white font-[600] text-[110%] text-center py-[6px] px-[30px] rounded-lg w-[fit-content] self-end"
+                  className="bg-[var(--btn)] text-white font-[600] text-[110%] text-center py-[6px] px-[30px] rounded-lg w-[fit-content] self-end"
                 >
                   درخواست جدید
                 </button>

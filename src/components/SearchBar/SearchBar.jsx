@@ -23,7 +23,7 @@ const SearchBar = forwardRef(function SearchBar(
       dir="ltr"
       className={
         isMobile
-          ? "p-1 flex items-center gap-[10px] w-full bg-[#e5f3ff] m-[4px] rounded-sm border border-[#1874c4]"
+          ? "p-1 flex items-center gap-[10px] w-full bg-[var(--navbar-searchbar-bg)] m-[4px] rounded-sm border border-[var(--btn)]"
           : "hidden px-[3px] lg:flex justify-between w-[130px] lg:w-[200px] bg-[#d8dce496] mx-[7px] lg:mx-[8px] py-[2px] lg:py-[6px] rounded-xl"
       }
     >

@@ -45,30 +45,30 @@ function Filter({ resetPage }) {
           className={`
     px-3 py-1 rounded-xl transition-all duration-300
     border border-gray-300 shadow-sm hover:shadow-md
-    ${onlyAvailable ? "bg-[#d4ebff] border-[#81bcf0]" : "bg-white"}
+    ${onlyAvailable ? "border-[#81bcf0] bg-[var(--filter-products)]" : ""}
   `}
         >
           محصولات موجود
         </button>
         <Listbox value={sortFilter} onChange={handleSortChange}>
           {({ open }) => (
-            <div className="relative w-[100px] md:w-[120px]">
+            <div className="relative w-[100px] md:w-[120px] border border-gray-300 rounded-xl">
               <Listbox.Button
                 className={`${
-                  open ? "border-[1px] border-[#97a7b461]" : ""
-                }  flex justify-between items-center gap-[4px] text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-white`}
+                  open ? "bg-[var(--filter-products)]" : ""
+                }  flex justify-between items-center gap-[4px] text-right w-full rounded-xl px-3 py-1 shadow-sm transition focus:outline-none focus:ring-1 focus:ring-gary-300`}
               >
                 <span className={`w-[90%] whitespace-nowrap tracking-tighter`}>
                   {selected.label}
                 </span>
                 <FiChevronDown
-                  className={`md:inline-block hidden  ${
+                  className={` ${
                     open ? "rotate-[180deg]" : ""
                   } transition-all duration-300 text-[85%]`}
                 />
               </Listbox.Button>
 
-              <Listbox.Options className="absolute bg-white mt-1 w-full text-[90%] rounded-sm border-[2px] border-[#97a7b461] z-3 focus:outline-none">
+              <Listbox.Options className="absolute bg-[var(--sup-sm)] mt-1 w-full text-[90%] rounded-sm border-[2px] border-[#97a7b461] z-3 focus:outline-none">
                 {filters.map((filter) => (
                   <Listbox.Option
                     key={filter.id}
@@ -76,9 +76,9 @@ function Filter({ resetPage }) {
                     className={({ active }) =>
                       `px-3 py-1 cursor-pointer whitespace-nowrap ${
                         active
-                          ? "bg-[#eaf5ff]"
+                          ? "bg-[var(--filter-products)]"
                           : selected.id === filter.id
-                          ? "bg-[#cbe4fa]"
+                          ? "bg-[var(--filter-products)]"
                           : ""
                       }`
                     }

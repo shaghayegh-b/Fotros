@@ -146,15 +146,20 @@ function AddressModal({ open, onClose, onSave }) {
     if (!city) newErrors.city = "انتخاب شهر الزامی است";
     if (!address) newErrors.address = "آدرس الزامی است";
     if (isOtherRecipient) {
-      if (!phone) newErrors.phone = "شماره تماس الزامی است";
+
+  if (!phone) {
+    newErrors.phone = "شماره تماس الزامی است";
+  } else if (!/^09\d{9}$/.test(phone)) {
+    newErrors.phone = "شماره موبایل معتبر وارد کنید (باید با 09 شروع شود)";
+  } else if (phone.length !== 11) {
+    newErrors.phone = "شماره موبایل باید 11 رقم باشد";
+  }
+
       if (!fname) newErrors.fname = "نام فرد گیرنده الزامی است";
       if (!lname) newErrors.lname = "نام خانوادگی فرد گیرنده الزامی است";
     }
 
-    if (!/^09\d{9}$/.test(phone))
-      newErrors.phone = "شماره موبایل معتبر وارد کنید(ماره موبایل باید با 09.. شروع شود)";
-    if (!phone || phone.length < 11)
-      newErrors.phone = "شماره موبایل وارد شده صحیح نیست";
+
     if (!/^\d{10}$/.test(postalCode))
       newErrors.postalCode = "کدپستی باید ۱۰ رقم باشد";
     if (Object.keys(newErrors).length > 0) {
@@ -199,7 +204,7 @@ function AddressModal({ open, onClose, onSave }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#d9d9d9] w-[95%] md:w-[90%] max-w-md max-h-[64vh] md:max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
+        className="bg-[var(--sup)] w-[95%] md:w-[90%] max-w-md max-h-[64vh] md:max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
       >
         <div className="flex justify-between items-center pb-[18px]">
           <h2 className="text-lg font-bold">افزودن آدرس</h2>
@@ -222,37 +227,37 @@ function AddressModal({ open, onClose, onSave }) {
             <>
               {/* اسم گیرنده */}
               <label htmlFor="fname" className="block mb-1 font-semibold mt-3">
-                نام گیرنده<span className="text-[#c20101]">*</span>
+                نام گیرنده<span className="text-[var(--import)]">*</span>
               </label>
               <input
                 id="fname"
                 type="text"
                 value={fname}
                 onChange={(e) => setFName(e.target.value)}
-                className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
+                className="w-full rounded p-2 mb-2 bg-[var(--sup-sm)] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
                 placeholder="مثلاً : علی"
               />
               {errors.fname && (
-                <p className="text-red-500 text-sm mb-2">{errors.fname}</p>
+                <p className="text-[var(--import)] text-sm mb-2">{errors.fname}</p>
               )}
               {/* فامیل گیرنده */}
               <label htmlFor="lname" className="block mb-1 font-semibold mt-3">
-                نام خانوادگی گیرنده<span className="text-[#c20101]">*</span>
+                نام خانوادگی گیرنده<span className="text-[var(--import)]">*</span>
               </label>
               <input
                 id="lname"
                 type="text"
                 value={lname}
                 onChange={(e) => setLName(e.target.value)}
-                className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
+                className="w-full rounded p-2 mb-2 bg-[var(--sup-sm)] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
                 placeholder="مثلاً : رضایی"
               />
               {errors.lname && (
-                <p className="text-red-500 text-sm mb-2">{errors.lname}</p>
+                <p className="text-[var(--import)] text-sm mb-2">{errors.lname}</p>
               )}
               {/* شماره تماس گیرنده */}
               <label htmlFor="phone" className="block mb-1 font-semibold mt-3">
-                شماره تماس<span className="text-[#c20101]">*</span>
+                شماره تماس<span className="text-[var(--import)]">*</span>
               </label>
               <input
                 id="phone"
@@ -264,23 +269,23 @@ function AddressModal({ open, onClose, onSave }) {
                   const val = e.target.value.replace(/\D/g, "");
                   setPhone(val.slice(0, 11));
                 }}
-                className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa]
+                className={`w-full rounded p-2 mb-2 bg-[var(--sup-sm)] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa]
                  ${
                    phone.length > 0 && phone.length !== 11
-                     ? "text-red-500 border-red-400"
-                     : "text-black "
+                     ? "text-[var(--import)] border-red-400"
+                     : "[var(--text-input)] "
                  }`}
                 placeholder="مثال : 09123456789"
               />
               {errors.phone && (
-                <p className="text-red-500 text-sm mb-2">{errors.phone}</p>
+                <p className="text-[var(--import)] text-sm mb-2">{errors.phone}</p>
               )}
             </>
           )}
 
           {/* استان */}
           <label htmlFor="province" className="block mb-1 font-semibold">
-            استان<span className="text-[#c20101]">*</span>
+            استان<span className="text-[var(--import)]">*</span>
           </label>
           <select
             id="province"
@@ -289,31 +294,31 @@ function AddressModal({ open, onClose, onSave }) {
               setProvince(e.target.value);
               setCity("");
             }}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#bababa]  ${
-              province === "" ? "text-gray-600 " : "text-black "
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup-sm)] border border-transparent focus:outline-none focus:border-[#bababa]  ${
+              province === "" ? "text-gray-600 " : "[var(--text-input)] "
             }`}
           >
             <option value="">انتخاب کنید</option>
             {Object.keys(provinces).map((prov) => (
-              <option key={prov} value={prov} className="text-[black]">
+              <option key={prov} value={prov} className="text-[var(--text-input)]">
                 {prov}
               </option>
             ))}
           </select>
           {errors.province && (
-            <p className="text-red-500 text-sm mb-2">{errors.province}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.province}</p>
           )}
 
           {/* شهر */}
           <label htmlFor="city" className="block mb-1 font-semibold mt-3">
-            شهر<span className="text-[#c20101]">*</span>
+            شهر<span className="text-[var(--import)]">*</span>
           </label>
           <select
             id="city"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#bababa]  ${
-              city === "" ? "text-gray-600 " : "text-black "
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup-sm)] border border-transparent focus:outline-none focus:border-[#bababa]  ${
+              city === "" ? "text-gray-600 " : "[var(--text-input)] "
             }`}
             disabled={!province}
           >
@@ -322,34 +327,34 @@ function AddressModal({ open, onClose, onSave }) {
             </option>
             {province &&
               provinces[province].map((c) => (
-                <option key={c} value={c} className="text-[black]">
+                <option key={c} value={c} className="text-[var(--text-input)]">
                   {c}
                 </option>
               ))}
           </select>
           {errors.city && (
-            <p className="text-red-500 text-sm mb-2">{errors.city}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.city}</p>
           )}
 
           {/* آدرس */}
           <label htmlFor="address" className="block mb-1 font-semibold mt-3">
-            آدرس<span className="text-[#c20101]">*</span>
+            آدرس<span className="text-[var(--import)]">*</span>
           </label>
           <input
             id="address"
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className="w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
+            className="w-full rounded p-2 mb-2 bg-[var(--sup-sm)] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa] "
             placeholder="مثلاً: شهر. محله. خیابان. پلاک...."
           />
           {errors.address && (
-            <p className="text-red-500 text-sm mb-2">{errors.address}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.address}</p>
           )}
 
           {/* کدپستی */}
           <label htmlFor="postalCode" className="block mb-1 font-semibold mt-3">
-            کدپستی<span className="text-[#c20101]">*</span>
+            کدپستی<span className="text-[var(--import)]">*</span>
           </label>
           <input
             id="postalCode"
@@ -362,15 +367,15 @@ function AddressModal({ open, onClose, onSave }) {
               const val = e.target.value.replace(/\D/g, "");
               setPostalCode(val.slice(0, 10));
             }}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa]  ${
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup-sm)] placeholder:text-gray-600 border border-transparent focus:outline-none focus:border-[#bababa]  ${
               postalCode.length > 0 && postalCode.length !== 10
-                ? "text-red-500 border-red-400"
-                : "text-black "
+                ? "text-[var(--import)] border-red-400"
+                : "[var(--text-input)] "
             }`}
             placeholder="مثال :6064554499"
           />
           {errors.postalCode && (
-            <p className="text-red-500 text-sm mb-2">{errors.postalCode}</p>
+            <p className="text-[var(--import)] text-sm mb-2">{errors.postalCode}</p>
           )}
 
           {/* دکمه‌ها */}
@@ -378,13 +383,13 @@ function AddressModal({ open, onClose, onSave }) {
             <button
               onClick={onClose}
               type="button"
-              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%]  text-[#0e73cc] border border-[#1e88e5] rounded-lg bg-[#f5f5f5]"
+              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%]  text-[var(--btn)] border border-[var(--btn)] rounded-lg bg-[var(--sup-sm)]"
             >
               انصراف
             </button>
             <button
               type="submit"
-              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%] bg-[#1e88e5] text-white rounded-lg"
+              className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%] bg-[var(--btn)] text-white rounded-lg"
             >
               ذخیره آدرس
             </button>

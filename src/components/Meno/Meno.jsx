@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import "./Meno.css";
 import { mymeno } from "../Navbar/Navbar";
 import { useContext } from "react";
@@ -23,6 +23,8 @@ import {
 } from "react-icons/md";
 import { BiHeart } from "react-icons/bi";
 import { useAuth } from "../../context/AuthContext/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext/ThemeProvider";
+
 import { FiLogOut } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
 import { HiHome } from "react-icons/hi2";
@@ -34,33 +36,28 @@ function Meno() {
   const { meno, setMeno } = useContext(mymeno);
   const { funcAxios, applyFilter, setSortFilter, setOnlyAvailable } =
     useAxios();
-  const [isDark, setIsDark] = useState(() => {
-    return (
-      localStorage.getItem("theme") === "dark" ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches &&
-        !localStorage.getItem("theme"))
-    );
-  });
-  useEffect(() => {
-    const html = document.documentElement;
-    if (isDark) {
-      html.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      html.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDark]);
+
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalButtons, setModalButtons] = useState([]);
   const navigate = useNavigate();
+  const { userTheme, setUserTheme, realTheme } = useContext(ThemeContext);
 
+  // ترتیب چرخش حالت‌ها
+  const nextTheme = () => {
+    if (userTheme === "light") return "dark";
+    if (userTheme === "dark") return "system";
+    return "light"; // وقتی system بود → برگرد به light
+  };
+
+  const handleThemeToggle  = () => {
+    setUserTheme(nextTheme());
+  };
   return (
     <>
       <div
-        className={`Meno h-[100vh]    transition-all duration-300 ease-in-out ${
+        className={`Meno h-[100vh] bg-[var(--menu2)] transition-all duration-300 ease-in-out ${
           meno ? "w-[85vw]" : "w-[0]"
         } `}
       >
@@ -68,7 +65,7 @@ function Meno() {
           {isLoggedIn && (
             <Link
               to="/Fotros/userdashboard/UserInfo"
-              className="Meno1 bg-blue-300 w-[100%] flex flex-row p-3 py-8 gap-3 items-center"
+              className="Meno1 bg-[var(--menu1)] w-[100%] flex flex-row p-3 py-8 gap-3 items-center"
             >
               <div className="w-[3.5rem] h-[3.5rem] rounded-full flex justify-center items-center">
                 <img
@@ -88,7 +85,7 @@ function Meno() {
               </span>
             </Link>
           )}
-          <div className="Meno2 flex flex-col gap-2">
+          <div className="Meno2 bg-[var(--menu2)] p-[.5rem] flex flex-col gap-2">
             <ul className="flex flex-col gap-[20px] pb-[5px]">
               <li
                 onClick={() => {
@@ -107,7 +104,7 @@ function Meno() {
                     className={` ${
                       location.pathname === "/Fotros/"
                         ? "text-[#4f93e8]"
-                        : "text-[#042a50]"
+                        : "text-[var(--icon-menu)]"
                     }`}
                   />
                   <span className="font-[600]">صفحه اصلی</span>
@@ -125,7 +122,7 @@ function Meno() {
                       className={` ${
                         location.pathname === "/Fotros/Products" || grouping
                           ? "text-[#4f93e8]"
-                          : "text-[#042a50]"
+                          : "text-[var(--icon-menu)]"
                       }`}
                     />
                     دسته بندی
@@ -141,7 +138,7 @@ function Meno() {
 
                 <div
                   className={`overflow-hidden transition-all duration-500 flex flex-col  ${
-                    grouping ? "block grouping rounded-lg" : "hidden"
+                    grouping ? "block bg-[var(--category-menu)]" : "hidden"
                   }
                `}
                 >
@@ -156,7 +153,7 @@ function Meno() {
                         applyFilter("", false, cat.filterName);
                         setMeno(false);
                       }}
-                      className="tracking-tighter w-full px-[7px] py-[8px] hover:bg-[#afd2fd] border-y border-y-[#afd2fd] "
+                      className="tracking-tighter w-full px-[7px] py-[8px] hover:bg-[#afd2fd] rounded-lg border-y border-y-[2px] border-y-[var(--category-menu-border)] "
                     >
                       {cat.name}
                     </NavLink>
@@ -186,7 +183,7 @@ function Meno() {
                       className={` ${
                         location.pathname === `/Fotros/${id}`
                           ? "text-[#4f93e8]"
-                          : "text-[#042a50] "
+                          : "text-[var(--icon-menu)] "
                       }`}
                     />
                     <span className="font-[600]">{text}</span>
@@ -194,17 +191,24 @@ function Meno() {
                 </li>
               ))}
               <li
-                title="Change Theme Mode"
-                onClick={() => setIsDark(!isDark)}
-                className="flex gap-[8px] items-center  px-[7px] "
+                title="تغییر تم"
+                onClick={handleThemeToggle}
+                className="flex gap-[8px] items-center px-[7px] cursor-pointer"
               >
-                {isDark ? (
+                {/* آیکون بر اساس realTheme */}
+                {realTheme === "dark" ? (
                   <MdLightMode className="text-[#897705]" />
                 ) : (
-                  <MdDarkMode className="text-[#042a50]" />
+                  <MdDarkMode className="text-[var(--icon-menu)]" />
                 )}
+
+                {/* متن بر اساس userTheme */}
                 <span className="font-[600]">
-                  {isDark ? "حالت روز" : "حالت شب "}
+                  {userTheme === "light"
+                    ? "حالت شب"
+                    : userTheme === "dark"
+                    ? "حالت سیستم"
+                    : "حالت روز"}
                 </span>
               </li>
             </ul>
@@ -248,7 +252,7 @@ function Meno() {
                         className={`${
                           location.pathname === `/Fotros/${id}`
                             ? "text-[#4f93e8]"
-                            : "text-[#042a50]"
+                            : "text-[var(--icon-menu)]"
                         }`}
                       />
                       <span className="font-[600]">{text}</span>
@@ -283,7 +287,7 @@ function Meno() {
                   }}
                 >
                   <NavLink className="flex gap-[8px] items-center  px-[7px]">
-                    <FiLogOut className="text-[#042a50]" />
+                    <FiLogOut className="text-[var(--icon-menu)]" />
                     <span className="font-[600]">خروج از حساب کاربری</span>
                   </NavLink>
                 </li>
@@ -297,7 +301,7 @@ function Meno() {
                     to="/Fotros/login"
                     className="flex gap-[8px] items-center  px-[7px] "
                   >
-                    <FaUserPlus className="text-[#042a50]" />
+                    <FaUserPlus className="text-[var(--icon-menu)]" />
                     <span className="font-[600]">ساخت حساب کاربری</span>
                   </NavLink>
                 </li>

@@ -69,7 +69,7 @@ const ModalAlert = ({
       }`}
     >
       <div
-        className={`relative bg-white rounded-xl shadow-lg w-full max-w-[90%] md:max-w-[47%]  p-[25px] overflow-hidden transform transition-all duration-300 ${
+        className={`relative bg-[var(--sup-sm)] rounded-xl shadow-lg w-full max-w-[90%] md:max-w-[47%]  p-[25px] overflow-hidden transform transition-all duration-300 ${
           visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
       >
@@ -77,7 +77,7 @@ const ModalAlert = ({
           <div className="absolute w-[100%]  left-0 bottom-[0px]  shadow-[0_0_8px_rgba(30,136,229,0.6)] rounded-b-xl">
             <div className="h-[4px] bg-gray-300">
               <div
-                className=" h-[4px] bg-[#0b9ae7dd] "
+                className=" h-[4px] bg-[var(--btn)] "
                 style={{
                   width: progressWidth,
                   transition: `width ${timer}ms linear`,
@@ -101,9 +101,9 @@ const ModalAlert = ({
               }}
               className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all duration-300 ${
                   btn.type === "confirm"
-                    ? "hover:bg-[#1e88e5] text-white bg-[#0b9ae7dd]"
+                    ? "hover:bg-[var(--btn)] text-white bg-[var(--btn)]"
                     : btn.type === "yes"
-                    ? "hover:bg-[#1e88e5] text-white bg-[#0b9ae7dd]"
+                    ? "hover:bg-[var(--btn)] text-white bg-[var(--btn)]"
                     : btn.type === "no"
                     ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"

@@ -23,7 +23,7 @@ console.log(address)
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#f5f5f5] flex flex-col gap-[8px] w-[95%] md:w-[90%] max-w-md max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
+        className="bg-[var(--sup)] flex flex-col gap-[8px] w-[95%] md:w-[90%] max-w-md max-h-[98vh] p-6 rounded-xl shadow-lg overflow-y-auto scrollbar-hide"
       >
         <MdClose
           onClick={onClose}
@@ -32,7 +32,7 @@ console.log(address)
         <h2 className="text-lg font-semibold text-[125%]">
           میخواهید این ادرس را حذف کنید؟
         </h2>
-        <p className="text-gray-600">
+        <p >
           {address?.fullAddress || "آدرس موجود نیست"}{" "}
         </p>
         {/* دکمه‌ها */}
@@ -40,14 +40,14 @@ console.log(address)
           <button
             onClick={onClose}
             type="button"
-            className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%]  text-[#0e73cc] border border-[#1e88e5] rounded-lg bg-[white]"
+            className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%]  text-[var(--btn)] border border-[var(--btn)] rounded-lg bg-[var(--sup-sm)]"
           >
             انصراف
           </button>
           <button
             onClick={onConfirm}
             type="submit"
-            className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%] bg-[#1e88e5] text-white rounded-lg"
+            className="px-[30px] py-[8px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full lg:w-[50%] bg-[var(--btn)] text-white rounded-lg"
           >
             حذف آدرس
           </button>

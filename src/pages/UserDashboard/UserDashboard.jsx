@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useContext} from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 
 import { CgProfile } from "react-icons/cg";
@@ -18,7 +18,13 @@ import "./UserDashboard.css";
 import { useAuth } from "../../context/AuthContext/AuthContext";
 import { FiLogOut } from "react-icons/fi";
 import ModalAlert from "../../components/ModalAlert/ModalAlert";
-
+import { ThemeContext } from "../../context/ThemeContext/ThemeProvider";
+import {
+  MdCategory,
+  MdDarkMode,
+  MdKeyboardArrowUp,
+  MdLightMode,
+} from "react-icons/md";
 function UserDashboard() {
   const { user, logout } = useAuth();
   const { subMenu } = useParams();
@@ -31,13 +37,25 @@ function UserDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalButtons, setModalButtons] = useState([]);
+  const { userTheme, setUserTheme, realTheme } = useContext(ThemeContext);
+
+    // ترتیب چرخش حالت‌ها
+    const nextTheme = () => {
+      if (userTheme === "light") return "dark";
+      if (userTheme === "dark") return "system";
+      return "light"; // وقتی system بود → برگرد به light
+    };
+
+    const handleThemeToggle  = () => {
+      setUserTheme(nextTheme());
+    };
   return (
     <div className="flex flex-col min-h-screen">
       {/* navbar */}
       <Navbar />
       <div className="h-6 lg:h-16  "></div>
       {/* main */}
-        <h6 className="text-gray-500 px-[14px] md:px-[20px] pt-[28px] lg:pt-[10px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
+      <h6 className="text-gray-500 px-[14px] md:px-[20px] pt-[28px] lg:pt-[10px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
         <Link to="/Fotros/">صفحه اصلی &gt; </Link>
         <span>حساب کاربری</span>
       </h6>
@@ -65,12 +83,34 @@ function UserDashboard() {
               <NavLink
                 key={idx}
                 to={`/Fotros/userdashboard/${id}`}
-                className=" border-[2px] w-full border-[#dfdfdf] flex items-center justify-start gap-[9px]  pr-[15px] pl-[13px] py-[8px] rounded-xl "
+                className=" border-[2px] w-full border-[var(--dashboard-b)] flex items-center justify-start gap-[9px]  pr-[15px] pl-[13px] py-[8px] rounded-xl "
               >
                 <span className="icondashboard text-[115%]">{icon}</span>
                 <span className="textdashboard">{text}</span>
               </NavLink>
             ))}
+            <button
+              title="تغییر تم"
+              onClick={handleThemeToggle}
+              className=" border-[2px] w-full border-[var(--dashboard-b)] flex items-center justify-start gap-[9px]  pr-[15px] pl-[13px] py-[8px] rounded-xl "
+            >
+              <span className="icondashboard text-[115%]">
+              {/* آیکون بر اساس realTheme */}
+              {realTheme === "dark" ? (
+                <MdLightMode className="text-[#c4aa04]" />
+              ) : (
+                <MdDarkMode className="text-[var(--icon-menu)]" />
+              )}
+</span>
+              {/* متن بر اساس userTheme */}
+              <span className="textdashboard">
+                {userTheme === "light"
+                  ? "حالت شب"
+                  : userTheme === "dark"
+                  ? "حالت سیستم"
+                  : "حالت روز"}
+              </span>
+            </button>
             <button
               onClick={() => {
                 setModalMessage("میخوای از حساب کاربری خارج بشی؟");
@@ -94,7 +134,7 @@ function UserDashboard() {
                 ]);
                 setIsModalOpen(true);
               }}
-              className=" border-[2px] w-full border-[#dfdfdf] flex items-center justify-start gap-[9px]  pr-[15px] pl-[13px] py-[8px] rounded-xl "
+              className=" border-[2px] w-full border-[var(--dashboard-b)] flex items-center justify-start gap-[9px]  pr-[15px] pl-[13px] py-[8px] rounded-xl "
             >
               <span className="icondashboard text-[115%]">
                 <FiLogOut />

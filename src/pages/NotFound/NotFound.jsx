@@ -12,10 +12,10 @@ function NotFound() {
           alt="404 Not Found"
           className="w-[240px] md:w-[400px] mb-6"
         />
-        <h1 className="text-[1.8rem] md:text-[2.2rem] font-bold text-gray-800 mb-2">
+        <h1 className="text-[1.8rem] md:text-[2.2rem] font-bold text-[var(--text-gray2)] mb-2">
           صفحه مورد نظر یافت نشد!
         </h1>
-        <p className="text-gray-600 text-[1rem] md:text-[1.1rem] mb-6 leading-7">
+        <p className="text-[var(--text-gray)] text-[1rem] md:text-[1.1rem] mb-6 leading-7">
           متاسفانه صفحه‌ای که به دنبال آن بودید وجود ندارد یا ممکن است حذف شده
           باشد.
           <br />
@@ -23,7 +23,7 @@ function NotFound() {
         </p>
         <Link
           to="/Fotros/"
-          className="flex items-center gap-2 bg-blue-400 hover:bg-blue-500 text-white px-6 py-3 rounded-xl transition-all box-shadow "
+          className="flex items-center gap-2 bg-[var(--btn)] hover:bg-blue-500 text-white px-6 py-3 rounded-xl transition-all box-shadow "
         >
                       بازگشت به صفحه اصلی
 

@@ -72,7 +72,7 @@ function InfoLogin() {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-[100vh] bg-[#d5d5d5]">
+    <div className="flex justify-center items-center w-full h-[100vh] bg-[var(--bg-login)]">
       {/* تزئینی‌ها */}
       <div className="">
         <img
@@ -107,7 +107,7 @@ function InfoLogin() {
         />
       </div>
 
-      <div className="mt-[-40%] md:mt-[unset] w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[white] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
+      <div className="mt-[-40%] md:mt-[unset] w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[var(--sup-sm)] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
         <h2 className="text-center w-full mb-[20px] font-semibold text-[130%] ">
           اطلاعات کاربری
         </h2>
@@ -122,7 +122,7 @@ function InfoLogin() {
             value={fname}
             placeholder="مثال : شقایق"
             onChange={(e) => setFname(e.target.value)}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#288fea] `}
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup)] border border-transparent focus:outline-none focus:border-[#288fea] `}
           />
           {errors.fname && (
             <p className="text-red-500 text-sm mb-2">{errors.fname}</p>
@@ -136,7 +136,7 @@ function InfoLogin() {
             value={lname}
             placeholder="مثال : محمدی"
             onChange={(e) => setLname(e.target.value)}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#288fea] `}
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup)] border border-transparent focus:outline-none focus:border-[#288fea] `}
           />
           {errors.lname && (
             <p className="text-red-500 text-sm mb-2">{errors.lname}</p>
@@ -147,14 +147,14 @@ function InfoLogin() {
             value={email}
             placeholder="مثال : bazrafkannjad.sh@email.com"
             onChange={(e) => setEmail(e.target.value)}
-            className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#288fea] `}
+            className={`w-full rounded p-2 mb-2 bg-[var(--sup)] border border-transparent focus:outline-none focus:border-[#288fea] `}
           />
           {errors.email && (
             <p className="text-red-500 text-sm mb-2">{errors.email}</p>
           )}
           <button
             type="submit"
-            className="px-[30px] py-[8px] mt-[10px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full bg-[#1e88e5] text-white rounded-lg"
+            className="px-[30px] py-[8px] mt-[10px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full bg-[var(--btn)] text-white rounded-lg"
           >
             ذخیره اطلاعات
           </button>

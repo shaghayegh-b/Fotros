@@ -25,7 +25,7 @@ function Addresses() {
         <h2 className="font-bold text-[130%]">ادرس های من</h2>
         <button
           onClick={() => setOpenAddressModal(true)}
-          className="hidden md:inline-block bg-[#1e88e5] text-white text-center py-[8px] px-[50px] rounded-lg w-[fit-content] "
+          className="hidden md:inline-block bg-[var(--btn)] text-white text-center py-[8px] px-[50px] rounded-lg w-[fit-content] "
         >
           افزودن ادرس
         </button>
@@ -38,7 +38,7 @@ function Addresses() {
       {addresses.map((address) => (
         <div
           key={address.id}
-          className="p-[10px] md:p-[15px] bg-[#f5f5f5] w-full flex flex-col md:flex-row items-baseline md:justify-between md:items-center "
+          className="p-[10px] md:p-[15px] bg-[var(--adress-sm)] w-full flex flex-col md:flex-row items-baseline md:justify-between md:items-center "
         >
           <div className="flex flex-col gap-[9px]">
             <h3 className="font-bold text-[105%]">{address.fullAddress}</h3>
@@ -71,7 +71,7 @@ function Addresses() {
       ))}
       <button
         onClick={() => setOpenAddressModal(true)}
-        className="self-center bg-[#1e88e5] w-[90%] inline-block md:hidden text-white text-center py-[8px] px-[50px] rounded-lg "
+        className="self-center bg-[var(--btn)] w-[90%] inline-block md:hidden text-white text-center py-[8px] px-[50px] rounded-lg "
       >
         افزودن ادرس
       </button>

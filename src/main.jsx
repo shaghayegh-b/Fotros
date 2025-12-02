@@ -9,6 +9,7 @@ import { CartProvider } from "./context/CartContext/CartContext";
 import { SearchProvider } from "./context/SearchContext/SearchContext";
 import { AuthProvider } from "./context/AuthContext/AuthContext";
 import { AddressProvider } from "./context/AddressContext/AddressContext";
+import { ThemeProvider } from "./context/ThemeContext/ThemeProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,7 +21,10 @@ root.render(
             <AuthProvider>
               <FavProvider>
                 <AddressProvider>
-                <App></App></AddressProvider>
+                  <ThemeProvider>
+                    <App></App>
+                  </ThemeProvider>
+                </AddressProvider>
               </FavProvider>
             </AuthProvider>
           </SearchProvider>

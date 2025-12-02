@@ -88,7 +88,7 @@ function Navbar() {
     <>
       {/* Navbar */}
       <div
-        className={`Navbar bg-[#fffffff7] py-[5px] px-[3px] md:p-[unset] border-b-[3px] border-b-solid border-b-[#f5f5f5]  w-full fixed top-0 z-20 `}
+        className={`Navbar bg-[var(--navbar-bg)] py-[5px] px-[3px] md:p-[unset] border-b-[3px] border-b-solid border-[var(--navbar-bb)] w-full fixed top-0 z-20 `}
       >
         <div
           className={`Navbarchild px-[8px] lg:px-[15px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
@@ -130,7 +130,7 @@ function Navbar() {
                   ></IoMdArrowDropdown>
                 </button>
                 {isProductDropdownOpen && (
-                  <div className="rounded-lg border border-[#afafaf] w-[105px] h-[fit-content] absolute top-[31px] left-0 bg-[#f5f5f5]">
+                  <div className="rounded-lg border border-[var(--navbar-md-category-b)] w-[105px] h-[fit-content] absolute top-[31px] left-0 bg-[var(--navbar-md-category)]">
                     {PRODUCT_CATEGORIES.map((cat) => (
                       <NavLink
                         key={cat.name}
@@ -141,7 +141,7 @@ function Navbar() {
                           setOnlyAvailable(false);
                           applyFilter("", false, cat.filterName);
                         }}
-                        className=" flex justify-center items-center border-b border-b-[#d8d4d4c9] w-full px-[7px] py-[5px] hover:bg-[#e0dede] "
+                        className=" flex justify-center items-center border-b border-b-[var(--navbar-md-category-b)] w-full px-[7px] py-[5px] hover:bg-[#e0dede] "
                       >
                         {cat.name}
                       </NavLink>
@@ -212,7 +212,7 @@ function Navbar() {
             {isLoggedIn ? (
               <NavLink
                 to="/Fotros/userdashboard/UserInfo"
-                className="h-full w-[80px] lg:w-[115px] hidden md:flex items-center justify-around gap-2 px-[6px] py-[2px] rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200"
+                className="h-full w-[80px] lg:w-[115px] hidden md:flex items-center justify-around gap-2 px-[6px] py-[2px] rounded-full bg-[var(--navbar-porof)] hover:bg-[var(--navbar-porof-hover)] transition-colors duration-200"
               >
                 <img
                   src={user.profilePic}
@@ -322,14 +322,14 @@ function Navbar() {
             onClick={() => setMeno(false)}
           >
             <MdClose
-              className={`rounded-full shadow flex justify-center items-center bg-[#d9dadb] m-[8px]
+              className={`rounded-full shadow flex justify-center items-center bg-[var(--close-menu)] m-[8px]
                         ${meno ? "" : "hidden"}`}
             />
           </div>
         </div>
         {/* serchmobile */}
         {fSearch && (
-          <div className="bg-[#ffff] w-full fixed top-0 z-2 flex justify-center">
+          <div className="bg-[var(--navbar-bg)] w-full fixed top-0 left-0 z-2 flex justify-center">
             <SearchBar
               mode="mobile"
               ref={searchRef}

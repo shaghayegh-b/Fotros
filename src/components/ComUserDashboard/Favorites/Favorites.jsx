@@ -111,7 +111,7 @@ function Favorites() {
                 </p>
                 <div className=" self-end flex flex-col  md:flex-row lg:flex-col items-baseline md:gap-[10px] gap-[3px]">
                   {product.off > 0 && (
-                    <span className=" text-gray-800 md:text-[95%] text-[85%] line-through">
+                    <span className=" text-[var(--text-gray)] md:text-[95%] text-[85%] line-through">
                       {product.price.toLocaleString()}
                     </span>
                   )}

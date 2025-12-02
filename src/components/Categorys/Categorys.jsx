@@ -79,7 +79,6 @@ function Categorys() {
             1800: { slidesPerView: 11 },
             2500: { slidesPerView: 20 },
           }}
-          modules={[Scrollbar]}
           scrollbar={{
             hide: true,
           }}
@@ -98,16 +97,16 @@ function Categorys() {
                   type="button"
                   onClick={() => handleCategoryClick(url, filterName)}
                   className={`Category flex flex-col items-center justify-center py-[3px] px-[6px]
-                    w-[85px] h-[84px] md:w-[128px] md:h-[128px] lg:w-[140px] lg:h-[120px] bg-[#d8dce4] rounded-[1rem]
+                    w-[85px] h-[84px] md:w-[128px] md:h-[128px] lg:w-[140px] lg:h-[120px] bg-[var(--cartcategory)] rounded-[1rem]
                      transition-all duration-300 ease-out
       hover:bg-gray-200 hover:scale-105 hover:shadow-lg
       overflow-hidden text-ellipsis text-center
                         ${hideIcons ? "w-[90px] h-[fit-content]" : ""}`}
                 >
-                  {!hideIcons && Icon &&  (
-                      <Icon className="flex justify-center items-center text-gray-800 group-hover:text-gray-600 transition-all duration-300"/>
+                  {!hideIcons && Icon && (
+                    <Icon className="flex justify-center items-center text--[var(--textcategory)] group-hover:text-gray-600 transition-all duration-300" />
                   )}
-                    <p className=" font-semibold text-gray-800 break-words leading-tight text-center">
+                  <p className=" font-semibold text--[var(--textcategory)] break-words leading-tight text-center">
                     {name}
                   </p>
                 </button>

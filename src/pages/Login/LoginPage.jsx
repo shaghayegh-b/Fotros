@@ -71,7 +71,7 @@ function LoginPage() {
   return (
     <>
       {/* main */}
-      <div className="flex justify-center items-center w-full h-[100vh] bg-[#d5d5d5]">
+      <div className="flex justify-center items-center w-full h-[100vh] bg-[var(--bg-login)]">
         {/* تزئینی‌ها */}
         <div className="">
           <img
@@ -107,7 +107,7 @@ function LoginPage() {
         </div>
 
         {/* فرم ورود */}
-        <div className="mt-[-40%] md:mt-[unset] w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[white] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
+        <div className="mt-[-40%] md:mt-[unset] w-[85%] md:w-[65%] flex flex-col items-center justify-center gap-[10px] z-3 bg-[var(--sup-sm)] rounded-md p-[20px] lg:p-[40px] lg:pt-[20px]">
           <div className=" w-full mb-[43px] flex items-center justify-center gap-[7px]">
             <div className="relative w-[55px] h-[55px]">
               <img src={wingfotros} alt="Logoimg" className=" h-full " />
@@ -139,11 +139,11 @@ function LoginPage() {
                 setPhone(val.slice(0, 11));
               }}
               placeholder="مثال : 09399619640"
-              className={`w-full rounded p-2 mb-2 bg-[#f5f5f5] border border-transparent focus:outline-none focus:border-[#288fea]
+              className={`w-full rounded p-2 mb-2 bg-[var(--sup)] border border-transparent focus:outline-none focus:border-[#288fea]
                  ${
                    phone.length > 0 && phone.length !== 11
                      ? "text-red-500 border-red-400"
-                     : "text-black "
+                     : "text-[var(--text-input)]"
                  } `}
             />
             {errors.phone && (
@@ -151,7 +151,7 @@ function LoginPage() {
             )}
             <button
               type="submit"
-              className="px-[30px] py-[8px] mt-[10px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full bg-[#1e88e5] text-white rounded-lg"
+              className="px-[30px] py-[8px] mt-[10px] md:py-[7px] font-semibold text-[105%] md:text-[120%]  w-full bg-[var(--btn)] text-white rounded-lg"
             >
               ورود
             </button>
