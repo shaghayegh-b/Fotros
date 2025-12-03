@@ -1,4 +1,17 @@
 @import "tailwindcss";
+
+/* --- جلوگیری از هر نوع دارک مود تحمیلی از مرورگر و افزونه‌ها --- */
+html {
+  color-scheme: light !important;
+  forced-color-adjust: none !important;
+}
+
+/* وقتی دارک مود اختصاصی سایت فعال میشه */
+html.dark {
+  color-scheme: dark !important;
+  forced-color-adjust: none !important;
+}
+
 /* استایل های عمومی */
 * {
   box-sizing: border-box;
@@ -86,6 +99,21 @@ html.dark *::-webkit-scrollbar-thumb {
 html.dark *::-webkit-scrollbar-thumb:hover {
   background-color: #1e88e5;
 }
+/* حالت پیش‌فرض (لایت مود) */
+:root .logo {
+    filter: none; /* تصویر اصلی بدون تغییر */
+    -webkit-filter: none;
+  }
+
+
+/* حالت دارک مود */
+html.dark .logo {
+    filter: invert(1) brightness(2);
+    -webkit-filter: invert(1) brightness(2);
+  }
+
+
+/* متغیرها */
 :root {
   /* all */
   --import: #c20101;
@@ -93,6 +121,7 @@ html.dark *::-webkit-scrollbar-thumb:hover {
   --text-gary: #4a5565;
   --text-gray2: #1e2939;
   --footer: #e0e6f1;
+  --text-footer: #000000;
 
   /* home */
   --primary: #1e88e5;
@@ -101,13 +130,15 @@ html.dark *::-webkit-scrollbar-thumb:hover {
   --bg: #fafafa;
   --cart: #f5f5f5;
   --cartsm: #bfdbfe;
-  --cartcategory: #d8dce4;
-  --textcategory: #1e2939;
   --btn: #1e88e5;
   --f5: #f5f5f5;
   --product: #ffffff;
   --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  /* category */
+  --cartcategory: #d8dce4;
+  --textcategory: #1e2939;
+  --cartcategory-hover: #b9bdc3;
   /* navbar */
   --navbar-bg: #fffffff7;
   --navbar-bb: #f5f5f5;
@@ -145,6 +176,7 @@ html.dark {
   --text-gary: #a7b7be;
   --text-gray2: #b3c2ca;
   --footer: #0b1a2b;
+  --text-footer: #ffffff;
 
   /* home */
   --text: #e0e0e0;
@@ -152,13 +184,16 @@ html.dark {
   --bg: #051121;
   --cart: #0a1b2f;
   --cartsm: #0e2648;
-  --cartcategory: #06234b;
-  --textcategory: #e1e9f3;
   --btn: #4270c1;
-  --f5: #7787a2;
+  --f5: #9ea9bc;
   --product: #0a1b2f;
   --card-shadow: 0 4px 16px rgba(255, 255, 255, 0.05);
   --card-hover-shadow: 0 8px 24px rgba(255, 255, 255, 0.08);
+  /* category */
+  --cartcategory: #06234b;
+  --textcategory: #e1e9f3;
+  --cartcategory-hover: #1a3e70;
+
   /* navbar */
   --navbar-bg: #122d55;
   --navbar-bb: #192f70bd;
@@ -188,4 +223,4 @@ html.dark {
   /* login */
   --bg-login: #59697c;
 }
-/* bg-[var(--sup)] */
+/* bg-[var( --cartcategory-hover)] */

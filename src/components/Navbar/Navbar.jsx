@@ -108,7 +108,7 @@ function Navbar() {
                 <img
                   src={wingfotros}
                   alt="Logoimg"
-                  className=" w-[37px] absolute top-[-3px] left-0 "
+                  className=" w-[37px] absolute top-[-3px] left-0 logo"
                 />
               </div>
               <h2 className="font-semibold text-[130%]">فطروس</h2>
@@ -141,7 +141,7 @@ function Navbar() {
                           setOnlyAvailable(false);
                           applyFilter("", false, cat.filterName);
                         }}
-                        className=" flex justify-center items-center border-b border-b-[var(--navbar-md-category-b)] w-full px-[7px] py-[5px] hover:bg-[#e0dede] "
+                        className=" flex justify-center items-center border-b border-b-[var(--navbar-md-category-b)] w-full px-[7px] py-[5px] hover:bg-[var(--cartcategory-hover)] "
                       >
                         {cat.name}
                       </NavLink>
@@ -173,7 +173,7 @@ function Navbar() {
           </div>
           {/* logo */}
           <div className="flex-3 h-[29px] self-center mx-[8px] flex justify-center lg:hidden">
-            <img src={logoimg} alt="Logoimg" className=" h-[24px]" />
+            <img src={logoimg} alt="Logoimg" className=" h-[24px] logo" />
           </div>
           {/* search & shopping & userdashboard */}
           <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-end items-center ">
@@ -203,7 +203,7 @@ function Navbar() {
             <NavLink to="/Fotros/ShoppingCart" className="relative">
               <RiShoppingCartLine />
               {!totalQuantity == 0 && (
-                <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-blue-400 text-white shadow-sm">
+                <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-[var(--btn)] text-white shadow-sm">
                   {totalQuantity}
                 </span>
               )}
@@ -217,7 +217,7 @@ function Navbar() {
                 <img
                   src={user.profilePic}
                   alt={user.fname}
-                  className="h-[1.2rem] md:h-[2rem] rounded-full object-cover border border-white shadow-sm"
+                  className="h-[1.2rem] md:h-[2rem] rounded-full object-cover border border-[var(--sup-b)] shadow-sm"
                 />
                 <p className=" flex-1 text-center text-ellipsis whitespace-nowrap ">
                   {user.fname}
@@ -235,7 +235,7 @@ function Navbar() {
         {isDropdownAllowed && (
           <div
             ref={dropdownRefSearch}
-            className={`fixed top-[38px] md:top-[60px] left-[50%] md:left-[160px] -translate-x-1/2 w-full md:w-[300px] bg-white border border-gray-300 shadow-lg rounded-lg z-5 transform transition-all duration-300 ease-in-out ${
+            className={`fixed top-[38px] md:top-[60px] left-[50%] md:left-[160px] -translate-x-1/2 w-full md:w-[300px] bg-[var(--sup-sm)] border border-gray-300 shadow-lg rounded-lg z-5 transform transition-all duration-300 ease-in-out ${
               isSearchDropdownOpen
                 ? "scale-y-100 opacity-100"
                 : "scale-y-0 opacity-0"
@@ -250,7 +250,7 @@ function Navbar() {
                   setinputValue("");
                   searchProducts("");
                 }}
-                className="hover:text-gray-700 font-bold"
+                className="hover:text-[var(--text-gary2)] font-bold"
               >
                 <MdClose />
               </button>
@@ -261,7 +261,7 @@ function Navbar() {
                 <Link
                   key={p.idsortby}
                   to={`/Fotros/Products/${p.idsortby}`}
-                  className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 transition-colors"
+                  className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--cartcategory-hover)] transition-colors"
                 >
                   <div className="w-[100px] h-[100px]">
                     <img
@@ -272,12 +272,12 @@ function Navbar() {
                     />
                   </div>
                   <div className="flex-1 flex flex-col">
-                    <span className="text-sm font-semibold text-gray-700">
+                    <span className="text-sm font-semibold text-[var(--text-gary2)]">
                       {p.title}
                     </span>
                     <div className="flex items-baseline gap-2">
                       {p.off > 0 && (
-                        <span className="text-gray-400 line-through text-xs">
+                        <span className="text-[var(--text-gary)] line-through text-xs">
                           {p.price.toLocaleString()} تومان
                         </span>
                       )}
@@ -297,7 +297,7 @@ function Navbar() {
                     setIsSearchDropdownOpen(false);
                     navigate("/Fotros/Products");
                   }}
-                  className="w-full py-2 text-center bg-[#1e88e5] text-white hover:bg-[#1874c4] rounded-b-lg"
+                  className="w-full py-2 text-center bg-[var(--btn)] text-white hover:bg-[#1874c4] rounded-b-lg"
                 >
                   دیدن همه محصولات سرچ شده
                 </button>

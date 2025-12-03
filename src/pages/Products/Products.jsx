@@ -64,7 +64,7 @@ function Products() {
       <Navbar />
       <div className="h-10 lg:h-16"></div>
       <div className="pb-[80px]">
-        <h6 className="text-gray-500 px-[15px] md:px-[40px] pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
+        <h6 className="text-[var(--text-gary)] px-[15px] md:px-[40px] pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>
             {searchedProducts.length > 0
@@ -87,7 +87,7 @@ function Products() {
           {loading ? (
             <Loading />
           ) : productsToShow.length === 0 ? (
-            <p className="text-center text-gray-500 mt-10">
+            <p className="text-center text-[var(--text-gary)] mt-10">
               هیچ محصولی در این دسته‌بندی فعلاً موجود نیست 😔
               <br />
               <span className="flex gap-[5px] items-center justify-center">

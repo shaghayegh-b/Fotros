@@ -99,7 +99,7 @@ function Categorys() {
                   className={`Category flex flex-col items-center justify-center py-[3px] px-[6px]
                     w-[85px] h-[84px] md:w-[128px] md:h-[128px] lg:w-[140px] lg:h-[120px] bg-[var(--cartcategory)] rounded-[1rem]
                      transition-all duration-300 ease-out
-      hover:bg-gray-200 hover:scale-105 hover:shadow-lg
+      hover:bg-[var(--cartcategory-hover)] hover:scale-105 hover:shadow-lg
       overflow-hidden text-ellipsis text-center
                         ${hideIcons ? "w-[90px] h-[fit-content]" : ""}`}
                 >

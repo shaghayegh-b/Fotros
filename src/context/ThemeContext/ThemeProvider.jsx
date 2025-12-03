@@ -3,52 +3,50 @@ import { createContext, useEffect, useState } from "react";
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  // خواندن انتخاب ذخیره شده کاربر
+  // خواندن انتخاب ذخیره‌شده کاربر
   const storedTheme = localStorage.getItem("theme"); // light | dark | system | null
 
-  // بررسی تم سیستم
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  // وضعیت تم سیستم
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // تعیین تم اولیه
   const getInitialTheme = () => {
-    if (storedTheme) return storedTheme;     // انتخاب دستی کاربر
-    return "system";                         // ابتدا با حالت سیستم وارد شو
+    if (storedTheme) return storedTheme;
+    return "system"; // ورود اولیه بر اساس سیستم
   };
 
-  // userTheme = light | dark | system
   const [userTheme, setUserTheme] = useState(getInitialTheme);
 
-  // realTheme = dark | light → تم واقعی که باید اعمال شود
+  // تم واقعی → فقط dark یا light
   const realTheme =
-    userTheme === "system"
-      ? systemPrefersDark.matches
-        ? "dark"
-        : "light"
-      : userTheme;
+    userTheme === "system" ? (media.matches ? "dark" : "light") : userTheme;
 
-  // اعمال تم واقعی روی html
+  // اعمال تم روی HTML و جلوگیری از override مرورگر/افزونه
   useEffect(() => {
     const root = document.documentElement;
 
-    if (realTheme === "dark") root.classList.add("dark");
-    else root.classList.remove("dark");
+    if (realTheme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+
+    // برای اطمینان از اینکه مرورگر و افزونه ها استایل های خودشان را اعمال نکنند
+    root.style.forcedColorAdjust = "none";
 
     localStorage.setItem("theme", userTheme);
   }, [realTheme, userTheme]);
 
-  // واکنش اتوماتیک به تغییرات سیستم
+  // واکنش به تغییر تم سیستم
   useEffect(() => {
     const handler = () => {
       if (userTheme === "system") {
-        // اگر کاربر در حالت system باشد → تغییر سیستم بر سایت اعمال شود
-if (userTheme === "system") {
-  setUserTheme(prev => prev); // فقط رفرش، بدون تغییر واقعی
-}
+        // فقط در حالت system، تم واقعی باید تغییر کند
+        setUserTheme("system");
       }
     };
 
-    systemPrefersDark.addEventListener("change", handler);
-    return () => systemPrefersDark.removeEventListener("change", handler);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
   }, [userTheme]);
 
   return (

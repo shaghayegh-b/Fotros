@@ -8,12 +8,12 @@ import { MdOutlinePhone } from "react-icons/md";
 import { Link } from "react-router-dom";
 function Footer() {
   return (
-    <div className="footer bg-[var(--footer)]">
+    <div className="footer bg-[var(--footer)] text-[var(--text-footer)]">
       <div className="h-[3rem]"></div>
       <div className=" flex justify-around h-[340px]">
         <div className="flex flex-col w-[45%] justify-between px-[18px] h-[88%] gap-[20px]">
           <h2 className=" flex items-baseline gap-[4px] w-[157px] px-[3px] text-[175%] font-bold text-left">
-            <img src={img} className="w-[36px]" />
+            <img src={img} className="w-[36px] logo" />
             ف&#x0640;&#x0640;ط&#x0640;&#x0640;&#x0640;روس
           </h2>
           <ul>
