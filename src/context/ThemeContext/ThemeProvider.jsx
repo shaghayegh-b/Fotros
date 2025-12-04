@@ -1,53 +1,42 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  // خواندن انتخاب ذخیره‌شده کاربر
-  const storedTheme = localStorage.getItem("theme"); // light | dark | system | null
-
-  // وضعیت تم سیستم
   const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-  const getInitialTheme = () => {
-    if (storedTheme) return storedTheme;
-    return "system"; // ورود اولیه بر اساس سیستم
-  };
+  const [userTheme, setUserTheme] = useState(
+    localStorage.getItem("theme") || "system"
+  );
 
-  const [userTheme, setUserTheme] = useState(getInitialTheme);
-
-  // تم واقعی → فقط dark یا light
-  const realTheme =
-    userTheme === "system" ? (media.matches ? "dark" : "light") : userTheme;
-
-  // اعمال تم روی HTML و جلوگیری از override مرورگر/افزونه
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (realTheme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
+  // محاسبه‌ی تم واقعی، بدون state اضافه
+  const realTheme = useMemo(() => {
+    if (userTheme === "system") {
+      return media.matches ? "dark" : "light";
     }
+    return userTheme;
+  }, [userTheme]);
 
-    // برای اطمینان از اینکه مرورگر و افزونه ها استایل های خودشان را اعمال نکنند
-    root.style.forcedColorAdjust = "none";
-
+  // وقتی userTheme تغییر کند → ذخیره کن
+  useEffect(() => {
     localStorage.setItem("theme", userTheme);
-  }, [realTheme, userTheme]);
+  }, [userTheme]);
 
   // واکنش به تغییر تم سیستم
   useEffect(() => {
     const handler = () => {
       if (userTheme === "system") {
-        // فقط در حالت system، تم واقعی باید تغییر کند
-        setUserTheme("system");
+        document.documentElement.classList.toggle("dark", media.matches);
       }
     };
-
     media.addEventListener("change", handler);
     return () => media.removeEventListener("change", handler);
   }, [userTheme]);
+
+  // اعمال تم واقعی روی html
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", realTheme === "dark");
+  }, [realTheme]);
 
   return (
     <ThemeContext.Provider value={{ userTheme, realTheme, setUserTheme }}>
