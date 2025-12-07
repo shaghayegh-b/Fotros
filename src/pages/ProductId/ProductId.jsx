@@ -34,6 +34,7 @@ import {
 import "./ProductId.css";
 import SlideProduct from "../../components/SlideProduct/SlideProduct";
 import { useAuth } from "../../context/AuthContext/AuthContext";
+import ProductIdSkeleton from "../../components/SkeletonCard/ProductIdSkeleton";
 const CACHE_DURATION = 5 * 60 * 1000; // مدت زمان کش: 5 دقیقه
 
 function ProductId() {
@@ -348,7 +349,7 @@ function ProductId() {
           </div>
         )}
         {loading ? (
-          <Loading />
+          <ProductIdSkeleton />
         ) : !product || !product.idsortby ? (
           <p className="text-center py-10 ">محصولی یافت نشد</p>
         ) : (
@@ -774,12 +775,18 @@ function ProductId() {
                 <div className={` desc flex gap-[10px] py-[16px] `}>
                   <div className="md:w-3/10 w-2/5  flex flex-col gap-[14px]">
                     <ul className="flex flex-col gap-[14px]">
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">نام</li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">کد</li>
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                        نام
+                      </li>
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                        کد
+                      </li>
                       <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                         جنس پارچه
                       </li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">سایز</li>
+                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                        سایز
+                      </li>
                       {product.dokme && (
                         <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
                           نحوه بسته شدن
@@ -1029,7 +1036,7 @@ function ProductId() {
               </p>
             </div>
             {/* محصولات مشابه  */}
-        <div className="md:w-full md:my-[45px]  md:py-[10px] md:bg-[var(--adress-sm)] md:px-[-5px]">
+            <div className="md:w-full md:my-[45px]  md:py-[10px] md:bg-[var(--adress-sm)] md:px-[-5px]">
               <SlideProduct
                 title="م&#x0640;حص&#x0640;ولات مشابه"
                 title2="محصولات مشابه"

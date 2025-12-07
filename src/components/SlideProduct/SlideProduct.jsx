@@ -9,7 +9,7 @@ import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
 import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
-
+import SkeletonCardSlide from "../SkeletonCard/SkeletonCardSlide";
 function SlideProduct({ title, title2, url, allurl }) {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
@@ -83,10 +83,19 @@ function SlideProduct({ title, title2, url, allurl }) {
 
       {/* اسلایدر */}
       {loading ? (
-        <div className="flex flex-col justify-center items-center">
-          <Loading />
-          <p className="text-[70%]">درحال دریافت {title2}</p>
-        </div>
+      <div className="p-[5px] pt-0">
+    <Swiper
+      dir="rtl"
+      slidesPerView={slidesPerView - 1}
+      spaceBetween={18}
+    >
+      {Array.from({ length: slidesPerView }).map((_, i) => (
+        <SwiperSlide key={i} className="flex justify-center">
+          <SkeletonCardSlide />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
       ) : (
         <div className="p-[5px] pt-0 NewProducts relative">
           {/* دکمه‌ها */}

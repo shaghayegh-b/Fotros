@@ -38,7 +38,7 @@ function Filter({ resetPage }) {
   const selected = filters.find((f) => f.id === sortFilter) || filters[0];
 
   return (
-    <div className="flex justify-between items-center px-[9px] md:px-[20px] py-[10px]">
+    <div className="flex justify-between items-center px-[9px] md:px-[20px] py-[10px] md:py-[0px]">
       <div className="my-filter h-10 flex gap-1 md:px-2 justify-right items-center text-[95%]">
         <button
           onClick={handleAvailableClick}

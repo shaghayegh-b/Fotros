@@ -10,6 +10,7 @@ import porofDefault from "../../../assets/img/porof1.png";
 
 import { useAuth } from "../../../context/AuthContext/AuthContext";
 import ModalAlert from "../../ModalAlert/ModalAlert";
+import SkeletonProfileGrid from "../../SkeletonCard/SkeletonProfileGrid";
 function UserInfo() {
   const { user, updateUser } = useAuth();
   const [selectedPic, setSelectedPic] = useState(
@@ -44,14 +45,48 @@ function UserInfo() {
     setIsModalOpen(true);
   };
 
-  useEffect(() => {
-    if (user) {
-      setFname(user.fname || "");
-      setLname(user.lname || "");
-      setPhone(user.username || "");
-      setEmail(user.email || "");
-    }
-  }, [user]);
+  // --- state ها ---
+const [loadingUser, setLoadingUser] = useState(true);
+const [loadingImages, setLoadingImages] = useState(true);
+
+// لود شدن user
+useEffect(() => {
+  if (user) {
+    setFname(user.fname || "");
+    setLname(user.lname || "");
+    setPhone(user.username || "");
+    setEmail(user.email || "");
+    setSelectedPic(user.profilePic || porofDefault);
+    setLoadingUser(false);
+  }
+}, [user]);
+
+// لود شدن تصاویر پروفایل
+useEffect(() => {
+  const images = [
+    porof1,
+    porof2,
+    porof3,
+    porof4,
+    porof5,
+    porof6,
+    porofDefault
+  ];
+
+  let loadedCount = 0;
+
+  images.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      loadedCount++;
+      if (loadedCount === images.length) {
+        setLoadingImages(false);
+      }
+    };
+  });
+}, []);
+
 
   const handleSaveForm = (e) => {
     e.preventDefault(); // جلوگیری از رفرش صفحه
@@ -149,11 +184,15 @@ function UserInfo() {
             <div className=" w-[40%] ">
               <div className="flex justify-center">
                 <span className="flex justify-center items-center m-[10px] w-[130px] h-[130px] shadow-lg rounded-full overflow-hidden">
-                  <img
-                    src={selectedPic}
-                    alt="Profile"
-                    className="w-full h-full object-cover object-center"
-                  />
+                  {loadingUser ? (
+                    <div className="w-[110px] h-[110px] rounded-full bg-gray-300 dark:bg-gray-700 animate-pulse mx-auto" />
+                  ) : (
+                    <img
+                      src={selectedPic}
+                      alt="Profile"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  )}
                 </span>
               </div>
               <div className="flex flex-col gap-[8px] p-[10px]">
@@ -184,19 +223,23 @@ function UserInfo() {
               </div>
             </div>
             <div className=" grid grid-cols-3 grid-rows-2 gap-[15px] p-[20px]">
-              {defaultPics.map((pic, idx) => (
-                <img
-                  key={idx}
-                  src={pic}
-                  alt={`porof${idx + 1}`}
-                  className={`rounded-full w-full cursor-pointer border-[1.2px] ${
-                    selectedPic === pic
-                      ? "border-[#0b9ae7dd]"
-                      : "border-[#56a3ff61]"
-                  }`}
-                  onClick={() => setSelectedPic(pic)}
-                />
-              ))}
+              {loadingImages ? (
+                <SkeletonProfileGrid />
+              ) : (
+                defaultPics.map((pic, idx) => (
+                  <img
+                    key={idx}
+                    src={pic}
+                    alt={`porof${idx + 1}`}
+                    className={`rounded-full w-full cursor-pointer border-[1.2px] ${
+                      selectedPic === pic
+                        ? "border-[#0b9ae7dd]"
+                        : "border-[#56a3ff61]"
+                    }`}
+                    onClick={() => setSelectedPic(pic)}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>

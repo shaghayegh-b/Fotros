@@ -8,13 +8,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import Filter from "../../components/Filter/Filter";
 import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
 import Footer from "../../components/Footer/Footer";
-import Loading from "../../components/Loading/Loading";
 import { useFav } from "../../context/FavProvider/FavProvider";
 import Categorys from "../../components/Categorys/Categorys";
 import { Link, useNavigate } from "react-router-dom";
 import { useSearch } from "../../context/SearchContext/SearchContext";
 import { useAuth } from "../../context/AuthContext/AuthContext";
 import ModalAlert from "../../components/ModalAlert/ModalAlert";
+import ProductsSkeleton from "../../components/SkeletonCard/ProductsSkeleton";
 
 function Products() {
   useEffect(() => {
@@ -64,7 +64,7 @@ function Products() {
       <Navbar />
       <div className="h-10 lg:h-16"></div>
       <div className="pb-[80px]">
-        <h6 className="text-[var(--text-gary)] px-[15px] md:px-[40px] pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
+        <h6 className="text-[var(--text-gary)] px-[15px] md:px-[40px] pt-[15px] pb-[10px] md:pb-[5px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>
             {searchedProducts.length > 0
@@ -72,7 +72,7 @@ function Products() {
               : selectedCategory}
           </span>
         </h6>
-        <h2 className="text-[175%] font-[600] py-[10px] px-[14px] md:px-[30px] md:py-[20px]">
+        <h2 className="text-[175%] font-[600] py-[10px] px-[14px] md:px-[30px] md:py-[5px]">
           {searchedProducts.length > 0
             ? `جستجو : ${searchQuery}`
             : selectedCategory}
@@ -85,8 +85,12 @@ function Products() {
         <div className="md:pt-[15px] pt-[10px] px-[5px]">
           {/* Skeleton Loader */}
           {loading ? (
-            <Loading />
-          ) : productsToShow.length === 0 ? (
+ <div className="products grid gap-[5px] md:gap-[9px] lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+    {Array.from({ length: 8 }).map((_, i) => (
+      <ProductsSkeleton key={i} />
+    ))}
+  </div>
+            ) : productsToShow.length === 0 ? (
             <p className="text-center text-[var(--text-gary)] mt-10">
               هیچ محصولی در این دسته‌بندی فعلاً موجود نیست 😔
               <br />
