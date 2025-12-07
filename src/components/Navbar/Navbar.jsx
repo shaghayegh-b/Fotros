@@ -88,18 +88,18 @@ function Navbar() {
     <>
       {/* Navbar */}
       <div
-        className={`Navbar bg-[var(--navbar-bg)] py-[5px] px-[3px] md:p-[unset] border-b-[3px] border-b-solid border-[var(--navbar-bb)] w-full fixed top-0 z-20 `}
+        className={`Navbar h-[50px] md:h-[unset]  bg-[var(--navbar-bg)] py-[5px] px-[3px] md:p-[unset] border-b-[3px] border-b-solid border-[var(--navbar-bb)] w-full fixed top-0 z-20 `}
       >
         <div
-          className={`Navbarchild px-[8px] lg:px-[15px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
+          className={`Navbarchild h-full px-[8px] lg:px-[15px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
             ${fSearch ? "hidden" : "flex"} `}
         >
           {/* menumobile */}
           <button
             onClick={() => setMeno(true)}
-            className="flex-1 lg:flex-0 inline-block lg:hidden"
+            className="flex-1 lg:flex-0 inline-block lg:hidden h-full"
           >
-            <HiBars3BottomRight />
+            <HiBars3BottomRight className="!h-full !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
           </button>
           {/* menumd */}
           <div className="hidden flex-3 lg:flex items-center gap-[21px] ">
@@ -173,10 +173,10 @@ function Navbar() {
           </div>
           {/* logo */}
           <div className="flex-3 h-[29px] self-center mx-[8px] flex justify-center lg:hidden">
-            <img src={logoimg} alt="Logoimg" className=" h-[24px] logo" />
+            <img src={logoimg} alt="Logoimg" className=" h-[31px] mt-[4px] mb-[2px] logo" />
           </div>
           {/* search & shopping & userdashboard */}
-          <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-end items-center ">
+          <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-end items-center h-full">
             {/* search desktop */}
             <SearchBar
               mode="desktop"
@@ -194,14 +194,14 @@ function Navbar() {
 
             <button
               onFocus={() => setFSearch(true)}
-              className={`lg:hidden   py-[2px] lg:py-[6px] rounded-xl
+              className={`lg:hidden   py-[2px] lg:py-[6px] rounded-xl h-full
               ${totalQuantity == 0 ? "mx-[4px] lg:mx-[8px]" : "mx-[10px] lg:mx-[12px]"}`}
             >
-              <IoSearchSharp />
+              <IoSearchSharp  className="!h-full !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
             </button>
             {/* shopping */}
-            <NavLink to="/Fotros/ShoppingCart" className="relative">
-              <RiShoppingCartLine />
+            <NavLink to="/Fotros/ShoppingCart" className="relative h-full">
+              <RiShoppingCartLine  className="!h-full !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
               {!totalQuantity == 0 && (
                 <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-[var(--btn)] text-white shadow-sm">
                   {totalQuantity}

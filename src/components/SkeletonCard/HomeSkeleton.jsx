@@ -5,11 +5,7 @@ export default function HomeSkeleton() {
     <div className="animate-pulse">
       {/* --- فاصله نوار بالایی --- */}
       <div className="main1">
-        {/* --- اسلایدر بنرها در بالا --- */}
-        <div className="pb-[5px] pt-[13px] px-[10px] flex gap-[10px]">
-          <div className="w-full h-[90px] lg:h-[180px] bg-[var(--cartsm)] rounded-xl"></div>
-          <div className="w-full h-[90px] lg:h-[180px] bg-[var(--cartsm)] rounded-xl"></div>
-        </div>
+
         {/* header */}
         <div className="flex flex-col md:flex-row-reverse gap-[10px]   mt-[10px] px-[16px] lg:px-[75px]">
           {/* --- بخش هدر (عکس‌ها و باکس‌ها) --- */}
@@ -40,8 +36,9 @@ export default function HomeSkeleton() {
           </div>
 
           {/* --- فاصله وسط موبایل --- */}
-          <div className="h-[3rem] md:h-[6rem] md:hidden"></div>
+ <div className="h-[2rem] md:h-[6rem] relative md:hidden">
 
+            </div>
           {/* --- بخش بنر عنوان و دکمه‌ها --- */}
           <div className="flex-1 mx-[9px] flex flex-col justify-center items-center mt-6">
             <div className="h-4 w-48 bg-[var(--cartsm)] rounded mb-4"></div>
@@ -68,7 +65,11 @@ export default function HomeSkeleton() {
             ))}
           </div>
         </div>
-
+   {/* --- اسلایدر بنرها در بالا --- */}
+        <div className="pb-[5px] pt-[13px] px-[10px] flex gap-[10px]">
+          <div className="w-full h-[90px] lg:h-[180px] bg-[var(--cartsm)] rounded-xl"></div>
+          <div className="w-full h-[90px] lg:h-[180px] bg-[var(--cartsm)] rounded-xl"></div>
+        </div>
         <div className="h-[3rem]"></div>
 
         {/* --- بنر تخفیفات --- */}

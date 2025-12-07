@@ -80,53 +80,13 @@ function Home() {
         <HomeSkeleton />
       ) : (
         <div className="main1">
-          {/* بنر ها */}
-          <div className="pb-[5px] pt-[13px] px-[10px] ">
-            <Swiper
-              slidesPerView={1}
-              spaceBetween={5}
-              autoplay={{
-                delay: 4500,
-                disableOnInteraction: false,
-              }}
-              breakpoints={{
-                766: { slidesPerView: 2 },
-              }}
-              loop={true}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide>
-                <img src={ersal} alt="" className="w-full rounded-xl" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={sopurt}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-900"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={back}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-800"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={off}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-900"
-                />
-              </SwiperSlide>
-            </Swiper>
-          </div>
+
           {/* header */}
-          <div className="flex mt-[10px] flex-col  px-[16px] lg:px-[75px] md:flex-row-reverse">
+          <div className="flex  flex-col px-[16px] lg:px-[75px] md:flex-row-reverse">
             {/* بخش 1 */}
-            <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2 my-[18px]  font-bold text-[125%]">
-              <div className="right flex-1 flex flex-col justify-between gap-[20px]">
-                <div className="hidden lg:inline-block lg:h-[20%]"></div>
+            <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2  my-[18px] lg:my-[10px]  font-bold text-[125%]">
+              <div className="right flex-1 flex flex-col  gap-[20px]">
+                <div className="hidden lg:inline-block lg:h-[3%]"></div>
                 {/* رضایت */}
                 <div className="flex flex-col rounded-2xl h-[fit-content] bg-[var(--cartsm)]">
                   <span className=" my-[2px] mx-[15px] pt-[7px] ">+900</span>
@@ -170,7 +130,7 @@ function Home() {
               </div>
             </div>
             {/* فاصله */}
-            <div className="h-[6rem] relative md:hidden">
+            <div className="h-[2rem] md:h-[6rem] relative md:hidden">
               <img
                 src={shirtimg}
                 alt=""
@@ -179,7 +139,13 @@ function Home() {
             </div>
             {/* بخش2 */}
             <div className="section2 md:flex-2 relative mx-[9px] flex flex-col justify-center items-center">
-              <h1 className="font-bold text-[180%]">
+               <div className="h-[1rem] md:h-[2rem] relative">
+                <img
+                  src={imgdaman}
+                  alt=""
+                  className="h-[4rem] absolute left-[1rem] bottom-0"
+                />
+              </div> <h1 className="font-bold text-[180%]">
                 ب&#x0640;&#x0640;ا&zwnj;&zwnj; &zwnj;&zwnj;&zwnj;&zwnj;
                 <span className="text-[var(--textsm)]">
                   ف&#x0640;&#x0640;ط&#x0640;&#x0640;روس <br />
@@ -218,24 +184,18 @@ function Home() {
               >
                 همه محصولات
               </Link>
-              <div className="h-[2rem] relative">
-                <img
-                  src={imgdaman}
-                  alt=""
-                  className="h-[4rem] absolute left-[1rem] bottom-0"
-                />
-              </div>
+
             </div>
           </div>
           {/* فاصله */}
-          <div className="h-[2rem] md:h-[5rem] relative">
+          <div className="h-[2rem] lg:h-[5rem] relative">
             <img
               src={imgdaman}
               alt=""
-              className="h-[5.4rem] absolute right-[3.6rem] z-1 bottom-0"
+              className="h-[5.4rem] absolute right-[3.6rem] z-1 bottom-[-40px] md:bottom-0"
             />
           </div>
-          <div className="h-[3rem] md:h-[3rem]"></div>
+          <div className="h-[3rem] md:hidden"></div>
           {/* دسته بندی  */}
           <div className="categorys ">
             <h3 className="font-bold text-[140%] px-[15px]  ">
@@ -246,7 +206,50 @@ function Home() {
               <Categorys />
             </Link>
           </div>
-          <div className="h-[2rem] md:h-[3rem]"></div>
+          <div className="h-[1rem] md:h-[3rem]"></div>
+            {/* بنر ها */}
+          <div className="pb-[5px] pt-[13px] px-[10px]  ">
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={5}
+              autoplay={{
+                delay: 4500,
+                disableOnInteraction: false,
+              }}
+              breakpoints={{
+                766: { slidesPerView: 2 },
+              }}
+              loop={true}
+              modules={[Autoplay]}
+            >
+              <SwiperSlide>
+                <img src={ersal} alt="" className="w-full rounded-xl" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src={sopurt}
+                  alt=""
+                  className="w-full rounded-xl bg-blue-900"
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src={back}
+                  alt=""
+                  className="w-full rounded-xl bg-blue-900"
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src={off}
+                  alt=""
+                  className="w-full rounded-xl bg-blue-900"
+                />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          <div className="h-[1.4rem] md:h-[5rem]"></div>
+
           {/* تخفیفات */}
           <Link
             to="/Fotros/Products"
@@ -304,7 +307,7 @@ function Home() {
               </Link>
             </div>
           </Link>
-          <div className="h-[3rem]"></div>
+          <div className="h-[2rem] md:h-[5rem]"></div>
 
           {/* محصولات جدید */}
           <SlideProduct
@@ -314,7 +317,7 @@ function Home() {
             allurl="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
           ></SlideProduct>
           {/* فاصله */}
-          <div className="h-[4.5rem]  "></div>
+          <div className="h-[3rem] md:h-[5.5rem]  "></div>
           {/* ست ها */}
           <div className="  px-[3px]">
             <h2 className="font-bold text-[140%] px-[14px]  ">
@@ -463,7 +466,7 @@ function Home() {
             </div>
           </div>
           {/* فاصله */}
-          <div className="h-[4.5rem]  "></div>
+          <div className="h-[4.5rem] md:h-[5.5rem]  "></div>
 
           {/* footer */}
           <Footer />
