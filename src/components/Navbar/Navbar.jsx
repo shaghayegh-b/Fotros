@@ -99,7 +99,7 @@ function Navbar() {
             onClick={() => setMeno(true)}
             className="flex-1 lg:flex-0 inline-block lg:hidden h-full"
           >
-            <HiBars3BottomRight className="!h-full !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+            <HiBars3BottomRight className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
           </button>
           {/* menumd */}
           <div className="hidden flex-3 lg:flex items-center gap-[21px] ">
@@ -172,7 +172,7 @@ function Navbar() {
             </div>
           </div>
           {/* logo */}
-          <div className="flex-3 h-[29px] self-center mx-[8px] flex justify-center lg:hidden">
+          <div className="flex-3 h-[49px] self-center mx-[8px] flex justify-center lg:hidden">
             <img src={logoimg} alt="Logoimg" className=" h-[31px] mt-[4px] mb-[2px] logo" />
           </div>
           {/* search & shopping & userdashboard */}
@@ -197,11 +197,11 @@ function Navbar() {
               className={`lg:hidden   py-[2px] lg:py-[6px] rounded-xl h-full
               ${totalQuantity == 0 ? "mx-[4px] lg:mx-[8px]" : "mx-[10px] lg:mx-[12px]"}`}
             >
-              <IoSearchSharp  className="!h-full !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+              <IoSearchSharp  className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
             </button>
             {/* shopping */}
-            <NavLink to="/Fotros/ShoppingCart" className="relative h-full">
-              <RiShoppingCartLine  className="!h-full !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+            <NavLink to="/Fotros/ShoppingCart" className="relative h-full py-[2px]">
+              <RiShoppingCartLine  className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
               {!totalQuantity == 0 && (
                 <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-[var(--btn)] text-white shadow-sm">
                   {totalQuantity}

@@ -7,7 +7,7 @@ const ProductIdSkeleton = () => {
       <div className="md:w-[88%] w-full flex md:flex-row flex-col justify-center items-start md:gap-16 gap-5 md:px-10 px-4">
         {/* عکس محصول */}
         <div className="flex flex-col gap-5 justify-between self-center items-center md:w-1/4 w-full">
-          <div className="bg-[var(--cart)] dark:bg-[var(--cartsm)] w-full h-[30rem] rounded-lg" />
+          <div className="bg-[var(--cart)] dark:bg-[var(--cartsm)] w-full h-[12rem] rounded-lg" />
           <div className="flex gap-2 w-full justify-start">
             <div className="bg-[var(--cart)] dark:bg-[var(--cartsm)] w-16 h-16 rounded-lg" />
             <div className="bg-[var(--cart)] dark:bg-[var(--cartsm)] w-16 h-16 rounded-lg" />

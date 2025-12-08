@@ -6,6 +6,7 @@ import imgkot from "../../assets/img/kot.png";
 import imgtap from "../../assets/img/tap.png";
 import shirtimg from "../../assets/img/shirt.png";
 import imgdaman from "../../assets/img/daman.png";
+import imgtop from "../../assets/img/top.png";
 import offset from "../../assets/img/off.png";
 import priceimg from "../../assets/img/percentsymbol.png";
 import varzeshset from "../../assets/img/set.png";
@@ -80,9 +81,8 @@ function Home() {
         <HomeSkeleton />
       ) : (
         <div className="main1">
-
           {/* header */}
-          <div className="flex  flex-col px-[16px] lg:px-[75px] md:flex-row-reverse">
+          <div className="flex  flex-col-reverse px-[16px] lg:px-[75px] md:flex-row-reverse">
             {/* بخش 1 */}
             <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2  my-[18px] lg:my-[10px]  font-bold text-[125%]">
               <div className="right flex-1 flex flex-col  gap-[20px]">
@@ -132,23 +132,25 @@ function Home() {
             {/* فاصله */}
             <div className="h-[2rem] md:h-[6rem] relative md:hidden">
               <img
-                src={shirtimg}
+                src={imgdaman}
                 alt=""
-                className="h-[5rem] absolute left-[1rem] bottom-0 z-1"
+                className="h-[5rem] absolute right-[1rem] bottom-0 z-1"
               />
             </div>
             {/* بخش2 */}
             <div className="section2 md:flex-2 relative mx-[9px] flex flex-col justify-center items-center">
-               <div className="h-[1rem] md:h-[2rem] relative">
+              {/* فاصله */}
+              <div className="h-[1rem] md:h-[2rem] relative">
                 <img
                   src={imgdaman}
                   alt=""
                   className="h-[4rem] absolute left-[1rem] bottom-0"
                 />
-              </div> <h1 className="font-bold text-[180%]">
+              </div>
+              <h1 className="font-bold text-[180%] text-center">
                 ب&#x0640;&#x0640;ا&zwnj;&zwnj; &zwnj;&zwnj;&zwnj;&zwnj;
-                <span className="text-[var(--textsm)]">
-                  ف&#x0640;&#x0640;ط&#x0640;&#x0640;روس <br />
+                <span className="text-[var(--textsm)] font-semibold">
+                  ف&#x0640;&#x0640;&#x0640;&#x0640;&#x0640;ط&#x0640;&#x0640;&#x0640;&#x0640;روس <br />
                 </span>
                 م&#x0640;&#x0640;ت&#x0640;&#x0640;ف&#x0640;&#x0640;اوت
                 ظ&#x0640;&#x0640;اه&#x0640;&#x0640;ر ش&#x0640;و
@@ -184,18 +186,24 @@ function Home() {
               >
                 همه محصولات
               </Link>
-
+            </div>
+            {/* فاصله */}
+            <div className="h-[2rem] lg:h-[5rem] relative">
+              <img
+                src={shirtimg}
+                alt=""
+                className="h-[4.4rem] absolute left-[0.4rem] z-1 bottom-[-70px] md:bottom-0"
+              />
             </div>
           </div>
           {/* فاصله */}
           <div className="h-[2rem] lg:h-[5rem] relative">
             <img
-              src={imgdaman}
+              src={imgtop}
               alt=""
-              className="h-[5.4rem] absolute right-[3.6rem] z-1 bottom-[-40px] md:bottom-0"
+              className="h-[5.4rem] absolute left-[.8rem] z-1 top-[-20px] md:bottom-0"
             />
           </div>
-          <div className="h-[3rem] md:hidden"></div>
           {/* دسته بندی  */}
           <div className="categorys ">
             <h3 className="font-bold text-[140%] px-[15px]  ">
@@ -207,7 +215,7 @@ function Home() {
             </Link>
           </div>
           <div className="h-[1rem] md:h-[3rem]"></div>
-            {/* بنر ها */}
+          {/* بنر ها */}
           <div className="pb-[5px] pt-[13px] px-[10px]  ">
             <Swiper
               slidesPerView={1}

@@ -7,7 +7,7 @@ export default function HomeSkeleton() {
       <div className="main1">
 
         {/* header */}
-        <div className="flex flex-col md:flex-row-reverse gap-[10px]   mt-[10px] px-[16px] lg:px-[75px]">
+        <div className="flex flex-col-reverse md:flex-row-reverse gap-[10px]   mt-[10px] px-[16px] lg:px-[75px]">
           {/* --- بخش هدر (عکس‌ها و باکس‌ها) --- */}
           <div className="flex-1 flex mt-[10px] px-[16px] lg:px-[75px] flex-row-reverse gap-4">
             {/* ستون راست */}
