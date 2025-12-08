@@ -51,7 +51,7 @@ function Meno() {
     return "light"; // وقتی system بود → برگرد به light
   };
 
-  const handleThemeToggle  = () => {
+  const handleThemeToggle = () => {
     setUserTheme(nextTheme());
   };
   return (
@@ -111,55 +111,57 @@ function Meno() {
                 </NavLink>
               </li>
               {/* دسته بندی */}
-              <li
-                className={`flex flex-col gap-[10px] relative
-                 `}
-                onClick={() => setGrouping(!grouping)}
-              >
-                <div className="font-[600] flex-2 flex justify-between items-center px-[7px] py-[5px]">
-                  <span className="flex-2 flex gap-[8px]">
-                    <MdCategory
-                      className={` ${
-                        location.pathname === "/Fotros/Products" || grouping
-                          ? "text-[#4f93e8]"
-                          : "text-[var(--icon-menu)]"
-                      }`}
-                    />
-                    دسته بندی
-                  </span>
-                  <span>
-                    <MdKeyboardArrowUp
-                      className={` transition-all duration-300 ease-in-out ${
-                        grouping ? "rotate-[180deg]" : ""
-                      }`}
-                    ></MdKeyboardArrowUp>
-                  </span>
-                </div>
+             <li className="flex flex-col relative">
+  <div
+    className={`font-[600] flex justify-between items-center px-[7px] cursor-pointer  transition-all duration-500 ease-in-out ${grouping?"pb-[15px]":""}`}
+    onClick={() => setGrouping(!grouping)}
+  >
+    <span className="flex gap-[8px] items-center">
+      <MdCategory
+        className={`${
+          location.pathname === "/Fotros/Products" || grouping
+            ? "text-[#4f93e8]"
+            : "text-[var(--icon-menu)]"
+        } transition-colors duration-300`}
+      />
+      دسته بندی
+    </span>
+    <MdKeyboardArrowUp
+      className={`transition-transform duration-300 ease-in-out ${
+        grouping ? "rotate-180" : "rotate-0"
+      }`}
+    />
+  </div>
 
-                <div
-                  className={`overflow-hidden transition-all duration-500 flex flex-col  ${
-                    grouping ? "block bg-[var(--category-menu)]" : "hidden"
-                  }
-               `}
-                >
-                  {PRODUCT_CATEGORIES.map((cat) => (
-                    <NavLink
-                      key={cat.name}
-                      to="/Fotros/Products"
-                      onClick={() => {
-                        funcAxios(cat.url);
-                        setSortFilter("");
-                        setOnlyAvailable(false);
-                        applyFilter("", false, cat.filterName);
-                        setMeno(false);
-                      }}
-                      className="tracking-tighter w-full px-[7px] py-[8px] hover:bg-[#afd2fd] rounded-lg border-y border-y-[2px] border-y-[var(--category-menu-border)] "
-                    >
-                      {cat.name}
-                    </NavLink>
-                  ))}
-                </div>
-              </li>
+  {/* Container انیمیشن */}
+  <div
+    className={`overflow-hidden transition-all duration-500 ease-in-out`}
+    style={{
+      maxHeight: grouping ? "1000px" : "0",
+      opacity: grouping ? 1 : 0,
+    }}
+  >
+    <div className="flex flex-col bg-[var(--category-menu)]">
+      {PRODUCT_CATEGORIES.map((cat) => (
+        <NavLink
+          key={cat.name}
+          to="/Fotros/Products"
+          onClick={() => {
+            funcAxios(cat.url);
+            setSortFilter("");
+            setOnlyAvailable(false);
+            applyFilter("", false, cat.filterName);
+            setMeno(false);
+          }}
+          className="tracking-tighter w-full px-[7px] py-[8px] hover:bg-[#afd2fd] rounded-lg border-y border-y-[2px] border-y-[var(--category-menu-border)]"
+        >
+          {cat.name}
+        </NavLink>
+      ))}
+    </div>
+  </div>
+</li>
+
 
               {[
                 {

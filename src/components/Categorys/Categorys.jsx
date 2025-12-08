@@ -97,7 +97,7 @@ function Categorys() {
                   type="button"
                   onClick={() => handleCategoryClick(url, filterName)}
                   className={`Category flex flex-col items-center justify-center py-[3px] px-[6px]
-                    w-[85px] h-[84px] md:w-[128px] md:h-[128px] lg:w-[140px] lg:h-[120px] bg-[var(--cartcategory)] rounded-[1rem]
+                    w-[89px] h-[84px] md:w-[128px] md:h-[128px] lg:w-[140px] lg:h-[120px] bg-[var(--cartcategory)] rounded-[1rem]
                      transition-all duration-300 ease-out
       hover:bg-[var(--cartcategory-hover)] hover:scale-105 hover:shadow-lg
       overflow-hidden text-ellipsis text-center
@@ -106,7 +106,7 @@ function Categorys() {
                   {!hideIcons && Icon && (
                     <Icon className="flex justify-center items-center text--[var(--textcategory)] group-hover:text-gray-600 transition-all duration-300" />
                   )}
-                  <p className=" font-semibold text--[var(--textcategory)] break-words leading-tight text-center">
+                  <p className=" font-semibold text--[var(--textcategory)] break-words leading-tight text-center whitespace-nowrap w-full">
                     {name}
                   </p>
                 </button>

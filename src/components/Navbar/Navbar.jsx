@@ -328,29 +328,29 @@ function Navbar() {
           </div>
         </div>
         {/* serchmobile */}
-        {fSearch && (
-          <div className="bg-[var(--navbar-bg)] w-full fixed top-0 left-0 z-2 flex justify-center">
-            <SearchBar
-              mode="mobile"
-              ref={searchRef}
-              inputValue={inputValue}
-              onChange={(e) => {
-                setinputValue(e.target.value);
-                searchProducts(e.target.value);
-                setIsSearchDropdownOpen(e.target.value.length > 0);
-              }}
-              onFocus={() =>
-                setIsSearchDropdownOpen(searchedProducts.length > 0)
-              }
-              onClose={() => {
-                setFSearch(false);
-                setIsSearchDropdownOpen(false);
-                setinputValue("");
-                searchProducts("");
-              }}
-            />
-          </div>
-        )}
+       <div
+  className={`fixed h-[48px] top-0 left-0 w-full z-20 flex justify-center bg-[var(--navbar-bg)] transform transition-all duration-300 ease-in-out
+    ${fSearch ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 pointer-events-none origin-top"}`}
+>
+  <SearchBar
+    mode="mobile"
+    ref={searchRef}
+    inputValue={inputValue}
+    onChange={(e) => {
+      setinputValue(e.target.value);
+      searchProducts(e.target.value);
+      setIsSearchDropdownOpen(e.target.value.length > 0);
+    }}
+    onFocus={() => setIsSearchDropdownOpen(searchedProducts.length > 0)}
+    onClose={() => {
+      setFSearch(false);
+      setIsSearchDropdownOpen(false);
+      setinputValue("");
+      searchProducts("");
+    }}
+  />
+</div>
+
       </div>
     </>
   );
