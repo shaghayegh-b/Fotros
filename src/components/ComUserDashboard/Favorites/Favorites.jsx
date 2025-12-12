@@ -54,7 +54,7 @@ function Favorites() {
       {
         pagedFavorites.length === 0 && !productsLoading && (
           <p className="text-center text-gray-500 mt-10">
-            هیچ محصولی در علاقه‌مندی‌ها موجود نیست 😔
+            هیچ محصولی در علاقه‌مندی‌ها موجود نیست! 
           </p>
         )}
       <div className="pruducts grid gap-x-[10px] gap-y-[7px] lg:grid-cols-4 md:grid-cols-3 grid-cols-2">

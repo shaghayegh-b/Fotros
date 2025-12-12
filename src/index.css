@@ -44,7 +44,7 @@ body {
 /* بدنه و متن اصلی */
 body {
   font-size: 100%;
-  font-family: "Poppins", "Inter", sans-serif;
+  font-family: "Vazir", "Inter", sans-serif;
   background-color: var(--bg-body);
   color: var(--text-body);
   transition: background-color 0.2s ease, color 0.2s ease;

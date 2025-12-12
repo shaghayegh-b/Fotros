@@ -150,7 +150,8 @@ function Home() {
               <h1 className="font-bold text-[180%] text-center">
                 ب&#x0640;&#x0640;ا&zwnj;&zwnj; &zwnj;&zwnj;&zwnj;&zwnj;
                 <span className="text-[var(--textsm)] font-semibold">
-                  ف&#x0640;&#x0640;&#x0640;&#x0640;&#x0640;ط&#x0640;&#x0640;&#x0640;&#x0640;روس <br />
+                  ف&#x0640;&#x0640;&#x0640;&#x0640;&#x0640;ط&#x0640;&#x0640;&#x0640;&#x0640;روس{" "}
+                  <br />
                 </span>
                 م&#x0640;&#x0640;ت&#x0640;&#x0640;ف&#x0640;&#x0640;اوت
                 ظ&#x0640;&#x0640;اه&#x0640;&#x0640;ر ش&#x0640;و
@@ -215,6 +216,16 @@ function Home() {
             </Link>
           </div>
           <div className="h-[1rem] md:h-[3rem]"></div>
+
+          {/* محصولات جدید */}
+          <SlideProduct
+            title=" م&#x0640;حص&#x0640;ولات ج&#x0640;دی&#x0640;د"
+            title2="محصولات جدید"
+            url="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
+            allurl="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
+          ></SlideProduct>
+          {/* فاصله */}
+          <div className="h-[1rem] md:h-[5.5rem]  "></div>
           {/* بنر ها */}
           <div className="pb-[5px] pt-[13px] px-[10px]  ">
             <Swiper
@@ -244,7 +255,7 @@ function Home() {
                 <img
                   src={back}
                   alt=""
-                  className="w-full rounded-xl bg-blue-900"
+                  className="w-full rounded-xl bg-blue-800"
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -269,7 +280,7 @@ function Home() {
               setOnlyAvailable(false);
               applyFilter("", false, "فروش ویژه");
             }}
-            className="m-[15px] p-[10px] mx-[20px] md:mx-[50px] bg-[var(--cartsm)] h-[180px] md:h-[200px] rounded-2xl flex md:items-center"
+            className="m-[15px] p-[10px] mx-[10px] md:mx-[50px] bg-[var(--cartsm)] h-[150px] md:h-[200px] rounded-2xl flex md:items-center"
           >
             <img className="h-[100%] md:h-[155%]" src={offset} alt="" />
             <div className="w-full flex flex-col justify-center">
@@ -316,16 +327,6 @@ function Home() {
             </div>
           </Link>
           <div className="h-[2rem] md:h-[5rem]"></div>
-
-          {/* محصولات جدید */}
-          <SlideProduct
-            title=" م&#x0640;حص&#x0640;ولات ج&#x0640;دی&#x0640;د"
-            title2="محصولات جدید"
-            url="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
-            allurl="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
-          ></SlideProduct>
-          {/* فاصله */}
-          <div className="h-[3rem] md:h-[5.5rem]  "></div>
           {/* ست ها */}
           <div className="  px-[3px]">
             <h2 className="font-bold text-[140%] px-[14px]  ">
@@ -345,7 +346,7 @@ function Home() {
                   setOnlyAvailable(false);
                   applyFilter("", false, "ست های ورزشی");
                 }}
-                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
+                className="mx-[8px] p-[10px] md:m-[unset] bg-[var(--footer)] md:bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
               >
                 <div className="h-[100%]  w-[50%] flex justify-center items-center">
                   <img className="h-[100%]" src={varzeshset} alt="" />
@@ -380,7 +381,7 @@ function Home() {
                   setOnlyAvailable(false);
                   applyFilter("", false, "ست های ورزشی");
                 }}
-                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
+                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] md:bg-[var(--footer)] h-[150px] lg:h-[200px] rounded-2xl flex"
               >
                 <div className="h-[100%]  w-[50%] flex justify-center items-center">
                   <img className="h-[100%]" src={tabeston} alt="" />
@@ -415,7 +416,7 @@ function Home() {
                   setOnlyAvailable(false);
                   applyFilter("", false, "ست های کامل");
                 }}
-                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
+                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--footer)] h-[150px] lg:h-[200px] rounded-2xl flex"
               >
                 <div className="h-[100%]  w-[50%] flex justify-center items-center">
                   <img className="h-[100%]" src={offset} alt="" />

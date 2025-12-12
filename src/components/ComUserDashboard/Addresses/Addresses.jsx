@@ -32,7 +32,7 @@ function Addresses() {
       </div>
       {addresses.length === 0 && (
         <p className="text-center text-gray-500 mt-10">
-          هنوز هیچ آدرسی اضافه نکردی 😅
+          هنوز آدرسی اضافه نشده !
         </p>
       )}
       {addresses.map((address) => (

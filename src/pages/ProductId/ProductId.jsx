@@ -305,7 +305,7 @@ function ProductId() {
       <Navbar></Navbar>
       <div className="h-10 lg:h-16"></div>
       <div className="">
-        <h6 className="text-[var(--text-gary)] px-[20px] md:px-[40px] pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
+        <h6 className="text-[var(--text-gary)] px-[20px] md:px-[40px] pt-[22px] lg:pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>{product.title}</span>
         </h6>
@@ -329,7 +329,6 @@ function ProductId() {
                 visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
               }`}
             >
-              {" "}
               {/* نوار Progress */}
               <div className="absolute w-[100%]  left-0 bottom-[0px]  shadow-[0_0_8px_rgba(30,136,229,0.6)] rounded-b-xl">
                 <div className="h-[4px] bg-gray-300">
@@ -772,131 +771,150 @@ function ProductId() {
               </div>
               {/* توضیحات محصول */}
               {desc && (
-                <div className={` desc flex gap-[10px] py-[16px] `}>
-                  <div className="md:w-3/10 w-2/5  flex flex-col gap-[14px]">
-                    <ul className="flex flex-col gap-[14px]">
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                        نام
-                      </li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                        کد
-                      </li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                        جنس پارچه
-                      </li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                        سایز
-                      </li>
-                      {product.dokme && (
-                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                          نحوه بسته شدن
-                        </li>
-                      )}
-                    </ul>
-                    {(product.shoulder ||
-                      product.chest ||
-                      product.arm ||
-                      product.wrist ||
-                      product.stans ||
-                      product.dressLength) && (
+                <div className="flex flex-col md:flex-row md:gap-[20px] ">
+                  <div className={`md:w-[55%] desc flex gap-[10px] pt-[16px] md:pb-[16px]`}>
+                    <div className="md:w-3/10 w-2/5 flex flex-col gap-[14px]">
                       <ul className="flex flex-col gap-[14px]">
-                        {product.shoulder && (
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          نام
+                        </li>
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          کد
+                        </li>
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          جنس پارچه
+                        </li>
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          سایز
+                        </li>
+                        {product.dokme && (
                           <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            عرض شانه
+                            نحوه بسته شدن
                           </li>
                         )}
-                        {product.chest && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            دور سینه
-                          </li>
-                        )}
-                        {product.arm && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            دور بازو
-                          </li>
-                        )}
-                        {product.wrist && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            دور مچ
-                          </li>
-                        )}
-                        {product.stans && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            قد آستین
-                          </li>
-                        )}
-                        {product.dressLength && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            قد کار
-                          </li>
-                        )}
+                         <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          کشور سازنده
+                        </li>
                       </ul>
-                    )}
+
+                    </div>
+                    <div className="md:w-7/10 w-2/3 flex flex-col gap-[14px]">
+
+                      <ul className="flex flex-col gap-[14px]">
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          {product.title}
+                        </li>
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          {product.code}
+                        </li>
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                          {product.jens}
+                        </li>
+                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px] flex">
+                          {product.size.map((s) => (
+                            <span className="">
+                              {s}
+                              {s > 2 && <span>,</span>}
+                            </span>
+                          ))}
+                        </li>
+                        {product.dokme && (
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                            {product.dokme}
+                          </li>
+                        )}
+                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px] flex">
+                          ایران
+                        </li>
+                      </ul>
+
+                    </div>
                   </div>
-                  <div className="md:w-7/10 w-2/3 flex flex-col gap-[14px]">
-                    <ul className="flex flex-col gap-[14px]">
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                        {product.title}
-                      </li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                        {product.code}
-                      </li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                        {product.jens}
-                      </li>
-                      <li className="bg-[var(--adress-sm)] px-[12px] py-[4px] flex">
-                        {product.size.map((s) => (
-                          <span className="">
-                            {s}
-                            {s > 2 && <span>,</span>}
-                          </span>
-                        ))}
-                      </li>
-                      {product.dokme && (
-                        <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                          {product.dokme}
-                        </li>
+                    <div className={`md:w-[45%] desc flex gap-[10px] pt-[10px] md:pt-[16px] pb-[16px]`}>
+                    <div className="md:w-3/10 w-2/5 flex flex-col gap-[14px]">
+
+                      {(product.shoulder ||
+                        product.chest ||
+                        product.arm ||
+                        product.wrist ||
+                        product.stans ||
+                        product.dressLength) && (
+                        <ul className="flex flex-col gap-[14px]">
+                          {product.shoulder && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              عرض شانه
+                            </li>
+                          )}
+                          {product.chest && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              دور سینه
+                            </li>
+                          )}
+                          {product.arm && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              دور بازو
+                            </li>
+                          )}
+                          {product.wrist && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              دور مچ
+                            </li>
+                          )}
+                          {product.stans && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              قد آستین
+                            </li>
+                          )}
+                          {product.dressLength && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              قد کار
+                            </li>
+                          )}
+                        </ul>
                       )}
-                    </ul>
-                    {(product.shoulder ||
-                      product.chest ||
-                      product.arm ||
-                      product.wrist ||
-                      product.stans ||
-                      product.dressLength) && (
-                      <ul className="flex flex-col gap-[14px]">
-                        {product.shoulder && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            {product.shoulder}
-                          </li>
-                        )}
-                        {product.chest && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            {product.chest}
-                          </li>
-                        )}
-                        {product.arm && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            {product.arm}
-                          </li>
-                        )}
-                        {product.wrist && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            {product.wrist}
-                          </li>
-                        )}
-                        {product.stans && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            {product.stans}
-                          </li>
-                        )}
-                        {product.dressLength && (
-                          <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
-                            {product.dressLength}
-                          </li>
-                        )}
-                      </ul>
-                    )}
+                    </div>
+                    <div className="md:w-7/10 w-2/3 flex flex-col gap-[14px]">
+
+                      {(product.shoulder ||
+                        product.chest ||
+                        product.arm ||
+                        product.wrist ||
+                        product.stans ||
+                        product.dressLength) && (
+                        <ul className="flex flex-col gap-[14px]">
+                          {product.shoulder && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              {product.shoulder}
+                            </li>
+                          )}
+                          {product.chest && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              {product.chest}
+                            </li>
+                          )}
+                          {product.arm && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              {product.arm}
+                            </li>
+                          )}
+                          {product.wrist && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              {product.wrist}
+                            </li>
+                          )}
+                          {product.stans && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              {product.stans}
+                            </li>
+                          )}
+                          {product.dressLength && (
+                            <li className="bg-[var(--adress-sm)] px-[12px] py-[4px]">
+                              {product.dressLength}
+                            </li>
+                          )}
+                        </ul>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}

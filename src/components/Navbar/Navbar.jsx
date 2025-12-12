@@ -34,6 +34,7 @@ function Navbar() {
     useAxios();
   const { searchProducts, searchedProducts, searchQuery } = useSearch();
   const { isLoggedIn, user } = useAuth();
+const searchInputRef = useRef(null);
 
   const dropdownRef = useRef(null);
   const location = useLocation();
@@ -91,16 +92,30 @@ function Navbar() {
         className={`Navbar h-[50px] md:h-[unset]  bg-[var(--navbar-bg)] py-[5px] px-[3px] md:p-[unset] border-b-[3px] border-b-solid border-[var(--navbar-bb)] w-full fixed top-0 z-20 `}
       >
         <div
-          className={`Navbarchild h-full px-[8px] lg:px-[15px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
+          className={`Navbarchild h-full px-[4px] lg:px-[15px] w-full flex items-center justify-between  shadow-[0px 4px 4px 0px rgba(0, 0, 0, 0.04)]
             ${fSearch ? "hidden" : "flex"} `}
         >
           {/* menumobile */}
+          <div className="w-[fit-content] flex items-center lg:hidden">
+            <button
+              onClick={() => setMeno(true)}
+              className="flex-1 lg:flex-0 inline-block lg:hidden h-full"
+            >
+              <HiBars3BottomRight className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+            </button>
+          {/* search sm */}
           <button
-            onClick={() => setMeno(true)}
-            className="flex-1 lg:flex-0 inline-block lg:hidden h-full"
+ onClick={() => {
+    setFSearch(true);
+    setTimeout(() => {
+      searchInputRef.current?.focus();
+    }, 50);
+  }}            className={`flex-1 py-[2px]  rounded-xl h-full
+              `}
           >
-            <HiBars3BottomRight className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+            <IoSearchSharp className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
           </button>
+          </div>
           {/* menumd */}
           <div className="hidden flex-3 lg:flex items-center gap-[21px] ">
             <div className="flex items-center gap-[7px] px-[5px]">
@@ -173,14 +188,18 @@ function Navbar() {
           </div>
           {/* logo */}
           <div className="flex-3 h-[49px] self-center mx-[8px] flex justify-center lg:hidden">
-            <img src={logoimg} alt="Logoimg" className=" h-[31px] mt-[4px] mb-[2px] logo" />
+            <img
+              src={logoimg}
+              alt="Logoimg"
+              className=" h-[31px] mt-[6px] logo"
+            />
           </div>
           {/* search & shopping & userdashboard */}
           <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-end items-center h-full">
             {/* search desktop */}
             <SearchBar
               mode="desktop"
-              ref={searchRef}
+               ref={searchInputRef}
               inputValue={inputValue}
               onChange={(e) => {
                 setinputValue(e.target.value);
@@ -192,16 +211,12 @@ function Navbar() {
               }
             />
 
-            <button
-              onFocus={() => setFSearch(true)}
-              className={`lg:hidden   py-[2px] lg:py-[6px] rounded-xl h-full
-              ${totalQuantity == 0 ? "mx-[4px] lg:mx-[8px]" : "mx-[10px] lg:mx-[12px]"}`}
-            >
-              <IoSearchSharp  className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
-            </button>
             {/* shopping */}
-            <NavLink to="/Fotros/ShoppingCart" className="relative h-full py-[2px]">
-              <RiShoppingCartLine  className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+            <NavLink
+              to="/Fotros/ShoppingCart"
+              className="relative h-full py-[2px]"
+            >
+              <RiShoppingCartLine className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
               {!totalQuantity == 0 && (
                 <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-[45%] bg-[var(--btn)] text-white shadow-sm">
                   {totalQuantity}
@@ -212,14 +227,14 @@ function Navbar() {
             {isLoggedIn ? (
               <NavLink
                 to="/Fotros/userdashboard/UserInfo"
-                className="h-full w-[80px] lg:w-[115px] hidden md:flex items-center justify-around gap-2 px-[6px] py-[2px] rounded-full bg-[var(--navbar-porof)] hover:bg-[var(--navbar-porof-hover)] transition-colors duration-200"
+                className="p-[3px] md:p-[unset] w-[41px] h-full md:w-[80px] lg:w-[115px] flex items-center justify-around gap-2 px-[6px] py-[2px] rounded-full bg-[var(--navbar-porof)] hover:bg-[var(--navbar-porof-hover)] transition-colors duration-200"
               >
                 <img
                   src={user.profilePic}
                   alt={user.fname}
-                  className="h-[1.2rem] md:h-[2rem] rounded-full object-cover border border-[var(--sup-b)] shadow-sm"
+                  className="h-full lg:h-[1.2rem] md:h-[2rem] rounded-full object-cover border border-[var(--sup-b)] shadow-sm"
                 />
-                <p className=" flex-1 text-center text-ellipsis whitespace-nowrap ">
+                <p className="hidden md:inline flex-1 text-center text-ellipsis whitespace-nowrap ">
                   {user.fname}
                 </p>
                 <MdKeyboardArrowDown className="hidden lg:inline-block shrink-0" />
@@ -328,29 +343,32 @@ function Navbar() {
           </div>
         </div>
         {/* serchmobile */}
-       <div
-  className={`fixed h-[48px] top-0 left-0 w-full z-20 flex justify-center bg-[var(--navbar-bg)] transform transition-all duration-300 ease-in-out
-    ${fSearch ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 pointer-events-none origin-top"}`}
->
-  <SearchBar
-    mode="mobile"
-    ref={searchRef}
-    inputValue={inputValue}
-    onChange={(e) => {
-      setinputValue(e.target.value);
-      searchProducts(e.target.value);
-      setIsSearchDropdownOpen(e.target.value.length > 0);
-    }}
-    onFocus={() => setIsSearchDropdownOpen(searchedProducts.length > 0)}
-    onClose={() => {
-      setFSearch(false);
-      setIsSearchDropdownOpen(false);
-      setinputValue("");
-      searchProducts("");
-    }}
-  />
-</div>
-
+        <div
+          className={`fixed h-[48px] top-0 left-0 w-full z-20 flex justify-center bg-[var(--navbar-bg)] transform transition-all duration-300 ease-in-out
+    ${
+      fSearch
+        ? "opacity-100 scale-y-100"
+        : "opacity-0 scale-y-0 pointer-events-none origin-top"
+    }`}
+        >
+          <SearchBar
+            mode="mobile"
+            ref={searchRef}
+            inputValue={inputValue}
+            onChange={(e) => {
+              setinputValue(e.target.value);
+              searchProducts(e.target.value);
+              setIsSearchDropdownOpen(e.target.value.length > 0);
+            }}
+            onFocus={() => setIsSearchDropdownOpen(searchedProducts.length > 0)}
+            onClose={() => {
+              setFSearch(false);
+              setIsSearchDropdownOpen(false);
+              setinputValue("");
+              searchProducts("");
+            }}
+          />
+        </div>
       </div>
     </>
   );

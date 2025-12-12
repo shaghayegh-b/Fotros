@@ -1,10 +1,10 @@
-import React, { forwardRef, memo } from "react";
+import React, { forwardRef, memo, useRef } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { HiArrowCircleRight } from "react-icons/hi";
 
 const SearchBar = forwardRef(function SearchBar(
   {
-    mode = "desktop",       // "desktop" | "mobile"
+    mode = "desktop",
     inputValue,
     onChange,
     onFocus,
@@ -14,6 +14,15 @@ const SearchBar = forwardRef(function SearchBar(
   ref
 ) {
   const isMobile = mode === "mobile";
+
+  // ref واقعی برای input
+  const inputRef = useRef(null);
+
+  const handleSearchClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   return (
     <form
@@ -28,6 +37,7 @@ const SearchBar = forwardRef(function SearchBar(
       }
     >
       <input
+        ref={inputRef}
         dir="rtl"
         type="text"
         className={isMobile ? "flex-2 w-full" : "pl-2 w-[87%] placeholder:text-[#0b3a63]"}
@@ -37,12 +47,14 @@ const SearchBar = forwardRef(function SearchBar(
         onFocus={onFocus}
       />
 
-      {/* آیکون سرچ */}
-      <button type="button" className="flex justify-center items-center">
+      <button
+        type="button"
+        onClick={handleSearchClick}
+        className="flex justify-center items-center"
+      >
         <IoSearchSharp />
       </button>
 
-      {/* فقط در حالت موبایل دکمه برگشت */}
       {isMobile && (
         <button
           type="button"
