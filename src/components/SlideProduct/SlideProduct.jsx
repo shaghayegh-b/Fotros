@@ -7,10 +7,11 @@ import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
 import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import SkeletonCardSlide from "../SkeletonCard/SkeletonCardSlide";
 function SlideProduct({ title, title2, url, allurl }) {
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [slidesPerView, setSlidesPerView] = useState(4); // 👈 مقدار پیش‌فرض
@@ -83,19 +84,15 @@ function SlideProduct({ title, title2, url, allurl }) {
 
       {/* اسلایدر */}
       {loading ? (
-      <div className="p-[5px] pt-0">
-    <Swiper
-      dir="rtl"
-      slidesPerView={slidesPerView - 1}
-      spaceBetween={18}
-    >
-      {Array.from({ length: slidesPerView }).map((_, i) => (
-        <SwiperSlide key={i} className="flex justify-center">
-          <SkeletonCardSlide />
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
+        <div className="p-[5px] pt-0">
+          <Swiper dir="rtl" slidesPerView={slidesPerView - 1} spaceBetween={18}>
+            {Array.from({ length: slidesPerView }).map((_, i) => (
+              <SwiperSlide key={i} className="flex justify-center">
+                <SkeletonCardSlide />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       ) : (
         <div className="p-[5px] pt-0 NewProducts relative">
           {/* دکمه‌ها */}
@@ -175,22 +172,24 @@ function SlideProduct({ title, title2, url, allurl }) {
       )}
 
       {/* دکمه موبایل */}
-      <div className="flex items-center justify-center md:hidden">
-        <Link
-          to="/Fotros/Products"
-          onClick={() => {
-            localStorage.removeItem("products");
-            localStorage.removeItem("productsFetchTime");
-            funcAxios(allurl);
-            setSortFilter("");
-            setOnlyAvailable(false);
-            applyFilter("", false, title);
-          }}
-          className="m-[20px] text-center  bg-[var(--btn)] text-white text-[120%] p-[10px] w-[60%] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
-        >
-          مشاهده {title2}
-        </Link>
-      </div>
+      {location.pathname !== "/Fotros/" && (
+        <div className="flex items-center justify-center md:hidden">
+          <Link
+            to="/Fotros/Products"
+            onClick={() => {
+              localStorage.removeItem("products");
+              localStorage.removeItem("productsFetchTime");
+              funcAxios(allurl);
+              setSortFilter("");
+              setOnlyAvailable(false);
+              applyFilter("", false, title);
+            }}
+            className="m-[20px] text-center bg-[var(--btn)] text-white text-[120%] p-[10px] w-[60%] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
+          >
+            مشاهده {title2}
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

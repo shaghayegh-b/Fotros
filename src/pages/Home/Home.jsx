@@ -15,6 +15,7 @@ import ersal from "../../assets/img/send.jpg";
 import back from "../../assets/img/back.png";
 import sopurt from "../../assets/img/support.png";
 import off from "../../assets/img/off2.png";
+import offImage3 from "../../assets/img/offImage3.png";
 
 import Categorys from "../../components/Categorys/Categorys";
 import Footer from "../../components/Footer/Footer";
@@ -82,7 +83,7 @@ function Home() {
       ) : (
         <div className="main1">
           {/* header */}
-          <div className="flex  flex-col-reverse px-[16px] lg:px-[75px] md:flex-row-reverse">
+          <div className="flex  flex-col px-[16px] lg:px-[75px] md:flex-row-reverse">
             {/* بخش 1 */}
             <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2  my-[18px] lg:my-[10px]  font-bold text-[125%]">
               <div className="right flex-1 flex flex-col  gap-[20px]">
@@ -130,11 +131,11 @@ function Home() {
               </div>
             </div>
             {/* فاصله */}
-            <div className="h-[2rem] md:h-[6rem] relative md:hidden">
+            <div className="h-[0.4rem] md:h-[6rem] relative md:hidden">
               <img
                 src={imgdaman}
                 alt=""
-                className="h-[5rem] absolute right-[1rem] bottom-0 z-1"
+                className="h-[5rem] absolute right-[1rem] bottom-[-45px] z-1"
               />
             </div>
             {/* بخش2 */}
@@ -150,7 +151,7 @@ function Home() {
               <h1 className="font-bold text-[180%] text-center">
                 ب&#x0640;&#x0640;ا&zwnj;&zwnj; &zwnj;&zwnj;&zwnj;&zwnj;
                 <span className="text-[var(--textsm)] font-semibold">
-                  ف&#x0640;&#x0640;&#x0640;&#x0640;&#x0640;ط&#x0640;&#x0640;&#x0640;&#x0640;روس{" "}
+                  ف&#x0640;&#x0640;&#x0640;&#x0640;&#x0640;ط&#x0640;&#x0640;&#x0640;&#x0640;روس
                   <br />
                 </span>
                 م&#x0640;&#x0640;ت&#x0640;&#x0640;ف&#x0640;&#x0640;اوت
@@ -183,13 +184,13 @@ function Home() {
                   setOnlyAvailable(false);
                   applyFilter("", false, "همه محصولات");
                 }}
-                className="m-[10px] mt-[0px] w-[90%] md:w-[60%] border-[var(--btn)] border-[1px] text-[120%] text-center p-[10px] rounded-xl box-shadow "
+                className="hidden md:block m-[10px] mt-[0px] w-[90%] md:w-[60%] border-[var(--btn)] border-[1px] text-[120%] text-center p-[10px] rounded-xl box-shadow "
               >
                 همه محصولات
               </Link>
             </div>
             {/* فاصله */}
-            <div className="h-[2rem] lg:h-[5rem] relative">
+            <div className="h-[0] lg:h-[5rem] relative">
               <img
                 src={shirtimg}
                 alt=""
@@ -208,8 +209,7 @@ function Home() {
           {/* دسته بندی  */}
           <div className="categorys ">
             <h3 className="font-bold text-[140%] px-[15px]  ">
-              دس&#x0640;&#x0640;ته بن&#x0640;&#x0640;دی
-              م&#x0640;&#x0640;حص&#x0640;&#x0640;ولات
+            دسته بندی محصولات
             </h3>
             <Link to="/Fotros/Products">
               <Categorys />
@@ -219,14 +219,14 @@ function Home() {
 
           {/* محصولات جدید */}
           <SlideProduct
-            title=" م&#x0640;حص&#x0640;ولات ج&#x0640;دی&#x0640;د"
+            title="محصولات جدید"
             title2="محصولات جدید"
             url="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
             allurl="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
           ></SlideProduct>
           {/* فاصله */}
           <div className="h-[1rem] md:h-[5.5rem]  "></div>
-          {/* بنر ها */}
+          {/* بنر ها
           <div className="pb-[5px] pt-[13px] px-[10px]  ">
             <Swiper
               slidesPerView={1}
@@ -266,7 +266,7 @@ function Home() {
                 />
               </SwiperSlide>
             </Swiper>
-          </div>
+          </div> */}
           <div className="h-[1.4rem] md:h-[5rem]"></div>
 
           {/* تخفیفات */}
@@ -280,7 +280,7 @@ function Home() {
               setOnlyAvailable(false);
               applyFilter("", false, "فروش ویژه");
             }}
-            className="m-[15px] p-[10px] mx-[10px] md:mx-[50px] bg-[var(--cartsm)] h-[150px] md:h-[200px] rounded-2xl flex md:items-center"
+            className="m-[15px] p-[10px] mx-[10px] md:mx-[50px] bg-[var(--cartsm)] h-[180px] md:h-[200px] rounded-2xl flex md:items-center"
           >
             <img className="h-[100%] md:h-[155%]" src={offset} alt="" />
             <div className="w-full flex flex-col justify-center">
@@ -301,13 +301,13 @@ function Home() {
                     70
                   </span>
                   <img
-                    className="w-[30px] h-[30px] md:w-[50px] md:h-[50px]"
+                    className="w-[30px] h-[40px] py-[10px] md:w-[50px] md:h-[50px]"
                     src={priceimg}
                     alt=""
                   />
                 </p>
               </div>
-              <Link
+              <h6
                 to="/Fotros/Products"
                 onClick={() => {
                   funcAxios(
@@ -323,10 +323,49 @@ function Home() {
                 <span className="w-[15px] ">
                   <IoMdArrowRoundBack />
                 </span>
-              </Link>
+              </h6>
             </div>
           </Link>
-          <div className="h-[2rem] md:h-[5rem]"></div>
+          <div className="h-[0] md:h-[5rem]"></div>
+
+          {/* فاصله */}
+           <div className="h-[1rem] md:h-[5.5rem]  "></div>
+          {/* بنر ها*/}
+          <div className="pb-[5px] pt-[13px] px-[10px]  ">
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={5}
+              autoplay={{
+                delay: 4500,
+                disableOnInteraction: false,
+              }}
+              breakpoints={{
+                766: { slidesPerView: 2 },
+              }}
+              loop={true}
+              modules={[Autoplay]}
+            >
+              <SwiperSlide>
+                <img src={ersal} alt="" className="w-full rounded-xl" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src={sopurt}
+                  alt=""
+                  className="w-full rounded-xl bg-blue-900"
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src={off}
+                  alt=""
+                  className="w-full rounded-xl bg-blue-900"
+                />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          <div className="h-[1.4rem] md:h-[5rem]"></div>
+
           {/* ست ها */}
           <div className="  px-[3px]">
             <h2 className="font-bold text-[140%] px-[14px]  ">
@@ -444,24 +483,24 @@ function Home() {
                   localStorage.removeItem("products");
                   localStorage.removeItem("productsFetchTime");
                   funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=ست"
+                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=پیراهن"
                   );
                   setSortFilter("");
                   setOnlyAvailable(false);
-                  applyFilter("", false, "ست های ورزشی");
+                  applyFilter("", false, "پیراهن های دخترانه");
                 }}
                 className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
               >
                 <div className="h-[100%]  w-[50%] flex justify-center items-center">
-                  <img className="h-[100%]" src={varzeshset} alt="" />
+                  <img className="w-[100%]" src={offImage3} alt="" />
                 </div>
                 <div className="w-full flex flex-col justify-between">
                   <div>
                     <p className="text-[137%] font-[600] mb-[10px]">
-                      ست های ورزشی
+                     پیراهن های دخترانه
                     </p>
 
-                    <p>برای ساختن بدنی سالم و سرحال</p>
+                    <p>پیراهن های دخترانه زیبا</p>
                   </div>
 
                   <button className="w-full flex justify-end-safe items-center md:px-[10px]">
