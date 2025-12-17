@@ -1,6 +1,7 @@
 .Navbar svg {
-  width: 1.85rem;
-  height: 1.85rem;
+  width: 1.85rem !important;
+  height: 1.85rem !important;
+  font-size: 1.85rem !important;
 }
 .menoClose svg,.HiArrowCircleLeft svg {
   width: 2rem;

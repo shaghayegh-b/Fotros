@@ -57,7 +57,7 @@ function Categorys() {
         </button>
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="swiper-button-next-custom shadow-md hover:shadow-lg hidden md:flex items-center justify-center
+          className="swiper-button-prev-custom shadow-md hover:shadow-lg hidden md:flex items-center justify-center
           absolute top-[40%] right-4 z-2
     hover:bg-gray-300 hover:text-gray-600 border-[1px] border-gray-600
            text-[#f5f5f5] bg-gray-600
@@ -90,7 +90,7 @@ function Categorys() {
             prevEl: ".swiper-button-prev-custom",
           }}
           modules={[Scrollbar, Navigation]}
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
+onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
           {PRODUCT_CATEGORIES.map(
             ({ id, name, icon: Icon, url, filterName }) => (
@@ -108,7 +108,8 @@ function Categorys() {
                   {!hideIcons && Icon && (
                     <Icon className="flex justify-center items-center text--[var(--textcategory)] group-hover:text-gray-600 transition-all duration-300" />
                   )}
-                  <p className=" font-semibold text--[var(--textcategory)] break-words leading-tight text-center whitespace-nowrap w-full">
+                  <p className={`font-semibold text--[var(--textcategory)] break-words leading-tight text-center whitespace-nowrap w-full
+                    ${hideIcons?"py-[4px]":""}`}>
                     {name}
                   </p>
                 </button>

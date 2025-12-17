@@ -54,81 +54,81 @@ function Favorites() {
       {
         pagedFavorites.length === 0 && !productsLoading && (
           <p className="text-center text-gray-500 mt-10">
-            هیچ محصولی در علاقه‌مندی‌ها موجود نیست! 
+            هیچ محصولی در علاقه‌مندی‌ها موجود نیست!
           </p>
         )}
-      <div className="pruducts grid gap-x-[10px] gap-y-[7px] lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-        {pagedFavorites.map((product) => {
-          const isFav = favoriteItems.some((item) => item.id === product.id);
-          return (
-            <div
-              key={`${product.idsortby}-${product.id}`}
-              className="product relative"
-            >
-              <div className="md:px-[10px] px-[2px] flex justify-between absolute z-1 top-0 w-full opacity-80 ">
-                {isFav ? (
-                  <FaHeart
-                    onClick={() => removeFromFav(product.id)}
-                    color="#bc0000"
-                    className="m-[5px] mt-[10px] cursor-pointer"
-                    size={20}
-                  />
-                ) : (
-                  <FaRegHeart
-                    onClick={() => addToFav(product)}
-                    className="m-[5px] mt-[10px] cursor-pointer"
-                    size={20}
-                  />
-                )}
-                {product.off > 0 && (
-                  <div className="relative ">
-                    <IoBookmarkSharp
-                      color="#bc0000"
-                      size={47}
-                    ></IoBookmarkSharp>
-                    <span className="absolute top-[15%] left-[25%] text-[80%] text-white">
-                      %{product.off}
-                    </span>
-                  </div>
-                )}
-              </div>
+     <div className="products grid gap-[5px] md:gap-[9px] lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+  {pagedFavorites.map((product) => {
+    const isFav = favoriteItems.some(
+      (item) => item.id === product.id
+    );
 
-              <Link
-                to={`/Fotros/Products/${product.idsortby}`}
-                className=" md:h-[345px] h-[228px] rounded px-[6px] py-[10px] pt-0 box-shadow flex flex-col justify-center items-center md:gap-[15px] gap-[9px] "
-              >
-                <div className=" h-[140px] md:h-[220px] lg:h-[180px] ">
-                  <img
-                    src={product.img}
-                    alt={product.title}
-                    className=" h-full"
-                    loading="lazy"
-                  />
-                </div>
+    return (
+      <div key={product.id} className="product relative">
+        <div className="md:px-[10px] px-[2px] flex justify-between absolute z-1 top-0 w-full opacity-80">
+          {isFav ? (
+            <FaHeart
+              onClick={() => removeFromFav(product.id)}
+              color="#bc0000"
+              className="m-[5px] mt-[10px] cursor-pointer"
+              size={20}
+            />
+          ) : (
+            <FaRegHeart
+              onClick={() => addToFav(product)}
+              className="m-[5px] mt-[10px] cursor-pointer"
+              size={20}
+            />
+          )}
 
-                <p className="font-semibold self-start text-[110%] ">
-                  {product.title}
-                </p>
-                <div className=" self-end flex flex-col  md:flex-row lg:flex-col items-baseline md:gap-[10px] gap-[3px]">
-                  {product.off > 0 && (
-                    <span className=" text-[var(--text-gray)] md:text-[95%] text-[85%] line-through">
-                      {product.price.toLocaleString()}
-                    </span>
-                  )}
-
-                  <p className="flex gap-[3px] text-red-800 font-bold text-[100%] md:text-[110%]">
-                    {(
-                      product.price -
-                      (product.price * product.off) / 100
-                    ).toLocaleString()}
-                    <span>تومان</span>
-                  </p>
-                </div>
-              </Link>
+          {product.off > 0 && (
+            <div className="relative">
+              <IoBookmarkSharp color="#bc0000" size={47} />
+              <span className="absolute top-[15%] left-[25%] text-[80%] text-white">
+                %{product.off}
+              </span>
             </div>
-          );
-        })}
+          )}
+        </div>
+
+        <Link
+          to={`/Fotros/Products/${product.idsortby}`}
+          className="md:h-[345px] h-[228px] rounded p-[10px] pt-0 box-shadow
+                     flex flex-col justify-center items-center
+                     md:gap-[15px] gap-[9px]"
+        >
+          <img
+            src={product.img}
+            alt={product.title}
+            className="md:h-[220px] h-[140px]"
+            loading="lazy"
+          />
+
+          <p className="font-semibold self-start text-[110%]">
+            {product.title}
+          </p>
+
+          <div className="self-end flex items-baseline md:gap-[10px] gap-[6px]">
+            {product.off > 0 && (
+              <span className="text-[var(--text-gray)] md:text-[95%] text-[85%] line-through">
+                {product.price.toLocaleString()}
+              </span>
+            )}
+
+            <p className="flex gap-[3px] text-red-800 font-bold text-[110%]">
+              {(
+                product.price -
+                (product.price * product.off) / 100
+              ).toLocaleString()}
+              <span>تومان</span>
+            </p>
+          </div>
+        </Link>
       </div>
+    );
+  })}
+</div>
+
 
       {pageCount > 1 && (
         <div className="mt-[35px]">

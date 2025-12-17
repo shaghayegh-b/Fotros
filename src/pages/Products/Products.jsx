@@ -85,14 +85,14 @@ function Products() {
         <div className="md:pt-[15px] pt-[10px] px-[5px]">
           {/* Skeleton Loader */}
           {loading ? (
- <div className="products grid gap-[5px] md:gap-[9px] lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-    {Array.from({ length: 8 }).map((_, i) => (
-      <ProductsSkeleton key={i} />
-    ))}
-  </div>
-            ) : productsToShow.length === 0 ? (
+            <div className="products grid gap-[5px] md:gap-[9px] lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <ProductsSkeleton key={i} />
+              ))}
+            </div>
+          ) : productsToShow.length === 0 ? (
             <p className="text-center text-[var(--text-gary)] mt-10">
-              هیچ محصولی در این دسته‌بندی فعلاً موجود نیست 😔
+              هیچ محصولی در این دسته‌بندی فعلاً موجود نیست !
               <br />
               <span className="flex gap-[5px] items-center justify-center">
                 لطفاً کمی صبر کنید تا محصولات تازه اضافه شوند

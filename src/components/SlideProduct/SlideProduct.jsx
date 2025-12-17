@@ -14,28 +14,9 @@ function SlideProduct({ title, title2, url, allurl }) {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
-  const [slidesPerView, setSlidesPerView] = useState(4); // 👈 مقدار پیش‌فرض
   const { funcAxios, setSortFilter, setOnlyAvailable, applyFilter } =
     useAxios();
   const swiperRef = useRef(null);
-
-  // 📏 تابع محاسبه تعداد اسلایدها بر اساس عرض واقعی صفحه
-  const updateSlidesPerView = () => {
-    const width = window.innerWidth;
-    let slides = 2;
-    if (width < 480) slides = 2;
-    else if (width < 768) slides = 3;
-    else if (width < 1024) slides = 5;
-    else if (width < 1440) slides = 7;
-    else slides = Math.floor(width / 200); // 👈 داینامیک بر اساس عرض کارت‌ها
-    setSlidesPerView(slides);
-  };
-
-  useEffect(() => {
-    updateSlidesPerView();
-    window.addEventListener("resize", updateSlidesPerView);
-    return () => window.removeEventListener("resize", updateSlidesPerView);
-  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -85,8 +66,17 @@ function SlideProduct({ title, title2, url, allurl }) {
       {/* اسلایدر */}
       {loading ? (
         <div className="p-[5px] pt-0">
-          <Swiper dir="rtl" slidesPerView={slidesPerView - 1} spaceBetween={18}>
-            {Array.from({ length: slidesPerView }).map((_, i) => (
+          <Swiper
+            dir="rtl"
+            spaceBetween={18}
+            breakpoints={{
+              0: { slidesPerView: 2 },
+              640: { slidesPerView: 3 },
+              768: { slidesPerView: 4 },
+              1024: { slidesPerView: 5 },
+            }}
+          >
+            {Array.from({ length: 8 }).map((_, i) => (
               <SwiperSlide key={i} className="flex justify-center">
                 <SkeletonCardSlide />
               </SwiperSlide>
@@ -117,7 +107,6 @@ function SlideProduct({ title, title2, url, allurl }) {
           {products.length > 0 && (
             <Swiper
               dir="rtl"
-              slidesPerView={slidesPerView - 1}
               spaceBetween={18}
               autoplay={{
                 delay: 3500,
@@ -125,11 +114,31 @@ function SlideProduct({ title, title2, url, allurl }) {
                 pauseOnMouseEnter: true,
               }}
               speed={800}
-              scrollbar={{ hide: true }}
               loop
+              scrollbar={{ hide: true }}
               navigation={{
                 nextEl: ".swiper-button-next-custom",
                 prevEl: ".swiper-button-prev-custom",
+              }}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2, // موبایل
+                },
+                640: {
+                  slidesPerView: 3,
+                },
+                768: {
+                  slidesPerView: 4,
+                },
+                1024: {
+                  slidesPerView: 5,
+                },
+                1280: {
+                  slidesPerView: 6,
+                },
+                1536: {
+                  slidesPerView: 7,
+                },
               }}
               modules={[Scrollbar, Autoplay, Navigation]}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -184,7 +193,7 @@ function SlideProduct({ title, title2, url, allurl }) {
               setOnlyAvailable(false);
               applyFilter("", false, title);
             }}
-            className="m-[20px] text-center bg-[var(--btn)] text-white text-[120%] p-[10px] w-[60%] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
+            className="mx-[5px] my-[10px] sm:m-[20px] text-center bg-[var(--btn)] text-white text-[120%] p-[10px] w-[60%] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
           >
             مشاهده {title2}
           </Link>

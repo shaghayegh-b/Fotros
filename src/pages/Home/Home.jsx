@@ -83,7 +83,7 @@ function Home() {
       ) : (
         <div className="main1">
           {/* header */}
-          <div className="flex  flex-col px-[16px] lg:px-[75px] md:flex-row-reverse">
+          <div className="flex  flex-col-reverse px-[16px] lg:px-[75px] md:flex-row-reverse">
             {/* بخش 1 */}
             <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2  my-[18px] lg:my-[10px]  font-bold text-[125%]">
               <div className="right flex-1 flex flex-col  gap-[20px]">
@@ -215,7 +215,7 @@ function Home() {
               <Categorys />
             </Link>
           </div>
-          <div className="h-[1rem] md:h-[3rem]"></div>
+          <div className="h-[2rem] md:h-[3rem]"></div>
 
           {/* محصولات جدید */}
           <SlideProduct
@@ -385,7 +385,7 @@ function Home() {
                   setOnlyAvailable(false);
                   applyFilter("", false, "ست های ورزشی");
                 }}
-                className="mx-[8px] p-[10px] md:m-[unset] bg-[var(--footer)] md:bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
+                className="mx-[8px] p-[10px] md:m-[unset] bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
               >
                 <div className="h-[100%]  w-[50%] flex justify-center items-center">
                   <img className="h-[100%]" src={varzeshset} alt="" />
@@ -420,7 +420,7 @@ function Home() {
                   setOnlyAvailable(false);
                   applyFilter("", false, "ست های ورزشی");
                 }}
-                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] md:bg-[var(--footer)] h-[150px] lg:h-[200px] rounded-2xl flex"
+                className="mx-[8px] p-[10px] md:m-[unset] bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
               >
                 <div className="h-[100%]  w-[50%] flex justify-center items-center">
                   <img className="h-[100%]" src={tabeston} alt="" />
@@ -455,7 +455,7 @@ function Home() {
                   setOnlyAvailable(false);
                   applyFilter("", false, "ست های کامل");
                 }}
-                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--footer)] h-[150px] lg:h-[200px] rounded-2xl flex"
+                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
               >
                 <div className="h-[100%]  w-[50%] flex justify-center items-center">
                   <img className="h-[100%]" src={offset} alt="" />
