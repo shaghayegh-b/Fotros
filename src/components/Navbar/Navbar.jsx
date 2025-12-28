@@ -232,7 +232,7 @@ const searchInputRef = useRef(null);
                 <img
                   src={user.profilePic}
                   alt={user.fname}
-                  className="p-[3px] md:p-[unset] h-[41px] w-[41px] lg:h-[1.2rem] md:h-[2rem] rounded-full object-cover border border-[var(--sup-b)] shadow-sm"
+                  className="p-[3px] md:p-[unset] h-[41px] md:h-[30px] w-[41px] lg:h-[1.2rem] rounded-full object-cover border border-[var(--sup-b)] shadow-sm"
                 />
                 <p className="hidden md:inline flex-1 text-center text-ellipsis whitespace-nowrap ">
                   {user.fname}
