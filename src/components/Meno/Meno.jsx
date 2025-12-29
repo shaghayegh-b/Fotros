@@ -101,6 +101,7 @@ function Meno() {
                   to="/Fotros/"
                 >
                   <HiHome
+                    size={25}
                     className={` ${
                       location.pathname === "/Fotros/"
                         ? "text-[#4f93e8]"
@@ -111,57 +112,60 @@ function Meno() {
                 </NavLink>
               </li>
               {/* دسته بندی */}
-             <li className="flex flex-col relative">
-  <div
-    className={`font-[600] flex justify-between items-center px-[7px] cursor-pointer  transition-all duration-500 ease-in-out ${grouping?"pb-[15px]":""}`}
-    onClick={() => setGrouping(!grouping)}
-  >
-    <span className="flex gap-[8px] items-center">
-      <MdCategory
-        className={`${
-          location.pathname === "/Fotros/Products" || grouping
-            ? "text-[#4f93e8]"
-            : "text-[var(--icon-menu)]"
-        } transition-colors duration-300`}
-      />
-      دسته بندی
-    </span>
-    <MdKeyboardArrowUp
-      className={`transition-transform duration-300 ease-in-out ${
-        grouping ? "rotate-180" : "rotate-0"
-      }`}
-    />
-  </div>
+              <li className="flex flex-col relative">
+                <div
+                  className={`font-[600] flex justify-between items-center px-[7px] cursor-pointer  transition-all duration-500 ease-in-out ${
+                    grouping ? "pb-[15px]" : ""
+                  }`}
+                  onClick={() => setGrouping(!grouping)}
+                >
+                  <span className="flex gap-[8px] items-center">
+                    <MdCategory
+                      size={25}
+                      className={`${
+                        location.pathname === "/Fotros/Products" || grouping
+                          ? "text-[#4f93e8]"
+                          : "text-[var(--icon-menu)]"
+                      } transition-colors duration-300`}
+                    />
+                    دسته بندی
+                  </span>
+                  <MdKeyboardArrowUp
+                    size={25}
+                    className={`transition-transform duration-300 ease-in-out ${
+                      grouping ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
+                </div>
 
-  {/* Container انیمیشن */}
-  <div
-    className={`overflow-hidden transition-all duration-500 ease-in-out`}
-    style={{
-      maxHeight: grouping ? "1000px" : "0",
-      opacity: grouping ? 1 : 0,
-    }}
-  >
-    <div className="flex flex-col bg-[var(--category-menu)]">
-      {PRODUCT_CATEGORIES.map((cat) => (
-        <NavLink
-          key={cat.name}
-          to="/Fotros/Products"
-          onClick={() => {
-            funcAxios(cat.url);
-            setSortFilter("");
-            setOnlyAvailable(false);
-            applyFilter("", false, cat.filterName);
-            setMeno(false);
-          }}
-          className="tracking-tighter w-full px-[7px] py-[8px] hover:bg-[#afd2fd] rounded-lg border-y border-y-[2px] border-y-[var(--category-menu-border)]"
-        >
-          {cat.name}
-        </NavLink>
-      ))}
-    </div>
-  </div>
-</li>
-
+                {/* Container انیمیشن */}
+                <div
+                  className={`overflow-hidden transition-all duration-500 ease-in-out`}
+                  style={{
+                    maxHeight: grouping ? "1000px" : "0",
+                    opacity: grouping ? 1 : 0,
+                  }}
+                >
+                  <div className="flex flex-col bg-[var(--category-menu)]">
+                    {PRODUCT_CATEGORIES.map((cat) => (
+                      <NavLink
+                        key={cat.name}
+                        to="/Fotros/Products"
+                        onClick={() => {
+                          funcAxios(cat.url);
+                          setSortFilter("");
+                          setOnlyAvailable(false);
+                          applyFilter("", false, cat.filterName);
+                          setMeno(false);
+                        }}
+                        className="tracking-tighter w-full px-[7px] py-[8px] hover:bg-[#afd2fd] rounded-lg border-y border-y-[2px] border-y-[var(--category-menu-border)]"
+                      >
+                        {cat.name}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              </li>
 
               {[
                 {
@@ -182,6 +186,7 @@ function Meno() {
                     className="flex gap-[8px] items-center  px-[7px] "
                   >
                     <Icon
+                      size={25}
                       className={` ${
                         location.pathname === `/Fotros/${id}`
                           ? "text-[#4f93e8]"
@@ -199,9 +204,9 @@ function Meno() {
               >
                 {/* آیکون بر اساس realTheme */}
                 {realTheme === "dark" ? (
-                  <MdLightMode className="text-[#897705]" />
+                  <MdLightMode size={25} className="text-[#897705]" />
                 ) : (
-                  <MdDarkMode className="text-[var(--icon-menu)]" />
+                  <MdDarkMode size={25} className="text-[var(--icon-menu)]" />
                 )}
 
                 {/* متن بر اساس userTheme */}
@@ -251,6 +256,7 @@ function Meno() {
                       className="flex gap-[8px] items-center px-[7px]"
                     >
                       <Icon
+                        size={25}
                         className={`${
                           location.pathname === `/Fotros/${id}`
                             ? "text-[#4f93e8]"
@@ -289,7 +295,7 @@ function Meno() {
                   }}
                 >
                   <NavLink className="flex gap-[8px] items-center  px-[7px]">
-                    <FiLogOut className="text-[var(--icon-menu)]" />
+                    <FiLogOut size={25} className="text-[var(--icon-menu)]" />
                     <span className="font-[600]">خروج از حساب کاربری</span>
                   </NavLink>
                 </li>
@@ -303,7 +309,7 @@ function Meno() {
                     to="/Fotros/login"
                     className="flex gap-[8px] items-center  px-[7px] "
                   >
-                    <FaUserPlus className="text-[var(--icon-menu)]" />
+                    <FaUserPlus size={25} className="text-[var(--icon-menu)]" />
                     <span className="font-[600]">ساخت حساب کاربری</span>
                   </NavLink>
                 </li>

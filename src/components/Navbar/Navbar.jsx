@@ -227,12 +227,12 @@ const searchInputRef = useRef(null);
             {isLoggedIn ? (
               <NavLink
                 to="/Fotros/userdashboard/UserInfo"
-                className="w-[41px] h-full md:w-[80px] lg:w-[115px] flex items-center justify-around gap-2 md:px-[6px] md:py-[2px] rounded-full bg-[var(--navbar-porof)] hover:bg-[var(--navbar-porof-hover)] transition-colors duration-200"
+                className="w-[41px] h-full md:w-[95px] lg:w-[115px] flex items-center justify-around gap-[4px] md:px-[6px] md:py-[2px] rounded-full bg-[var(--navbar-porof)] hover:bg-[var(--navbar-porof-hover)] transition-colors duration-200"
               >
                 <img
                   src={user.profilePic}
                   alt={user.fname}
-                  className="p-[3px] md:p-[unset] h-[41px] md:h-[30px] w-[41px] lg:h-[1.2rem] rounded-full object-cover border border-[var(--sup-b)] shadow-sm"
+                  className="p-[3px] md:p-[unset] h-[41px] md:h-[30px] w-[41px]  rounded-full object-cover border border-[var(--sup-b)] shadow-sm"
                 />
                 <p className="hidden md:inline flex-1 text-center text-ellipsis whitespace-nowrap ">
                   {user.fname}
