@@ -33,7 +33,7 @@ const SearchBar = forwardRef(function SearchBar(
       className={
         `${isMobile
           ? "p-1.5 flex items-center gap-[10px] w-full bg-[var(--navbar-searchbar-bg)] m-[4px] rounded-full border border-[var(--sup-b)]"
-          : "hidden lg:flex items-center justify-between w-[150px] lg:w-[220px] bg-[var(--f5)]/60 mx-[7px] lg:mx-[8px] py-[1px] px-[12px] rounded-full border border-[var(--navbar-searchbar-bg)]  focus-within:border-[var(--btn)] transition-colors duration-200"
+          : "hidden lg:flex items-center justify-between w-[150px] lg:w-[220px] bg-[var(--f5)]/60 mx-[7px] lg:ml-[0px] py-[1px] px-[12px] rounded-full border border-[var(--navbar-searchbar-bg)]  focus-within:border-[var(--btn)] transition-colors duration-200"
       }`}
     >
       <input

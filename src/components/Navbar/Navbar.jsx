@@ -1,12 +1,9 @@
 import { useState, createContext, memo, useEffect, useRef } from "react";
 import { useLocation, useNavigate, Link, NavLink } from "react-router-dom";
 
-import { HiBars3BottomRight } from "react-icons/hi2";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { RiShoppingCartLine } from "react-icons/ri";
-import { IoSearchSharp } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
-import { LuCircleUser } from "react-icons/lu";
+import { LuMenu, LuShoppingCart, LuSearch, LuCircleUser } from "react-icons/lu";
 import logoimg from "../../assets/img/Fotros.png";
 import wingfotros from "../../assets/img/wingfotros.png";
 import porofDefault from "../../assets/img/porof1.png";
@@ -130,7 +127,7 @@ function Navbar() {
               onClick={() => setMeno(true)}
               className="flex-1 lg:flex-0 inline-block lg:hidden h-full"
             >
-              <HiBars3BottomRight className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+              <LuMenu className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
             </button>
             {/* search sm */}
             <button
@@ -143,7 +140,7 @@ function Navbar() {
               className={`flex-1 py-[2px]  rounded-xl h-full transition-transform duration-200 hover:scale-110 active:scale-95
               `}
             >
-              <IoSearchSharp className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+              <LuSearch className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
             </button>
           </div>
           {/* menumd */}
@@ -274,7 +271,7 @@ function Navbar() {
                 aria-label="سبد خرید"
                 aria-expanded={cartPreviewOpen}
               >
-                <RiShoppingCartLine className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
+                <LuShoppingCart className="!h-[1.85rem] !w-[unset] md:!h-[1.5rem] md:!w-[1.5rem] " />
                 {totalQuantity > 0 && (
                   <span className="absolute bottom-[-2px] right-[-10px] py-[3px] px-[4px] rounded-full text-xs bg-[var(--btn)] text-white shadow-sm animate-pop">
                     {totalQuantity}
