@@ -148,7 +148,10 @@ function Navbar() {
           </div>
           {/* menumd */}
           <div className="hidden flex-3 lg:flex items-center gap-[21px] ">
-            <div className="flex items-center gap-[7px] px-[5px]">
+            <Link
+              to="/Fotros/"
+              className="flex items-center gap-[7px] px-[5px]"
+            >
               <div className="relative w-[45px] h-[55px] mb-[2px]">
                 <img
                   src={wingfotros}
@@ -157,7 +160,7 @@ function Navbar() {
                 />
               </div>
               <h2 className="font-semibold text-[130%]">فطروس</h2>
-            </div>
+            </Link>
             <div className="hidden md:flex items-center gap-[21px] ">
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -227,13 +230,16 @@ function Navbar() {
             </div>
           </div>
           {/* logo */}
-          <div className="flex-3 h-[49px] self-center mx-[8px] flex justify-center lg:hidden">
+          <Link
+            to="/Fotros/"
+            className="flex-3 h-[49px] self-center mx-[8px] flex justify-center lg:hidden"
+          >
             <img
               src={logoimg}
               alt="Logoimg"
               className=" h-[31px] mt-[6px] logo"
             />
-          </div>
+          </Link>
           {/* search & shopping & userdashboard */}
           <div className="flex-1 lg:flex-0 flex gap-[4px] md:gap-[8px] justify-end items-center h-full">
             {/* search desktop */}

@@ -2,10 +2,7 @@ import { memo, useState } from "react";
 import img from "../../assets/img/wingfotros.png";
 import logo1 from "../../assets/img/mojavez-footer.png";
 
-import {
-  FaInstagram,
-  FaTelegramPlane,
-} from "react-icons/fa";
+import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
 import { MdOutlinePhone, MdKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -27,7 +24,6 @@ const LINK_GROUPS = [
     ],
   },
 ];
-
 
 function FooterLinkGroup({ title, links }) {
   const [open, setOpen] = useState(false);
@@ -52,7 +48,10 @@ function FooterLinkGroup({ title, links }) {
       >
         {links.map((link) => (
           <li key={link.to}>
-            <Link to={link.to} className="transition-colors hover:text-[var(--btn)]">
+            <Link
+              to={link.to}
+              className="transition-colors hover:text-[var(--btn)]"
+            >
               {link.label}
             </Link>
           </li>
@@ -69,10 +68,13 @@ function Footer() {
       <div className="container-page grid grid-cols-1 gap-8 py-8 md:grid-cols-4">
         {/* برند + شبکه‌های اجتماعی */}
         <div className="flex flex-col gap-4">
-          <h2 className="flex items-center gap-2 text-xl font-bold">
+          <Link
+            to="/Fotros/"
+            className="flex items-center gap-2 text-xl font-bold"
+          >
             <img src={img} className="logo w-8" alt="لوگو فطروس" />
             فطروس
-          </h2>
+          </Link>
           <p className="text-sm text-[var(--text-footer)]/70">
             مد و پوشاک زنانه با کیفیت، برای همه‌ی سلیقه‌ها.
           </p>

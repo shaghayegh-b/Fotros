@@ -19,14 +19,14 @@ function DiscountBanner({ img, percent = 70 }) {
     <Link
       to="/Fotros/Products"
       onClick={goToDiscounted}
-      className="discount-banner relative flex min-h-[170px] items-center gap-5 rounded-3xl bg-gradient-to-l from-[var(--cartsm)] via-[var(--cartsm)] to-transparent p-5 shadow-[var(--card-shadow)] md:min-h-[220px] md:p-8"
+      className="discount-banner relative flex max-md:flex-col max-md:gap-2 min-h-[170px] items-center gap-5 rounded-3xl bg-gradient-to-l from-[var(--cartsm)] via-[var(--cartsm)] to-transparent p-5 shadow-[var(--card-shadow)] md:min-h-[220px] md:p-8"
     >
       {/* دایره‌های تزئینی پشت زمینه */}
       <div className="deco-blob h-[180px] w-[180px] bg-[var(--btn)]/40 -left-10 -top-16" />
       <div className="deco-blob h-[140px] w-[140px] bg-red-400/25 right-1/3 bottom-[-60px]" />
 
       {/* بج درصد تخفیف - CSS واقعی، نه عکس بریده */}
-      <div className="absolute left-4 top-4 z-1 flex -rotate-[14deg] flex-col items-center rounded-lg bg-white/90 px-3 py-1 shadow-md md:left-8 md:top-7">
+      <div className="absolute  top-4 left-5 z-1 flex -rotate-[14deg] flex-col items-center rounded-lg bg-white/90 px-3 py-1 shadow-md md:top-7">
         <span className="text-2xl font-extrabold leading-none text-red-600 md:text-4xl">
           {percent}%
         </span>
@@ -35,22 +35,22 @@ function DiscountBanner({ img, percent = 70 }) {
         </span>
       </div>
 
-      <div className="relative z-1 h-[150px] w-[42%] shrink-0 md:h-[200px]">
+      <div className="relative z-1 h-[150px] w-[42%] shrink-0 md:h-[200px] max-md:mt-8 max-md:h-[110px] max-md:w-[130px] max-md:mx-auto">
         <img
           src={img}
           alt="فروش ویژه"
-          className="discount-banner-img absolute bottom-[-31%] left-35 w-[40%]"
+          className="discount-banner-img absolute bottom-[-31%] left-35 w-[40%] max-md:left-1/2 max-md:bottom-[-10%] max-md:w-[80%] max-md:-translate-x-1/2"
         />
       </div>
 
-      <div className="relative z-1 flex w-full flex-col justify-center gap-2 md:gap-3">
+      <div className="relative z-1 flex w-full flex-col justify-center gap-2 max-md:text-center md:gap-3">
         <p className="text-2xl font-bold tracking-tight text-[var(--text)] md:text-3xl">
           فروش ویژه
         </p>
         <p className="text-sm text-[var(--text-gary)] md:text-lg">
           تخفیف ویژه‌ی روزانه بر روی تمامی محصولات
         </p>
-        <span className="discount-banner-cta mt-1 inline-flex w-fit items-center gap-1 rounded-lg bg-[var(--btn)] px-4 py-2 text-sm font-medium text-white md:px-5 md:py-2.5 md:text-base">
+        <span className="discount-banner-cta mt-1 inline-flex w-fit items-center gap-1 rounded-lg bg-[var(--btn)] px-4 py-2 text-sm font-medium text-white md:px-5 md:py-2.5 md:text-base max-md:mx-auto">
           مشاهده محصولات
           <IoMdArrowRoundBack />
         </span>
