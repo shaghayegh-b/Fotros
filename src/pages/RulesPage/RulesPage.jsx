@@ -15,7 +15,7 @@ function RulesPage() {
       <Navbar />
       <div className="h-6 lg:h-16  "></div>
       {/* main */}
-      <div className="RulesPage py-[10px] px-[14px] md:px-[50px]  ">
+      <div className="RulesPage py-[10px] container-page  ">
         <h6 className="text-[var(--text-gary)] pt-[29px] pb-[10px] lg:pt-0 lg:pb-[0px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>قوانین و مقررات</span>

@@ -8,4 +8,8 @@ export const API_ENDPOINTS = {
   SORT_BY_OFF: `${BASE_URL}/products?sortBy=off&order=desc`,
   SPORT_SETS: `${BASE_URL}/products?category=ست`,
   NEW_PRODUCTS: `${BASE_URL}/products?sortBy=idsortby&order=desc`,
+  PANTS_SKIRTS: `${BASE_URL}/products?category=شلوار`,
+  // TODO: بک‌اند فعلاً فیلد "تعداد فروش" نداره. وقتی فیلد sales/salesCount
+  // به مدل محصول اضافه شد، این رو به sortBy=sales&order=desc تغییر بده.
+  BEST_SELLERS: `${BASE_URL}/products?sortBy=idsortby&order=desc`,
 };

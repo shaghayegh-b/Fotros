@@ -19,6 +19,12 @@ html.dark {
 html {
   transition: background-color 0.3s, color 0.3s;
 }
+*,
+*::before,
+*::after {
+  transition: background-color 0.45s ease, border-color 0.45s ease,
+    color 0.35s ease, box-shadow 0.45s ease, fill 0.45s ease;
+}
 
 html,
 body {
@@ -68,6 +74,47 @@ button {
 /* سایه */
 .box-shadow {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.32);
+}
+
+/* ----------------------------------------------------------------
+   سیستم فاصله‌گذاری سکشن‌ها (جایگزین دیوهای خالی spacer)
+   روی خود سکشن بذار: <section className="page-section"> ... </section>
+   دیگه لازم نیست بعد از هر بخش یه <div className="h-[..]"> اضافه کنی
+----------------------------------------------------------------- */
+.page-section {
+  margin-bottom: clamp(1.5rem, 1rem + 2.5vw, 4rem);
+}
+.page-section:last-child {
+  margin-bottom: 0;
+}
+
+/* عرض یکدست محتوای صفحه در دسکتاپ */
+.container-page {
+  padding-inline: 1rem;
+}
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 3rem;
+  }
+}
+@media (min-width: 1536px) {
+  .container-page {
+    padding-inline: 4.5rem;
+  }
+}
+
+/* جعبه‌ی استاندارد عکس محصول/دسته‌بندی: مستقل از نسبت ابعاد فایل اصلی عکس،
+   همیشه داخل قاب مربعی/مستطیلی می‌مونه و به‌هم نمی‌ریزه */
+.media-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.media-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 /* اسکرولبار */
@@ -231,4 +278,154 @@ html.dark {
   /* login */
   --bg-login: #59697c;
 }
+.categorys .swiper,
+.NewProducts .swiper,
+.banner-slider .swiper {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+.categorys .swiper-wrapper,
+.NewProducts .swiper-wrapper,
+.banner-slider .swiper-wrapper {
+  overflow: visible;
+}
+.scroll-contain {
+  overscroll-behavior: contain;
+}
+.glass-panel {
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+.thin-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--btn) 55%, transparent);
+  border-radius: 8px;
+}
+.deco-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-slide {
+  animation: fadeSlideIn 0.25s ease-out;
+}
+.product-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+.product-card img {
+  transition: transform 0.5s ease;
+}
+.product-card:hover img {
+  transform: scale(1.07);
+}
+.add-to-cart-btn {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.add-to-cart-btn:hover {
+  transform: scale(1.12);
+  box-shadow: var(--card-hover-shadow);
+}
+.add-to-cart-btn:active {
+  transform: scale(0.92);
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-pop {
+  animation: popIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* bg-[var( --cartcategory-hover)] */
+
+.discount-banner {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+.discount-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+.discount-banner .discount-banner-img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.discount-banner:hover .discount-banner-img {
+  transform: scale(1.1);
+}
+.discount-banner .discount-banner-cta {
+  transition:
+    gap 0.3s ease,
+    background-color 0.3s ease;
+}
+.discount-banner:hover .discount-banner-cta {
+  gap: 0.5rem;
+  background-color: #1565c0;
+}.promo-banner {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+.promo-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+.promo-banner .promo-banner-img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.promo-banner:hover .promo-banner-img {
+  transform: scale(1.1);
+}
+.promo-banner .promo-banner-cta {
+  transition: background-color 0.3s ease;
+}
+.promo-banner:hover .promo-banner-cta {
+  background-color: #1565c0;
+}
+.category-promo-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+.category-promo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+.category-promo-card .category-promo-card-img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.category-promo-card:hover .category-promo-card-img {
+  transform: scale(1.1);
+}

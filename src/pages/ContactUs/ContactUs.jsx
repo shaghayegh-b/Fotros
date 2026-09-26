@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import contactus from "../../assets/img/contactus.png";
+import contactus from "../../assets/img/ContactUs.png";
 
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -15,7 +15,7 @@ function ContactUs() {
       <Navbar />
       <div className="h-6 lg:h-16  "></div>
       {/* main */}
-      <div className="ContactUs flex-grow py-[10px] px-[14px] md:px-[50px]">
+      <div className="ContactUs flex-grow py-[10px] container-page">
         <h6 className="text-[var(--text-gary)] pt-[29px] pb-[10px] lg:pt-0 lg:pb-[0px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>تماس با ما</span>

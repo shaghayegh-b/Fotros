@@ -305,7 +305,7 @@ function ProductId() {
       <Navbar></Navbar>
       <div className="h-10 lg:h-16"></div>
       <div className="">
-        <h6 className="text-[var(--text-gary)] px-[20px] md:px-[40px] pt-[22px] lg:pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
+        <h6 className="text-[var(--text-gary)] container-page pt-[22px] lg:pt-[15px] pb-[10px] md:pb-[20px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>{product.title}</span>
         </h6>
@@ -353,7 +353,7 @@ function ProductId() {
           <p className="text-center py-10 ">محصولی یافت نشد</p>
         ) : (
           <div className="ProductId p-2 flex flex-col gap-[30px]">
-            <div className="md:w-[88%]  w-full flex md:flex-row flex-col justify-center items-start md:gap-[70px] gap-[20px] md:px-[40px] px-[15px]  ">
+            <div className="md:w-[88%]  w-full flex md:flex-row flex-col justify-center items-start md:gap-[70px] gap-[20px] container-page  ">
               {/* md> */}
               <h1 className="font-bold text-[140%] md:hidden block ">
                 {product.title}

@@ -27,7 +27,7 @@ function ShoppingCart() {
   } = useCart();
   const totalQuantity = cartItems?.reduce(
     (sum, item) => sum + item.quantity,
-    0
+    0,
   );
   const [colorPickerVisible, setColorPickerVisible] = useState({});
   const toggleColorPicker = (idsortby) => {
@@ -40,7 +40,7 @@ function ShoppingCart() {
   const handleColorSelect = (produkt, colorToSend) => {
     // حذف فقط آیتم بی‌رنگ
     const itemWithoutColor = cartItems.find(
-      (item) => item.idsortby === produkt.idsortby && !item.selectedColor
+      (item) => item.idsortby === produkt.idsortby && !item.selectedColor,
     );
 
     if (itemWithoutColor) {
@@ -51,7 +51,7 @@ function ShoppingCart() {
     const itemExists = cartItems.some(
       (item) =>
         item.idsortby === produkt.idsortby &&
-        item.selectedColor?.code === colorToSend?.code
+        item.selectedColor?.code === colorToSend?.code,
     );
 
     if (itemExists) {
@@ -72,7 +72,7 @@ function ShoppingCart() {
 
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
-    0
+    0,
   );
   //   deletedMessage
   const [deletedMessage, setDeletedMessage] = useState("");
@@ -137,7 +137,6 @@ function ShoppingCart() {
                 visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
               }`}
             >
-              {" "}
               {/* نوار Progress */}
               <div className="absolute w-[100%]  left-0 bottom-[0px]  shadow-[0_0_8px_rgba(30,136,229,0.6)] rounded-b-xl">
                 <div className="h-[4px] bg-gray-300">
@@ -197,7 +196,7 @@ function ShoppingCart() {
                         <IoTrashOutline
                           onClick={() => {
                             setModalMessage(
-                              "میخوای کالا رو از سبد خریدت حذف کنی؟"
+                              "میخوای کالا رو از سبد خریدت حذف کنی؟",
                             );
                             setModalButtons([
                               {
@@ -207,10 +206,10 @@ function ShoppingCart() {
                                   removeFromCart(
                                     item.idsortby,
                                     item.selectedColor?.code,
-                                    item.selectedSize
+                                    item.selectedSize,
                                   );
                                   setDeletedMessage(
-                                    `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`
+                                    `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`,
                                   );
 
                                   setIsModalOpen(false);
@@ -247,7 +246,7 @@ function ShoppingCart() {
                       </div>
                       {/* رنگ انتخابی */}
                       <div className="flex gap-[10px]">
-                        {/* رنگ انتخابی */}{" "}
+                        {/* رنگ انتخابی */}
                         <p className="flex bg-[var(--menu2)] py-[3px] px-[10px] rounded-xl w-[fit-content] ">
                           <span className="font-[600]">رنگ انتخابی : </span>
                           &nbsp;
@@ -314,7 +313,7 @@ function ShoppingCart() {
                               increase(
                                 item.idsortby,
                                 item.selectedColor?.code,
-                                item.selectedSize
+                                item.selectedSize,
                               )
                             }
                             className="  bg-[#92999d2b]    px-4 rounded-br-sm rounded-tr-sm"
@@ -326,7 +325,7 @@ function ShoppingCart() {
                             onClick={() => {
                               if (item.quantity === 1) {
                                 setModalMessage(
-                                  "میخوای کالا رو از سبد خریدت حذف کنی؟"
+                                  "میخوای کالا رو از سبد خریدت حذف کنی؟",
                                 );
                                 setModalButtons([
                                   {
@@ -336,10 +335,10 @@ function ShoppingCart() {
                                       removeFromCart(
                                         item.idsortby,
                                         item.selectedColor?.code,
-                                        item.selectedSize
+                                        item.selectedSize,
                                       );
                                       setDeletedMessage(
-                                        `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`
+                                        `"${item.title}" با رنگ "${item.selectedColor?.name}" از سبد خرید حذف شد`,
                                       );
 
                                       setIsModalOpen(false);
@@ -358,7 +357,7 @@ function ShoppingCart() {
                                 decrease(
                                   item.idsortby,
                                   item.selectedColor?.code,
-                                  item.selectedSize
+                                  item.selectedSize,
                                 );
                               }
                             }}
@@ -381,7 +380,7 @@ function ShoppingCart() {
                 </h4>
 
                 <p className="md:font-[600] flex gap-[10px] self-center whitespace-nowrap">
-                  <span> جمع کل سبد خرید ({totalQuantity})</span>:{" "}
+                  <span> جمع کل سبد خرید ({totalQuantity})</span>:
                   <span>{total.toLocaleString()} تومان</span>
                 </p>
 
@@ -389,7 +388,7 @@ function ShoppingCart() {
                   onClick={() => {
                     if (!isLoggedIn) {
                       setModalMessage(
-                        "برای تسویه حساب باید وارد حساب کاربری خود شوید!"
+                        "برای تسویه حساب باید وارد حساب کاربری خود شوید!",
                       );
                       setModalButtons([
                         {

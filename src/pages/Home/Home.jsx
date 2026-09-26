@@ -1,39 +1,30 @@
 import { Link } from "react-router-dom";
-import { IoMdArrowRoundBack } from "react-icons/io";
 
 import imgCaucasian from "../../assets/img/Caucasian.png";
 import imgkot from "../../assets/img/kot.png";
 import imgtap from "../../assets/img/tap.png";
 import shirtimg from "../../assets/img/shirt.png";
 import imgdaman from "../../assets/img/daman.png";
-import imgtop from "../../assets/img/top.png";
 import offset from "../../assets/img/off.png";
-import priceimg from "../../assets/img/percentsymbol.png";
 import varzeshset from "../../assets/img/set.png";
 import tabeston from "../../assets/img/tabeston.png";
-import ersal from "../../assets/img/send.jpg";
-import back from "../../assets/img/back.png";
-import sopurt from "../../assets/img/support.png";
-import off from "../../assets/img/off2.png";
+import ersal from "../../assets/img/support.webp";
+import back from "../../assets/img/back.webp";
 import offImage3 from "../../assets/img/offImage3.png";
 
 import Categorys from "../../components/Categorys/Categorys";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
+import { API_ENDPOINTS } from "../../constants/apiEndpoints";
 import "./Home.css";
 import SlideProduct from "../../components/SlideProduct/SlideProduct";
+import CategoryPromoCard from "../../components/CategoryPromoCard/CategoryPromoCard";
+import DiscountBanner from "../../components/DiscountBanner/DiscountBanner";
+import TrustBadges from "../../components/TrustBadges/TrustBadges";
+import PromoBanner from "../../components/PromoBanner/PromoBanner";
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useState, useEffect } from "react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/scrollbar";
-import "swiper/css/navigation";
-// import required modules
-import { Autoplay } from "swiper/modules";
 import HomeSkeleton from "../../components/SkeletonCard/HomeSkeleton";
 
 function Home() {
@@ -49,16 +40,13 @@ function Home() {
   useEffect(() => {
     const images = [
       ersal,
-      sopurt,
       back,
-      off,
       imgCaucasian,
       imgkot,
       imgtap,
       shirtimg,
       imgdaman,
       offset,
-      priceimg,
       varzeshset,
       tabeston,
     ];
@@ -82,11 +70,13 @@ function Home() {
         <HomeSkeleton />
       ) : (
         <div className="main1">
-          {/* header */}
-          <div className="flex  flex-col-reverse px-[16px] lg:px-[75px] md:flex-row-reverse">
+          {/* hero */}
+          <div className="page-section relative flex flex-col-reverse overflow-hidden px-[16px] lg:px-[75px] md:flex-row-reverse lg:min-h-[560px] lg:max-h-[650px]">
+            <div className="deco-blob h-[260px] w-[260px] bg-[var(--btn)]/30 -left-16 top-10" />
+            <div className="deco-blob h-[200px] w-[200px] bg-[var(--textsm)]/20 right-10 -bottom-16" />
             {/* بخش 1 */}
-            <div className="section1 px-[3px] md:flex-2 flex justify-between  gap-2  my-[18px] lg:my-[10px]  font-bold text-[125%]">
-              <div className="right flex-1 flex flex-col  gap-[20px]">
+            <div className="section1 relative z-1 px-[3px] md:flex-2 flex justify-between  gap-3  my-[18px] lg:my-[14px]  font-bold text-[125%]">
+              <div className="right flex-1 flex flex-col  gap-[24px]">
                 <div className="hidden lg:inline-block lg:h-[3%]"></div>
                 {/* رضایت */}
                 <div className="flex flex-col rounded-2xl h-[fit-content] bg-[var(--cartsm)]">
@@ -139,7 +129,7 @@ function Home() {
               />
             </div>
             {/* بخش2 */}
-            <div className="section2 md:flex-2 relative mx-[9px] flex flex-col justify-center items-center">
+            <div className="section2 relative z-1 md:flex-2 mx-[9px] flex flex-col justify-center items-center gap-4 py-[10px] md:py-[20px]">
               {/* فاصله */}
               <div className="h-[1rem] md:h-[2rem] relative">
                 <img
@@ -148,49 +138,49 @@ function Home() {
                   className="h-[4rem] absolute left-[1rem] bottom-0"
                 />
               </div>
-              <h1 className="font-bold text-[180%] text-center">
+              <h1 className="font-bold text-[190%] md:text-[210%] leading-[1.5] text-center">
                 ب&#x0640;&#x0640;ا&zwnj;&zwnj; &zwnj;&zwnj;&zwnj;&zwnj;
-                <span className="text-[var(--textsm)] font-semibold">
+                <span className="bg-gradient-to-l from-[var(--btn)] to-[var(--textsm)] bg-clip-text text-transparent font-extrabold">
                   ف&#x0640;&#x0640;&#x0640;&#x0640;&#x0640;ط&#x0640;&#x0640;&#x0640;&#x0640;روس
                   <br />
                 </span>
                 م&#x0640;&#x0640;ت&#x0640;&#x0640;ف&#x0640;&#x0640;اوت
                 ظ&#x0640;&#x0640;اه&#x0640;&#x0640;ر ش&#x0640;و
               </h1>
-              <Link
-                to="/Fotros/Products"
-                onClick={() => {
-                  localStorage.removeItem("products");
-                  localStorage.removeItem("productsFetchTime");
-                  funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
-                  );
-                  setSortFilter("");
-                  setOnlyAvailable(false);
-                  applyFilter("", false, "محصولات جدید");
-                }}
-                className="m-[20px] mb-[17px] w-[90%] md:w-[60%] bg-[var(--btn)] text-white text-[120%] text-center p-[10px] rounded-xl box-shadow "
-              >
-                محصولات جدید
-              </Link>
-              <Link
-                type="button"
-                to="/Fotros/Products"
-                onClick={() => {
-                  funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products"
-                  );
-                  setSortFilter("");
-                  setOnlyAvailable(false);
-                  applyFilter("", false, "همه محصولات");
-                }}
-                className="hidden md:block m-[10px] mt-[0px] w-[90%] md:w-[60%] border-[var(--btn)] border-[1px] text-[120%] text-center p-[10px] rounded-xl box-shadow "
-              >
-                همه محصولات
-              </Link>
+              <div className="flex w-full flex-col items-center gap-3 md:w-[75%]">
+                <Link
+                  to="/Fotros/Products"
+                  onClick={() => {
+                    funcAxios(
+                      "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc",
+                    );
+                    setSortFilter("");
+                    setOnlyAvailable(false);
+                    applyFilter("", false, "محصولات جدید");
+                  }}
+                  className="w-full bg-[var(--btn)] text-white text-[120%] text-center p-[12px] rounded-2xl shadow-[var(--card-shadow)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--card-hover-shadow)]"
+                >
+                  محصولات جدید
+                </Link>
+                <Link
+                  type="button"
+                  to="/Fotros/Products"
+                  onClick={() => {
+                    funcAxios(
+                      "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products",
+                    );
+                    setSortFilter("");
+                    setOnlyAvailable(false);
+                    applyFilter("", false, "همه محصولات");
+                  }}
+                  className="hidden md:block w-full border-[var(--btn)] border-[1.5px] text-[120%] text-center p-[12px] rounded-2xl transition-all duration-300 hover:bg-[var(--btn)] hover:text-white"
+                >
+                  همه محصولات
+                </Link>
+              </div>
             </div>
             {/* فاصله */}
-            <div className="h-[0] lg:h-[5rem] relative">
+            <div className="h-[0] lg:h-[5rem] relative z-1">
               <img
                 src={shirtimg}
                 alt=""
@@ -198,324 +188,111 @@ function Home() {
               />
             </div>
           </div>
-          {/* فاصله */}
-          <div className="h-[2rem] lg:h-[5rem] relative">
-            <img
-              src={imgtop}
-              alt=""
-              className="h-[5.4rem] absolute left-[.8rem] z-1 top-[-20px] md:bottom-0"
-            />
+          {/* ارسال سریع / ضمانت اصالت / پشتیبانی */}
+          <div className="page-section container-page">
+            <TrustBadges />
           </div>
           {/* دسته بندی  */}
-          <div className="categorys ">
-            <h3 className="font-bold text-[140%] px-[15px]  ">
-            دسته بندی محصولات
+          <div className="page-section container-page">
+            <h3 className="font-bold text-2xl px-[1px] mb-3">
+              دسته بندی محصولات
             </h3>
             <Link to="/Fotros/Products">
               <Categorys />
             </Link>
           </div>
-          <div className="h-[2rem] md:h-[3rem]"></div>
-
           {/* محصولات جدید */}
-          <SlideProduct
-            title="محصولات جدید"
-            title2="محصولات جدید"
-            url="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
-            allurl="https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=idsortby&order=desc"
-          ></SlideProduct>
-          {/* فاصله */}
-          <div className="h-[1rem] md:h-[5.5rem]  "></div>
-          {/* بنر ها
-          <div className="pb-[5px] pt-[13px] px-[10px]  ">
-            <Swiper
-              slidesPerView={1}
-              spaceBetween={5}
-              autoplay={{
-                delay: 4500,
-                disableOnInteraction: false,
-              }}
-              breakpoints={{
-                766: { slidesPerView: 2 },
-              }}
-              loop={true}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide>
-                <img src={ersal} alt="" className="w-full rounded-xl" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={sopurt}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-900"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={back}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-800"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={off}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-900"
-                />
-              </SwiperSlide>
-            </Swiper>
-          </div> */}
-          <div className="h-[1.4rem] md:h-[5rem]"></div>
-
-          {/* تخفیفات */}
-          <Link
-            to="/Fotros/Products"
-            onClick={() => {
-              funcAxios(
-                "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=off&order=desc"
-              );
-              setSortFilter("");
-              setOnlyAvailable(false);
-              applyFilter("", false, "فروش ویژه");
-            }}
-            className="m-[15px] p-[10px] mx-[10px] md:mx-[50px] bg-[var(--cartsm)] h-[180px] md:h-[200px] rounded-2xl flex md:items-center"
-          >
-            <img className="h-[100%] md:h-[155%]" src={offset} alt="" />
-            <div className="w-full flex flex-col justify-center">
-              <div className="flex justify-between md:justify-start relative  my-[7px] w-[100%]">
-                <div>
-                  <p className="text-[140%] font-[600]">
-                    ف&#x0640;روش وی&#x0640;&#x0640;ژه
-                  </p>
-                  <div className="h-[21px] md:h-[28px]"></div>
-                  <p className="md:text-[135%]">
-                    ت&#x0640;خف&#x0640;یف وی&#x0640;ژه روزانه
-                    <br className="md:hidden " />
-                    بر روی تمامی محصولات&nbsp;
-                  </p>
-                </div>
-                <p className=" absolute left-[14px] md:left-[unset] md:right-[120px] top-[25px] md:top-[-22px] w-20% self-center bg-[var(--f5)] rotate-[343deg] p-[4px] px-[6px] rounded-sm text-red-700 h-[fit-content] flex ">
-                  <span className="text-[120%] md:text-[250%] font-semibold">
-                    70
-                  </span>
-                  <img
-                    className="w-[30px] h-[40px] py-[10px] md:w-[50px] md:h-[50px]"
-                    src={priceimg}
-                    alt=""
-                  />
-                </p>
-              </div>
-              <h6
-                to="/Fotros/Products"
-                onClick={() => {
-                  funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?sortBy=off&order=desc"
-                  );
-                  setSortFilter("");
-                  setOnlyAvailable(false);
-                  applyFilter("", false, "فروش ویژه");
-                }}
-                className="pt-[8px] md:pt-[unset] w-full flex justify-end-safe md:text-[130%] md:px-[10px] items-center"
-              >
-                مشاهده محصولات
-                <span className="w-[15px] ">
-                  <IoMdArrowRoundBack />
-                </span>
-              </h6>
-            </div>
-          </Link>
-          <div className="h-[0] md:h-[5rem]"></div>
-
-          {/* فاصله */}
-           <div className="h-[1rem] md:h-[5.5rem]  "></div>
-          {/* بنر ها*/}
-          <div className="pb-[5px] pt-[13px] px-[10px]  ">
-            <Swiper
-              slidesPerView={1}
-              spaceBetween={5}
-              autoplay={{
-                delay: 4500,
-                disableOnInteraction: false,
-              }}
-              breakpoints={{
-                766: { slidesPerView: 2 },
-              }}
-              loop={true}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide>
-                <img src={ersal} alt="" className="w-full rounded-xl" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={sopurt}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-900"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={off}
-                  alt=""
-                  className="w-full rounded-xl bg-blue-900"
-                />
-              </SwiperSlide>
-            </Swiper>
+          <div className="page-section container-page">
+            <SlideProduct
+              title="محصولات جدید"
+              title2="محصولات جدید"
+              url={API_ENDPOINTS.NEW_PRODUCTS}
+              allurl={API_ENDPOINTS.NEW_PRODUCTS}
+            />
           </div>
-          <div className="h-[1.4rem] md:h-[5rem]"></div>
-
+          {/* بنر تخفیف */}
+          <div className=" mt-[75px] mb-[57px] container-page">
+            <DiscountBanner img={offset} percent={70} />
+          </div>
+          {/* پیشنهادات ویژه - محصولات دارای تخفیف به همراه درصد */}
+          <div className="page-section container-page">
+            <SlideProduct
+              title="پیشنهادات ویژه"
+              title2="پیشنهادات ویژه"
+              url={API_ENDPOINTS.SORT_BY_OFF}
+              allurl={API_ENDPOINTS.SORT_BY_OFF}
+            />
+          </div>
+          {/* بنر جدید */}
+          <div className="page-section container-page">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <PromoBanner
+                img={ersal}
+                title="ارسال رایگان"
+                description="برای خریدهای بالای یک میلیون تومان، هزینه ارسال رایگانه"
+                ctaText="شروع خرید"
+                url={API_ENDPOINTS.NEW_PRODUCTS}
+                filterName="محصولات جدید"
+                variant="soft"
+              />
+              <PromoBanner
+                img={back}
+                title="باشگاه مشتریان فطروس"
+                description="عضو شو و از تخفیف‌های اختصاصی زودتر از بقیه باخبر شو"
+                ctaText="مشاهده محصولات"
+                url={API_ENDPOINTS.ALL_PRODUCTS}
+                filterName="همه محصولات"
+                variant="dark"
+              />
+            </div>
+          </div>
+          {/* پرفروش‌ترین‌ها
+             نکته: بک‌اند فعلی فیلد «تعداد فروش» نداره، پس فعلاً جدیدترین‌ها رو
+             به‌عنوان جایگزین موقت نشون می‌دیم. وقتی فیلد sales/salesCount به
+             mockAPI اضافه شد، کافیه url رو به endpoint واقعی best-seller تغییر بدی. */}
+          <div className="page-section container-page">
+            <SlideProduct
+              title="پرفروش‌ترین‌ها"
+              title2="پرفروش‌ترین‌ها"
+              url={API_ENDPOINTS.BEST_SELLERS}
+              allurl={API_ENDPOINTS.BEST_SELLERS}
+            />
+          </div>
           {/* ست ها */}
-          <div className="  px-[3px]">
-            <h2 className="font-bold text-[140%] px-[14px]  ">
-              س&#x0640;&#x0640;ت ه&#x0640;&#x0640;ا
-            </h2>
+          <div className="page-section container-page">
+            <h2 className="font-bold text-2xl px-[1px] mb-3">ست‌ها</h2>
 
-            <div className="px-[8px]  grid  grid-rows-3 grid-cols-1 md:grid-rows-2 md:grid-cols-2 md:px-[5px]  gap-[7px] md:gap-[10px]">
-              <Link
-                to="/Fotros/Products"
-                onClick={() => {
-                  localStorage.removeItem("products");
-                  localStorage.removeItem("productsFetchTime");
-                  funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=ست"
-                  );
-                  setSortFilter("");
-                  setOnlyAvailable(false);
-                  applyFilter("", false, "ست های ورزشی");
-                }}
-                className="mx-[8px] p-[10px] md:m-[unset] bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
-              >
-                <div className="h-[100%]  w-[50%] flex justify-center items-center">
-                  <img className="h-[100%]" src={varzeshset} alt="" />
-                </div>
-                <div className="w-full flex flex-col justify-between">
-                  <div>
-                    <p className="text-[137%] font-[600] mb-[10px]">
-                      ست های ورزشی
-                    </p>
-
-                    <p>برای ساختن بدنی سالم و سرحال</p>
-                  </div>
-
-                  <button className="w-full flex justify-end-safe items-center md:px-[10px]">
-                    مشاهده محصولات
-                    <span className="w-[15px] ">
-                      <IoMdArrowRoundBack />
-                    </span>
-                  </button>
-                </div>
-              </Link>
-
-              <Link
-                to="/Fotros/Products"
-                onClick={() => {
-                  localStorage.removeItem("products");
-                  localStorage.removeItem("productsFetchTime");
-                  funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=ست"
-                  );
-                  setSortFilter("");
-                  setOnlyAvailable(false);
-                  applyFilter("", false, "ست های ورزشی");
-                }}
-                className="mx-[8px] p-[10px] md:m-[unset] bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
-              >
-                <div className="h-[100%]  w-[50%] flex justify-center items-center">
-                  <img className="h-[100%]" src={tabeston} alt="" />
-                </div>
-                <div className="w-full flex flex-col justify-between">
-                  <div>
-                    <p className="text-[137%] font-[600] mb-[10px]">
-                      ست های تابستونه
-                    </p>
-
-                    <p>برای روزهای گرم سال</p>
-                  </div>
-
-                  <button className="w-full flex justify-end-safe items-center md:px-[10px]">
-                    مشاهده محصولات
-                    <span className="w-[15px] ">
-                      <IoMdArrowRoundBack />
-                    </span>
-                  </button>
-                </div>
-              </Link>
-
-              <Link
-                to="/Fotros/Products"
-                onClick={() => {
-                  localStorage.removeItem("products");
-                  localStorage.removeItem("productsFetchTime");
-                  funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=ست"
-                  );
-                  setSortFilter("");
-                  setOnlyAvailable(false);
-                  applyFilter("", false, "ست های کامل");
-                }}
-                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
-              >
-                <div className="h-[100%]  w-[50%] flex justify-center items-center">
-                  <img className="h-[100%]" src={offset} alt="" />
-                </div>
-                <div className="w-full flex flex-col justify-between">
-                  <div>
-                    <p className="text-[137%] font-[600] mb-[10px]">
-                      ست های کامل
-                    </p>
-
-                    <p>برای زدن یه استایل خانمانه</p>
-                  </div>
-
-                  <button className="w-full flex justify-end-safe items-center md:px-[10px]">
-                    مشاهده محصولات
-                    <span className="w-[15px] ">
-                      <IoMdArrowRoundBack />
-                    </span>
-                  </button>
-                </div>
-              </Link>
-              <Link
-                to="/Fotros/Products"
-                onClick={() => {
-                  localStorage.removeItem("products");
-                  localStorage.removeItem("productsFetchTime");
-                  funcAxios(
-                    "https://686b9bdee559eba90873470f.mockapi.io/ap/bazrafkan-store/products?category=پیراهن"
-                  );
-                  setSortFilter("");
-                  setOnlyAvailable(false);
-                  applyFilter("", false, "پیراهن های دخترانه");
-                }}
-                className="mx-[8px] p-[10px] md:m-[unset]  bg-[var(--cartsm)] h-[150px] lg:h-[200px] rounded-2xl flex"
-              >
-                <div className="h-[100%]  w-[50%] flex justify-center items-center">
-                  <img className="w-[100%]" src={offImage3} alt="" />
-                </div>
-                <div className="w-full flex flex-col justify-between">
-                  <div>
-                    <p className="text-[137%] font-[600] mb-[10px]">
-                     پیراهن های دخترانه
-                    </p>
-
-                    <p>پیراهن های دخترانه زیبا</p>
-                  </div>
-
-                  <button className="w-full flex justify-end-safe items-center md:px-[10px]">
-                    مشاهده محصولات
-                    <span className="w-[15px] ">
-                      <IoMdArrowRoundBack />
-                    </span>
-                  </button>
-                </div>
-              </Link>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <CategoryPromoCard
+                img={varzeshset}
+                title="ست های ورزشی"
+                description="برای ساختن بدنی سالم و سرحال"
+                url={API_ENDPOINTS.SPORT_SETS}
+                filterName="ست های ورزشی"
+              />
+              <CategoryPromoCard
+                img={tabeston}
+                title="ست های تابستونه"
+                description="برای روزهای گرم سال"
+                url={API_ENDPOINTS.SPORT_SETS}
+                filterName="ست های تابستونه"
+              />
+              <CategoryPromoCard
+                img={offset}
+                title="ست های کامل"
+                description="برای زدن یه استایل خانمانه"
+                url={API_ENDPOINTS.SPORT_SETS}
+                filterName="ست های کامل"
+              />
+              <CategoryPromoCard
+                img={offImage3}
+                title="پیراهن های دخترانه"
+                description="پیراهن های دخترانه زیبا"
+                url={API_ENDPOINTS.CATEGORY("پیراهن")}
+                filterName="پیراهن های دخترانه"
+              />
             </div>
           </div>
-          {/* فاصله */}
-          <div className="h-[4.5rem] md:h-[5.5rem]  "></div>
-
           {/* footer */}
           <Footer />
         </div>

@@ -13,7 +13,7 @@ function DeleteAddressModal({ open, onClose, onConfirm, address }) {
       document.body.style.overflow = "auto"; // cleanup
     };
   }, [open]);
-console.log(address)
+  console.log(address);
   if (!open) return null;
 
   return (
@@ -32,9 +32,7 @@ console.log(address)
         <h2 className="text-lg font-semibold text-[125%]">
           میخواهید این ادرس را حذف کنید؟
         </h2>
-        <p >
-          {address?.fullAddress || "آدرس موجود نیست"}{" "}
-        </p>
+        <p>{address?.fullAddress || "آدرس موجود نیست"}</p>
         {/* دکمه‌ها */}
         <div className="flex flex-col-reverse md:flex-row items-center justify-between mt-4 gap-[8px] ">
           <button

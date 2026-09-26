@@ -29,6 +29,7 @@ import { FiLogOut } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
 import { HiHome } from "react-icons/hi2";
 import ModalAlert from "../ModalAlert/ModalAlert";
+import porofDefault from "../../assets/img/porof1.png"; 
 function Meno() {
   const { isLoggedIn, user, logout } = useAuth();
 
@@ -69,7 +70,7 @@ function Meno() {
             >
               <div className="w-[3.5rem] h-[3.5rem] rounded-full flex justify-center items-center">
                 <img
-                  src={user.profilePic}
+                  src={user.profilePic || porofDefault}
                   alt={user.fname}
                   className="w-full rounded-full "
                 />

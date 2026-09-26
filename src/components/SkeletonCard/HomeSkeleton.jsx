@@ -48,6 +48,10 @@ export default function HomeSkeleton() {
             <div className="h-12 w-[90%] md:w-[60%] bg-[var(--cart)] rounded-xl"></div>
           </div>
         </div>
+           <div className="pb-[5px] pt-[13px] px-[10px] flex gap-[10px]">
+          <div className="w-full h-[90px] lg:h-[180px] bg-[var(--cartsm)] rounded-xl"></div>
+          <div className="w-full h-[90px] lg:h-[180px] bg-[var(--cartsm)] rounded-xl"></div>
+        </div>
         {/* --- فاصله --- */}
         <div className="h-[3rem] md:h-[4rem]"></div>
 

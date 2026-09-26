@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { IoBookmarkSharp } from "react-icons/io5";
+import { FaHeart } from "react-icons/fa";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Filter from "../../components/Filter/Filter";
 import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
 import Footer from "../../components/Footer/Footer";
-import { useFav } from "../../context/FavProvider/FavProvider";
 import Categorys from "../../components/Categorys/Categorys";
 import { Link, useNavigate } from "react-router-dom";
 import { useSearch } from "../../context/SearchContext/SearchContext";
-import { useAuth } from "../../context/AuthContext/AuthContext";
 import ModalAlert from "../../components/ModalAlert/ModalAlert";
 import ProductsSkeleton from "../../components/SkeletonCard/ProductsSkeleton";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 function Products() {
   useEffect(() => {
@@ -28,10 +26,9 @@ function Products() {
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const limit = 15; // تعداد محصول در هر صفحه
-  const { addToFav, removeFromFav, favoriteItems } = useFav();
-  const { filteredProducts, loading, selectedCategory, funcAxios } = useAxios();
+  const { filteredProducts, loading, selectedCategory, funcAxios } =
+    useAxios();
   const { searchedProducts, searchQuery } = useSearch();
-  const { isLoggedIn } = useAuth();
   const productsToShow =
     searchedProducts.length > 0 ? searchedProducts : filteredProducts;
 
@@ -64,7 +61,7 @@ function Products() {
       <Navbar />
       <div className="h-10 lg:h-16"></div>
       <div className="pb-[80px]">
-        <h6 className="text-[var(--text-gary)] px-[15px] md:px-[40px] pt-[22px] lg:pt-[15px] pb-[10px] md:pb-[5px] text-[85%] flex gap-[4px]">
+        <h6 className="text-[var(--text-gary)] container-page pt-[22px] lg:pt-[15px] pb-[10px] md:pb-[5px] text-[85%] flex gap-[4px]">
           <Link to="/Fotros/">صفحه اصلی &gt; </Link>
           <span>
             {searchedProducts.length > 0
@@ -72,7 +69,7 @@ function Products() {
               : selectedCategory}
           </span>
         </h6>
-        <h2 className="text-[175%] font-[600] py-[10px] px-[14px] md:px-[30px] md:py-[5px]">
+        <h2 className="text-[175%] font-[600] py-[10px] container-page md:py-[5px]">
           {searchedProducts.length > 0
             ? `جستجو : ${searchQuery}`
             : selectedCategory}
@@ -104,81 +101,19 @@ function Products() {
               </span>
             </p>
           ) : (
-            <div className="products grid gap-[5px] md:gap-[9px]  lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-              {pagedProducts.map((product) => {
-                const isFav = favoriteItems.some(
-                  (item) => item.id === product.id
-                );
-
-                return (
-                  <div key={product.id} className="product relative">
-                    <div className="md:px-[10px] px-[2px] flex justify-between absolute z-1 top-0 w-full opacity-80 ">
-                      {isFav ? (
-                        <FaHeart
-                          onClick={() => removeFromFav(product.id)}
-                          color="#bc0000"
-                          className="m-[5px] mt-[10px] cursor-pointer"
-                          size={20}
-                        />
-                      ) : (
-                        <FaRegHeart
-                          onClick={() => {
-                            if (!isLoggedIn) {
-                              setModalMessage(
-                                "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید!"
-                              );
-                              setIsModalOpen(true);
-                            }
-                            addToFav(product);
-                          }}
-                          className="m-[5px] mt-[10px] cursor-pointer"
-                          size={20}
-                        />
-                      )}
-                      {product.off > 0 && (
-                        <div className="relative ">
-                          <IoBookmarkSharp
-                            color="#bc0000"
-                            size={47}
-                          ></IoBookmarkSharp>
-                          <span className="absolute top-[15%] left-[25%] text-[80%] text-white">
-                            %{product.off}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <Link
-                      to={`/Fotros/Products/${product.idsortby}`}
-                      className=" md:h-[345px] h-[228px] rounded  p-[10px] pt-0 box-shadow flex flex-col justify-center items-center md:gap-[15px] gap-[9px] "
-                    >
-                      <img
-                        src={product.img}
-                        alt={product.title}
-                        className="md:h-[220px] h-[140px]"
-                        loading="lazy"
-                      />
-                      <p className="font-semibold self-start text-[110%] ">
-                        {product.title}
-                      </p>
-                      <div className=" self-end flex items-baseline md:gap-[10px] gap-[6px]">
-                        {product.off > 0 && (
-                          <span className=" text-[var(--text-gray)] md:text-[95%] text-[85%] line-through">
-                            {product.price.toLocaleString()}
-                          </span>
-                        )}
-
-                        <p className="flex gap-[3px] text-red-800 font-bold text-[110%]">
-                          {(
-                            product.price -
-                            (product.price * product.off) / 100
-                          ).toLocaleString()}
-                          <span>تومان</span>
-                        </p>
-                      </div>
-                    </Link>
-                  </div>
-                );
-              })}
+            <div className="products grid gap-[10px] md:gap-[16px]  lg:grid-cols-6 md:grid-cols-3 grid-cols-2">
+              {pagedProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onNeedLogin={() => {
+                    setModalMessage(
+                      "برای اضافه کردن محصول به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید!"
+                    );
+                    setIsModalOpen(true);
+                  }}
+                />
+              ))}
             </div>
           )}
 

@@ -31,16 +31,20 @@ const SearchBar = forwardRef(function SearchBar(
       action="#"
       dir="ltr"
       className={
-        isMobile
-          ? "p-1 flex items-center gap-[10px] w-full bg-[var(--navbar-searchbar-bg)] m-[4px] rounded-sm border border-[var(--btn)]"
-          : "hidden px-[3px] lg:flex justify-between w-[130px] lg:w-[200px] bg-[#d8dce496] mx-[7px] lg:mx-[8px] py-[2px] lg:py-[6px] rounded-xl"
-      }
+        `${isMobile
+          ? "p-1.5 flex items-center gap-[10px] w-full bg-[var(--navbar-searchbar-bg)] m-[4px] rounded-full border border-[var(--sup-b)]"
+          : "hidden lg:flex items-center justify-between w-[150px] lg:w-[220px] bg-[var(--f5)]/60 mx-[7px] lg:mx-[8px] py-[1px] px-[12px] rounded-full border border-[var(--navbar-searchbar-bg)]  focus-within:border-[var(--btn)] transition-colors duration-200"
+      }`}
     >
       <input
         ref={inputRef}
         dir="rtl"
         type="text"
-        className={isMobile ? "flex-2 w-full" : "pl-2 w-[87%] placeholder:text-[#0b3a63]"}
+        className={
+          isMobile
+            ? "flex-2 w-full bg-transparent outline-none"
+            : "pl-2 w-[87%] bg-transparent outline-none placeholder:text-[var(--text-gary)]"
+        }
         placeholder={placeholder}
         value={inputValue}
         onChange={onChange}

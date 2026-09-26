@@ -10,37 +10,81 @@ import { useAxios } from "../../context/AxiosContaext/AxiosContaext";
 import { Link, useLocation } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import SkeletonCardSlide from "../SkeletonCard/SkeletonCardSlide";
+import ProductCard from "../ProductCard/ProductCard";
+
+const SLIDE_CACHE_DURATION = 5 * 60 * 1000; // ۵ دقیقه، هم‌راستا با کش اصلی محصولات
+
 function SlideProduct({ title, title2, url, allurl }) {
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]);
+  const cacheKey = `slideProducts:${url}`;
+  const cached = (() => {
+    try {
+      return JSON.parse(sessionStorage.getItem(cacheKey)) || null;
+    } catch {
+      return null;
+    }
+  })();
+  const isCacheFresh =
+    cached && Date.now() - cached.time < SLIDE_CACHE_DURATION;
+
+  const [loading, setLoading] = useState(!isCacheFresh);
+  const [products, setProducts] = useState(isCacheFresh ? cached.data : []);
   const { funcAxios, setSortFilter, setOnlyAvailable, applyFilter } =
     useAxios();
   const swiperRef = useRef(null);
 
   useEffect(() => {
+    let cancelled = false;
+
+    // اگه همین url اخیراً گرفته شده، دوباره فچ نمی‌کنیم که هر بار برگشتن به
+    // این بخش (مثلاً برگشتن به صفحه اصلی) اسکلتون/لودینگ نشون نده
+    const freshCache = (() => {
+      try {
+        const c = JSON.parse(sessionStorage.getItem(cacheKey));
+        return c && Date.now() - c.time < SLIDE_CACHE_DURATION ? c : null;
+      } catch {
+        return null;
+      }
+    })();
+
+    if (freshCache) {
+      setProducts(freshCache.data);
+      setLoading(false);
+      return;
+    }
+
     const fetchProducts = async () => {
       try {
         setLoading(true);
         const res = await axios.get(url);
+        if (cancelled) return;
         setProducts(res.data);
-        const newData = res.data;
-        const oldData = JSON.parse(localStorage.getItem("productid")) || [];
-        if (JSON.stringify(newData) !== JSON.stringify(oldData)) {
-          localStorage.setItem("productid", JSON.stringify(newData));
-        }
+        sessionStorage.setItem(
+          cacheKey,
+          JSON.stringify({ data: res.data, time: Date.now() })
+        );
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
     fetchProducts();
+
+    return () => {
+      cancelled = true;
+    };
   }, [url]);
 
   if (!products) {
     return <div className="text-center text-red-500">محصولی یافت نشد</div>;
   }
+
+  // با تعداد محصول کم، loop باعث می‌شد سر هر هاور/اتوپلی کل اسلایدر بپره؛
+  // فقط وقتی محصولات به اندازه کافی زیاد باشن (بیشتر از بیشترین
+  // slidesPerView که ۷ تاست) حالت loop/autoplay رو فعال می‌کنیم.
+  const visibleCount = Math.min(products.length, 12);
+  const enableLoop = visibleCount > 7;
 
   return (
     <div>
@@ -50,14 +94,12 @@ function SlideProduct({ title, title2, url, allurl }) {
         <Link
           to="/Fotros/Products"
           onClick={() => {
-            localStorage.removeItem("products");
-            localStorage.removeItem("productsFetchTime");
             funcAxios(allurl);
             setSortFilter("");
             setOnlyAvailable(false);
             applyFilter("", false, title);
           }}
-          className="hidden md:inline-block m-[20px] mb-[10px] bg-[var(--btn)] text-white text-center text-[120%] p-[10px] w-[60%] md:w-[250px] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
+          className="hidden md:inline-block mb-[10px] bg-[var(--btn)] text-white text-center text-[120%] p-[10px] w-[60%] md:w-[250px] rounded-xl shadow-md hover:bg-[#1565c0] transition-all"
         >
           مشاهده {title2}
         </Link>
@@ -76,7 +118,7 @@ function SlideProduct({ title, title2, url, allurl }) {
               1024: { slidesPerView: 5 },
             }}
           >
-            {Array.from({ length: 8 }).map((_, i) => (
+            {Array.from({ length: 7 }).map((_, i) => (
               <SwiperSlide key={i} className="flex justify-center">
                 <SkeletonCardSlide />
               </SwiperSlide>
@@ -108,13 +150,17 @@ function SlideProduct({ title, title2, url, allurl }) {
             <Swiper
               dir="rtl"
               spaceBetween={18}
-              autoplay={{
-                delay: 3500,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-              }}
+              autoplay={
+                enableLoop
+                  ? {
+                      delay: 3500,
+                      disableOnInteraction: false,
+                      pauseOnMouseEnter: true,
+                    }
+                  : false
+              }
               speed={800}
-              loop
+              loop={enableLoop}
               scrollbar={{ hide: true }}
               navigation={{
                 nextEl: ".swiper-button-next-custom",
@@ -144,35 +190,13 @@ function SlideProduct({ title, title2, url, allurl }) {
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
               {products.slice(0, 12).map((product) => (
-                <SwiperSlide key={product.id} className="flex justify-center">
-                  <Link
-                    to={`/Fotros/Products/${product.idsortby}`}
-                    className="flex flex-col gap-[15px] items-start bg-[var(--product)]
-               p-4 rounded-2xl shadow-[var(--card-shadow)]
-             hover:shadow-[var(--card-hover-shadow)]
-               hover:scale-[1.04] transition-all duration-300
-               border border-gray-100 w-full max-w-[250px] mx-auto
-               aspect-[3/4] sm:aspect-[4/5] md:aspect-[5/6] lg:aspect-[6/7]"
-                  >
-                    {/* تصویر محصول */}
-                    <div className="w-full h-[70%] flex justify-center items-center overflow-hidden rounded-xl">
-                      <img
-                        src={product.img}
-                        alt={product.title}
-                        className="w-[95%] h-[95%] object-contain transition-transform duration-500 hover:scale-110"
-                      />
-                    </div>
-
-                    {/* عنوان */}
-                    <p className="pt-2 w-full text-center font-medium text-[var(--text)] truncate text-[95%]">
-                      {product.title}
-                    </p>
-
-                    {/* قیمت */}
-                    <p className="pt-1 w-full text-center text-[var(--text)] text-[90%]">
-                      {product.price} تـومـان
-                    </p>
-                  </Link>
+                <SwiperSlide
+                  key={product.id}
+                  className="flex justify-center h-auto"
+                >
+                  <div className="w-full max-w-[250px] mx-auto">
+                    <ProductCard product={product} />
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -186,8 +210,6 @@ function SlideProduct({ title, title2, url, allurl }) {
           <Link
             to="/Fotros/Products"
             onClick={() => {
-              localStorage.removeItem("products");
-              localStorage.removeItem("productsFetchTime");
               funcAxios(allurl);
               setSortFilter("");
               setOnlyAvailable(false);

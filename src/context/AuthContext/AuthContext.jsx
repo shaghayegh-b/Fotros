@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 
 const AuthContext = createContext();
+const USERS_DB_KEY = "usersDB"; // { [phone]: {id, username, fname, lname, email, password, profilePic, favorites, token} }
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -16,42 +17,75 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // ورود با شماره موبایل
-  const login = useCallback(async (phone) => {
-    setLoading(true);
-    setError(null);
+  const getUsersDB = () => {
     try {
-      if (!/^09\d{9}$/.test(phone)) {
-        setError("شماره موبایل معتبر نیست!");
-        setLoading(false);
-        return false;
-      }
-
-      // اگه کاربر قبلا ثبت نام کرده باشه → همون داده‌هاش رو بیار
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-
-      const fakeUser = storedUser && storedUser.username === phone
-        ? storedUser
-        : {
-            id: Date.now(),
-            username: phone,
-            fname: "",
-            lname: "",
-            email: "",
-            profilePic: "",
-            favorites: [],
-            token: "JWT_TOKEN_EXAMPLE",
-          };
-
-      localStorage.setItem("user", JSON.stringify(fakeUser));
-      setUser(fakeUser);
-      return true;
-    } catch (err) {
-      setError("خطا در ورود کاربر");
-      return false;
-    } finally {
-      setLoading(false);
+      return JSON.parse(localStorage.getItem(USERS_DB_KEY)) || {};
+    } catch {
+      return {};
     }
+  };
+  const saveUsersDB = (db) => {
+    localStorage.setItem(USERS_DB_KEY, JSON.stringify(db));
+  };
+
+  // آیا این شماره موبایل قبلاً ثبت‌نام کرده؟
+  const checkUserExists = useCallback((phone) => {
+    const db = getUsersDB();
+    return !!db[phone];
+  }, []);
+
+  // ورود کاربری که قبلاً ثبت‌نام کرده، فقط با شماره + رمز عبور
+  const loginWithPassword = useCallback((phone, password) => {
+    setError(null);
+    const db = getUsersDB();
+    const record = db[phone];
+    if (!record) {
+      setError("این شماره ثبت‌نام نشده است.");
+      return false;
+    }
+    if (record.password !== password) {
+      setError("رمز عبور اشتباه است.");
+      return false;
+    }
+    localStorage.setItem("user", JSON.stringify(record));
+    setUser(record);
+    return true;
+  }, []);
+
+  // تولید و «ارسال» کد تایید برای شماره‌ی جدید
+  // چون بک‌اند/سرویس پیامکی واقعی وصل نیست، کد به صورت نمایشی برگردونده میشه
+  // (توی پروژه واقعی باید این تابع یک درخواست به سرور بزنه)
+  const sendVerificationCode = useCallback((phone) => {
+    const code = String(Math.floor(1000 + Math.random() * 9000));
+    sessionStorage.setItem(`otp:${phone}`, code);
+    return code;
+  }, []);
+
+  const verifyCode = useCallback((phone, code) => {
+    const saved = sessionStorage.getItem(`otp:${phone}`);
+    return !!saved && saved === code;
+  }, []);
+
+  // ثبت‌نام نهایی کاربر جدید (بعد از تایید کد پیامکی و پر کردن مشخصات)
+  const registerUser = useCallback((phone, data) => {
+    const db = getUsersDB();
+    const newUser = {
+      id: Date.now(),
+      username: phone,
+      fname: data.fname || "",
+      lname: data.lname || "",
+      email: data.email || "",
+      password: data.password || "",
+      profilePic: data.profilePic || "",
+      favorites: [],
+      token: "JWT_TOKEN_EXAMPLE",
+    };
+    db[phone] = newUser;
+    saveUsersDB(db);
+    sessionStorage.removeItem(`otp:${phone}`);
+    localStorage.setItem("user", JSON.stringify(newUser));
+    setUser(newUser);
+    return newUser;
   }, []);
 
   // خروج
@@ -60,11 +94,16 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   }, []);
 
-  // آپدیت اطلاعات کاربر (UserInfo)
+  // آپدیت اطلاعات کاربر (UserInfo) — هم توی سشن جاری هم توی دیتابیس محلی
   const updateUser = useCallback((newData) => {
     const updatedUser = { ...user, ...newData };
     setUser(updatedUser);
     localStorage.setItem("user", JSON.stringify(updatedUser));
+    if (updatedUser?.username) {
+      const db = getUsersDB();
+      db[updatedUser.username] = updatedUser;
+      saveUsersDB(db);
+    }
   }, [user]);
 
   return (
@@ -73,7 +112,12 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         error,
-        login,
+        setError,
+        checkUserExists,
+        loginWithPassword,
+        sendVerificationCode,
+        verifyCode,
+        registerUser,
         logout,
         updateUser,
         isLoggedIn: !!user,
